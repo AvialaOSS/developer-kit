@@ -1,11 +1,11 @@
 {
   "name": "@aviala-design/icons",
   "version": "2.4.0",
-  "description": "Aviala Design Icons for Spiral 2",
+  "description": "Aviala Design Icons for Spiral",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AvialaOSS/spiral-2.git",
+    "url": "https://github.com/AvialaOSS/developer-kit.git",
     "directory": "packages/icons"
   },
   "publishConfig": {

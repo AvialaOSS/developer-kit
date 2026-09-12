@@ -1,11 +1,11 @@
-# Spiral 2 — Agent Instructions
+# Spiral — Agent Instructions
 
-Spiral 2 is a design-system monorepo for the **Aviala Design** component library. It publishes three packages under the `@aviala-design` scope and two private apps for development and documentation.
+Spiral is a design-system monorepo for the **Aviala Design** component library. It publishes three packages under the `@aviala-design` scope and two private apps for development and documentation.
 
 ## Monorepo layout
 
 ```
-spiral2/
+spiral/
 ├── packages/
 │   ├── ui/          → @aviala-design/spiral    React component library (Radix + shadcn pattern)
 │   ├── icons/       → @aviala-design/icons     SVG icon pipeline (Figma → SVGR → React)

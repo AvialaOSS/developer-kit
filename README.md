@@ -1,4 +1,4 @@
-# Spiral 2
+# Spiral
 
 Aviala Design aligned React component library built on shadcn/ui, Radix UI, and Tailwind CSS v4.
 

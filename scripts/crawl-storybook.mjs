@@ -10,7 +10,7 @@ import { readdirSync } from "node:fs";
 import { join } from "node:path";
 
 const BASE = process.argv[2] ?? "http://localhost:6006";
-const ROOT = "C:/Users/kailunlark/Documents/GitHub/Spiral2";
+const ROOT = "C:/Users/kailunlark/Documents/GitHub/developer-kit";
 const COMPONENTS_DIR = join(process.cwd(), "packages/ui/src/components");
 
 function collectStories(dir) {

@@ -1,9 +1,9 @@
 ---
 name: spiral-coding-tone
 description: >-
-  Spiral 2 coding conventions for packages/ui naming, English comments, token
+  Spiral coding conventions for packages/ui naming, English comments, token
   and icon usage, and English commit/PR messaging. Use when implementing or
-  refactoring Spiral UI packages, writing commits or PRs in Spiral2, or when
+  refactoring Spiral UI packages, writing commits or PRs in Spiral, or when
   the user mentions coding style, naming, or commit tone.
 ---
 

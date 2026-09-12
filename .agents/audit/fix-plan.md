@@ -1,4 +1,4 @@
-# Spiral 2 审计修复任务书（归档件 / archived reference）
+# Spiral 审计修复任务书（归档件 / archived reference）
 
 > **状态：归档。** 本文件原为一次性任务交付稿，现作为审计记录长期保留在 `.agents/audit/`，供后续 Agent 复用背景与证据定位。**不要**把它当成待办清单——各 wave 的实际落地状态见 `README.md`。
 >

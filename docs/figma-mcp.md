@@ -1,6 +1,6 @@
 # Figma MCP & API
 
-Spiral 2 reads design specs from three Figma files. Configure locally (never commit tokens).
+Spiral reads design specs from three Figma files. Configure locally (never commit tokens).
 
 ## Environment
 
