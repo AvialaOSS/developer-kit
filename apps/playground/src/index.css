@@ -1,22 +1,9 @@
-@import "@aviala-design/tokens/styles.css";
+/* Playground chrome only — Spiral component styles come from
+   `@aviala-design/spiral/styles.css` (effects + residual utilities). */
 @import "tailwindcss";
-
-/* Scan component library sources so Tailwind generates their utility classes */
-@source "../../../packages/ui/src";
 @source "../src";
 
 @layer base {
-  * {
-    border-color: var(--border);
-  }
-
-  body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-  }
-
   button {
     font: inherit;
   }
