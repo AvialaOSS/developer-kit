@@ -1,6 +1,6 @@
 ---
 name: aviala-design-system
-description: Aviala Design system conventions for Spiral 2 — tokens, Figma files, naming, theme rules. Use when implementing Spiral components or tokens.
+description: Aviala Design system conventions for Spiral — tokens, Figma files, naming, theme rules. Use when implementing Spiral components or tokens.
 ---
 
 # Aviala Design System

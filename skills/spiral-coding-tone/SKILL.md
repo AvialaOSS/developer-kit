@@ -1,9 +1,9 @@
 ---
 name: spiral-coding-tone
 description: >-
-  Spiral 2 coding conventions for packages/ui naming, English comments, token
+  Spiral coding conventions for packages/ui naming, English comments, token
   and icon usage, and English commit/PR messaging. Use when implementing or
-  refactoring Spiral UI packages, writing commits or PRs in Spiral2, or when
+  refactoring Spiral UI packages, writing commits or PRs in Spiral, or when
   the user mentions coding style, naming, or commit tone.
 ---
 
@@ -27,7 +27,7 @@ After implementing or refactoring code in `packages/ui`:
 4. Confirm file naming matches the flat layout: `components/{name}.tsx` + `{name}.stories.tsx` (subfolder only for compound components).
 5. Review commit message: English subject, correct scope (`fix(ui):`, `fix(tokens):`, etc.), no Chinese subject line.
 
-## Commits and PRs (Spiral2)
+## Commits and PRs (Spiral)
 
 - **English** subjects and bodies; why-focused, concise.
 - Prefer scopes seen in history: `fix(ui):`, `fix(tokens):`, `fix(playground):`, `chore:`, `docs:`.

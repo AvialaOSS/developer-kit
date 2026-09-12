@@ -1,6 +1,6 @@
 # Monorepo 命令参考
 
-Spiral 2 使用 **pnpm workspace** + **Turborepo** 管理 monorepo。本文档汇总根目录与各 workspace 包的全部 npm scripts，以及独立 CLI 脚本与 CI 流程。
+Spiral 使用 **pnpm workspace** + **Turborepo** 管理 monorepo。本文档汇总根目录与各 workspace 包的全部 npm scripts，以及独立 CLI 脚本与 CI 流程。
 
 > Figma 导出、MCP 配置等设计侧细节见 [figma-mcp.md](./figma-mcp.md)。
 
@@ -24,7 +24,7 @@ pnpm build             # 构建全部 workspace（Turbo 拓扑排序）
 
 | 路径              | 包名                    | 说明                              |
 | ----------------- | ----------------------- | --------------------------------- |
-| `/`               | `spiral2`               | 根 monorepo，Turbo 编排与跨包脚本 |
+| `/`               | `spiral`                | 根 monorepo，Turbo 编排与跨包脚本 |
 | `apps/docs`       | `@spiral/docs`          | Storybook 组件预览                |
 | `apps/playground` | `@spiral/playground`    | 本地开发 playground               |
 | `packages/ui`     | `@aviala-design/spiral` | React 组件库                      |
@@ -178,7 +178,7 @@ pnpm changeset                   # 记录版本变更
 # 合并到 main 后由 release.yml 发布到 npm
 ```
 
-发布成功后 Spiral2 会向 avialaWebsite 派发 `spiral-released`：脚手架自动开 docs PR（manifest / stubs、workspace 依赖 + lockfile bump）。人工按 bot checklist 补文档后把 manifest 标为 `ready` 并更新 `default`。详见 `avialaWebsite/docs/SPIRAL_DOCS_DISPATCH.md`。
+发布成功后 Spiral 会向 avialaWebsite 派发 `spiral-released`：脚手架自动开 docs PR（manifest / stubs、workspace 依赖 + lockfile bump）。人工按 bot checklist 补文档后把 manifest 标为 `ready` 并更新 `default`。详见 `avialaWebsite/docs/SPIRAL_DOCS_DISPATCH.md`。
 
 ### 图标同步（Figma → 代码）
 
