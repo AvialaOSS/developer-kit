@@ -492,3 +492,39 @@ fs.writeFileSync(
 console.log(
   `Wrote ${Object.keys(registry).length} component prop docs to dist/props.json`
 );
+
+/** Slim agent catalog — names + import paths, not full props. */
+const FORM_ENTRY_KEYS = new Set(["Form", "FormField"]);
+const PROVIDER_KEYS = new Set([
+  "ThemeProvider",
+  "LocaleProvider",
+  "ConfigProvider",
+]);
+
+const catalog = {
+  version: 1,
+  css: "@aviala-design/spiral/styles.css",
+  notes:
+    "Consumer agents: import css once, wrap with ThemeProvider. See CONSUMER.md / spiral-consume.",
+  components: components.map((entry) => {
+    const formEntry = FORM_ENTRY_KEYS.has(entry.key);
+    return {
+      name: entry.key,
+      exportName: entry.exportName,
+      import: formEntry
+        ? "@aviala-design/spiral/form"
+        : "@aviala-design/spiral",
+      requiresThemeProvider: !PROVIDER_KEYS.has(entry.key),
+      isProvider: PROVIDER_KEYS.has(entry.key),
+      parts: (entry.parts ?? []).map((p) => p.exportName),
+    };
+  }),
+};
+
+fs.writeFileSync(
+  path.join(outDir, "component-catalog.json"),
+  `${JSON.stringify(catalog, null, 2)}\n`
+);
+console.log(
+  `Wrote ${catalog.components.length} entries to dist/component-catalog.json`
+);

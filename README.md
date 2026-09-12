@@ -2,6 +2,8 @@
 
 Aviala Design aligned React component library built on shadcn/ui, Radix UI, and Tailwind CSS v4.
 
+**Using the published packages in an app?** Start at [`CONSUMER.md`](./CONSUMER.md) (one CSS import, `ThemeProvider`, no consumer Tailwind). **Changing this monorepo?** Use [`AGENTS.md`](./AGENTS.md).
+
 ## Packages
 
 | Package                 | Description                                                 |
@@ -75,7 +77,7 @@ npm run build:spiral-docs
 
 因此**文档展示的是已发布版本**：组件改动需要先 `pnpm changeset` 并合并到 `main`，由 [release.yml](.github/workflows/release.yml) 发布后，文档站才会同步。发版成功后 Release 用 GitHub App 向 avialaWebsite 派发 `spiral-released`，自动开 docs scaffold PR（含依赖 bump）；凭证配置见 [SPIRAL_DOCS_DISPATCH](https://github.com/AvialaOSS/avialaWebsite/blob/main/docs/SPIRAL_DOCS_DISPATCH.md)。
 
-Component API tables are generated when building `packages/ui` and published as `@aviala-design/spiral/props.json`.
+Component API tables are generated when building `packages/ui` and published as `@aviala-design/spiral/props.json`. A slim agent catalog ships as `@aviala-design/spiral/component-catalog.json`.
 
 组件 API 表格数据由 `packages/ui` 构建时生成，随包发布为 `@aviala-design/spiral/props.json`。
 

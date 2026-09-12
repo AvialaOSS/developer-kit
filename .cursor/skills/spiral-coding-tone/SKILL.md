@@ -5,6 +5,7 @@ description: >-
   and icon usage, and English commit/PR messaging. Use when implementing or
   refactoring Spiral UI packages, writing commits or PRs in Spiral, or when
   the user mentions coding style, naming, or commit tone.
+audience: maintainer
 ---
 
 # Spiral Coding Tone
