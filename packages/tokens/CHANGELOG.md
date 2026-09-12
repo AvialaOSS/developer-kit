@@ -1,5 +1,11 @@
 # @aviala-design/tokens
 
+## 2.6.1
+
+### Patch Changes
+
+- 4c0c986: Point package `repository.url` metadata at `AvialaOSS/developer-kit` (npm names unchanged).
+
 ## 2.6.0
 
 ### Minor Changes

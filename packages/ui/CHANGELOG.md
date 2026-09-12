@@ -1,5 +1,14 @@
 # @aviala-design/spiral
 
+## 3.0.1
+
+### Patch Changes
+
+- 4c0c986: Point package `repository.url` metadata at `AvialaOSS/developer-kit` (npm names unchanged).
+- Updated dependencies [4c0c986]
+  - @aviala-design/tokens@2.6.1
+  - @aviala-design/icons@2.4.1
+
 ## 3.0.0
 
 ### Major Changes
