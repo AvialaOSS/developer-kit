@@ -341,10 +341,7 @@ export function listStandaloneCssFiles(root) {
  * `focus-effects.css` is already merged into tokens `styles.css` — skip it
  * when building the spiral aggregate to avoid a duplicate block.
  */
-export function buildStandaloneEffectsCss(
-  root,
-  { skipFocus = true } = {}
-) {
+export function buildStandaloneEffectsCss(root, { skipFocus = true } = {}) {
   const files = listStandaloneCssFiles(root).filter(
     ({ name }) => !(skipFocus && name === "focus-effects.css")
   );

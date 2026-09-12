@@ -32,7 +32,10 @@ const required = [
   { label: "focus ring", re: /\.aviala-focus-ring\b/ },
   { label: "ALD theme", re: /:root\[data-theme="ald"\]/ },
   { label: "spiral base layer", re: /@layer\s+base\b/ },
-  { label: "aviala-utils layer", re: /@layer\s+aviala-utils\b|layer\(aviala-utils\)/ },
+  {
+    label: "aviala-utils layer",
+    re: /@layer\s+aviala-utils\b|layer\(aviala-utils\)/,
+  },
   { label: "inline-flex utility", re: /\.inline-flex\b/ },
   { label: "items-center utility", re: /\.items-center\b/ },
   { label: "relative utility", re: /\.relative\b/ },

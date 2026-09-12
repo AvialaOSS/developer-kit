@@ -69,13 +69,13 @@ export async function compileAvialaUtilsCss() {
     onDependency() {},
   });
 
-  const sources =
-    (compiler.root === "none"
+  const sources = (
+    compiler.root === "none"
       ? []
       : compiler.root === null
         ? [{ base: uiRoot, pattern: "**/*", negated: false }]
         : [{ ...compiler.root, negated: false }]
-    ).concat(compiler.sources);
+  ).concat(compiler.sources);
 
   const scanner = new Scanner({ sources });
   const candidates = scanner.scan();

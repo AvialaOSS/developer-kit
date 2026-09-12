@@ -25,14 +25,14 @@ Migrate layout/interaction leftovers into the matching `*-effects.css` and
 strip TW tokens from `cva` / `cn(...)`. Prefer the Badge / color-picker pattern
 (effects own layout).
 
-| Priority | Component | Notes |
-| -------- | --------- | ----- |
-| 1 | Button | densest mix — display/flex/cursor/disabled/loading overlay |
-| 2 | Input | `relative`, width, transparent field chrome |
-| 3 | NumberInput | shares Input patterns |
-| 4 | Segmentator | sticky/transition/opacity leftovers |
-| 5 | Link | `inline-flex` / size utilities |
-| 6 | InputGroup | flex/gap/shrink |
+| Priority | Component   | Notes                                                      |
+| -------- | ----------- | ---------------------------------------------------------- |
+| 1        | Button      | densest mix — display/flex/cursor/disabled/loading overlay |
+| 2        | Input       | `relative`, width, transparent field chrome                |
+| 3        | NumberInput | shares Input patterns                                      |
+| 4        | Segmentator | sticky/transition/opacity leftovers                        |
+| 5        | Link        | `inline-flex` / size utilities                             |
+| 6        | InputGroup  | flex/gap/shrink                                            |
 
 Lower priority: Modal, Drawer, Checkbox, Avatar, Alert, Navigation, Stack,
 Video, Table (mostly semantic already, thin TW tails).
