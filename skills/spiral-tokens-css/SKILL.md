@@ -13,13 +13,13 @@ audience: maintainer
 
 ## Layout
 
-| Path | Role |
-| ---- | ---- |
-| `packages/tokens/src/semantic/*-effects.css` / `*-extras.css` | Per-area component effect styles |
-| `packages/tokens/scripts/css-lib.mjs` → `STANDALONE_CSS_MANIFEST` | Ordered list of standalone sheets; build asserts disk ↔ manifest |
-| `buildSpiralAggregateCss()` | Tokens baseline + all effects (skip duplicate focus) + ALD theme |
-| `packages/ui/scripts/assemble-styles.mjs` (+ compile-utils) | Produces published `packages/ui/dist/styles.css` (`@aviala-design/spiral/styles.css`) |
-| `packages/ui/docs/residual-tailwind-utilities.md` | Inventory / migration of leftover TW utilities into effects |
+| Path                                                              | Role                                                                                  |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `packages/tokens/src/semantic/*-effects.css` / `*-extras.css`     | Per-area component effect styles                                                      |
+| `packages/tokens/scripts/css-lib.mjs` → `STANDALONE_CSS_MANIFEST` | Ordered list of standalone sheets; build asserts disk ↔ manifest                      |
+| `buildSpiralAggregateCss()`                                       | Tokens baseline + all effects (skip duplicate focus) + ALD theme                      |
+| `packages/ui/scripts/assemble-styles.mjs` (+ compile-utils)       | Produces published `packages/ui/dist/styles.css` (`@aviala-design/spiral/styles.css`) |
+| `packages/ui/docs/residual-tailwind-utilities.md`                 | Inventory / migration of leftover TW utilities into effects                           |
 
 When you add a new `*-effects.css` or `*-extras.css`, update `STANDALONE_CSS_MANIFEST` in the same change.
 

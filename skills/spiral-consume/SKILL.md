@@ -34,11 +34,11 @@ export function App() {
 }
 ```
 
-| Step | Required |
-| ---- | -------- |
-| `styles.css` once at app entry | Yes |
-| `ThemeProvider` around Spiral UI | Yes |
-| Consumer Tailwind / `@source` | **No** |
+| Step                             | Required |
+| -------------------------------- | -------- |
+| `styles.css` once at app entry   | Yes      |
+| `ThemeProvider` around Spiral UI | Yes      |
+| Consumer Tailwind / `@source`    | **No**   |
 
 ## Entries
 
