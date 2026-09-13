@@ -1,6 +1,7 @@
 ---
 name: spiral-theme
 description: Spiral theme engine — generateTheme, applyTheme, ThemeProvider, ALD alias rules. Use when working on theming or @aviala-design/tokens.
+audience: maintainer
 ---
 
 # Spiral Theme

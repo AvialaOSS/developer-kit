@@ -30,6 +30,7 @@
     },
     "./styles.css": "./dist/styles.css",
     "./props.json": "./dist/props.json",
+    "./component-catalog.json": "./dist/component-catalog.json",
     "./component-changelogs.json": "./dist/component-changelogs.json"
   },
   "files": [

@@ -6,6 +6,7 @@ description: >-
   Unreleased headings for version:packages stamping. Use when editing
   changelogs/*.md, making user-visible UI changes, updating
   component-changelogs.json, or mentioning Unreleased / changeset / changelog.
+audience: maintainer
 ---
 
 # Spiral Component Changelog

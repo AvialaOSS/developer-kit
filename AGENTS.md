@@ -1,5 +1,11 @@
 # Spiral — Agent Instructions
 
+> **Audience: maintainers only.** This file is for agents changing components, tokens, icons, or release tooling **inside** this monorepo (developer-kit).
+>
+> **App / consumer agents:** stop here and open [`CONSUMER.md`](./CONSUMER.md) instead — install, one `styles.css` import, `ThemeProvider`, and Hello Button. Do not follow playground, changeset, or `icons:export` flows when consuming the published packages.
+>
+> Acceptance probes (maintainer vs consumer): [`docs/acceptance-probes.md`](./docs/acceptance-probes.md).
+
 Spiral is a design-system monorepo for the **Aviala Design** component library. It publishes three packages under the `@aviala-design` scope and two private apps for development and documentation.
 
 ## Monorepo layout
@@ -65,14 +71,16 @@ When editing skills, always edit the file in `skills/` — the redirectors only 
 
 Tool-specific agent directories other than `.cursor/` are **not tracked**. `.qoder/` is gitignored: it used to carry a duplicate redirector set plus a generated `repowiki/`, which drifted from `skills/` and bloated the tree. If another agent tool needs discovery stubs, add a redirector set under that tool's directory and register it here rather than committing generated caches.
 
-| Skill                  | Purpose                                         |
-| ---------------------- | ----------------------------------------------- |
-| `spiral-component`     | How to add/modify components aligned with Figma |
-| `spiral-coding-tone`   | Naming, comments, token usage conventions       |
-| `spiral-changelog`     | Changelog + changeset workflow                  |
-| `spiral-theme`         | Theme engine, generateTheme, applyTheme         |
-| `aviala-design-system` | Design system reference                         |
-| `spiral-icons`         | Icon pipeline usage                             |
+| Skill                  | Audience   | Purpose                                                    |
+| ---------------------- | ---------- | ---------------------------------------------------------- |
+| `spiral-component`     | maintainer | How to add/modify components aligned with Figma            |
+| `spiral-coding-tone`   | maintainer | Naming, comments, token usage conventions                  |
+| `spiral-changelog`     | maintainer | Changelog + changeset workflow                             |
+| `spiral-theme`         | maintainer | Theme engine, generateTheme, applyTheme                    |
+| `aviala-design-system` | maintainer | Design system reference                                    |
+| `spiral-icons`         | maintainer | Icon pipeline usage                                        |
+| `spiral-tokens-css`    | maintainer | Semantic effects CSS, class↔CSS sync, aggregate styles.css |
+| `spiral-consume`       | consumer   | npm install path only — see also `CONSUMER.md`             |
 
 ## Coding conventions
 
@@ -188,3 +196,7 @@ GitHub Actions (`.github/workflows/`):
 - **TypeScript**: 5.x, strict mode, ES2022 target
 - **Testing**: vitest (minimal setup — pure-function tests for date-utils)
 - **Releases**: Changesets
+
+## Acceptance probes
+
+Maintainer vs consumer agent checks: [`docs/acceptance-probes.md`](./docs/acceptance-probes.md). Consumer agents use [`CONSUMER.md`](./CONSUMER.md); do not merge those flows into this file.
