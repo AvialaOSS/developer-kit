@@ -44,10 +44,10 @@ export function App() {
 
 ## Entries
 
-| Import | Contents | Extra peers |
-| ------ | -------- | ----------- |
-| `@aviala-design/spiral` | Components, `ThemeProvider`, hooks (except form bindings) | `react`, `react-dom` |
-| `@aviala-design/spiral/form` | `Form`, `FormField`, … | also `react-hook-form` (`>=7.50`) |
+| Import                       | Contents                                                  | Extra peers                       |
+| ---------------------------- | --------------------------------------------------------- | --------------------------------- |
+| `@aviala-design/spiral`      | Components, `ThemeProvider`, hooks (except form bindings) | `react`, `react-dom`              |
+| `@aviala-design/spiral/form` | `Form`, `FormField`, …                                    | also `react-hook-form` (`>=7.50`) |
 
 Machine index: `@aviala-design/spiral/component-catalog.json` (name, import path, provider hints). Props detail: `@aviala-design/spiral/props.json`.
 
