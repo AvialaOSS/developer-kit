@@ -34,6 +34,7 @@ jobs:
       # Icons: build from committed src/components (raw/ is gitignored; no Figma in CI).
       - run: pnpm sync:ald || true
       - run: pnpm build
+      - run: pnpm --filter @aviala-design/spiral smoke:styles
       - run: pnpm typecheck
       - run: pnpm lint
       - run: pnpm format:check

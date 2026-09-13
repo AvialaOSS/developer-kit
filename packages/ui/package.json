@@ -38,6 +38,7 @@
   "scripts": {
     "build": "tsup && node scripts/copy-css.mjs && node scripts/generate-props.mjs && node scripts/aggregate-changelogs.mjs",
     "build:styles": "node scripts/copy-css.mjs",
+    "smoke:styles": "node scripts/smoke-styles.mjs",
     "changelog:aggregate": "node scripts/aggregate-changelogs.mjs",
     "changelog:check": "node scripts/check-changelog-pairing.mjs",
     "changelog:stamp": "node scripts/stamp-unreleased.mjs",
@@ -77,11 +78,14 @@
   },
   "devDependencies": {
     "@hookform/resolvers": "^5.2.1",
+    "@tailwindcss/node": "^4.1.11",
+    "@tailwindcss/oxide": "^4.1.11",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "react-docgen-typescript": "^2.2.20",
     "react-hook-form": "^7.62.0",
     "rimraf": "^6.0.1",
+    "tailwindcss": "^4.1.11",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3",
     "vitest": "^4.1.11",

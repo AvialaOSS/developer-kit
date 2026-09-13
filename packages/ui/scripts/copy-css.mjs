@@ -1,33 +1,23 @@
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { buildSpiralStylesCss } from "./assemble-styles.mjs";
+
+/**
+ * Write `@aviala-design/spiral/styles.css` into dist/.
+ * See assemble-styles.mjs for composition.
+ */
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const tokensCss = readFileSync(
-  join(__dirname, "../../tokens/dist/styles.css"),
-  "utf8"
-);
 const dist = join(__dirname, "../dist");
 
 mkdirSync(dist, { recursive: true });
 
-const css = `${tokensCss}
-
-@layer base {
-  * {
-    border-color: var(--border);
-  }
-  body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-  }
-}
-`;
-
+const css = await buildSpiralStylesCss();
 writeFileSync(join(dist, "styles.css"), css);
-console.log("Built dist/styles.css");
+console.log(
+  `Built dist/styles.css (${(Buffer.byteLength(css, "utf8") / 1024).toFixed(1)} KiB raw)`
+);
 
 function patchKeyboardFocusDts(filePath) {
   let content = readFileSync(filePath, "utf8");
