@@ -33,7 +33,10 @@ const components = [
     key: "InputGroup",
     file: "components/input-group.tsx",
     exportName: "InputGroup",
-    parts: [{ exportName: "InputGroupItem" }, { exportName: "InputGroupAddon" }],
+    parts: [
+      { exportName: "InputGroupItem" },
+      { exportName: "InputGroupAddon" },
+    ],
   },
   {
     key: "ButtonGroup",
@@ -53,6 +56,11 @@ const components = [
   },
   { key: "Button", file: "components/button.tsx", exportName: "Button" },
   { key: "Input", file: "components/input.tsx", exportName: "Input" },
+  {
+    key: "NumberInput",
+    file: "components/number-input.tsx",
+    exportName: "NumberInput",
+  },
   {
     key: "Select",
     file: "components/select.tsx",
