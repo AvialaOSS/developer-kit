@@ -3,6 +3,7 @@ import { typographyVariants } from "./typography";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import {
+  cloneElement,
   forwardRef,
   isValidElement,
   type ButtonHTMLAttributes,
@@ -10,8 +11,8 @@ import {
   type ReactElement,
   type ReactNode,
 } from "react";
-import type { IconLevel } from "@aviala-design/icons";
-import { resolveIconSizeToken } from "@aviala-design/icons";
+import type { AvialaIconProps, IconLevel } from "@aviala-design/icons";
+import { IconFrame, resolveIconSizeToken } from "@aviala-design/icons";
 import { cloneAvialaIconElement } from "../lib/clone-aviala-icon";
 import { resolveIconSlotSizing } from "../lib/icon-slot-sizing";
 import { cn } from "../lib/utils";
@@ -20,6 +21,9 @@ import { spiralDebugId } from "../lib/spiral-debug";
 /** Figma Components → Basic Input → Button */
 export type ButtonMode =
   | "primary"
+  | "secondary"
+  | "tertiary"
+  | "tertiaryCustom"
   | "second"
   | "default"
   | "defaultCustom"
@@ -39,11 +43,14 @@ const sizeLabelLevels = {
 } as const;
 
 const buttonVariants = cva(
-  "aviala-button aviala-focus-ring relative inline-flex shrink-0 cursor-pointer items-center justify-center overflow-hidden border-0 bg-transparent font-sans whitespace-nowrap focus-visible:outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-[var(--button-disabled-opacity,0.55)]",
+  "aviala-button aviala-focus-ring relative inline-flex shrink-0 cursor-pointer items-center justify-center overflow-hidden border-0 bg-transparent font-sans whitespace-nowrap focus-visible:outline-none disabled:pointer-events-none disabled:cursor-not-allowed",
   {
     variants: {
       mode: {
         primary: "aviala-button--mode-primary",
+        secondary: "aviala-button--mode-second",
+        tertiary: "aviala-button--mode-default",
+        tertiaryCustom: "aviala-button--mode-defaultCustom",
         second: "aviala-button--mode-second",
         default: "aviala-button--mode-default",
         defaultCustom: "aviala-button--mode-defaultCustom",
@@ -54,7 +61,7 @@ const buttonVariants = cva(
         destructive: "aviala-button--mode-destructive",
       },
       allRound: {
-        true: "min-w-[var(--button-min-width-allround,48px)] !rounded-[var(--border-radius-allround,99px)]",
+        true: "aviala-button--rounded min-w-[var(--button-min-width-allround,48px)]",
         false: "min-w-[var(--button-min-width,46px)]",
       },
       compact: {
@@ -72,7 +79,10 @@ const buttonVariants = cva(
 function resolveMode(
   mode?: ButtonMode | null,
   variant?: LegacyVariant | null
-): ButtonMode {
+): Exclude<ButtonMode, "secondary" | "tertiary" | "tertiaryCustom"> {
+  if (mode === "secondary") return "second";
+  if (mode === "tertiary") return "default";
+  if (mode === "tertiaryCustom") return "defaultCustom";
   if (mode) return mode;
   switch (variant) {
     case "secondary":
@@ -134,35 +144,40 @@ function hasSurface(mode: ButtonMode): boolean {
 function renderIcon(
   node: ReactNode,
   iconLevel: IconLevel,
-  dimmed?: boolean,
-  debugId?: string
+  debugId?: string,
+  iconOnly = false
 ): ReactNode {
   if (!node) return null;
 
   const slotSizing = resolveIconSlotSizing(node, iconLevel, true);
+  const customSize =
+    isValidElement<AvialaIconProps>(node) &&
+    (node.props.level !== undefined || node.props.biggerSize !== undefined);
   const content = cloneAvialaIconElement(node, {
     level: iconLevel,
     biggerSize: true,
   });
 
   return (
-    <span
-      className={cn(
-        "aviala-button__icon",
-        dimmed && "opacity-[var(--button-disabled-opacity,0.55)]"
-      )}
+    <IconFrame
+      level={iconLevel}
+      lineHeightFix={iconOnly ? "both" : "off"}
+      className="aviala-button__icon"
+      data-custom-icon-size={customSize || undefined}
       style={
-        {
-          "--button-icon-size": resolveIconSizeToken(
-            slotSizing.level,
-            slotSizing.biggerSize
-          ),
-        } as CSSProperties
+        customSize
+          ? ({
+              "--button-icon-size": resolveIconSizeToken(
+                slotSizing.level,
+                slotSizing.biggerSize
+              ),
+            } as CSSProperties)
+          : undefined
       }
       {...(debugId ? spiralDebugId(debugId) : undefined)}
     >
       {content}
-    </span>
+    </IconFrame>
   );
 }
 
@@ -222,25 +237,26 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const mode = resolveMode(modeProp, variant);
+    const child =
+      asChild && isValidElement<{ children?: ReactNode }>(children)
+        ? children
+        : undefined;
+    const content = child ? child.props.children : children;
     const iconOnly =
       iconOnlyProp ??
       (sizeProp === "icon" ||
         ((!!(leftIcon ?? icon) ||
-          (isValidElement(children) && typeof children.type !== "string")) &&
+          (isValidElement(content) && typeof content.type !== "string")) &&
           !rightIcon &&
-          ((leftIcon ?? icon) ? !children : true)));
+          ((leftIcon ?? icon) ? !content : true)));
     const size = resolveSize(sizeProp, iconOnly, variant);
     const isDisabled = disabled || loading;
     const showSurface = hasSurface(mode);
 
-    const contentOpacity = loading
-      ? "opacity-[var(--button-loading-opacity,0.6)]"
-      : undefined;
-
     const resolvedLeft = iconOnly
-      ? resolveIconOnlyIcon(leftIcon, icon, children, true)
+      ? resolveIconOnlyIcon(leftIcon, icon, content, true)
       : (leftIcon ?? icon);
-    const label = iconOnly ? null : children;
+    const label = iconOnly ? null : content;
     const iconLevel = sizeLabelLevels[size];
 
     const inner = (
@@ -257,36 +273,33 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             level={loadingLevelForButtonSize(size)}
             mode="inherit"
             lineHeightFix={false}
-            className="relative z-[1] shrink-0 text-inherit"
+            className="aviala-button__loading relative z-[1] shrink-0 text-inherit"
             aria-hidden
           />
         )}
-        {!iconOnly &&
-          renderIcon(resolvedLeft, iconLevel, undefined, "button.icon-left")}
+        {!iconOnly && renderIcon(resolvedLeft, iconLevel, "button.icon-left")}
         {iconOnly
-          ? renderIcon(resolvedLeft, iconLevel, undefined, "button.icon-left")
+          ? renderIcon(resolvedLeft, iconLevel, "button.icon-left", true)
           : label !== null &&
             label !== undefined && (
               <span
                 className={cn(
                   typographyVariants({ level: sizeLabelLevels[size] }),
-                  "relative z-[1] shrink-0",
-                  contentOpacity
+                  "aviala-button__label relative z-[1] shrink-0"
                 )}
                 {...spiralDebugId("button.label")}
               >
                 {label}
               </span>
             )}
-        {!iconOnly &&
-          renderIcon(rightIcon, iconLevel, undefined, "button.icon-right")}
+        {!iconOnly && renderIcon(rightIcon, iconLevel, "button.icon-right")}
       </>
     );
 
     const classes = cn(
       buttonVariants({ mode, ...(iconOnly ? {} : { allRound }), compact }),
       iconOnly && "min-w-0",
-      iconOnly && allRound && "!rounded-[var(--border-radius-allround,99px)]",
+      iconOnly && allRound && "aviala-button--rounded",
       className
     );
 
@@ -295,10 +308,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         <Slot
           className={classes}
           ref={ref}
+          data-size={size}
+          data-icon-only={iconOnly || undefined}
+          aria-busy={loading || undefined}
           aria-disabled={isDisabled || undefined}
           {...props}
         >
-          {children}
+          {child ? cloneElement(child, undefined, inner) : children}
         </Slot>
       );
     }

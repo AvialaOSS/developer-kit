@@ -8,15 +8,11 @@
   max-width: 100%;
   height: var(--video-height, 450px);
   overflow: clip;
-  border: 1px solid var(--video-border, var(--border-border-normal-1, #f9f8f8));
-  border-radius: var(--video-radius, var(--border-radius-big, 12px));
-  background-color: var(
-    --video-bg,
-    var(
-      --normal-background-theme,
-      var(--box-box-normal-lightbackground-white, #f9f8f8)
-    )
-  );
+  padding: var(--video-size-padding-y) var(--video-size-padding-x);
+  border: var(--video-size-stroke-width) solid
+    var(--video-border, var(--video-color-border));
+  border-radius: var(--video-radius, var(--video-size-radius));
+  background-color: var(--video-bg, var(--video-color-background));
   box-sizing: border-box;
 }
 
@@ -49,8 +45,14 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: var(--button-icon-size, var(--size-regular, 0.875rem));
-  height: var(--button-icon-size, var(--size-regular, 0.875rem));
+  width: var(
+    --button-icon-size,
+    var(--_legacy-button-icon-size, var(--size-regular, 0.875rem))
+  );
+  height: var(
+    --button-icon-size,
+    var(--_legacy-button-icon-size, var(--size-regular, 0.875rem))
+  );
   color: inherit;
 }
 
@@ -100,26 +102,31 @@
   flex-shrink: 0;
   width: 100%;
   box-sizing: border-box;
+  gap: var(--video-size-controls-container-gap);
+  padding: var(--video-size-controls-container-default-padding-y)
+    var(--video-size-controls-container-default-padding-x);
 }
 
 .aviala-video__bar {
   position: relative;
   display: flex;
   align-items: flex-start;
-  gap: var(--video-bar-gap, var(--gap-component-space, 8px));
+  gap: var(--video-bar-gap, var(--video-size-controls-bar-gap));
   width: 100%;
   min-height: var(--video-bar-height, 46px);
-  padding: var(--video-bar-padding, var(--padding-default, 8px));
+  padding: var(
+    --video-bar-padding,
+    var(--video-size-controls-bar-padding-y)
+      var(--video-size-controls-bar-padding-x)
+  );
   box-sizing: border-box;
 }
 
 .aviala-video__bar-bg {
   position: absolute;
   inset: 0;
-  background-color: var(
-    --video-bar-bg,
-    var(--control-control-normal-lightbackground-1, #f0efef)
-  );
+  background-color: var(--video-bar-bg, var(--video-color-controls-background));
+  border-radius: var(--video-size-controls-background-radius-default);
   pointer-events: none;
 }
 
@@ -129,7 +136,7 @@
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  gap: var(--video-bar-group-gap, var(--gap-inside, 4px));
+  gap: var(--video-bar-group-gap, var(--video-size-control-slot-gap));
 }
 
 .aviala-video__progress {
@@ -138,7 +145,7 @@
   display: flex;
   flex: 1 1 auto;
   align-items: center;
-  gap: var(--video-bar-progress-gap, 10px);
+  gap: var(--video-bar-progress-gap, var(--video-size-progress-container-gap));
   min-width: 0;
 }
 
@@ -182,10 +189,39 @@
   }
 }
 
-.aviala-video__seek {
+.aviala-video__seek.aviala-slider {
+  --slider-size-regular-track-height: var(--video-size-progress-track-height);
+  --slider-size-track-radius: var(--video-size-progress-track-radius);
+  --slider-size-progress-radius: var(--video-size-progress-track-radius);
+  --slider-color-track-default: var(--video-color-progress-background);
+  --slider-color-progress-default: var(--video-color-progress);
+  --slider-size-regular-thumb-width: var(--video-size-indicator-size);
+  --slider-size-regular-thumb-height: var(--video-size-indicator-size);
+  --slider-size-thumb-radius: var(--video-size-indicator-radius);
+  --slider-color-thumb-default: var(--video-color-indicator-background);
+  --slider-size-regular-thumb-mark-width: var(--video-size-indicator-icon-size);
+  --slider-size-regular-thumb-mark-height: var(
+    --video-size-indicator-icon-size
+  );
+  --slider-color-thumb-mark-default: var(--video-color-progress);
+  --slider-size-thumb-shadow-1-offset-x: var(--video-effect-shadow-offset-x);
+  --slider-size-thumb-shadow-1-offset-y: var(
+    --video-effect-shadow-large-offset-y
+  );
+  --slider-size-thumb-shadow-1-radius: var(--video-effect-shadow-large-blur);
+  --slider-size-thumb-shadow-1-spread: var(--video-effect-shadow-spread);
+  --slider-color-thumb-shadow-1: var(--video-effect-shadow-large-color);
+  --slider-size-thumb-shadow-2-offset-x: var(--video-effect-shadow-offset-x);
+  --slider-size-thumb-shadow-2-offset-y: var(
+    --video-effect-shadow-small-offset-y
+  );
+  --slider-size-thumb-shadow-2-radius: var(--video-effect-shadow-small-blur);
+  --slider-size-thumb-shadow-2-spread: var(--video-effect-shadow-spread);
+  --slider-color-thumb-shadow-2: var(--video-effect-shadow-small-color);
   flex: 1 1 auto;
   min-width: 0;
   width: auto;
+  padding-block: var(--slider-pad-y, var(--video-size-slider-padding-y));
   /* Playback ticks are frequent; Slider’s click-jump easing makes the playhead look laggy. */
   --slider-value-transition-duration: 0s;
 }
@@ -199,7 +235,8 @@
   flex-direction: column;
   width: max-content;
   min-width: var(--video-speed-min-width, 48px);
-  padding: var(--select-menu-py, 6px) var(--select-group-px, 6px);
+  gap: var(--popover-slot-size-gap);
+  padding: var(--select-menu-py, var(--padding-small)) var(--padding-none);
   box-sizing: border-box;
 }
 
@@ -213,27 +250,75 @@
   margin: 0;
   border: 0;
   background: transparent;
-  font: inherit;
-  color: inherit;
+  font-family: inherit;
+  font-size: var(
+    --select-item-font-size,
+    var(--input-font-size, var(--typography-text-size))
+  );
+  line-height: var(
+    --select-item-line-height,
+    var(--input-line-height, var(--typography-text-line-height))
+  );
+  font-weight: var(--typography-text-weight-text);
+  color: var(--select-item-fg, var(--select-menu-item-color-text-default));
   text-align: start;
   appearance: none;
+}
+
+.aviala-video__speed-menu .aviala-select-item[data-state="checked"] {
+  background: var(--select-item-selected-bg, transparent);
+  color: var(
+    --select-item-selected-fg,
+    var(--select-item-fg, var(--select-menu-item-color-text-default))
+  );
+  box-shadow: var(--input-surface-shadow, none);
+}
+
+.aviala-video__speed-menu .aviala-select-item__trailing-radio {
+  width: var(--select-menu-item-size-icon-width);
+  height: var(--select-menu-item-size-icon-height);
+}
+
+.aviala-video__speed-menu .aviala-select-item__trailing-radio svg {
+  width: var(--select-item-icon-size, var(--select-menu-item-size-icon-width));
+  height: var(--select-item-icon-size, var(--select-menu-item-size-icon-width));
+}
+
+.aviala-video__speed-menu .aviala-select-label {
+  padding: var(--select-label-pt, var(--select-menu-item-size-padding-y))
+    var(--select-label-px, var(--select-menu-item-size-padding-x))
+    var(--select-label-pb, var(--select-menu-item-size-title-padding-y-end));
+  color: var(
+    --select-label-fg,
+    var(--select-menu-item-color-group-title-default)
+  );
 }
 
 .aviala-video__settings-body {
   display: flex;
   flex-direction: column;
-  gap: var(--video-settings-gap, var(--gap-component-space, 8px));
+  gap: var(--video-settings-gap, var(--popover-slot-size-gap));
   width: var(--video-settings-width, 200px);
-  padding: var(--video-settings-padding, var(--padding-middle, 10px));
+  padding: var(
+    --video-settings-padding,
+    var(--popover-slot-size-padding-y) var(--popover-slot-size-padding-x)
+  );
   box-sizing: border-box;
+}
+
+.aviala-video__control-label.aviala-typography {
+  color: var(--video-color-controls-text-default);
 }
 
 .aviala-video__volume-body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--video-settings-gap, var(--gap-component-space, 8px));
-  padding: var(--video-settings-padding, var(--padding-middle, 10px));
+  gap: var(--video-settings-gap, var(--popover-slot-size-gap));
+  padding: var(
+    --video-settings-padding,
+    var(--popover-slot-size-padding-y) var(--popover-slot-size-padding-x)
+  );
   box-sizing: border-box;
 }
 
@@ -277,7 +362,11 @@
   inset-inline: 0;
   bottom: 0;
   align-items: center;
-  padding: var(--video-bar-light-inset, var(--padding-big, 14px));
+  padding: var(
+    --video-bar-light-inset,
+    var(--video-size-controls-container-light-padding-y)
+      var(--video-size-controls-container-light-padding-x)
+  );
   pointer-events: none;
 }
 
@@ -289,28 +378,31 @@
 }
 
 .aviala-video--appearance-light .aviala-video__bar-bg {
-  /* Figma Controls Background: lightBackground-1 + luminosity over media.
-     mix-blend alone often fails to sample <video> compositor layers; frosted
-     backdrop-filter + translucent fill matches the designed glass material. */
+  /* Retain the existing Web glass treatment pending material alignment.
+     Figma currently uses a NORMAL paint inside a PASS_THROUGH node;
+     the translucency and backdrop filter below are not verified equivalents. */
   background-color: var(
     --video-bar-light-bg,
     color-mix(
       in srgb,
-      var(
-          --video-bar-bg,
-          var(--control-control-normal-lightbackground-1, #f0efef)
-        )
-        72%,
+      var(--video-bar-bg, var(--video-color-controls-background)) 72%,
       transparent
     )
   );
   border-radius: var(
     --video-bar-light-radius,
-    var(--border-radius-allround, 99px)
+    var(--video-size-controls-background-radius-light)
   );
   box-shadow: var(
     --video-bar-light-shadow,
-    var(--aviala-shadow-level4-with-line)
+    var(--video-effect-shadow-offset-x)
+      var(--video-effect-shadow-large-offset-y)
+      var(--video-effect-shadow-large-blur) var(--video-effect-shadow-spread)
+      var(--video-effect-shadow-large-color),
+    var(--video-effect-shadow-offset-x)
+      var(--video-effect-shadow-small-offset-y)
+      var(--video-effect-shadow-small-blur) var(--video-effect-shadow-spread)
+      var(--video-effect-shadow-small-color)
   );
   -webkit-backdrop-filter: blur(var(--video-bar-light-blur, 24px)) saturate(1.4);
   backdrop-filter: blur(var(--video-bar-light-blur, 24px)) saturate(1.4);

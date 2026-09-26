@@ -1,0 +1,40 @@
+{
+  "source": "aykyMmGyzVPkAsf8oRBZg0",
+  "rules": {
+    "VariableCollectionId:15:2": {
+      "axis": "density",
+      "css": "leaf",
+      "layer": "foundation"
+    },
+    "VariableCollectionId:15:4": {
+      "axis": "none",
+      "css": "leaf",
+      "layer": "foundation"
+    },
+    "VariableCollectionId:140:814": {
+      "axis": "color",
+      "css": "path",
+      "layer": "semantic"
+    },
+    "VariableCollectionId:1416:20307": {
+      "axis": "effects",
+      "css": "path",
+      "layer": "semantic"
+    },
+    "VariableCollectionId:2233:3308": {
+      "axis": "none",
+      "css": "path",
+      "layer": "component"
+    },
+    "VariableCollectionId:1bd48b52b5909ff259a92d782376db1a205ebea9/282:187": {
+      "axis": "color",
+      "css": "palette",
+      "layer": "foundation"
+    },
+    "VariableCollectionId:654:140367": {
+      "axis": "none",
+      "css": "path",
+      "layer": "semantic"
+    }
+  }
+}

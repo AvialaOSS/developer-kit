@@ -17,8 +17,11 @@
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
-  width: var(--loading-icon-size);
-  height: var(--loading-icon-size);
+  width: var(--loading-icon-size, var(--_loading-icon-size));
+  height: var(
+    --loading-icon-size,
+    var(--_loading-icon-height, var(--_loading-icon-size))
+  );
 }
 
 .aviala-loading__ring {
@@ -31,8 +34,13 @@
 
 /* Figma 30×30 ring is r15 − r13 (2px stroke). Same geometry as Progress ring. */
 .aviala-loading__path {
-  r: calc(50% - var(--loading-ring-stroke, 2px) / 2);
-  stroke-width: var(--loading-ring-stroke, 2px);
+  r: calc(
+    50% - var(--loading-ring-stroke, var(--loading-icon-size-stroke-width)) / 2
+  );
+  stroke-width: var(
+    --loading-ring-stroke,
+    var(--loading-icon-size-stroke-width)
+  );
   stroke: var(--loading-mask-reveal, #ffffff);
 }
 
@@ -41,58 +49,94 @@
   height: 100%;
 }
 
-/* Level → icon size + optional line-height box */
+/* Component geometry; explicit legacy overrides retain precedence. */
 .aviala-loading--level-display {
-  --loading-icon-size: var(--size-huge, 1.875rem);
-}
-
-.aviala-loading--level-headline1 {
-  --loading-icon-size: var(--size-large, 1.625rem);
-}
-
-.aviala-loading--level-headline2 {
-  --loading-icon-size: var(--size-semilarge, 1.375rem);
-}
-
-.aviala-loading--level-title,
-.aviala-loading--level-subtitle {
-  --loading-icon-size: var(--size-middle, 1rem);
-}
-
-.aviala-loading--level-text {
-  --loading-icon-size: var(--size-regular, 0.875rem);
-}
-
-.aviala-loading--level-caption {
-  --loading-icon-size: var(--size-small, 0.75rem);
+  --_loading-icon-size: var(--loading-icon-size-display-icon-width);
+  --_loading-icon-height: var(--loading-icon-size-display-icon-height);
 }
 
 .aviala-loading--line-height-fix.aviala-loading--level-display {
-  height: var(--line-height-max, 2.75rem);
+  height: var(--loading-icon-size-display-container-height);
+}
+
+.aviala-loading--level-headline1 {
+  --_loading-icon-size: var(--loading-icon-size-headline1-icon-width);
+  --_loading-icon-height: var(--loading-icon-size-headline1-icon-width);
 }
 
 .aviala-loading--line-height-fix.aviala-loading--level-headline1 {
-  height: var(--line-height-large, 2.875rem);
+  height: var(--loading-icon-size-headline1-container-height);
+}
+
+.aviala-loading--level-headline2 {
+  --_loading-icon-size: var(--loading-icon-size-headline2-icon-width);
+  --_loading-icon-height: var(--loading-icon-size-headline2-icon-width);
 }
 
 .aviala-loading--line-height-fix.aviala-loading--level-headline2 {
-  height: var(--line-height-semilarge, 2.375rem);
+  height: var(--loading-icon-size-headline2-container-height);
+}
+
+.aviala-loading--level-title {
+  --_loading-icon-size: var(--loading-icon-size-title-icon-width);
+  --_loading-icon-height: var(--loading-icon-size-title-icon-width);
 }
 
 .aviala-loading--line-height-fix.aviala-loading--level-title {
-  height: var(--line-height-big, 2rem);
+  height: var(--loading-icon-size-title-container-height);
+}
+
+.aviala-loading--level-subtitle {
+  --_loading-icon-size: var(--loading-icon-size-subtitle-icon-width);
+  --_loading-icon-height: var(--loading-icon-size-subtitle-icon-width);
 }
 
 .aviala-loading--line-height-fix.aviala-loading--level-subtitle {
-  height: var(--line-height-middle, 1.375rem);
+  height: var(--loading-icon-size-subtitle-container-height);
+}
+
+.aviala-loading--level-text {
+  --_loading-icon-size: var(--loading-icon-size-text-icon-width);
+  --_loading-icon-height: var(--loading-icon-size-text-icon-width);
 }
 
 .aviala-loading--line-height-fix.aviala-loading--level-text {
-  height: var(--line-height-regular, 1.125rem);
+  height: var(--loading-icon-size-text-container-height);
+}
+
+.aviala-loading--level-caption {
+  --_loading-icon-size: var(--loading-icon-size-caption-icon-width);
+  --_loading-icon-height: var(--loading-icon-size-caption-icon-width);
 }
 
 .aviala-loading--line-height-fix.aviala-loading--level-caption {
-  height: var(--line-height-small, 1rem);
+  height: var(--loading-icon-size-caption-container-height);
 }
 
-/* Mode classes retained for Storybook matrix / future hooks; ring colors set in loading.tsx */
+.aviala-loading--level-display[data-alignment="both"] {
+  width: var(--loading-icon-size-display-container-width);
+}
+
+.aviala-loading--level-headline1[data-alignment="both"] {
+  width: var(--loading-icon-size-headline1-container-width);
+}
+
+.aviala-loading--level-headline2[data-alignment="both"] {
+  width: var(--loading-icon-size-headline2-container-width);
+}
+
+.aviala-loading--level-title[data-alignment="both"] {
+  width: var(--loading-icon-size-title-container-width);
+}
+
+.aviala-loading--level-subtitle[data-alignment="both"] {
+  width: var(--loading-icon-size-subtitle-container-width);
+}
+
+.aviala-loading--level-text[data-alignment="both"] {
+  width: var(--loading-icon-size-text-container-width);
+}
+
+.aviala-loading--level-caption[data-alignment="both"] {
+  width: var(--loading-icon-size-caption-container-width);
+}

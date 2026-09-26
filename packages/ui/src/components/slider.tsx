@@ -96,6 +96,7 @@ function SliderValueTooltip({
 function SliderThumb({
   index,
   value,
+  disabled,
   showValueTooltip,
   formatValueTooltip,
   forceTooltipOpen,
@@ -103,6 +104,7 @@ function SliderThumb({
 }: {
   index: number;
   value: number;
+  disabled?: boolean;
   showValueTooltip: boolean;
   formatValueTooltip?: (value: number, index: number) => ReactNode;
   forceTooltipOpen: boolean;
@@ -131,7 +133,7 @@ function SliderThumb({
           <SliderValueTooltip open={tooltipOpen}>{label}</SliderValueTooltip>
         ) : null}
       </SliderPrimitive.unstable_ThumbTrigger>
-      <SliderPrimitive.unstable_BubbleInput />
+      <SliderPrimitive.unstable_BubbleInput disabled={disabled} />
     </SliderPrimitive.unstable_ThumbProvider>
   );
 }
@@ -267,6 +269,7 @@ export const Slider = forwardRef<HTMLSpanElement, SliderProps>(
         max={max}
         data-size={resolvedSize}
         data-type={resolvedType}
+        data-inverted={props.inverted ? "true" : undefined}
         data-disabled={disabled ? "true" : undefined}
         data-dragging={isDragging ? "true" : undefined}
         data-value-transition={valueTransitionReady ? "true" : undefined}
@@ -299,6 +302,7 @@ export const Slider = forwardRef<HTMLSpanElement, SliderProps>(
               key={index}
               index={index}
               value={thumbValue}
+              disabled={disabled}
               showValueTooltip={Boolean(showValueTooltip && !disabled)}
               formatValueTooltip={formatValueTooltip}
               forceTooltipOpen={forceTooltipOpen}

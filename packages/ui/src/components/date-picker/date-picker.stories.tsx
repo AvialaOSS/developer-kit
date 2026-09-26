@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useEffect, useState } from "react";
 import { FormField } from "../form-field";
+import { Button } from "../button";
 import {
   DatePicker,
   DatePickerCalendar,
@@ -181,22 +182,62 @@ export const WithTimeOpenOnTimePanel: Story = {
     const [value, setValue] = useState<Date | undefined>(
       new Date(2026, 5, 10, 14, 30)
     );
+    const [changes, setChanges] = useState(0);
 
     return (
-      <DatePicker
-        mode="single"
-        defaultOpen
-        value={value}
-        onValueChange={setValue}
-        className="w-[290px]"
-      >
-        <DatePickerTrigger />
-        <DatePickerContent>
-          <TimePanelOpenCalendar />
-        </DatePickerContent>
-      </DatePicker>
+      <div className="flex flex-col items-start gap-4">
+        <Button onClick={() => setValue(new Date(2026, 5, 10, 9, 45))}>
+          Set controlled date to 09:45
+        </Button>
+        <output aria-label="Date change count">{changes}</output>
+        <DatePicker
+          mode="single"
+          defaultOpen
+          value={value}
+          onValueChange={(next) => {
+            setValue(next);
+            setChanges((count) => count + 1);
+          }}
+          className="w-[290px]"
+        >
+          <DatePickerTrigger />
+          <DatePickerContent>
+            <TimePanelOpenCalendar />
+          </DatePickerContent>
+        </DatePicker>
+      </div>
     );
   },
+};
+
+export const TimeSourcePrecedence: Story = {
+  render: () => (
+    <div className="flex flex-col items-start gap-4">
+      <DatePickerField
+        label="Date supplies time"
+        defaultValue={new Date(2026, 5, 10, 14, 30)}
+      />
+      <DatePickerField
+        label="Explicit default time"
+        defaultValue={new Date(2026, 5, 10, 14, 30)}
+        defaultTimeValue={{ hours: 10, minutes: 15 }}
+      />
+      <DatePickerField
+        label="Controlled time wins"
+        value={new Date(2026, 5, 10, 14, 30)}
+        timeValue={{ hours: 11, minutes: 20 }}
+        defaultTimeValue={{ hours: 10, minutes: 15 }}
+      />
+      <DatePickerField
+        label="Range anchor supplies time"
+        mode="range"
+        defaultValue={{
+          from: new Date(2026, 5, 10, 8, 25),
+          to: new Date(2026, 5, 12, 8, 25),
+        }}
+      />
+    </div>
+  ),
 };
 
 function TimePanelOpenCalendar() {

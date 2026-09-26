@@ -483,6 +483,7 @@ writeFileSync(
   join(srcDir, "index.ts"),
   `export type { SVGProps } from "react";
 export { Icon, type IconProps } from "./icon";
+export { IconFrame, type IconFrameProps, type IconLineHeightFix } from "./icon-frame";
 export {
   DEFAULT_ICON_MODE,
   DEFAULT_ICON_THICKNESS,

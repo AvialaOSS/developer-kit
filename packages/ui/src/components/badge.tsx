@@ -7,7 +7,6 @@ import {
   type ReactElement,
   type ReactNode,
 } from "react";
-import { resolveIconSizeToken } from "@aviala-design/icons";
 import { cn } from "../lib/utils";
 import { Typography, type TypographyLevel } from "./typography";
 
@@ -58,13 +57,9 @@ function resolveLineHeightFix(
   return level === "text" ? "subtitle" : "text";
 }
 
-function iconSizeForLevel(level: BadgeLevel): string {
-  return resolveIconSizeToken(level);
-}
-
-function renderBadgeIcon(node: ReactNode, level: BadgeLevel): ReactNode {
+function renderBadgeIcon(node: ReactNode): ReactNode {
   if (!node) return null;
-  const size = iconSizeForLevel(level);
+  const size = "var(--badge-icon-size, var(--_badge-icon-size))";
   const content =
     isValidElement(node) && typeof node.type !== "string"
       ? cloneElement(
@@ -145,16 +140,18 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
         data-line-height-fix={resolvedLhf}
         {...props}
       >
-        {renderBadgeIcon(leftIcon, resolvedLevel)}
-        <Typography
-          level={typographyLevel}
-          tone={tone}
-          as="span"
-          className="aviala-badge__text whitespace-nowrap"
-        >
-          {children}
-        </Typography>
-        {renderBadgeIcon(rightIcon, resolvedLevel)}
+        <span className="aviala-badge__surface">
+          {renderBadgeIcon(leftIcon)}
+          <Typography
+            level={typographyLevel}
+            tone={tone}
+            as="span"
+            className="aviala-badge__text whitespace-nowrap"
+          >
+            {children}
+          </Typography>
+          {renderBadgeIcon(rightIcon)}
+        </span>
       </span>
     );
   }

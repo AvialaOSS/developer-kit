@@ -1,7 +1,9 @@
 import { Slot } from "@radix-ui/react-slot";
-import type { IconLevel } from "@aviala-design/icons";
+import type { AvialaIconProps, IconLevel } from "@aviala-design/icons";
 import {
+  cloneElement,
   forwardRef,
+  isValidElement,
   type AnchorHTMLAttributes,
   type MouseEvent,
   type ReactNode,
@@ -17,17 +19,17 @@ export type LinkMode = "noBackground" | "noBackgroundCustom";
 const levelStyles = {
   caption: {
     className: typographyVariants({ level: "caption" }),
-    iconBox: "h-5",
   },
   text: {
     className: typographyVariants({ level: "text" }),
-    iconBox: "h-6",
   },
 } as const;
 
 function renderIcon(node: ReactNode, level: LinkLevel): ReactNode {
   if (!node) return null;
-  const { iconBox } = levelStyles[level];
+  const customSize =
+    isValidElement<AvialaIconProps>(node) &&
+    (node.props.level !== undefined || node.props.biggerSize !== undefined);
   const iconLevel: IconLevel = level;
   const content = cloneAvialaIconElement(node, {
     level: iconLevel,
@@ -36,10 +38,8 @@ function renderIcon(node: ReactNode, level: LinkLevel): ReactNode {
 
   return (
     <span
-      className={cn(
-        "relative inline-flex shrink-0 items-center justify-center",
-        iconBox
-      )}
+      data-custom-icon-size={customSize || undefined}
+      className="aviala-link__icon relative inline-flex shrink-0 items-center justify-center"
     >
       {content}
     </span>
@@ -75,7 +75,13 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     },
     ref
   ) => {
-    const iconOnly = iconOnlyProp ?? (!!(leftIcon ?? rightIcon) && !children);
+    const child =
+      asChild &&
+      isValidElement<AnchorHTMLAttributes<HTMLAnchorElement>>(children)
+        ? children
+        : undefined;
+    const content = child ? child.props.children : children;
+    const iconOnly = iconOnlyProp ?? (!!(leftIcon ?? rightIcon) && !content);
     const resolvedLevel = level ?? "caption";
     const Comp = asChild ? Slot : "a";
 
@@ -85,7 +91,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       iconOnly ? "aviala-link--icon-only" : undefined,
       className
     );
-    const { href, onClick, tabIndex, ...restProps } = props;
+    const { href, onClick, onClickCapture, tabIndex, ...restProps } = props;
     const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
       if (disabled) {
         e.preventDefault();
@@ -94,23 +100,33 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       onClick?.(e);
     };
 
-    if (asChild) {
-      return (
-        <Comp
-          className={sharedClassName}
-          data-mode={mode}
-          data-disabled={disabled ? "true" : undefined}
-          ref={ref}
-          aria-disabled={disabled || undefined}
-          {...restProps}
-          href={disabled ? undefined : href}
-          tabIndex={disabled ? -1 : tabIndex}
-          onClick={handleClick}
-        >
-          {children}
-        </Comp>
-      );
-    }
+    const inner = (
+      <>
+        {renderIcon(
+          leftIcon ?? (iconOnly ? rightIcon : undefined),
+          resolvedLevel
+        )}
+        {!iconOnly && content !== undefined && content !== null && (
+          <span
+            className={cn(
+              "aviala-link__label relative shrink-0",
+              levelStyles[resolvedLevel].className
+            )}
+          >
+            {content}
+          </span>
+        )}
+        {!iconOnly && renderIcon(rightIcon, resolvedLevel)}
+      </>
+    );
+    const handleClickCapture = (e: MouseEvent<HTMLAnchorElement>) => {
+      if (disabled) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+      onClickCapture?.(e);
+    };
 
     return (
       <Comp
@@ -123,22 +139,22 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
         href={disabled ? undefined : href}
         tabIndex={disabled ? -1 : tabIndex}
         onClick={handleClick}
+        onClickCapture={handleClickCapture}
       >
-        {renderIcon(
-          leftIcon ?? (iconOnly ? rightIcon : undefined),
-          resolvedLevel
-        )}
-        {!iconOnly && children !== undefined && children !== null && (
-          <span
-            className={cn(
-              "relative shrink-0",
-              levelStyles[resolvedLevel].className
-            )}
-          >
-            {children}
-          </span>
-        )}
-        {!iconOnly && renderIcon(rightIcon, resolvedLevel)}
+        {child
+          ? cloneElement(
+              child,
+              disabled
+                ? {
+                    href: undefined,
+                    tabIndex: -1,
+                    onClick: undefined,
+                    onClickCapture: undefined,
+                  }
+                : {},
+              inner
+            )
+          : inner}
       </Comp>
     );
   }

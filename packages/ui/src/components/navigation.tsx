@@ -121,12 +121,14 @@ function measureNavigationIndicator(
     1
   );
   const railInset = readIndicatorToken(group, "--navigation-rail-inset", 6);
-  const railWidth = readIndicatorToken(group, "--navigation-rail-width", 3);
-  const horizontalWidth = readIndicatorToken(
-    group,
-    "--navigation-indicator-width-horizontal",
-    50
+  // Resolve CSS lengths through layout without disturbing the animated indicator.
+  const sizingElement = group.querySelector<HTMLElement>(
+    ":scope > .aviala-navigation-indicator-size"
   );
+  if (!sizingElement) return null;
+  const sizingStyle = getComputedStyle(sizingElement);
+  const indicatorWidth = parseFloat(sizingStyle.width) || 0;
+  const indicatorHeight = parseFloat(sizingStyle.height) || 0;
   if (direction === "vertical") {
     let inset = railInset;
 
@@ -138,22 +140,22 @@ function measureNavigationIndicator(
     }
     const isRtl = getComputedStyle(group).direction === "rtl";
     const x = isRtl
-      ? groupRect.width - railWidth - railInlineStart
+      ? groupRect.width - indicatorWidth - railInlineStart
       : railInlineStart;
     return {
       x,
       y: itemRect.top - groupRect.top + inset,
-      width: railWidth,
+      width: indicatorWidth,
       height: Math.max(0, itemRect.height - inset * 2),
       visible: true,
     };
   }
   const itemCenterX = itemRect.left + itemRect.width / 2;
   return {
-    x: itemCenterX - groupRect.left - horizontalWidth / 2,
-    y: itemRect.bottom - groupRect.top - railWidth,
-    width: horizontalWidth,
-    height: railWidth,
+    x: itemCenterX - groupRect.left - indicatorWidth / 2,
+    y: itemRect.bottom - groupRect.top - indicatorHeight,
+    width: indicatorWidth,
+    height: indicatorHeight,
     visible: true,
   };
 }
@@ -737,6 +739,7 @@ export const NavigationGroup = forwardRef<HTMLDivElement, NavigationGroupProps>(
         className={cn("aviala-navigation-group", className)}
         {...props}
       >
+        <span className="aviala-navigation-indicator-size" aria-hidden />
         <span
           ref={onIndicatorRef}
           className="aviala-navigation-indicator"

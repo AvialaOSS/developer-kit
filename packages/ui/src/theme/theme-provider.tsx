@@ -9,6 +9,8 @@ import {
 } from "react";
 import {
   applyTheme,
+  applyProjectTheme,
+  removeProjectTheme,
   applyBaseNumbersDensity,
   DEFAULT_PALETTE_CONFIG,
   DEFAULT_PRIMARY,
@@ -21,7 +23,13 @@ import {
   type ThemeMode,
   type ThemePreset,
 } from "@aviala-design/tokens";
+import {
+  projectCssVariables,
+  type TokenProject,
+  type ProjectCssOptions,
+} from "@aviala-design/tokens/project";
 import { initKeyboardFocus } from "../lib/keyboard-focus";
+import { ThemeOverlayContainerProvider } from "../overlay/overlay-container";
 
 /** Last-resort brand color when no prop, stored value, or preset supplies one. */
 const DEFAULT_PRIMARY_COLOR: string = DEFAULT_PRIMARY;
@@ -35,6 +43,12 @@ export type ThemeProviderProps = {
   defaultDensity?: BaseNumbersDensity;
   storageKey?: string;
   onThemeChange?: (vars: Record<string, string>) => void;
+  /** Canonical project; legacy palette controls do not rewrite its token values. */
+  project?: TokenProject;
+  projectCssOptions?: ProjectCssOptions;
+  /** Explicit container for a local project theme. Defaults to the document root. */
+  projectTarget?: HTMLElement;
+  defaultEffects?: boolean;
 };
 
 type ThemeContextValue = {
@@ -53,6 +67,9 @@ type ThemeContextValue = {
   setPaletteConfig: (config: Partial<PaletteConfig>) => void;
   resetPaletteConfig: () => void;
   themeVars: Record<string, string>;
+  effects: boolean;
+  setEffects: (enabled: boolean) => void;
+  isProjectTheme: boolean;
 };
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
@@ -66,7 +83,12 @@ export function ThemeProvider({
   defaultDensity = "default",
   storageKey = "aviala-theme",
   onThemeChange,
+  project,
+  projectCssOptions,
+  projectTarget,
+  defaultEffects = true,
 }: ThemeProviderProps) {
+  const [effects, setEffects] = useState(defaultEffects);
   const [mode, setModeState] = useState<ThemeMode>(() => {
     if (typeof window === "undefined") return defaultMode;
     const stored = localStorage.getItem(`${storageKey}:mode`);
@@ -115,19 +137,43 @@ export function ThemeProvider({
     return stored === "mobile-friendly" ? "mobile-friendly" : defaultDensity;
   });
 
-  const isStaticTheme = presetId ? getPreset(presetId)?.static === true : false;
+  const isStaticTheme =
+    !project && (presetId ? getPreset(presetId)?.static === true : false);
+  const projectModes = useMemo(
+    () => ({
+      color: mode === "dark" ? "Dark" : "Light",
+      density: density === "mobile-friendly" ? "Mobile Friendly" : "Default",
+      effects: effects ? "ON" : "OFF",
+    }),
+    [mode, density, effects]
+  );
 
   const themeVars = useMemo(
     () =>
-      isStaticTheme
-        ? {}
-        : generateTheme({
-            mode,
-            primary: primaryColor,
-            presetId,
-            palette: paletteConfig,
-          }),
-    [isStaticTheme, mode, primaryColor, presetId, paletteConfig]
+      project
+        ? projectCssVariables(project, projectModes, projectCssOptions)
+        : isStaticTheme
+          ? {}
+          : generateTheme({
+              mode,
+              primary: primaryColor,
+              presetId,
+              palette: paletteConfig,
+              density,
+              effects,
+            }),
+    [
+      project,
+      projectModes,
+      projectCssOptions,
+      isStaticTheme,
+      mode,
+      primaryColor,
+      presetId,
+      paletteConfig,
+      density,
+      effects,
+    ]
   );
 
   useLayoutEffect(() => {
@@ -135,6 +181,31 @@ export function ThemeProvider({
   }, []);
 
   useLayoutEffect(() => {
+    if (project) {
+      const target = projectTarget ?? document.documentElement;
+      const attributes = {
+        "data-theme": "ald",
+        "data-mode": mode,
+        "data-density": density,
+        "data-effects": effects ? "on" : "off",
+      };
+      const previous = Object.fromEntries(
+        Object.keys(attributes).map((name) => [name, target.getAttribute(name)])
+      );
+      applyProjectTheme(target, project, projectModes, projectCssOptions);
+      for (const [name, value] of Object.entries(attributes))
+        target.setAttribute(name, value);
+      onThemeChange?.(themeVars);
+      return () => {
+        removeProjectTheme(target);
+        for (const [name, value] of Object.entries(attributes)) {
+          if (target.getAttribute(name) !== value) continue;
+          const original = previous[name];
+          if (original === null) target.removeAttribute(name);
+          else target.setAttribute(name, original!);
+        }
+      };
+    }
     applyBaseNumbersDensity(document.documentElement, density);
 
     if (isStaticTheme) {
@@ -142,12 +213,28 @@ export function ThemeProvider({
       removeTheme();
       document.documentElement.setAttribute("data-theme", presetId ?? "ald");
       document.documentElement.setAttribute("data-mode", mode);
+      document.documentElement.setAttribute(
+        "data-effects",
+        effects ? "on" : "off"
+      );
       onThemeChange?.(themeVars);
       return;
     }
     applyTheme(themeVars, { mode, themeId: presetId, density });
     onThemeChange?.(themeVars);
-  }, [isStaticTheme, themeVars, mode, presetId, density, onThemeChange]);
+  }, [
+    project,
+    projectTarget,
+    projectModes,
+    projectCssOptions,
+    effects,
+    isStaticTheme,
+    themeVars,
+    mode,
+    presetId,
+    density,
+    onThemeChange,
+  ]);
 
   const setMode = useCallback(
     (next: ThemeMode) => {
@@ -227,6 +314,9 @@ export function ThemeProvider({
       setPaletteConfig,
       resetPaletteConfig,
       themeVars,
+      effects,
+      setEffects,
+      isProjectTheme: Boolean(project),
     }),
     [
       mode,
@@ -242,11 +332,23 @@ export function ThemeProvider({
       setPaletteConfig,
       resetPaletteConfig,
       themeVars,
+      effects,
+      project,
     ]
   );
 
   return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>
+      <ThemeOverlayContainerProvider
+        value={
+          project && projectTarget?.tagName !== "HTML"
+            ? (projectTarget ?? null)
+            : null
+        }
+      >
+        {children}
+      </ThemeOverlayContainerProvider>
+    </ThemeContext.Provider>
   );
 }
 

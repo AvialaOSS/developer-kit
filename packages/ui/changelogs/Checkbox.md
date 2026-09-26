@@ -1,5 +1,16 @@
 # Checkbox
 
+## [Unreleased]
+
+### Changed
+
+- 三态两档 x/y 内边距接入组件 Token，保留 Figma 固定标记居中布局；CheckboxInput 正文/说明颜色和禁用文字透明度可独立覆盖。
+
+- 三态的默认/禁用背景、边框、勾选与半选颜色、高光及阴影颜色消费组件 Token；禁用仅降低内部标记透明度，背景保持设计色。
+
+- default/huge 外框尺寸、默认/圆形圆角及半选标记圆角接入组件 Token，保留原尺寸覆盖。
+- CheckboxInput 图标容器高度与间距、CheckboxGroup 横纵方向间距支持组件 Token 独立配置。
+
 ## 2.7.0
 
 ### Fixed

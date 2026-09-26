@@ -1,0 +1,32 @@
+{
+  "limitations": [
+    "No browser visual, keyboard, wheel or touch acceptance",
+    "No Figma plugin interaction or font recovery",
+    "ThemeCat production bundle size verified separately; not by this SSR script",
+    "No remote publication"
+  ],
+  "directory": "C:\\Users\\MXrek\\AppData\\Local\\Temp\\spiral-release-check-804b74f10d934d3ab60ebeae514bfbce",
+  "script": "installed-package-check-20260924.mjs",
+  "checks": [
+    "tokens prepack: 7 tests",
+    "Fresh isolated install: 80 packages; Spiral packages are extracted archives, no workspace links or TypeScript",
+    "Installed ESM/CJS TableHead left/right icon order and no DOM prop leakage",
+    "Installed ESM/CJS Aviala CSS profile: font 12px to 0.75rem, spacing 6px unchanged, generic output and source unchanged",
+    "Existing installed checks: Card heading, TimePicker seconds, string escaping, Rate, ListItem, Alert, Avatar, MultiSelect, ButtonGroup, props, finite wheel CSS and eight-mode Nested shadow"
+  ],
+  "consumer": "C:\\Users\\MXrek\\AppData\\Local\\Temp\\spiral-release-check-804b74f10d934d3ab60ebeae514bfbce\\consumer",
+  "packages": [
+    {
+      "file": "aviala-design-icons-2.4.0.tgz",
+      "sha256": "cd7990e78b4d394022f398457f63246b141ac833e9fcf6a493be5c837d11f189"
+    },
+    {
+      "file": "aviala-design-spiral-3.0.0.tgz",
+      "sha256": "ece02ec9b65fc64e021175a5e34fd09624e85dbb9bfac60edec60d3090d26d44"
+    },
+    {
+      "file": "aviala-design-tokens-2.6.0.tgz",
+      "sha256": "17355635afd19f31a56bc3122cae5c72474004b063f8354097a5ebc571cc037e"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "directory": "C:\\Users\\MXrek\\AppData\\Local\\Temp\\spiral-final-package-44462b3a77384998a3ed72c58834affd",
+  "consumer": "C:\\Users\\MXrek\\AppData\\Local\\Temp\\spiral-final-package-44462b3a77384998a3ed72c58834affd\\consumer-clean",
+  "packages": [
+    {
+      "file": "aviala-design-icons-2.4.0.tgz",
+      "sha256": "cd7990e78b4d394022f398457f63246b141ac833e9fcf6a493be5c837d11f189"
+    },
+    {
+      "file": "aviala-design-spiral-3.0.0.tgz",
+      "sha256": "44f811e3277148b89ef190ef95ea73085f430910e9fbc8d77089904c0c5a9c9b"
+    },
+    {
+      "file": "aviala-design-tokens-2.6.0.tgz",
+      "sha256": "ef593ccf32ea0d291657fc3761efc5fd68e395cd90f9732d37a23f23837b50fa"
+    }
+  ],
+  "checks": [
+    "prepack: 7 tests",
+    "Clean npm ci: 80 packages installed from lockfile and three local archives",
+    "Installed ESM/CJS Rate, MultiSelect and ButtonGroup SSR; Card reuse",
+    "18 RateIcon dynamic token combinations and latest Like runtime values",
+    "ListItem divider/radius, Avatar six heights, Alert four custom neutral links",
+    "MultiSelect/ButtonGroup props and CSS, finite wheel scroll chaining CSS",
+    "Nested Segmentator 16px shadow and ON/OFF in eight independent mode combinations"
+  ],
+  "limitations": [
+    "SSR/CSS/Node API checks, not browser visual or interaction acceptance",
+    "No remote publication"
+  ],
+  "installationNotes": [
+    "First npm installation exited internally and left incomplete dependency files",
+    "Offline recovery was insufficient; verification passed in a new consumer-clean directory with npm ci --prefer-offline"
+  ]
+}

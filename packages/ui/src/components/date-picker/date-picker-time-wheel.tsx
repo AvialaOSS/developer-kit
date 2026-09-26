@@ -1,6 +1,7 @@
 import {
   useCallback,
   useEffect,
+  useId,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -9,6 +10,8 @@ import {
 import { cn } from "../../lib/utils";
 import {
   consumeWheelSteps,
+  pickerWheelDeltaPixels,
+  shouldCapturePickerWheel,
   nearestLoopIndex,
   normalizeWheelIndex,
   recenterLoopIndex,
@@ -65,9 +68,8 @@ function readItemHeight(container: HTMLElement): number {
     ".aviala-datepicker-time__wheel-item"
   );
   if (item) {
-    // Prefer offsetHeight — getBoundingClientRect is skewed by ancestor
-    // transforms (e.g. date ↔ month view enter scale animation).
-    const layoutHeight = item.offsetHeight;
+    // Computed height preserves fractional CSS pixels without ancestor transforms.
+    const layoutHeight = parseFloat(getComputedStyle(item).height);
     if (layoutHeight > 0) return layoutHeight;
   }
 
@@ -104,6 +106,7 @@ export function DatePickerTimeWheelColumn({
     ReturnType<typeof setTimeout> | undefined
   >(undefined);
   const selectedValueRef = useRef(value);
+  const measuredLayoutRef = useRef("");
 
   selectedValueRef.current = value;
 
@@ -123,9 +126,12 @@ export function DatePickerTimeWheelColumn({
     const container = scrollRef.current;
     const track = clipTrackRef.current;
     if (!container || !track) return;
-    // List items start at 0 in the track; scroll padding is on the container, so
-    // the highlight band lines up when we translate by scrollTop only.
-    track.style.transform = `translate3d(0, ${-container.scrollTop}px, 0)`;
+    // Each row includes half the gap on either side of its visible option.
+    const bandHeight = track.parentElement
+      ? parseFloat(getComputedStyle(track.parentElement).height)
+      : readItemHeight(container);
+    const halfGap = (readItemHeight(container) - bandHeight) / 2;
+    track.style.transform = `translate3d(0, ${-container.scrollTop - halfGap}px, 0)`;
   }, []);
 
   const scrollToIndex = useCallback(
@@ -268,8 +274,8 @@ export function DatePickerTimeWheelColumn({
 
   const handleScroll = useCallback(() => {
     syncClipTrack();
-    if (isProgrammaticScrollRef.current) return;
-    isUserScrollingRef.current = true;
+    // Also settle programmatic scrolls when native scrollend is not delivered.
+    if (!isProgrammaticScrollRef.current) isUserScrollingRef.current = true;
     if (scrollEndTimerRef.current) {
       clearTimeout(scrollEndTimerRef.current);
     }
@@ -299,10 +305,26 @@ export function DatePickerTimeWheelColumn({
 
     container.addEventListener("scrollend", onScrollEnd);
 
+    const band = clipTrackRef.current?.parentElement;
     const resizeObserver = new ResizeObserver(() => {
-      syncScrollToValue("auto");
+      const measurement = `${container.clientHeight}:${readItemHeight(container)}:${band ? getComputedStyle(band).height : ""}`;
+      if (measurement === measuredLayoutRef.current) return;
+      measuredLayoutRef.current = measurement;
+      // A density/Token change can resize rows without resizing the viewport.
+      // Align the committed value even if rounding still reports the old index.
+      const index = getValueIndex(values, selectedValueRef.current);
+      if (scrollEndTimerRef.current) clearTimeout(scrollEndTimerRef.current);
+      smoothTargetValueRef.current = null;
+      isUserScrollingRef.current = false;
+      wheelAccumRef.current = 0;
+      scrollToIndex(loop ? values.length * MIDDLE_SECTION + index : index);
     });
     resizeObserver.observe(container);
+    const firstItem = container.querySelector(
+      ".aviala-datepicker-time__wheel-item"
+    );
+    if (firstItem) resizeObserver.observe(firstItem);
+    if (band) resizeObserver.observe(band);
 
     return () => {
       container.removeEventListener("scrollend", onScrollEnd);
@@ -311,7 +333,7 @@ export function DatePickerTimeWheelColumn({
         clearTimeout(scrollEndTimerRef.current);
       }
     };
-  }, [settleScroll, syncScrollToValue]);
+  }, [loop, scrollToIndex, settleScroll, values]);
 
   // Mouse-wheel: accumulate delta into multi-item steps; finger drag still uses
   // CSS snap + sticky settle. Loop targets the nearest raw index so wraps stay short.
@@ -320,11 +342,29 @@ export function DatePickerTimeWheelColumn({
     if (!container) return;
 
     const onWheel = (event: WheelEvent) => {
-      event.preventDefault();
-      if (values.length === 0) return;
+      if (
+        !shouldCapturePickerWheel(event, {
+          count: values.length,
+          loop,
+          scrollTop: container.scrollTop,
+          scrollHeight: container.scrollHeight,
+          clientHeight: container.clientHeight,
+        })
+      ) {
+        wheelAccumRef.current = 0;
+        return;
+      }
 
       const itemHeight = readItemHeight(container);
       if (itemHeight <= 0) return;
+      const delta = pickerWheelDeltaPixels(
+        event.deltaY,
+        event.deltaMode,
+        itemHeight,
+        container.clientHeight
+      );
+      if (delta === 0) return;
+      event.preventDefault();
 
       if (wheelAccumIdleTimerRef.current) {
         clearTimeout(wheelAccumIdleTimerRef.current);
@@ -336,7 +376,7 @@ export function DatePickerTimeWheelColumn({
       const threshold = itemHeight * WHEEL_STEP_THRESHOLD_FACTOR;
       const { nextAccum, steps } = consumeWheelSteps(
         wheelAccumRef.current,
-        event.deltaY,
+        delta,
         threshold
       );
       wheelAccumRef.current = nextAccum;
@@ -456,10 +496,12 @@ export function DatePickerTimeWheelColumn({
     }
   };
 
-  const committedIndex = getValueIndex(values, value);
-  const selectedOptionId = loop
-    ? `${ariaLabel}-${value}-${values.length * MIDDLE_SECTION + committedIndex}`
-    : `${ariaLabel}-${value}`;
+  const instanceId = useId();
+  const committedIndex = values.indexOf(value);
+  const selectedOptionId =
+    committedIndex < 0
+      ? undefined
+      : `${instanceId}-${committedIndex + (loop ? values.length * MIDDLE_SECTION : 0)}`;
 
   return (
     <div className={cn("aviala-datepicker-time__wheel", className)}>
@@ -475,6 +517,7 @@ export function DatePickerTimeWheelColumn({
       <div
         ref={scrollRef}
         className="aviala-datepicker-time__wheel-scroll aviala-focus-ring"
+        data-loop={loop && values.length > 1}
         onScroll={handleScroll}
         role="listbox"
         aria-label={ariaLabel}
@@ -485,23 +528,15 @@ export function DatePickerTimeWheelColumn({
         <ul className="aviala-datepicker-time__wheel-list">
           {repeatedValues.map((itemValue, index) => {
             const isCommitted = itemValue === value;
-            const optionId = loop
-              ? `${ariaLabel}-${itemValue}-${index}`
-              : `${ariaLabel}-${itemValue}`;
+            const optionId = `${instanceId}-${index}`;
 
             return (
               <li
                 key={optionId}
-                id={
-                  loop &&
-                  isCommitted &&
-                  Math.floor(index / values.length) === MIDDLE_SECTION
-                    ? selectedOptionId
-                    : optionId
-                }
+                id={optionId}
                 className="aviala-datepicker-time__wheel-item"
                 role="option"
-                aria-selected={isCommitted}
+                aria-selected={optionId === selectedOptionId}
               >
                 <button
                   type="button"

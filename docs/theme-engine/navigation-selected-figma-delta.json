@@ -1,0 +1,145 @@
+{
+  "file": "aykyMmGyzVPkAsf8oRBZg0",
+  "variables": [
+    {
+      "id": "VariableID:2740:10501",
+      "name": "navigationItem/color/selected/background-default",
+      "key": "fd8a71ceed13d5c3ba28e078d13d04607c0b7bbf",
+      "type": "COLOR",
+      "collectionId": "VariableCollectionId:2233:3308",
+      "valuesByMode": {
+        "2233:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:527:56693"
+        }
+      },
+      "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+    },
+    {
+      "id": "VariableID:2740:10502",
+      "name": "navigationItem/color/selected/background-hover",
+      "key": "8315c9601b3b2d61b0f55c29aa1bd4d23c81e921",
+      "type": "COLOR",
+      "collectionId": "VariableCollectionId:2233:3308",
+      "valuesByMode": {
+        "2233:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2240:3315"
+        }
+      },
+      "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+    },
+    {
+      "id": "VariableID:2740:10503",
+      "name": "navigationItem/color/selected/background-active",
+      "key": "ffe5c133d2eb2933f3a1f99f17026627ee3932e6",
+      "type": "COLOR",
+      "collectionId": "VariableCollectionId:2233:3308",
+      "valuesByMode": {
+        "2233:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2240:3316"
+        }
+      },
+      "scopes": ["FRAME_FILL", "SHAPE_FILL"]
+    },
+    {
+      "id": "VariableID:2740:10504",
+      "name": "navigationItem/color/selected/text-default",
+      "key": "174c8ce3023c7583699f1fbf67c3e90ec0789ac4",
+      "type": "COLOR",
+      "collectionId": "VariableCollectionId:2233:3308",
+      "valuesByMode": {
+        "2233:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2319:22985"
+        }
+      },
+      "scopes": ["TEXT_FILL"]
+    },
+    {
+      "id": "VariableID:2740:10505",
+      "name": "navigationItem/color/selected/icon-default",
+      "key": "c9f0291d6d6cb63f1860e35bfd78e8f8ae24eb08",
+      "type": "COLOR",
+      "collectionId": "VariableCollectionId:2233:3308",
+      "valuesByMode": {
+        "2233:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2319:22984"
+        }
+      },
+      "scopes": ["SHAPE_FILL"]
+    },
+    {
+      "id": "VariableID:2740:10506",
+      "name": "navigationItem/color/selected/shadow-inner",
+      "key": "a9793802bfb796f9aa07a1524db016595f944b24",
+      "type": "COLOR",
+      "collectionId": "VariableCollectionId:2233:3308",
+      "valuesByMode": {
+        "2233:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2520:32072"
+        }
+      },
+      "scopes": ["EFFECT_COLOR"]
+    },
+    {
+      "id": "VariableID:2740:10507",
+      "name": "navigationItem/size/selected/shadow-inner/blur",
+      "key": "df8bec5bc96b5137bc27b522d2e65facde9e37ef",
+      "type": "FLOAT",
+      "collectionId": "VariableCollectionId:2233:3308",
+      "valuesByMode": {
+        "2233:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2520:32073"
+        }
+      },
+      "scopes": ["EFFECT_FLOAT"]
+    },
+    {
+      "id": "VariableID:2740:10508",
+      "name": "navigationItem/size/selected/shadow-inner/spread",
+      "key": "9ac2893cb2e353b3175ba7f50cae3adc9ab11268",
+      "type": "FLOAT",
+      "collectionId": "VariableCollectionId:2233:3308",
+      "valuesByMode": {
+        "2233:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2520:32074"
+        }
+      },
+      "scopes": ["EFFECT_FLOAT"]
+    },
+    {
+      "id": "VariableID:2740:10509",
+      "name": "navigationItem/size/selected/shadow-inner/offset-x",
+      "key": "194ac4be3f545f5c2a674e5d500de9ea7267364b",
+      "type": "FLOAT",
+      "collectionId": "VariableCollectionId:2233:3308",
+      "valuesByMode": {
+        "2233:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2520:32075"
+        }
+      },
+      "scopes": ["EFFECT_FLOAT"]
+    },
+    {
+      "id": "VariableID:2740:10510",
+      "name": "navigationItem/size/selected/shadow-inner/offset-y",
+      "key": "4ff5e7213138dfbd5c01b2bc2fd4044bb998831a",
+      "type": "FLOAT",
+      "collectionId": "VariableCollectionId:2233:3308",
+      "valuesByMode": {
+        "2233:0": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2520:32076"
+        }
+      },
+      "scopes": ["EFFECT_FLOAT"]
+    }
+  ]
+}

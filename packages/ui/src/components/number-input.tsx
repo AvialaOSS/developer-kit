@@ -200,6 +200,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           className
         )}
         data-size={size}
+        data-input-kind="number"
         data-all-round={allRound ? "true" : undefined}
         data-input-state={inputState}
         data-input-style={inputStyle}
@@ -210,7 +211,8 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         {renderSlotIcon(
           leftIcon,
           "aviala-input__slot",
-          "number-input.left-icon"
+          "number-input.left-icon",
+          "var(--input-slot-icon-size, var(--number-input-size-icon-width))"
         )}
         {renderBadgeArea(leftBadge)}
 
@@ -277,7 +279,8 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         {renderSlotIcon(
           rightIcon,
           "aviala-input__slot",
-          "number-input.right-icon"
+          "number-input.right-icon",
+          "var(--input-slot-icon-size, var(--number-input-size-icon-width))"
         )}
 
         {showControls ? (
@@ -298,7 +301,11 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
               onClick={() => applyStep(1)}
               {...spiralDebugId("number-input.step-up")}
             >
-              <DirectionArrowUpLight level="text" biggerSize aria-hidden />
+              <DirectionArrowUpLight
+                width="var(--input-slot-icon-size, var(--size-regular))"
+                height="var(--input-slot-icon-size, var(--size-regular))"
+                aria-hidden
+              />
             </button>
             <button
               type="button"
@@ -313,7 +320,11 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
               onClick={() => applyStep(-1)}
               {...spiralDebugId("number-input.step-down")}
             >
-              <DirectionArrowDownLight level="text" biggerSize aria-hidden />
+              <DirectionArrowDownLight
+                width="var(--input-slot-icon-size, var(--size-regular))"
+                height="var(--input-slot-icon-size, var(--size-regular))"
+                aria-hidden
+              />
             </button>
           </div>
         ) : null}

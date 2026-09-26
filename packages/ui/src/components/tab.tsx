@@ -88,8 +88,7 @@ function applyTabIndicatorMetrics(
   instant = false
 ) {
   if (instant) el.setAttribute("data-instant", "true");
-  el.style.width = `${metrics.width}px`;
-  el.style.height = `${metrics.height}px`;
+  el.style.setProperty("--_tab-indicator-measured-width", `${metrics.width}px`);
   el.style.transform = `translate(${metrics.x}px, ${metrics.y}px)`;
   el.dataset.visible = metrics.visible ? "true" : "false";
   if (instant) {
@@ -98,7 +97,10 @@ function applyTabIndicatorMetrics(
   }
 }
 
-function measureTabIndicator(list: HTMLElement): IndicatorMetrics | null {
+function measureTabIndicator(
+  list: HTMLElement,
+  indicator: HTMLElement
+): IndicatorMetrics | null {
   const active = list.querySelector<HTMLElement>(
     '.aviala-tab-item[data-active="true"]:not([data-disabled="true"])'
   );
@@ -112,18 +114,35 @@ function measureTabIndicator(list: HTMLElement): IndicatorMetrics | null {
   const controlRect = control.getBoundingClientRect();
   const itemRect = active.getBoundingClientRect();
   const styles = getComputedStyle(list);
-  const height =
-    Number.parseFloat(styles.getPropertyValue("--tab-indicator-height")) || 4;
-  // Figma active Default: indicator x=12, width = itemWidth - 24 (66 → 42)
-  const inset =
-    Number.parseFloat(
-      styles.getPropertyValue("--tab-indicator-inset-inline")
-    ) || 12;
+  // Read resolved CSS dimensions so rem/calc and zero-valued tokens work.
+  const previousWidth = indicator.style.getPropertyValue(
+    "--_tab-indicator-measured-width"
+  );
+  const previousTransition = indicator.style.transition;
+  indicator.style.transition = "none";
+  indicator.style.removeProperty("--_tab-indicator-measured-width");
+  const indicatorStyles = getComputedStyle(indicator);
+  const height = Number.parseFloat(indicatorStyles.height) || 0;
+  const tokenWidth = Number.parseFloat(indicatorStyles.width) || 0;
+  if (previousWidth)
+    indicator.style.setProperty(
+      "--_tab-indicator-measured-width",
+      previousWidth
+    );
+  void indicator.offsetWidth;
+  indicator.style.transition = previousTransition;
+  const legacyInset = Number.parseFloat(
+    styles.getPropertyValue("--tab-indicator-inset-inline")
+  );
+  const width = Number.isFinite(legacyInset)
+    ? Math.max(0, controlRect.width - legacyInset * 2)
+    : tokenWidth;
+  const inset = (controlRect.width - width) / 2;
 
   return {
     x: controlRect.left - listRect.left + list.scrollLeft + inset,
     y: itemRect.bottom - listRect.top + list.scrollTop - height,
-    width: Math.max(0, controlRect.width - inset * 2),
+    width,
     height,
     visible: true,
   };
@@ -146,7 +165,7 @@ function useTabIndicator(
         if (el) el.dataset.visible = "false";
         return;
       }
-      const metrics = measureTabIndicator(list);
+      const metrics = measureTabIndicator(list, el);
       if (metrics) applyTabIndicatorMetrics(el, metrics, instant);
     },
     [enabled, listRef]

@@ -1,4 +1,4 @@
-import { resolveIconSizeToken, SymbolWrong } from "@aviala-design/icons";
+import { SymbolWrong } from "@aviala-design/icons";
 import { cva, type VariantProps } from "class-variance-authority";
 import {
   cloneElement,
@@ -55,16 +55,9 @@ function resolveLineHeightFix(
   return level === "text" ? "subtitle" : "text";
 }
 
-function iconSizeForLevel(level: TagLevel): string {
-  /* Caption tags use text-level glyphs; text tags use the bigger text slot. */
-  return level === "caption"
-    ? resolveIconSizeToken("text")
-    : resolveIconSizeToken("text", true);
-}
-
-function renderTagIcon(node: ReactNode, level: TagLevel): ReactNode {
+function renderTagIcon(node: ReactNode): ReactNode {
   if (!node) return null;
-  const size = iconSizeForLevel(level);
+  const size = "var(--tag-size-icon-width)";
   const content =
     isValidElement(node) && typeof node.type !== "string"
       ? cloneElement(
@@ -117,7 +110,13 @@ export const TagClose = forwardRef<HTMLButtonElement, TagCloseProps>(
       className={cn("aviala-tag__close aviala-focus-ring", className)}
       {...props}
     >
-      {children ?? <SymbolWrong aria-hidden width={14} height={14} />}
+      {children ?? (
+        <SymbolWrong
+          aria-hidden
+          width="var(--tag-size-icon-width)"
+          height="var(--tag-size-icon-width)"
+        />
+      )}
     </button>
   )
 );
@@ -185,31 +184,31 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
         aria-disabled={disabled || undefined}
         {...props}
       >
-        {resolvedContent === "people" ? (
-          <span className="aviala-tag__avatar">{peopleAvatar}</span>
-        ) : (
-          renderTagIcon(leftIcon, resolvedLevel)
-        )}
-        <Typography
-          level={typographyLevel}
-          as="span"
-          className="aviala-tag__text whitespace-nowrap"
-        >
-          {children}
-        </Typography>
-        {resolvedContent === "text"
-          ? renderTagIcon(rightIcon, resolvedLevel)
-          : null}
-        {closable ? (
-          <TagClose
-            aria-label={resolvedCloseLabel}
-            disabled={disabled}
-            onClick={(event) => {
-              if (disabled) return;
-              onClose?.(event);
-            }}
-          />
-        ) : null}
+        <span className="aviala-tag__surface">
+          {resolvedContent === "people" ? (
+            <span className="aviala-tag__avatar">{peopleAvatar}</span>
+          ) : (
+            renderTagIcon(leftIcon)
+          )}
+          <Typography
+            level={typographyLevel}
+            as="span"
+            className="aviala-tag__text whitespace-nowrap"
+          >
+            {children}
+          </Typography>
+          {resolvedContent === "text" ? renderTagIcon(rightIcon) : null}
+          {closable ? (
+            <TagClose
+              aria-label={resolvedCloseLabel}
+              disabled={disabled}
+              onClick={(event) => {
+                if (disabled) return;
+                onClose?.(event);
+              }}
+            />
+          ) : null}
+        </span>
       </span>
     );
   }

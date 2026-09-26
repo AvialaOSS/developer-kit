@@ -104,6 +104,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div
         className={cn(inputRootVariants({ fullWidth }), className)}
+        data-input-kind="text"
         data-size={size}
         data-all-round={allRound ? "true" : undefined}
         data-input-state={inputState}
@@ -111,7 +112,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         data-disabled={disabled ? "true" : undefined}
         {...spiralDebugId("input")}
       >
-        {renderSlotIcon(leftIcon, "aviala-input__slot", "input.left-icon")}
+        {renderSlotIcon(
+          leftIcon,
+          "aviala-input__slot",
+          "input.left-icon",
+          "var(--input-slot-icon-size, var(--base-input-size-icon-width))"
+        )}
         {renderBadgeArea(leftBadge)}
 
         <div
@@ -149,7 +155,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         </div>
 
         {renderBadgeArea(rightBadge)}
-        {renderSlotIcon(rightIcon, "aviala-input__slot", "input.right-icon")}
+        {renderSlotIcon(
+          rightIcon,
+          "aviala-input__slot",
+          "input.right-icon",
+          "var(--input-slot-icon-size, var(--base-input-size-icon-width))"
+        )}
       </div>
     );
   }

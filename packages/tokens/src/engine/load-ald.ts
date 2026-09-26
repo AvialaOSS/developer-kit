@@ -10,6 +10,7 @@ import {
   type RawTokenTree,
 } from "./parse-ald";
 import type { ThemeMode, ThemeVars } from "./generate-theme";
+import { aldProjectVariables } from "./ald-project";
 
 export type { BaseNumbersDensity } from "./base-numbers";
 
@@ -125,7 +126,8 @@ function loadFontWeights(): ThemeVars {
 
 export function loadAldTheme(
   mode: ThemeMode = "light",
-  density: BaseNumbersDensity = "default"
+  density: BaseNumbersDensity = "default",
+  effects = true
 ): ThemeVars {
   const palette = loadPrimitivePalette(mode);
   return {
@@ -133,8 +135,10 @@ export function loadAldTheme(
     ...loadSemanticColors(palette),
     ...loadBaseNumbers(density),
     ...loadFontWeights(),
+    ...aldProjectVariables(mode, density, effects),
     "--aviala-mode": mode,
     "--aviala-density": density,
+    "--aviala-effects": effects ? "on" : "off",
   };
 }
 

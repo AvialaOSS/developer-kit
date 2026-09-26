@@ -68,7 +68,7 @@ function renderModalIcon(node: ReactNode): ReactNode {
 
   return (
     <span className="aviala-modal__icon" aria-hidden>
-      {content}
+      <span className="aviala-modal__icon-frame">{content}</span>
     </span>
   );
 }
@@ -199,19 +199,23 @@ export const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
       >
         <div className="aviala-modal__header-row">
           {showIcon ? renderModalIcon(icon) : null}
-          <div className="aviala-modal__header-main">{children}</div>
-          {showClose ? (
-            <DialogPrimitive.Close asChild>
-              <Button
-                type="button"
-                mode="noBackgroundCustom"
-                iconOnly
-                aria-label={resolvedCloseLabel}
-                className="aviala-modal__close"
-                leftIcon={<SymbolWrong aria-hidden />}
-              />
-            </DialogPrimitive.Close>
-          ) : null}
+          <div className="aviala-modal__header-content">
+            <div className="aviala-modal__header-main">{children}</div>
+            {showClose ? (
+              <div className="aviala-modal__close-slot">
+                <DialogPrimitive.Close asChild>
+                  <Button
+                    type="button"
+                    mode="noBackgroundCustom"
+                    iconOnly
+                    aria-label={resolvedCloseLabel}
+                    className="aviala-modal__close"
+                    leftIcon={<SymbolWrong aria-hidden />}
+                  />
+                </DialogPrimitive.Close>
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
     );
@@ -308,12 +312,12 @@ ModalBody.displayName = "ModalBody";
 export type ModalFooterProps = HTMLAttributes<HTMLDivElement>;
 
 export const ModalFooter = forwardRef<HTMLDivElement, ModalFooterProps>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("aviala-modal__footer", className)}
-      {...props}
-    />
+  ({ className, children, ...props }, ref) => (
+    <div ref={ref} className={cn("aviala-modal__footer", className)} {...props}>
+      <div className="aviala-modal__button-group">
+        <div className="aviala-modal__button-slot">{children}</div>
+      </div>
+    </div>
   )
 );
 ModalFooter.displayName = "ModalFooter";

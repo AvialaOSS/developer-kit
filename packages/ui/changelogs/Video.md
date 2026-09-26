@@ -1,5 +1,15 @@
 # Video
 
+## [Unreleased]
+
+### Changed
+- 设置标题、设置字段标签与音量百分比接入 Video 文字 Token，字体指标继续使用共享 Typography。
+- 倍速菜单正文和勾选图标消费 SelectMenuItem Token；默认选中态按 Figma 仅显示勾选，不附加通用底色或阴影，保留显式覆盖。
+- 倍速菜单去除与分组重复的横向留白，标题留白接入 SelectMenuItem Token。
+- 设置与音量弹层的留白、间距消费 PopoverSlot Token，保留显式旧覆盖入口。
+- 根容器和 Default/Light 控制栏布局、表面、圆角接入 Video Token，保留显式旧覆盖。
+- 播放进度的轨道、指示器尺寸与颜色及两层阴影消费 Video Token；浮动控制栏阴影使用同一效果变量，音量滑块仍保持独立。
+
 ## 3.0.0
 
 ### Fixed

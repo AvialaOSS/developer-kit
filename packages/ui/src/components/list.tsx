@@ -5,11 +5,14 @@ import {
 } from "@aviala-design/icons";
 import {
   cloneElement,
+  createContext,
   forwardRef,
   isValidElement,
+  useContext,
   type ComponentPropsWithoutRef,
   type HTMLAttributes,
   type KeyboardEvent,
+  type MouseEvent,
   type ReactElement,
   type ReactNode,
   type Ref,
@@ -28,17 +31,21 @@ export type ListItemType = "action" | "switch" | "select";
 /** Figma List item `left icon setting` variant */
 export type ListItemLeading = "shaped" | "default" | "none";
 
-export type ListProps = HTMLAttributes<HTMLDivElement> & {
+export type ListAppearance = "default" | "deep";
+const ListAppearanceContext = createContext<ListAppearance>("default");
+
+export type ListProps = Omit<HTMLAttributes<HTMLDivElement>, "title"> & {
   /** Optional section title above the list card */
   title?: ReactNode;
+  appearance?: ListAppearance;
 };
 
 /** Figma Structure Navigation → List root */
 export const List = forwardRef<HTMLDivElement, ListProps>(
-  ({ className, title, children, ...props }, ref) => (
+  ({ className, title, children, appearance, ...props }, ref) => (
     <div ref={ref} className={cn("aviala-list", className)} {...props}>
       {title != null ? <ListTitle>{title}</ListTitle> : null}
-      <ListGroup>{children}</ListGroup>
+      <ListGroup appearance={appearance}>{children}</ListGroup>
     </div>
   )
 );
@@ -50,32 +57,44 @@ export type ListTitleProps = HTMLAttributes<HTMLDivElement>;
 export const ListTitle = forwardRef<HTMLDivElement, ListTitleProps>(
   ({ className, children, ...props }, ref) => (
     <div ref={ref} className={cn("aviala-list-title", className)} {...props}>
-      <span className={cn(typographyVariants({ level: "text" }))}>
-        {children}
-      </span>
+      <div className="aviala-list-title__content">
+        <span className={cn(typographyVariants({ level: "text" }))}>
+          {children}
+        </span>
+      </div>
     </div>
   )
 );
 ListTitle.displayName = "ListTitle";
 
-export type ListGroupProps = HTMLAttributes<HTMLDivElement>;
+export type ListGroupProps = HTMLAttributes<HTMLDivElement> & {
+  appearance?: ListAppearance;
+};
 
 /** Figma List card container — rounded white surface for items */
 export const ListGroup = forwardRef<HTMLDivElement, ListGroupProps>(
-  ({ className, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("aviala-list-group", className)}
-      role="list"
-      {...props}
-    >
-      {children}
-    </div>
-  )
+  ({ className, children, appearance, ...props }, ref) => {
+    const inheritedAppearance = useContext(ListAppearanceContext);
+    const resolvedAppearance = appearance ?? inheritedAppearance;
+    return (
+      <ListAppearanceContext.Provider value={resolvedAppearance}>
+        <div
+          ref={ref}
+          className={cn("aviala-list-group", className)}
+          role="list"
+          data-appearance={resolvedAppearance}
+          {...props}
+        >
+          {children}
+        </div>
+      </ListAppearanceContext.Provider>
+    );
+  }
 );
 ListGroup.displayName = "ListGroup";
 
 export type ListItemGroupProps = {
+  appearance?: ListAppearance;
   label?: ReactNode;
   children: ReactNode;
   className?: string;
@@ -83,6 +102,7 @@ export type ListItemGroupProps = {
 
 /** Convenience wrapper — titled list section (Figma List title + card) */
 export function ListItemGroup({
+  appearance,
   label,
   children,
   className,
@@ -90,10 +110,11 @@ export function ListItemGroup({
   return (
     <div className={cn("aviala-list", className)}>
       {label != null ? <ListTitle>{label}</ListTitle> : null}
-      <ListGroup>{children}</ListGroup>
+      <ListGroup appearance={appearance}>{children}</ListGroup>
     </div>
   );
 }
+ListItemGroup.displayName = "ListItemGroup";
 
 export type ListDividerProps = HTMLAttributes<HTMLSpanElement>;
 
@@ -168,6 +189,8 @@ function renderLeadingIcon(
 }
 
 type ListItemSharedProps = {
+  /** Inherits the containing ListGroup appearance when omitted. */
+  appearance?: ListAppearance;
   /** Figma `Type` variant */
   itemType?: ListItemType;
   /** Figma `left icon setting` variant */
@@ -229,6 +252,7 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
     {
       className,
       itemType = "select",
+      appearance,
       leading = "shaped",
       icon,
       title,
@@ -255,6 +279,7 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
     ref
   ) => {
     const locale = useLocaleMessages("List");
+    const inheritedAppearance = useContext(ListAppearanceContext);
     const rtl = useRtl();
     const ChevronIcon = rtl
       ? DirectionArrowLeftLight
@@ -276,7 +301,7 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 
     const chevron = chevronVisible ? (
       <span className="aviala-list-item__chevron" aria-hidden>
-        <ChevronIcon width={18} height={18} />
+        <ChevronIcon />
       </span>
     ) : null;
 
@@ -294,20 +319,24 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
       switch (itemType) {
         case "action":
           return (
-            <div className="aviala-list-item__more">
-              <div className="aviala-list-item__trailing">
-                {primaryAction}
-                {secondaryAction ?? (
-                  <Button
-                    mode="default"
-                    size="regular"
-                    iconOnly
-                    aria-label={locale.more}
-                    leftIcon={<GeneralSetting aria-hidden />}
-                  />
-                )}
+            <div className="aviala-list-item__trailing">
+              <div className="aviala-list-item__more">
+                <div className="aviala-list-item__button-group">
+                  <div className="aviala-list-item__button-slot">
+                    {primaryAction}
+                    {secondaryAction ?? (
+                      <Button
+                        mode="noBackgroundCustom"
+                        size="regular"
+                        iconOnly
+                        aria-label={locale.more}
+                        leftIcon={<GeneralSetting aria-hidden />}
+                      />
+                    )}
+                  </div>
+                </div>
+                <ListDivider />
               </div>
-              <ListDivider />
               {chevron}
             </div>
           );
@@ -333,6 +362,7 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 
     const sharedClassName = cn("aviala-list-item", className);
     const sharedData = {
+      "data-appearance": appearance ?? inheritedAppearance,
       "data-leading": leading,
       "data-type": itemType,
       "data-selected": selected ? ("true" as const) : undefined,
@@ -352,11 +382,13 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
         <div className="aviala-list-item__body">
           <div className="aviala-list-item__content">
             <div className="aviala-list-item__head">
-              <Typeface
-                content="textCaption"
-                primary={title}
-                secondary={subtitle}
-              />
+              <div className="aviala-list-item__title">
+                <Typeface
+                  content="textCaption"
+                  primary={title}
+                  secondary={subtitle}
+                />
+              </div>
             </div>
             {trailingNode}
           </div>
@@ -398,6 +430,23 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
       event.currentTarget.click();
     };
 
+    const handleClick = (event: MouseEvent<HTMLDivElement>) => {
+      if (disabled || event.defaultPrevented) return;
+      const control =
+        event.target instanceof Element
+          ? event.target.closest(
+              'button, a, input, select, textarea, label, [contenteditable="true"], [role="button"], [role="switch"], [role="checkbox"], [role="radio"], [role="combobox"], [role="slider"], [role="link"], [role="textbox"]'
+            )
+          : null;
+      if (
+        control &&
+        control !== event.currentTarget &&
+        event.currentTarget.contains(control)
+      )
+        return;
+      onClick?.(event);
+    };
+
     return (
       <div
         ref={ref}
@@ -405,7 +454,7 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
         tabIndex={activatable ? 0 : undefined}
         aria-disabled={isInteractive && disabled ? true : undefined}
         className={sharedClassName}
-        onClick={disabled ? undefined : onClick}
+        onClick={handleClick}
         onKeyDown={handleKeyDown}
         {...sharedData}
         {...props}

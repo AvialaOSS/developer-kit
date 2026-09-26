@@ -115,6 +115,7 @@ export const Typeface = forwardRef<HTMLDivElement, TypefaceProps>(
             <span
               key={`${line.level}-${index}`}
               className="aviala-typeface__line"
+              data-line={index}
             >
               <Typography level={line.level} content={lineContent} tone={tone}>
                 {value}

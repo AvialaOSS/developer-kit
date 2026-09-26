@@ -1,15 +1,18 @@
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import * as SelectPrimitive from "@radix-ui/react-select";
+import { createPortal } from "react-dom";
 import {
   DirectionArrowDownLight,
   DirectionArrowLeft,
   DirectionArrowRight,
   SymbolRight,
   UsersUserCircle,
+  type AvialaIconProps,
   type IconLevel,
 } from "@aviala-design/icons";
 import {
   Children,
+  cloneElement,
   createContext,
   forwardRef,
   useCallback,
@@ -29,12 +32,10 @@ import {
 } from "react";
 import { forwardChevronSide, useDirection, useRtl } from "../config";
 import { Badge } from "./badge";
+import { Input, type InputProps } from "./input";
 import { typographyVariants } from "./typography";
 import { cloneAvialaIconElement } from "../lib/clone-aviala-icon";
-import {
-  iconLevelCssVarStyle,
-  iconSlotCssVarStyle,
-} from "../lib/icon-slot-sizing";
+import { iconSlotCssVarStyle } from "../lib/icon-slot-sizing";
 import { renderSlotIcon } from "../lib/render-slot-icon";
 import {
   collectRovingItems,
@@ -309,6 +310,7 @@ function useSelectSubMenuLayer(): SelectSubMenuContextValue {
       cancelScheduledClose();
       closeTimerRef.current = setTimeout(() => {
         if (isPointerOverSubItem(id)) return;
+        if (isTargetInSubItemTree(id, document.activeElement)) return;
 
         const pointerSiblingId = findSubItemIdAtPointer(id);
         if (pointerSiblingId) {
@@ -470,10 +472,26 @@ function renderItemIcon(
   debugId?: string
 ): ReactNode {
   if (!node) return null;
-  const content = cloneAvialaIconElement(node, {
+  let content = cloneAvialaIconElement(node, {
     level: iconLevel,
     biggerSize: true,
   });
+  const iconProps = isValidElement(node)
+    ? (node as ReactElement<AvialaIconProps>).props
+    : undefined;
+  const useComponentSize =
+    iconProps?.level === undefined && iconProps?.biggerSize === undefined;
+  if (
+    useComponentSize &&
+    isValidElement(content) &&
+    typeof content.type !== "string"
+  ) {
+    const size = `var(--select-item-icon-size, var(--select-menu-item-size-${iconLevel === "caption" ? "title-" : ""}icon-width))`;
+    content = cloneElement(content as ReactElement<AvialaIconProps>, {
+      width: size,
+      height: size,
+    });
+  }
 
   return (
     <span
@@ -481,12 +499,16 @@ function renderItemIcon(
         "aviala-select-item__icon",
         iconLevel === "caption" && "aviala-select-item__icon--sm"
       )}
-      style={iconSlotCssVarStyle(
-        node,
-        "--select-item-icon-size",
-        iconLevel,
-        true
-      )}
+      style={
+        useComponentSize
+          ? undefined
+          : iconSlotCssVarStyle(
+              node,
+              "--select-item-icon-size",
+              iconLevel,
+              true
+            )
+      }
       {...(debugId ? spiralDebugId(debugId) : undefined)}
     >
       {content}
@@ -530,13 +552,20 @@ function SelectItemFormCheckbox() {
   );
 }
 
+const selectFunctionIconSize =
+  "var(--select-item-function-icon-size, var(--select-menu-item-size-icon-width))";
+
 function SelectItemTrailingRadio() {
   return (
     <SelectPrimitive.ItemIndicator
       className="aviala-select-item__trailing-radio"
       aria-hidden
     >
-      <SymbolRight level="text" biggerSize aria-hidden />
+      <SymbolRight
+        width={selectFunctionIconSize}
+        height={selectFunctionIconSize}
+        aria-hidden
+      />
     </SelectPrimitive.ItemIndicator>
   );
 }
@@ -547,7 +576,11 @@ function SelectItemTrailingCheckbox() {
       className="aviala-select-item__trailing-checkbox"
       aria-hidden
     >
-      <SymbolRight level="text" biggerSize aria-hidden />
+      <SymbolRight
+        width={selectFunctionIconSize}
+        height={selectFunctionIconSize}
+        aria-hidden
+      />
     </SelectPrimitive.ItemIndicator>
   );
 }
@@ -563,7 +596,13 @@ function SelectItemDefaultAvatar() {
 function SelectExpandChevron() {
   const rtl = useRtl();
   const Icon = rtl ? DirectionArrowLeft : DirectionArrowRight;
-  return <Icon level="text" biggerSize aria-hidden />;
+  return (
+    <Icon
+      width={selectFunctionIconSize}
+      height={selectFunctionIconSize}
+      aria-hidden
+    />
+  );
 }
 
 function renderFunctionSlot(
@@ -575,23 +614,42 @@ function renderFunctionSlot(
   if (!showFunctionIcon) return null;
   if (layout === "checked") return null;
 
-  const functionStyle = icon
-    ? iconSlotCssVarStyle(
-        icon,
-        "--select-item-function-icon-size",
-        "text",
-        true
-      )
-    : undefined;
-
   if (icon !== undefined) {
+    const iconProps = isValidElement(icon)
+      ? (icon as ReactElement<AvialaIconProps>).props
+      : undefined;
+    const useComponentSize =
+      iconProps?.level === undefined && iconProps?.biggerSize === undefined;
+    let content = cloneAvialaIconElement(icon, {
+      level: "text",
+      biggerSize: true,
+    });
+    if (
+      useComponentSize &&
+      isValidElement(content) &&
+      typeof content.type !== "string"
+    ) {
+      content = cloneElement(content as ReactElement<AvialaIconProps>, {
+        width: selectFunctionIconSize,
+        height: selectFunctionIconSize,
+      });
+    }
     return (
       <span
         className="aviala-select-item__function"
-        style={functionStyle}
+        style={
+          useComponentSize
+            ? undefined
+            : iconSlotCssVarStyle(
+                icon,
+                "--select-item-function-icon-size",
+                "text",
+                true
+              )
+        }
         {...spiralDebugId("select.content.item.function")}
       >
-        {cloneAvialaIconElement(icon, { level: "text", biggerSize: true })}
+        {content}
       </span>
     );
   }
@@ -621,11 +679,6 @@ function renderFunctionSlot(
       return (
         <span
           className="aviala-select-item__function"
-          style={iconLevelCssVarStyle(
-            "text",
-            true,
-            "--select-item-function-icon-size"
-          )}
           {...spiralDebugId("select.content.item.function")}
         >
           <SelectExpandChevron />
@@ -814,7 +867,8 @@ export const SelectTrigger = forwardRef<
         {renderSlotIcon(
           leftIcon,
           "aviala-select-trigger__slot",
-          "select.trigger.icon-left"
+          "select.trigger.icon-left",
+          "var(--input-slot-icon-size, var(--select-input-size-icon-width))"
         )}
         <span className="aviala-select-trigger__field">
           <SelectPrimitive.Value
@@ -829,7 +883,8 @@ export const SelectTrigger = forwardRef<
         {renderSlotIcon(
           rightIcon,
           "aviala-select-trigger__slot",
-          "select.trigger.icon-right"
+          "select.trigger.icon-right",
+          "var(--input-slot-icon-size, var(--select-input-size-icon-width))"
         )}
         <SelectPrimitive.Icon asChild>
           <span
@@ -843,15 +898,15 @@ export const SelectTrigger = forwardRef<
                     "text",
                     true
                   )
-                : iconLevelCssVarStyle("text", true, "--input-slot-icon-size")
+                : undefined
             }
             {...spiralDebugId("select.trigger.expand")}
           >
             {expandIcon ?? (
               <DirectionArrowDownLight
                 className="aviala-select-trigger__expand-icon"
-                level="text"
-                biggerSize
+                width="var(--input-slot-icon-size, var(--select-input-size-icon-width))"
+                height="var(--input-slot-icon-size, var(--select-input-size-icon-width))"
                 aria-hidden
               />
             )}
@@ -943,6 +998,75 @@ export const SelectContent = forwardRef<
   }
 );
 SelectContent.displayName = SelectPrimitive.Content.displayName;
+
+/** Search field composition; callers own filtering and empty-result content. */
+export type SelectSearchProps = InputProps;
+
+export const SelectSearch = forwardRef<HTMLInputElement, SelectSearchProps>(
+  ({ onKeyDown, onFocus, onBlur, ...props }, ref) => {
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const editingRef = useRef(false);
+    useEffect(() => {
+      const panel = inputRef.current?.closest(SELECT_PANEL_SELECTOR);
+      const preserveEditingFocus = (event: Event) => {
+        // Radix may focus the panel when filtering unmounts its selected item.
+        if (event.target === panel && editingRef.current)
+          inputRef.current?.focus();
+      };
+      panel?.addEventListener("focus", preserveEditingFocus);
+      return () => panel?.removeEventListener("focus", preserveEditingFocus);
+    }, []);
+    return (
+      <div className="aviala-select-search">
+        <Input
+          ref={(node) => {
+            inputRef.current = node;
+            if (typeof ref === "function") ref(node);
+            else if (ref) ref.current = node;
+          }}
+          type="search"
+          {...props}
+          onFocus={(event) => {
+            editingRef.current = true;
+            onFocus?.(event);
+          }}
+          onBlur={(event) => {
+            if (
+              event.relatedTarget !==
+              event.currentTarget.closest(SELECT_PANEL_SELECTOR)
+            )
+              editingRef.current = false;
+            onBlur?.(event);
+          }}
+          onKeyDown={(event) => {
+            onKeyDown?.(event);
+            if (event.defaultPrevented || event.key === "Escape") return;
+            // Do not feed input text, selection keys or IME events to Radix typeahead.
+            event.stopPropagation();
+            if (
+              event.nativeEvent.isComposing ||
+              event.ctrlKey ||
+              event.metaKey ||
+              event.altKey
+            )
+              return;
+            // Enter edits the search query; selection belongs to the focused result.
+            if (event.key === "Enter") event.preventDefault();
+            if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+              event.preventDefault();
+              focusSelectMenuItem(
+                event.currentTarget.closest(SELECT_PANEL_SELECTOR),
+                null,
+                event.key === "ArrowDown" ? "first" : "last"
+              );
+            }
+          }}
+        />
+      </div>
+    );
+  }
+);
+SelectSearch.displayName = "SelectSearch";
 
 export type SelectLabelProps = ComponentPropsWithoutRef<
   typeof SelectPrimitive.Label
@@ -1189,6 +1313,10 @@ export const SelectSubItem = forwardRef<HTMLDivElement, SelectSubItemProps>(
     const subMenuId = useId();
     const rootRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const [closedContent, setClosedContent] = useState<DocumentFragment>();
+    useEffect(() => {
+      setClosedContent(new DocumentFragment());
+    }, []);
 
     const rtl = useRtl();
     const direction = useDirection();
@@ -1430,6 +1558,10 @@ export const SelectSubItem = forwardRef<HTMLDivElement, SelectSubItemProps>(
           onPointerLeave={handlePointerLeave}
         >
           <PopoverPrimitive.Anchor asChild>{itemRow}</PopoverPrimitive.Anchor>
+          {/* Keep Radix item text and native options registered without a hidden focusable panel. */}
+          {!open && !exiting && closedContent
+            ? createPortal(subMenu.children, closedContent)
+            : null}
           {portalled ? (
             <PopoverPrimitive.Portal container={overlayContainer}>
               {flyout}

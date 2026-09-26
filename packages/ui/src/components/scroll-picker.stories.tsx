@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
+import { Button } from "./button";
 import { ScrollPicker, ScrollPickerColumn } from "./scroll-picker";
 
 const hours = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, "0"));
@@ -15,6 +16,47 @@ const meta: Meta<typeof ScrollPicker> = {
 
 export default meta;
 type Story = StoryObj<typeof ScrollPicker>;
+
+export const TokenGeometry: Story = {
+  render: () => {
+    const [value, setValue] = useState("09");
+    const [expanded, setExpanded] = useState(false);
+    const [legacyHeight, setLegacyHeight] = useState(false);
+    return (
+      <div>
+        <Button onClick={() => setExpanded(!expanded)}>
+          切换内边距：{expanded ? "8px" : "4px"}
+        </Button>
+        <Button onClick={() => setLegacyHeight(!legacyHeight)}>
+          旧高度覆盖：{legacyHeight ? "40px" : "关闭"}
+        </Button>
+        <p>当前值：{value}；切换尺寸后应保持居中，高亮与选项等高。</p>
+        <ScrollPicker
+          style={
+            {
+              "--scroll-picker-item-size-padding-y": expanded ? "8px" : "4px",
+              "--scroll-picker-item-height": legacyHeight ? "40px" : undefined,
+            } as CSSProperties
+          }
+        >
+          <ScrollPickerColumn
+            aria-label="Loop hour"
+            values={hours}
+            value={value}
+            onChange={setValue}
+          />
+          <ScrollPickerColumn
+            aria-label="Finite hour"
+            values={hours}
+            value={value}
+            onChange={setValue}
+            loop={false}
+          />
+        </ScrollPicker>
+      </div>
+    );
+  },
+};
 
 export const DualColumn: Story = {
   render: () => {

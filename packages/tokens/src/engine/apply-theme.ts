@@ -3,6 +3,7 @@ import {
   type BaseNumbersDensity,
 } from "./base-numbers";
 import type { ThemeVars } from "./generate-theme";
+import { applyThemeVariables, removeProjectTheme } from "./project-runtime";
 
 export type ApplyThemeOptions = {
   target?: HTMLElement;
@@ -25,6 +26,7 @@ export function applyTheme(
 
   const mode = options.mode ?? vars["--aviala-mode"] ?? "light";
   target.setAttribute("data-mode", mode);
+  target.setAttribute("data-effects", vars["--aviala-effects"] ?? "on");
 
   const density =
     options.density ??
@@ -39,22 +41,14 @@ export function applyTheme(
     // Leaving a static preset (e.g. ald) must drop data-theme so frozen
     // [data-theme="ald"] CSS no longer overrides dynamic inline vars.
     target.removeAttribute("data-theme");
-    target.style.removeProperty("--aviala-theme-id");
   }
 
-  for (const [key, value] of Object.entries(vars)) {
-    target.style.setProperty(key, value);
-  }
+  applyThemeVariables(target, vars);
 }
 
-export function removeTheme(
-  target: HTMLElement = document.documentElement
-): void {
-  const style = target.style;
-  const toRemove: string[] = [];
-  for (let i = 0; i < style.length; i++) {
-    const prop = style.item(i);
-    if (prop.startsWith("--")) toRemove.push(prop);
-  }
-  toRemove.forEach((prop) => style.removeProperty(prop));
+export function removeTheme(target?: HTMLElement): void {
+  const scope =
+    target ??
+    (typeof document !== "undefined" ? document.documentElement : null);
+  if (scope) removeProjectTheme(scope);
 }

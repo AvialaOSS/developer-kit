@@ -1,5 +1,11 @@
 # FormField
 
+## [Unreleased]
+
+### Changed
+
+- 标签、说明、必填标记及横纵布局间距改为消费 Form 组件级 Token，字体指标继续共用 Typography。
+
 ## 3.0.0
 
 ### Changed

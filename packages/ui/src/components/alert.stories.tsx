@@ -1,10 +1,159 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { useState, type CSSProperties } from "react";
+import { Button } from "./button";
+import { ThemeProvider, useTheme } from "../theme/theme-provider";
+import { parseProject } from "@aviala-design/tokens/project";
+import project from "../../../tokens/source/theme-engine/ald.project.json";
 import {
   Alert,
   type AlertAppearance,
   type AlertSize,
   type AlertType,
 } from "./alert";
+
+const alertProject = parseProject(JSON.stringify(project));
+function AlertCases() {
+  const { mode, setMode, density, setDensity, effects, setEffects } =
+    useTheme();
+  const [custom, setCustom] = useState(false);
+  const [clicks, setClicks] = useState(0);
+  const [rtl, setRtl] = useState(false);
+  const [narrow, setNarrow] = useState(false);
+  const [legacy, setLegacy] = useState(false);
+  const [longActions, setLongActions] = useState(false);
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="flex gap-4">
+        <Button onClick={() => setMode(mode === "light" ? "dark" : "light")}>
+          外观：{mode}
+        </Button>
+        <Button
+          onClick={() =>
+            setDensity(density === "default" ? "mobile-friendly" : "default")
+          }
+        >
+          密度：{density}
+        </Button>
+        <Button onClick={() => setEffects(!effects)}>
+          效果：{effects ? "ON" : "OFF"}
+        </Button>
+        <Button onClick={() => setCustom(!custom)}>
+          覆盖：{custom ? "ON" : "OFF"}
+        </Button>
+        <Button onClick={() => setRtl(!rtl)}>
+          方向：{rtl ? "RTL" : "LTR"}
+        </Button>
+        <Button onClick={() => setNarrow(!narrow)}>
+          窄屏：{narrow ? "ON" : "OFF"}
+        </Button>
+        <Button onClick={() => setLegacy(!legacy)}>
+          旧留白：{legacy ? "ON" : "OFF"}
+        </Button>
+        <Button onClick={() => setLongActions(!longActions)}>
+          长操作：{longActions ? "ON" : "OFF"}
+        </Button>
+      </div>
+      <output>操作次数：{clicks}</output>
+      {(["default", "small"] as const).flatMap((size) =>
+        (["default", "light"] as const).flatMap((appearance) =>
+          (["info", "warning", "error", "success", "neutral"] as const).map(
+            (type) => (
+              <Alert
+                key={`${size}-${appearance}-${type}`}
+                size={size}
+                appearance={appearance}
+                type={type}
+                dir={rtl ? "rtl" : "ltr"}
+                quickAction={
+                  longActions
+                    ? "QuickActionWithoutWordBreaksForLayoutVerification"
+                    : undefined
+                }
+                onQuickAction={() => setClicks((v) => v + 1)}
+                title={
+                  narrow
+                    ? `${type}: LongTitleWithoutWordBreaksForLayoutVerification`
+                    : `${size} ${appearance} ${type}`
+                }
+                description="Supporting details"
+                showActions
+                action={
+                  longActions
+                    ? "PrimaryActionWithoutWordBreaksForLayoutVerification"
+                    : "继续"
+                }
+                secondaryAction={
+                  longActions
+                    ? "SecondaryActionWithoutWordBreaksForLayoutVerification"
+                    : "取消"
+                }
+                onSecondaryAction={() => setClicks((v) => v + 1)}
+                onAction={() => setClicks((v) => v + 1)}
+                onDismiss={() => setClicks((v) => v + 1)}
+                style={
+                  {
+                    width: narrow ? 320 : undefined,
+                    ...(custom
+                      ? {
+                          "--alert-size-info-gap": "13px",
+                          "--alert-size-info-padding-x": "15px",
+                          "--alert-size-text-gap": "5px",
+                          "--alert-size-action-padding-x-start": "40px",
+                          "--alert-size-icon-width": "20px",
+                          "--alert-size-icon-height": "24px",
+                          "--alert-size-icon-padding-y": "2px",
+                          "--alert-color-text-default": "#123456",
+                          "--alert-color-description-default": "#705020",
+                          "--link-color-caption-no-background-custom-text-default":
+                            "#603080",
+                        }
+                      : {}),
+                    ...(legacy
+                      ? {
+                          "--alert-actions-pl": "12px",
+                          "--alert-actions-pr": "7px",
+                          "--alert-secondary-action-fg": "#204060",
+                        }
+                      : {}),
+                  } as CSSProperties
+                }
+              />
+            )
+          )
+        )
+      )}
+      <Alert
+        title="Title without description"
+        dismissible={false}
+        style={
+          {
+            "--alert-color-text-default": "#123456",
+            "--alert-color-description-default": "#705020",
+          } as CSSProperties
+        }
+      />
+    </div>
+  );
+}
+export const ProjectModes: StoryObj<typeof Alert> = {
+  render: function ProjectModesStory() {
+    const [target, setTarget] = useState<HTMLDivElement | null>(null);
+    return (
+      <div ref={setTarget}>
+        {target && (
+          <ThemeProvider
+            project={alertProject}
+            projectTarget={target}
+            defaultMode="light"
+            storageKey="alert-project"
+          >
+            <AlertCases />
+          </ThemeProvider>
+        )}
+      </div>
+    );
+  },
+};
 
 const meta: Meta<typeof Alert> = {
   title: "Response And Feedback/Alert",

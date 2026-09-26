@@ -74,6 +74,7 @@ export {
   SelectItemPeople,
   SelectLabel,
   SelectSeparator,
+  SelectSearch,
   SelectSubItem,
   SelectSubItemPeople,
   SelectSubMenu,
@@ -87,6 +88,7 @@ export {
   type SelectItemProps,
   type SelectLabelProps,
   type SelectSeparatorProps,
+  type SelectSearchProps,
   type SelectSize,
   type SelectSubItemPeopleProps,
   type SelectSubItemProps,
@@ -134,6 +136,7 @@ export {
   loadingLevelForButtonSize,
   type LoadingProps,
   type LoadingLevel,
+  type LoadingAlignment,
   type LoadingMode,
   type LoadingButtonSize,
 } from "./components/loading";
@@ -200,6 +203,7 @@ export {
 } from "./components/typeface";
 export {
   InputGroup,
+  InputGroupItem,
   InputGroupAddon,
   type InputGroupProps,
 } from "./components/input-group";
@@ -241,6 +245,7 @@ export {
   CascaderMenu,
   CascaderColumn,
   CascaderItemGroup,
+  CascaderSearch,
   CascaderItem,
   CascaderOptionsMenu,
   CascaderField,
@@ -250,6 +255,7 @@ export {
   type CascaderMenuProps,
   type CascaderColumnProps,
   type CascaderItemGroupProps,
+  type CascaderSearchProps,
   type CascaderItemProps,
   type CascaderOptionsMenuProps,
   type CascaderFieldProps,
@@ -302,6 +308,8 @@ export {
   Popover,
   PopoverTrigger,
   PopoverContent,
+  PopoverIcon,
+  type PopoverIconProps,
   PopoverAnchor,
   type PopoverProps,
   type PopoverContentProps,
@@ -409,6 +417,7 @@ export {
   type ListSeparatorProps,
   type ListItemType,
   type ListItemLeading,
+  type ListAppearance,
 } from "./components/list";
 export {
   Navigation,
@@ -528,4 +537,20 @@ export {
 } from "./components/table";
 
 export { cn } from "./lib/utils";
+export {
+  Rate,
+  RateIcon,
+  type RateProps,
+  type RateIconProps,
+  type RateSize,
+  type RateType,
+  type RateIconStatus,
+} from "./components/rate";
 export { initKeyboardFocus } from "./lib/keyboard-focus";
+
+export {
+  MultiSelect,
+  type MultiSelectProps,
+  type MultiSelectOption,
+} from "./components/multi-select";
+export { ButtonGroup, type ButtonGroupProps } from "./components/button-group";

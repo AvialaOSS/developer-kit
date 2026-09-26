@@ -41,7 +41,7 @@ export interface ResponsiveTooltipProps {
   collisionPadding?: number;
   /** Show the caret arrow pointing at the trigger. */
   showArrow?: boolean;
-  /** Typography level for the content surface (default `caption`). */
+  /** Typography level for the content surface (default `text`). */
   level?: TooltipContentLevel;
   /**
    * Hover open delay on desktop, in ms (ignored on touch).
@@ -74,7 +74,7 @@ export interface ResponsiveTooltipProps {
  * - Touch (`pointer: coarse`): Radix Popover with `appearance="tooltip"` — opens on
  *   **long-press** (short tap still reaches the trigger’s own `onClick`), dismisses
  *   on outside tap / Escape, and keeps the tooltip visual skin (dark surface,
- *   caption text, solid caret) so it looks identical to desktop.
+ *   Text typography, solid caret) so it looks identical to desktop.
  *
  * The consumer API and the look are unchanged between devices; only the trigger
  * gesture differs. Animations are handled by the respective effect CSS
@@ -96,7 +96,7 @@ export function ResponsiveTooltip({
   sideOffset = 4,
   collisionPadding = 8,
   showArrow = true,
-  level = "caption",
+  level = "text",
   delayDuration = TOOLTIP_DELAY_DURATION,
   longPressMs = RESPONSIVE_TOOLTIP_LONG_PRESS_MS,
   open: openProp,

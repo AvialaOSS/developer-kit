@@ -1,0 +1,526 @@
+{
+  "fileKey": "aykyMmGyzVPkAsf8oRBZg0",
+  "readOnly": true,
+  "id": "1457:1475",
+  "name": "Table",
+  "type": "COMPONENT",
+  "width": 855,
+  "height": 438,
+  "layoutMode": "GRID",
+  "gridColumnCount": 5,
+  "gridRowCount": 9,
+  "gridColumnGap": 0,
+  "gridRowGap": 0,
+  "columns": [
+    {
+      "type": "HUG",
+      "value": 1
+    },
+    {
+      "type": "FLEX",
+      "value": 1
+    },
+    {
+      "type": "FLEX",
+      "value": 1
+    },
+    {
+      "type": "FLEX",
+      "value": 1
+    },
+    {
+      "type": "FIXED",
+      "value": 126
+    }
+  ],
+  "rows": [
+    {
+      "type": "HUG",
+      "value": 1
+    },
+    {
+      "type": "HUG",
+      "value": 1
+    },
+    {
+      "type": "HUG",
+      "value": 1
+    },
+    {
+      "type": "HUG",
+      "value": 1
+    },
+    {
+      "type": "HUG",
+      "value": 1
+    },
+    {
+      "type": "HUG",
+      "value": 1
+    },
+    {
+      "type": "HUG",
+      "value": 1
+    },
+    {
+      "type": "HUG",
+      "value": 1
+    },
+    {
+      "type": "HUG",
+      "value": 1
+    }
+  ],
+  "children": [
+    {
+      "id": "1456:694",
+      "name": "Table Head",
+      "x": 0,
+      "y": 0,
+      "width": 40,
+      "height": 38,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED"
+    },
+    {
+      "id": "1455:35543",
+      "name": "Table Head",
+      "x": 40,
+      "y": 0,
+      "width": 229.6666717529297,
+      "height": 38,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:710",
+      "name": "Table Head",
+      "x": 269.66668701171875,
+      "y": 0,
+      "width": 229.6666717529297,
+      "height": 38,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:727",
+      "name": "Table Head",
+      "x": 499.3333740234375,
+      "y": 0,
+      "width": 229.6666717529297,
+      "height": 38,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:744",
+      "name": "Table Head",
+      "x": 729.0000610351562,
+      "y": 0,
+      "width": 126,
+      "height": 38,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:704",
+      "name": "Table Cell",
+      "x": 0,
+      "y": 38,
+      "width": 40,
+      "height": 50,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED"
+    },
+    {
+      "id": "1456:761",
+      "name": "Table Cell",
+      "x": 40,
+      "y": 38,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:781",
+      "name": "Table Cell",
+      "x": 269.66668701171875,
+      "y": 38,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:801",
+      "name": "Table Cell",
+      "x": 499.3333740234375,
+      "y": 38,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:821",
+      "name": "Table Cell",
+      "x": 729.0000610351562,
+      "y": 38,
+      "width": 126,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:841",
+      "name": "Table Cell",
+      "x": 0,
+      "y": 88,
+      "width": 40,
+      "height": 50,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED"
+    },
+    {
+      "id": "1456:842",
+      "name": "Table Cell",
+      "x": 40,
+      "y": 88,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:843",
+      "name": "Table Cell",
+      "x": 269.66668701171875,
+      "y": 88,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:844",
+      "name": "Table Cell",
+      "x": 499.3333740234375,
+      "y": 88,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:845",
+      "name": "Table Cell",
+      "x": 729.0000610351562,
+      "y": 88,
+      "width": 126,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:923",
+      "name": "Table Cell",
+      "x": 0,
+      "y": 138,
+      "width": 40,
+      "height": 50,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED"
+    },
+    {
+      "id": "1456:924",
+      "name": "Table Cell",
+      "x": 40,
+      "y": 138,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:925",
+      "name": "Table Cell",
+      "x": 269.66668701171875,
+      "y": 138,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:926",
+      "name": "Table Cell",
+      "x": 499.3333740234375,
+      "y": 138,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:927",
+      "name": "Table Cell",
+      "x": 729.0000610351562,
+      "y": 138,
+      "width": 126,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1005",
+      "name": "Table Cell",
+      "x": 0,
+      "y": 188,
+      "width": 40,
+      "height": 50,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED"
+    },
+    {
+      "id": "1456:1006",
+      "name": "Table Cell",
+      "x": 40,
+      "y": 188,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1007",
+      "name": "Table Cell",
+      "x": 269.66668701171875,
+      "y": 188,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1008",
+      "name": "Table Cell",
+      "x": 499.3333740234375,
+      "y": 188,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1009",
+      "name": "Table Cell",
+      "x": 729.0000610351562,
+      "y": 188,
+      "width": 126,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1087",
+      "name": "Table Cell",
+      "x": 0,
+      "y": 238,
+      "width": 40,
+      "height": 50,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED"
+    },
+    {
+      "id": "1456:1088",
+      "name": "Table Cell",
+      "x": 40,
+      "y": 238,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1089",
+      "name": "Table Cell",
+      "x": 269.66668701171875,
+      "y": 238,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1090",
+      "name": "Table Cell",
+      "x": 499.3333740234375,
+      "y": 238,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1091",
+      "name": "Table Cell",
+      "x": 729.0000610351562,
+      "y": 238,
+      "width": 126,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1169",
+      "name": "Table Cell",
+      "x": 0,
+      "y": 288,
+      "width": 40,
+      "height": 50,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED"
+    },
+    {
+      "id": "1456:1170",
+      "name": "Table Cell",
+      "x": 40,
+      "y": 288,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1171",
+      "name": "Table Cell",
+      "x": 269.66668701171875,
+      "y": 288,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1172",
+      "name": "Table Cell",
+      "x": 499.3333740234375,
+      "y": 288,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1173",
+      "name": "Table Cell",
+      "x": 729.0000610351562,
+      "y": 288,
+      "width": 126,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1251",
+      "name": "Table Cell",
+      "x": 0,
+      "y": 338,
+      "width": 40,
+      "height": 50,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED"
+    },
+    {
+      "id": "1456:1252",
+      "name": "Table Cell",
+      "x": 40,
+      "y": 338,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1253",
+      "name": "Table Cell",
+      "x": 269.66668701171875,
+      "y": 338,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1254",
+      "name": "Table Cell",
+      "x": 499.3333740234375,
+      "y": 338,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1255",
+      "name": "Table Cell",
+      "x": 729.0000610351562,
+      "y": 338,
+      "width": 126,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1333",
+      "name": "Table Cell",
+      "x": 0,
+      "y": 388,
+      "width": 40,
+      "height": 50,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutSizingVertical": "FIXED"
+    },
+    {
+      "id": "1456:1334",
+      "name": "Table Cell",
+      "x": 40,
+      "y": 388,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1335",
+      "name": "Table Cell",
+      "x": 269.66668701171875,
+      "y": 388,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1336",
+      "name": "Table Cell",
+      "x": 499.3333740234375,
+      "y": 388,
+      "width": 229.6666717529297,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    },
+    {
+      "id": "1456:1337",
+      "name": "Table Cell",
+      "x": 729.0000610351562,
+      "y": 388,
+      "width": 126,
+      "height": 50,
+      "layoutSizingHorizontal": "FILL",
+      "layoutSizingVertical": "HUG"
+    }
+  ]
+}

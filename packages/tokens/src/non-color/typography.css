@@ -1,11 +1,6 @@
-:root {
+:root,
+[data-theme] {
   --font-sans: "Inter", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
-  --font-weight-light: 300;
-  --font-weight-semilight: 350;
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
 
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;

@@ -30,7 +30,8 @@ const required = [
   { label: "typeface effects", re: /\.aviala-typeface\b|\.aviala-text\b/ },
   { label: "loading effects", re: /\.aviala-loading\b/ },
   { label: "focus ring", re: /\.aviala-focus-ring\b/ },
-  { label: "ALD theme", re: /:root\[data-theme="ald"\]/ },
+  // Project themes also support nested preview containers.
+  { label: "ALD theme", re: /\[data-theme="ald"\]/ },
   { label: "spiral base layer", re: /@layer\s+base\b/ },
   {
     label: "aviala-utils layer",

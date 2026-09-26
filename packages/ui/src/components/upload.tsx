@@ -103,62 +103,75 @@ export const Upload = forwardRef<HTMLDivElement, UploadProps>(
     };
 
     return (
-      <div
-        ref={ref}
-        role="button"
-        tabIndex={disabled ? -1 : 0}
-        className={cn(uploadVariants({ style: resolvedStyle }), className)}
-        data-style={resolvedStyle}
-        data-disabled={disabled ? "true" : undefined}
-        data-dragging={dragging ? "true" : undefined}
-        aria-disabled={disabled || undefined}
-        onClick={openPicker}
-        onKeyDown={(event) => {
-          if (event.key === "Enter" || event.key === " ") {
+      <div className="aviala-upload-layout" data-style={resolvedStyle}>
+        <div
+          ref={ref}
+          role="button"
+          tabIndex={disabled ? -1 : 0}
+          className={cn(uploadVariants({ style: resolvedStyle }), className)}
+          data-style={resolvedStyle}
+          data-disabled={disabled ? "true" : undefined}
+          data-dragging={dragging ? "true" : undefined}
+          aria-disabled={disabled || undefined}
+          onClick={openPicker}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              openPicker();
+            }
+          }}
+          onDragOver={(event) => {
+            onDragOver?.(event);
+            if (disabled || !allowDrag) return;
             event.preventDefault();
-            openPicker();
-          }
-        }}
-        onDragOver={(event) => {
-          onDragOver?.(event);
-          if (disabled || !allowDrag) return;
-          event.preventDefault();
-          setDragging(true);
-        }}
-        onDragLeave={(event) => {
-          onDragLeave?.(event);
-          setDragging(false);
-        }}
-        onDrop={handleDrop}
-        {...props}
-      >
-        <input
-          ref={inputRef}
-          type="file"
-          className="aviala-upload__input"
-          accept={accept}
-          multiple={multiple}
-          disabled={disabled}
-          onChange={handleChange}
-          tabIndex={-1}
-          aria-hidden
-          {...inputProps}
-        />
-        <span className="aviala-upload__icon" aria-hidden>
-          <GeneralUpload width={16} height={16} />
-        </span>
-        {resolvedStyle === "large" ? (
-          <Typeface
-            className="aviala-upload__typeface"
-            content="textCaption"
-            primary={resolvedTitle}
-            secondary={resolvedDescription}
+            setDragging(true);
+          }}
+          onDragLeave={(event) => {
+            onDragLeave?.(event);
+            setDragging(false);
+          }}
+          onDrop={handleDrop}
+          {...props}
+        >
+          <input
+            ref={inputRef}
+            type="file"
+            className="aviala-upload__input"
+            accept={accept}
+            multiple={multiple}
+            disabled={disabled}
+            onChange={handleChange}
+            tabIndex={-1}
+            aria-hidden
+            {...inputProps}
           />
-        ) : (
-          <Typography level="text" as="span" className="aviala-upload__label">
-            {resolvedLabel}
-          </Typography>
-        )}
+          <span className="aviala-upload__icon" aria-hidden>
+            <GeneralUpload
+              width={
+                resolvedStyle === "default"
+                  ? "var(--button-regular-icon-size, var(--button-size-regular-icon-width))"
+                  : 16
+              }
+              height={
+                resolvedStyle === "default"
+                  ? "var(--button-regular-icon-size, var(--button-size-regular-icon-width))"
+                  : 16
+              }
+            />
+          </span>
+          {resolvedStyle === "large" ? (
+            <Typeface
+              className="aviala-upload__typeface"
+              content="textCaption"
+              primary={resolvedTitle}
+              secondary={resolvedDescription}
+            />
+          ) : (
+            <Typography level="text" as="span" className="aviala-upload__label">
+              {resolvedLabel}
+            </Typography>
+          )}
+        </div>
       </div>
     );
   }

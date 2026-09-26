@@ -38,8 +38,9 @@ export function useCloseSuppression({
   const pointerDownCloseRef = useRef(false);
 
   useEffect(() => {
-    const markWindowBlur = () => {
-      windowBlurCloseRef.current = true;
+    const markWindowBlur = (event: FocusEvent) => {
+      // Capturing blur also receives focus changes between elements in the page.
+      if (event.target === window) windowBlurCloseRef.current = true;
     };
     window.addEventListener("blur", markWindowBlur, true);
     return () => window.removeEventListener("blur", markWindowBlur, true);
@@ -54,11 +55,19 @@ export function useCloseSuppression({
     }
 
     const markPointerDown = () => {
+      windowBlurCloseRef.current = false;
       pointerDownCloseRef.current = true;
     };
+    const markKeyDown = () => {
+      windowBlurCloseRef.current = false;
+      pointerDownCloseRef.current = false;
+    };
     document.addEventListener("pointerdown", markPointerDown, true);
-    return () =>
+    document.addEventListener("keydown", markKeyDown, true);
+    return () => {
       document.removeEventListener("pointerdown", markPointerDown, true);
+      document.removeEventListener("keydown", markKeyDown, true);
+    };
   }, [keepPointerDownFlagAfterClose, open]);
 
   const shouldCommitOpenChange = useCallback(

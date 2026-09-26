@@ -117,8 +117,15 @@ export function formatMonthYear(date: Date, locale = "zh-CN"): string {
   }).format(date);
 }
 
-export function formatTimeValue(hours: number, minutes: number): string {
-  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+export function formatTimeValue(
+  hours: number,
+  minutes: number,
+  seconds?: number
+): string {
+  const time = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+  return seconds === undefined
+    ? time
+    : `${time}:${String(seconds).padStart(2, "0")}`;
 }
 
 export function getRangeSelectionPosition(

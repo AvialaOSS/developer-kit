@@ -1,4 +1,6 @@
 import { palette } from "@aviala-design/color";
+import { aldProjectVariables } from "./ald-project";
+import type { BaseNumbersDensity } from "./base-numbers";
 import { tokenPathToCssVar } from "./parse-ald";
 import {
   ALD_NEUTRAL_RAMP,
@@ -21,6 +23,8 @@ export type ThemeInput = {
   presetId?: string;
   /** Customizable color generation config (curve, hue protection, blending). */
   palette?: PaletteConfig;
+  density?: BaseNumbersDensity;
+  effects?: boolean;
 };
 
 export type ThemeVars = Record<string, string>;
@@ -211,6 +215,7 @@ export function generateTheme(input: ThemeInput = {}): ThemeVars {
   }
 
   syncNeutralPalette(vars, mode);
+  const generatedPalette = { ...vars };
   syncPrimarySemanticTokens(vars);
   syncSemanticStatusTextTokens(vars);
   syncAldModeTokens(vars, mode);
@@ -227,6 +232,13 @@ export function generateTheme(input: ThemeInput = {}): ThemeVars {
   if (input.presetId) {
     vars["--aviala-theme-id"] = input.presetId;
   }
+
+  Object.assign(
+    vars,
+    aldProjectVariables(mode, input.density, input.effects, generatedPalette)
+  );
+  vars["--aviala-density"] = input.density ?? "default";
+  vars["--aviala-effects"] = input.effects === false ? "off" : "on";
 
   return vars;
 }

@@ -13,17 +13,28 @@
   display: flex;
   width: var(--color-picker-panel-width, 370px);
   flex-direction: column;
-  gap: var(--color-picker-panel-gap, 10px);
+  gap: var(--color-picker-panel-gap, var(--color-picker-panel-size-gap));
   overflow: hidden;
-  border: 1px solid var(--color-picker-panel-border, #f0efef);
-  border-radius: var(--color-picker-panel-radius, 10px);
-  background-color: var(--color-picker-panel-bg, #ffffff);
+  border: 1px solid
+    var(
+      --color-picker-panel-border,
+      var(--color-picker-panel-color-border-default)
+    );
+  border-radius: var(
+    --color-picker-panel-radius,
+    var(--color-picker-panel-size-radius)
+  );
+  background-color: var(
+    --color-picker-panel-bg,
+    var(--color-picker-panel-color-background-default)
+  );
   box-shadow: var(
     --color-picker-panel-shadow,
     var(--aviala-shadow-level4-with-line)
   );
-  padding: var(--padding-none, 0) var(--padding-none, 0)
-    var(--color-picker-panel-px, 8px);
+  padding: var(--color-picker-panel-size-padding-y)
+    var(--color-picker-panel-size-padding-x)
+    var(--color-picker-panel-px, var(--color-picker-panel-size-padding-y-end));
 }
 
 .aviala-color-picker-area {
@@ -31,17 +42,35 @@
   height: var(--color-picker-area-height, 160px);
   width: 100%;
   overflow: hidden;
-  padding: var(--gap-content-space, 10px) var(--color-picker-panel-px, 8px);
+  box-sizing: border-box;
+  padding: var(--color-picker-panel-size-pick-area-padding-y)
+    var(--color-picker-panel-size-pick-area-padding-x)
+    var(--color-picker-panel-size-pick-area-padding-y-end);
   touch-action: none;
   cursor: crosshair;
 }
 
-.aviala-color-picker-area__surface {
+.aviala-color-picker-area__palette {
   position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: var(--color-picker-panel-size-palette-padding-y)
+    var(
+      --color-picker-panel-px,
+      var(--color-picker-panel-size-palette-padding-x)
+    );
+  border-radius: var(--color-picker-panel-size-palette-radius);
+}
+
+.aviala-color-picker-area__surface {
+  /* Figma paints the palette fill across its padding; its indicator is absolute. */
+  position: absolute;
+  inset: 0;
   height: 100%;
   width: 100%;
   overflow: hidden;
-  border-radius: var(--border-radius-extra-small-2, 6px);
+  border-radius: inherit;
 }
 
 .aviala-color-picker-area__white {
@@ -61,22 +90,34 @@
   width: 14px;
   height: 14px;
   transform: translate(-50%, -50%);
-  border: 2px solid #fff;
+  border: 1px solid var(--color-picker-panel-color-indicator-border-default);
   border-radius: 999px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
   pointer-events: none;
 }
 
 .aviala-color-picker-slider-row {
-  padding: 3px var(--color-picker-panel-px, 8px);
+  display: flex;
+  gap: var(--color-picker-panel-size-action-area-gap);
+  padding: var(--color-picker-panel-size-action-area-padding-y)
+    var(
+      --color-picker-panel-px,
+      var(--color-picker-panel-size-action-area-padding-x)
+    );
 }
 
 /* Hue / alpha rails reuse the shared Slider thumb + interaction model;
  * track fill is ColorPicker-specific (spectrum / opacity + checkerboard). */
 .aviala-color-picker-slider.aviala-slider {
   width: 100%;
-  --slider-track-height: var(--color-picker-slider-height, 16px);
-  --slider-track-height-big: var(--color-picker-slider-height, 16px);
+  --slider-track-height: var(
+    --color-picker-slider-height,
+    var(--slider-size-big-track-height)
+  );
+  --slider-track-height-big: var(
+    --color-picker-slider-height,
+    var(--slider-size-big-track-height)
+  );
 }
 
 .aviala-color-picker-slider .aviala-slider__track {
@@ -114,8 +155,12 @@
 .aviala-color-picker-inputs {
   display: flex;
   align-items: center;
-  gap: var(--gap-component-space, 8px);
-  padding: 0 var(--color-picker-panel-px, 8px);
+  gap: var(--color-picker-panel-size-action-area-gap);
+  padding: var(--color-picker-panel-size-action-area-padding-y)
+    var(
+      --color-picker-panel-px,
+      var(--color-picker-panel-size-action-area-padding-x)
+    );
 }
 
 /* Panel row fields — pure CSS (no Tailwind); mirrors BaseInput + Badge */
@@ -127,27 +172,59 @@
   align-items: center;
   overflow: hidden;
   border: 0;
-  border-radius: var(--input-radius, 8px);
-  background-color: var(--input-bg-default, #f0efef);
-  box-shadow: var(--input-shell-shadow);
-  padding: 0 var(--input-shell-px, var(--input-px-regular, 10px));
-  gap: var(--input-shell-gap, var(--input-gap-regular, 6px));
-  color: var(--input-fg, #262525);
-  --input-shell-px: var(--input-px-regular, 10px);
-  --input-shell-gap: var(--input-gap-regular, 6px);
-  --input-shell-field-py: var(--input-field-py-regular, 6px);
-  --input-shell-slot-py: var(--input-slot-py-regular, 6px);
+  border-radius: var(--input-radius, var(--base-input-size-radius));
+  background-color: var(
+    --input-bg-default,
+    var(--base-input-color-background-default)
+  );
+  box-shadow: var(
+    --input-shell-shadow,
+    inset 0 -0.5px 0 var(--base-input-color-shadow-default)
+  );
+  padding: var(--base-input-size-regular-padding-y)
+    var(
+      --input-shell-px,
+      var(--input-px-regular, var(--base-input-size-regular-padding-x))
+    );
+  gap: var(
+    --input-shell-gap,
+    var(--input-gap-regular, var(--base-input-size-regular-gap))
+  );
+  color: var(--input-fg, var(--base-input-color-text-default));
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--base-input-size-regular-padding-x)
+  );
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--base-input-size-regular-gap)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--base-input-size-regular-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--base-input-size-regular-slot-padding-y)
+  );
   transition:
     background-color 0.15s ease,
     box-shadow 0.15s ease;
 }
 
 .aviala-color-picker-field:focus-within {
-  background-color: var(--input-bg-activated, #ffffff);
+  background-color: var(
+    --input-bg-activated,
+    var(--base-input-color-background-active)
+  );
   box-shadow: var(
     --input-shell-focus-shadow,
-    inset 0 0 0 1px var(--input-border-activated, var(--primary)),
-    var(--input-surface-shadow, inset 0 -0.5px 0 rgba(0, 0, 0, 0.04))
+    inset 0 0 0 var(--base-input-size-border-width)
+      var(--input-border-activated, var(--base-input-color-border-active)),
+    var(
+      --input-surface-shadow,
+      inset 0 -0.5px 0 var(--base-input-color-shadow-default)
+    )
   );
 }
 
@@ -172,9 +249,9 @@
   background: transparent;
   padding: var(--input-shell-field-py) 0;
   font-family: inherit;
-  font-size: var(--input-font-size);
-  line-height: var(--input-line-height);
-  color: var(--input-fg, #262525);
+  font-size: var(--input-font-size, var(--typography-text-size));
+  line-height: var(--input-line-height, var(--typography-text-line-height));
+  color: var(--input-fg, var(--base-input-color-text-default));
   outline: none;
 }
 
@@ -191,7 +268,7 @@
   .aviala-color-picker-field__input::selection {
   background-color: color-mix(
     in srgb,
-    var(--input-border-activated, var(--primary)) 25%,
+    var(--input-border-activated, var(--base-input-color-border-active)) 25%,
     transparent
   );
 }
@@ -204,27 +281,36 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: var(--gap-component-space, 8px);
-  padding: 0 var(--color-picker-panel-px, 8px);
+  gap: var(--color-picker-panel-size-action-area-gap);
+  padding: var(--color-picker-panel-size-action-area-padding-y)
+    var(
+      --color-picker-panel-px,
+      var(--color-picker-panel-size-action-area-padding-x)
+    );
 }
 
 .aviala-color-pick-button {
   display: inline-flex;
-  width: var(--color-picker-swatch-button-size, 32px);
-  height: var(--color-picker-swatch-button-size, 32px);
+  box-sizing: border-box;
+  width: var(--color-picker-swatch-button-size, auto);
+  height: var(--color-picker-swatch-button-size, auto);
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--border-border-normal-1, #f0efef);
-  border-radius: var(--input-radius, 8px);
-  background-color: var(--control-control-normal-background-whiteonly, #ffffff);
-  padding: var(--padding-min, 2px);
+  border: 0;
+  --_color-pick-button-border: var(--color-pick-button-color-border-default);
+  box-shadow: inset 0 0 0 1px var(--_color-pick-button-border);
+  border-radius: var(--input-radius, var(--color-pick-button-size-radius));
+  background-color: var(--color-pick-button-color-background-default);
+  gap: var(--color-pick-button-size-gap);
+  padding: var(--color-pick-button-size-padding-y)
+    var(--color-pick-button-size-padding-x);
   cursor: pointer;
-  transition: border-color 0.15s ease;
+  transition: box-shadow 0.15s ease;
 }
 
 .aviala-color-pick-button:hover:not(:disabled) {
-  border-color: var(--border-border-normal-3, #d6d5d4);
+  --_color-pick-button-border: var(--border-border-normal-3, #d6d5d4);
 }
 
 .aviala-color-pick-button:disabled {
@@ -233,13 +319,38 @@
 }
 
 .aviala-color-pick-button[data-selected="true"] {
-  border-color: var(--input-border-activated, var(--primary));
+  --_color-pick-button-border: var(
+    --input-border-activated,
+    var(--_legacy-input-border-activated, var(--primary))
+  );
+}
+
+.aviala-color-pick-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--color-pick-button-size-icon-width);
+  height: var(--color-pick-button-size-icon-height);
+  color: var(--color-pick-button-color-icon-default);
+}
+
+.aviala-color-pick-button__icon > svg {
+  width: 100%;
+  height: auto;
 }
 
 .aviala-color-pick-button__swatch {
-  width: var(--color-picker-swatch-button, 26px);
-  height: var(--color-picker-swatch-button, 26px);
-  border-radius: var(--border-radius-extra-small-2, 6px);
+  width: var(
+    --color-picker-swatch-button,
+    var(--color-pick-button-size-preview-width)
+  );
+  height: var(
+    --color-picker-swatch-button,
+    var(--color-pick-button-size-preview-height)
+  );
+  flex-shrink: 0;
+  border-radius: var(--color-pick-button-size-preview-radius);
 }
 
 .aviala-color-picker-trigger {
@@ -250,75 +361,150 @@
   align-items: center;
   overflow: hidden;
   border: 0;
-  border-radius: var(--input-radius, 8px);
-  background-color: var(--input-bg-default, #f0efef);
+  border-radius: var(--input-radius, var(--color-picker-input-size-radius));
+  background-color: var(
+    --input-bg-default,
+    var(--color-picker-input-color-background-default)
+  );
   box-shadow: var(
     --input-shell-shadow,
-    var(--input-surface-shadow, inset 0 -0.5px 0 rgba(0, 0, 0, 0.04))
+    var(
+      --input-surface-shadow,
+      inset 0 -0.5px 0 var(--color-picker-input-color-shadow-default)
+    )
   );
-  padding: 0 var(--input-shell-px, var(--input-px-regular, 10px));
-  gap: var(--input-shell-gap, var(--input-gap-regular, 6px));
+  padding: var(
+      --_color-picker-input-py,
+      var(--color-picker-input-size-regular-padding-y)
+    )
+    var(
+      --input-shell-px,
+      var(--input-px-regular, var(--color-picker-input-size-regular-padding-x))
+    );
+  gap: var(
+    --input-shell-gap,
+    var(--input-gap-regular, var(--color-picker-input-size-regular-gap))
+  );
   font-family: inherit;
-  color: var(--input-fg, #262525);
-  --input-shell-px: var(--input-px-regular, 10px);
-  --input-shell-gap: var(--input-gap-regular, 6px);
-  --input-shell-field-py: var(--input-field-py-regular, 6px);
-  --input-shell-slot-py: var(--input-slot-py-regular, 6px);
+  color: var(--input-fg, var(--color-picker-input-color-text-default));
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--color-picker-input-size-regular-padding-x)
+  );
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--color-picker-input-size-regular-gap)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--color-picker-input-size-regular-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--color-picker-input-size-regular-slot-padding-y)
+  );
   transition:
     background-color 0.15s ease,
     box-shadow 0.15s ease;
 }
 
 .aviala-color-picker-trigger[data-size="big"] {
-  --input-shell-px: var(--input-px-big, 14px);
-  --input-shell-gap: var(--input-gap-big, 8px);
-  --input-shell-field-py: var(--padding-middle, 10px);
-  --input-shell-slot-py: var(--padding-middle, 10px);
+  --_color-picker-input-py: var(--color-picker-input-size-big-padding-y);
+  --input-shell-px: var(
+    --input-px-big,
+    var(--color-picker-input-size-big-padding-x)
+  );
+  --input-shell-gap: var(
+    --input-gap-big,
+    var(--color-picker-input-size-big-gap)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-big,
+    var(--color-picker-input-size-big-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-big,
+    var(--color-picker-input-size-big-slot-padding-y)
+  );
 }
 
 .aviala-color-picker-trigger[data-size="regular"] {
-  --input-shell-px: var(--input-px-regular, 10px);
-  --input-shell-gap: var(--input-gap-regular, 6px);
-  --input-shell-field-py: var(--input-field-py-regular, 6px);
-  --input-shell-slot-py: var(--input-slot-py-regular, 6px);
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--color-picker-input-size-regular-padding-x)
+  );
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--color-picker-input-size-regular-gap)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--color-picker-input-size-regular-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--color-picker-input-size-regular-slot-padding-y)
+  );
 }
 
 .aviala-color-picker-trigger[data-all-round="true"] {
-  border-radius: var(--input-radius-allround, 99px);
+  border-radius: var(
+    --input-radius-allround,
+    var(--color-picker-input-size-round-radius)
+  );
 }
 
 .aviala-color-picker-trigger[data-open="true"] {
-  background-color: var(--input-bg-activated, #ffffff);
+  background-color: var(
+    --input-bg-activated,
+    var(--color-picker-input-color-background-active)
+  );
   box-shadow: var(
     --input-shell-focus-shadow,
-    inset 0 0 0 1px var(--input-border-activated, var(--primary)),
-    var(--input-surface-shadow, inset 0 -0.5px 0 rgba(0, 0, 0, 0.04))
+    inset 0 0 0 var(--color-picker-input-size-border-width)
+      var(
+        --input-border-activated,
+        var(--color-picker-input-color-border-active)
+      ),
+    var(
+      --input-surface-shadow,
+      inset 0 -0.5px 0 var(--color-picker-input-color-shadow-default)
+    )
   );
   outline: none;
 }
 
 .aviala-color-picker-trigger:focus-visible {
-  background-color: var(--input-bg-activated, #ffffff);
+  background-color: var(
+    --input-bg-activated,
+    var(--color-picker-input-color-background-active)
+  );
   outline: none;
 }
 
 .aviala-color-picker-trigger:disabled,
 .aviala-color-picker-trigger[data-disabled="true"] {
   cursor: not-allowed;
-  opacity: var(--input-disabled-opacity, 0.55);
+  background-color: var(
+    --input-bg-default,
+    var(--color-picker-input-color-background-disabled)
+  );
 }
 
 @media (hover: hover) and (pointer: fine) {
   .aviala-color-picker-trigger:hover:not(:focus-visible):not(
       [data-open="true"]
     ):not([data-disabled="true"]):not(:disabled) {
-    background-color: var(--input-bg-hover, #e5e4e3);
+    background-color: var(
+      --input-bg-hover,
+      var(--base-input-color-background-hover, var(--_legacy-input-bg-hover))
+    );
   }
 }
 
 .aviala-color-picker-trigger__swatch {
   display: inline-flex;
-  height: var(--input-icon-slot-height, var(--input-line-height, 1.125rem));
+  height: var(--input-icon-slot-height, auto);
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
@@ -328,7 +514,7 @@
 .aviala-color-picker-trigger__swatch-inner {
   width: var(--color-picker-swatch-input, 18px);
   height: var(--color-picker-swatch-input, 18px);
-  border-radius: var(--border-radius-extra-small-2, 6px);
+  border-radius: var(--color-picker-input-size-preview-radius);
 }
 
 .aviala-color-picker-trigger__value {
@@ -336,12 +522,30 @@
   flex: 1;
   padding: var(--input-shell-field-py) 0;
   text-align: start;
-  font-size: var(--input-font-size);
-  line-height: var(--input-line-height);
+  font-size: var(--input-font-size, var(--typography-text-size));
+  line-height: var(--input-line-height, var(--typography-text-line-height));
 }
 
 .aviala-color-picker-trigger__placeholder {
-  opacity: var(--input-placeholder-opacity, 0.6);
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--color-picker-input-transparency-placeholder)
+  );
+}
+
+.aviala-color-picker-trigger__icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: var(--color-picker-input-size-icon-width);
+  height: var(--color-picker-input-size-icon-height);
+  color: var(--color-picker-input-color-icon-default);
+}
+
+.aviala-color-picker-trigger__icon > svg {
+  width: 100%;
+  height: 100%;
 }
 
 .aviala-color-picker-content {
@@ -482,4 +686,27 @@
   .aviala-color-picker-content[data-state="closed"] {
     animation: none;
   }
+}
+
+.aviala-color-picker-trigger:is(:disabled, [data-disabled="true"])
+  > :is(
+    .aviala-color-picker-trigger__icon,
+    .aviala-color-picker-trigger__swatch,
+    .aviala-color-picker-trigger__value
+  ) {
+  opacity: var(
+    --input-disabled-opacity,
+    var(--color-picker-input-transparency-content-disabled)
+  );
+}
+.aviala-color-picker-trigger:is(:disabled, [data-disabled="true"])
+  .aviala-color-picker-trigger__text {
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--color-picker-input-transparency-placeholder)
+  );
+}
+.aviala-color-picker-trigger:is(:disabled, [data-disabled="true"])
+  .aviala-color-picker-trigger__placeholder {
+  opacity: 1;
 }

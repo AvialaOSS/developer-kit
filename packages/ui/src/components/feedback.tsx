@@ -1,6 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import {
-  GeneralNotification,
   SymbolInformationCircle,
   SymbolRightCircle,
   SymbolWarningCircle,
@@ -83,12 +82,13 @@ function renderFeedbackIcon(node: ReactNode): ReactNode {
   );
 }
 
-function defaultStatusIcon(type: FeedbackType, mode: FeedbackMode): ReactNode {
-  const iconMode = mode === "primary" ? "fill" : "default";
+function defaultStatusIcon(type: FeedbackType): ReactNode {
+  const iconMode = "fill";
   const thickness = "Regular";
 
   switch (type) {
     case "information":
+    case "normal":
       return (
         <SymbolInformationCircle
           thickness={thickness}
@@ -112,14 +112,10 @@ function defaultStatusIcon(type: FeedbackType, mode: FeedbackMode): ReactNode {
       return (
         <SymbolRightCircle thickness={thickness} mode={iconMode} aria-hidden />
       );
-    case "normal":
-      return (
-        <GeneralNotification thickness={thickness} mode="default" aria-hidden />
-      );
   }
 }
 
-export type FeedbackProps = HTMLAttributes<HTMLDivElement> &
+export type FeedbackProps = Omit<HTMLAttributes<HTMLDivElement>, "title"> &
   VariantProps<typeof feedbackVariants> & {
     /** Primary line — bold on default size */
     title: ReactNode;
@@ -180,7 +176,7 @@ export const Feedback = forwardRef<HTMLDivElement, FeedbackProps>(
         {...props}
       >
         <div className="aviala-feedback__body">
-          {renderFeedbackIcon(icon ?? defaultStatusIcon(resolvedType, mode))}
+          {renderFeedbackIcon(icon ?? defaultStatusIcon(resolvedType))}
 
           {isSmall ? (
             <Typography

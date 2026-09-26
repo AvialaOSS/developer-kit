@@ -1,0 +1,7 @@
+# Rate
+
+## [Unreleased]
+
+### Added
+- 新增评分组件，支持 Star/Like、三种尺寸、半分、清空、受控值、禁用、只读和表单提交。
+- 提供方向键、Home/End 键操作，颜色、尺寸、间距和禁用透明度消费 Figma 组件 Token。

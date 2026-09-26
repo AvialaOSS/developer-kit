@@ -1,0 +1,331 @@
+{
+  "file": "aykyMmGyzVPkAsf8oRBZg0",
+  "componentSet": "647:87555",
+  "readAt": "2026-09-23",
+  "variants": [
+    {
+      "id": "803:146788",
+      "name": "Type=Select, left icon setting=shaped, Style=Default",
+      "contentId": "803:146793",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40563",
+          "name": "listItem/color/content/border-neutral-2-default",
+          "targets": [
+            {
+              "id": "VariableID:165:3067",
+              "name": "border/border-neutral-2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1434:32350",
+      "name": "Type=Aciton, left icon setting=shaped, Style=Default",
+      "contentId": "1434:32353",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40568",
+          "name": "listItem/color/content/border-neutral-3-default",
+          "targets": [
+            {
+              "id": "VariableID:1903:35351",
+              "name": "border/border-neutral-3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1434:31238",
+      "name": "Type=Switch, left icon setting=shaped, Style=Default",
+      "contentId": "1434:31241",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40563",
+          "name": "listItem/color/content/border-neutral-2-default",
+          "targets": [
+            {
+              "id": "VariableID:165:3067",
+              "name": "border/border-neutral-2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1434:32405",
+      "name": "Type=Select, left icon setting=default, Style=Default",
+      "contentId": "1434:32408",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40568",
+          "name": "listItem/color/content/border-neutral-3-default",
+          "targets": [
+            {
+              "id": "VariableID:1903:35351",
+              "name": "border/border-neutral-3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1434:32416",
+      "name": "Type=Aciton, left icon setting=default, Style=Default",
+      "contentId": "1434:32419",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40563",
+          "name": "listItem/color/content/border-neutral-2-default",
+          "targets": [
+            {
+              "id": "VariableID:165:3067",
+              "name": "border/border-neutral-2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1434:32427",
+      "name": "Type=Switch, left icon setting=default, Style=Default",
+      "contentId": "1434:32430",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40568",
+          "name": "listItem/color/content/border-neutral-3-default",
+          "targets": [
+            {
+              "id": "VariableID:1903:35351",
+              "name": "border/border-neutral-3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1482:20314",
+      "name": "Type=Select, left icon setting=none, Style=Default",
+      "contentId": "1482:20317",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40563",
+          "name": "listItem/color/content/border-neutral-2-default",
+          "targets": [
+            {
+              "id": "VariableID:165:3067",
+              "name": "border/border-neutral-2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1482:20325",
+      "name": "Type=Aciton, left icon setting=none, Style=Default",
+      "contentId": "1482:20328",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40568",
+          "name": "listItem/color/content/border-neutral-3-default",
+          "targets": [
+            {
+              "id": "VariableID:1903:35351",
+              "name": "border/border-neutral-3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1482:20337",
+      "name": "Type=Switch, left icon setting=none, Style=Default",
+      "contentId": "1482:20340",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40563",
+          "name": "listItem/color/content/border-neutral-2-default",
+          "targets": [
+            {
+              "id": "VariableID:165:3067",
+              "name": "border/border-neutral-2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2053:28924",
+      "name": "Type=Select, left icon setting=shaped, Style=Deep",
+      "contentId": "2053:28927",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40568",
+          "name": "listItem/color/content/border-neutral-3-default",
+          "targets": [
+            {
+              "id": "VariableID:1903:35351",
+              "name": "border/border-neutral-3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2053:28935",
+      "name": "Type=Aciton, left icon setting=shaped, Style=Deep",
+      "contentId": "2053:28938",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40563",
+          "name": "listItem/color/content/border-neutral-2-default",
+          "targets": [
+            {
+              "id": "VariableID:165:3067",
+              "name": "border/border-neutral-2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2053:28947",
+      "name": "Type=Switch, left icon setting=shaped, Style=Deep",
+      "contentId": "2053:28950",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40568",
+          "name": "listItem/color/content/border-neutral-3-default",
+          "targets": [
+            {
+              "id": "VariableID:1903:35351",
+              "name": "border/border-neutral-3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2053:28959",
+      "name": "Type=Select, left icon setting=default, Style=Deep",
+      "contentId": "2053:28962",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40563",
+          "name": "listItem/color/content/border-neutral-2-default",
+          "targets": [
+            {
+              "id": "VariableID:165:3067",
+              "name": "border/border-neutral-2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2053:28970",
+      "name": "Type=Aciton, left icon setting=default, Style=Deep",
+      "contentId": "2053:28973",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40568",
+          "name": "listItem/color/content/border-neutral-3-default",
+          "targets": [
+            {
+              "id": "VariableID:1903:35351",
+              "name": "border/border-neutral-3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2053:28982",
+      "name": "Type=Switch, left icon setting=default, Style=Deep",
+      "contentId": "2053:28985",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40563",
+          "name": "listItem/color/content/border-neutral-2-default",
+          "targets": [
+            {
+              "id": "VariableID:165:3067",
+              "name": "border/border-neutral-2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2053:28994",
+      "name": "Type=Select, left icon setting=none, Style=Deep",
+      "contentId": "2053:28995",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40568",
+          "name": "listItem/color/content/border-neutral-3-default",
+          "targets": [
+            {
+              "id": "VariableID:1903:35351",
+              "name": "border/border-neutral-3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2053:29003",
+      "name": "Type=Aciton, left icon setting=none, Style=Deep",
+      "contentId": "2053:29004",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40563",
+          "name": "listItem/color/content/border-neutral-2-default",
+          "targets": [
+            {
+              "id": "VariableID:165:3067",
+              "name": "border/border-neutral-2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2053:29013",
+      "name": "Type=Switch, left icon setting=none, Style=Deep",
+      "contentId": "2053:29014",
+      "top": 1,
+      "refs": [
+        {
+          "id": "VariableID:2508:40568",
+          "name": "listItem/color/content/border-neutral-3-default",
+          "targets": [
+            {
+              "id": "VariableID:1903:35351",
+              "name": "border/border-neutral-3"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

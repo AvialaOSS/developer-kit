@@ -6,12 +6,14 @@ export type TimePickerSize = "regular" | "big";
 export type TimePickerValue = {
   hours: number;
   minutes: number;
+  seconds?: number;
 };
 
 export type TimePickerContextValue = {
   open: boolean;
   disabled?: boolean;
   size: TimePickerSize;
+  showSeconds: boolean;
   value: TimePickerValue;
   setValue: (value: TimePickerValue) => void;
 };

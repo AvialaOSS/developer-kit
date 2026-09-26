@@ -71,13 +71,13 @@ function renderCellIcon(node: ReactNode, sized = true): ReactNode {
     sized && isValidElement(node) && typeof node.type !== "string"
       ? cloneElement(
           node as ReactElement<{
-            width?: number;
-            height?: number;
+            width?: number | string;
+            height?: number | string;
             className?: string;
           }>,
           {
-            width: 16,
-            height: 16,
+            width: "100%",
+            height: "100%",
             className: cn(
               (node as ReactElement<{ className?: string }>).props.className,
               "shrink-0"
@@ -89,11 +89,30 @@ function renderCellIcon(node: ReactNode, sized = true): ReactNode {
   return <span className="aviala-table-cell__icon">{content}</span>;
 }
 
+function renderHeadIcon(node: ReactNode): ReactNode {
+  if (node == null || node === false) return null;
+  const content =
+    isValidElement(node) && typeof node.type !== "string"
+      ? cloneElement(
+          node as ReactElement<{ width?: string; height?: string }>,
+          {
+            width: "var(--table-head-size-icon-width)",
+            height: "var(--table-head-size-icon-width)",
+          }
+        )
+      : node;
+  return (
+    <span className="aviala-table-head__icon-slot">
+      <span className="aviala-table-head__icon">{content}</span>
+    </span>
+  );
+}
+
 function TableCellDefaultAvatar() {
   return (
     <Avatar
       content="icon"
-      level="text"
+      level="display"
       lineHeightFix={false}
       icon={<UsersUser aria-hidden />}
     />
@@ -103,7 +122,7 @@ function TableCellDefaultAvatar() {
 function renderTextBlock(text: ReactNode, caption?: ReactNode) {
   return (
     <span className="aviala-table-cell__text">
-      <Typography level="text" as="span">
+      <Typography level="text" as="span" className="aviala-table-cell__title">
         {text}
       </Typography>
       {caption != null && caption !== false ? (
@@ -124,17 +143,29 @@ function renderActions(actions: ReactNode) {
   return <div className="aviala-table-cell__actions">{actions}</div>;
 }
 
-function renderCellBody(main: ReactNode, actions?: ReactNode) {
+function renderCellBody(
+  main: ReactNode,
+  actions?: ReactNode,
+  leading?: ReactNode
+) {
   return (
-    <span className="aviala-table-cell__body">
-      <span className="aviala-table-cell__main">{main}</span>
-      {renderActions(actions)}
-    </span>
+    <>
+      {leading != null && (
+        <div className="aviala-table-cell__leading">{leading}</div>
+      )}
+      <div className="aviala-table-cell__body">
+        <div className="aviala-table-cell__main">{main}</div>
+        {renderActions(actions)}
+      </div>
+    </>
   );
 }
 
 export type TableHeadProps = ComponentPropsWithoutRef<"div"> & {
   content?: Extract<TableCellContent, "text" | "checkbox">;
+  /** Optional leading/trailing icon slots in the default header variant. */
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
   /** Header trailing button area (Figma Table Head Default) */
   actions?: ReactNode;
   /** Select-all / indeterminate / unchecked via Checkbox props */
@@ -143,7 +174,16 @@ export type TableHeadProps = ComponentPropsWithoutRef<"div"> & {
 
 export const TableHead = forwardRef<HTMLDivElement, TableHeadProps>(
   (
-    { className, content = "text", actions, checkboxProps, children, ...props },
+    {
+      className,
+      content = "text",
+      leftIcon,
+      rightIcon,
+      actions,
+      checkboxProps,
+      children,
+      ...props
+    },
     ref
   ) => {
     const renderBody = () => {
@@ -156,7 +196,11 @@ export const TableHead = forwardRef<HTMLDivElement, TableHeadProps>(
           <>
             <span className="aviala-table-cell__main">
               {typeof children === "string" || typeof children === "number" ? (
-                <Typography level="text" as="span">
+                <Typography
+                  level="text"
+                  as="span"
+                  className="aviala-table-head__title"
+                >
                   {children}
                 </Typography>
               ) : (
@@ -179,7 +223,11 @@ export const TableHead = forwardRef<HTMLDivElement, TableHeadProps>(
         data-content={content}
         {...props}
       >
-        {renderBody()}
+        <div className="aviala-table-head__content">
+          {content !== "checkbox" && renderHeadIcon(leftIcon)}
+          {renderBody()}
+          {content !== "checkbox" && renderHeadIcon(rightIcon)}
+        </div>
       </div>
     );
   }
@@ -233,7 +281,11 @@ export const TableCell = forwardRef<HTMLDivElement, TableCellProps>(
         case "checkbox":
           return <Checkbox {...checkboxProps} />;
         case "switch":
-          return <Switch {...switchProps} />;
+          return (
+            <div className="aviala-table-cell__headline">
+              <Switch {...switchProps} />
+            </div>
+          );
         case "action":
           return renderActions(actions);
         case "icon+text":
@@ -241,11 +293,9 @@ export const TableCell = forwardRef<HTMLDivElement, TableCellProps>(
             <>
               {grabber}
               {renderCellBody(
-                <>
-                  {renderCellIcon(icon)}
-                  {renderTextBlock(text, caption)}
-                </>,
-                actions
+                renderTextBlock(text, caption),
+                actions,
+                renderCellIcon(icon)
               )}
             </>
           );
@@ -255,15 +305,13 @@ export const TableCell = forwardRef<HTMLDivElement, TableCellProps>(
             <>
               {grabber}
               {renderCellBody(
-                <>
-                  {iconPlaceNode != null ? (
-                    <span className="aviala-table-cell__icon-place">
-                      {iconPlaceNode}
-                    </span>
-                  ) : null}
-                  {renderTextBlock(text, caption)}
-                </>,
-                actions
+                renderTextBlock(text, caption),
+                actions,
+                iconPlaceNode != null ? (
+                  <span className="aviala-table-cell__icon-place">
+                    {iconPlaceNode}
+                  </span>
+                ) : null
               )}
             </>
           );
@@ -273,11 +321,9 @@ export const TableCell = forwardRef<HTMLDivElement, TableCellProps>(
             <>
               {grabber}
               {renderCellBody(
-                <>
-                  {people ?? <TableCellDefaultAvatar />}
-                  {renderTextBlock(text, caption)}
-                </>,
-                actions
+                renderTextBlock(text, caption),
+                actions,
+                people ?? <TableCellDefaultAvatar />
               )}
             </>
           );
@@ -286,12 +332,14 @@ export const TableCell = forwardRef<HTMLDivElement, TableCellProps>(
             <>
               {grabber}
               {renderCellBody(
-                badge ??
-                  (badgeLabel != null ? (
-                    <Badge style="theme" level="caption">
-                      {badgeLabel}
-                    </Badge>
-                  ) : null),
+                <div className="aviala-table-cell__headline">
+                  {badge ??
+                    (badgeLabel != null ? (
+                      <Badge style="theme" level="caption">
+                        {badgeLabel}
+                      </Badge>
+                    ) : null)}
+                </div>,
                 actions
               )}
             </>
@@ -313,9 +361,14 @@ export const TableCell = forwardRef<HTMLDivElement, TableCellProps>(
         role="cell"
         className={cn("aviala-table-cell", className)}
         data-content={content}
+        data-custom-content={children != null ? "true" : undefined}
         {...props}
       >
-        {renderContent()}
+        {children != null ? (
+          children
+        ) : (
+          <div className="aviala-table-cell__content">{renderContent()}</div>
+        )}
       </div>
     );
   }

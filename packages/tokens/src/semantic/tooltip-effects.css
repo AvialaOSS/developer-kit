@@ -1,4 +1,4 @@
-/* Tooltip — Figma System Composition → Tooltip (inverted neutral surface, caption text) */
+/* Tooltip — Figma Information Display → Tooltip (inverted neutral surface, shared Text typography) */
 
 .aviala-tooltip-content {
   z-index: 50;
@@ -6,23 +6,65 @@
 }
 
 .aviala-tooltip-content__surface {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--tooltip-size-gap);
   /* Radix Popper sets --radix-tooltip-content-transform-origin on Content (accounts
      for side + arrow position) — enter scale grows from the invocation point */
   transform-origin: var(--radix-tooltip-content-transform-origin, 50% 50%);
-  max-width: var(--tooltip-content-max-width, 240px);
-  border-radius: var(--tooltip-content-radius, 8px);
-  background-color: var(--tooltip-content-bg, #262525);
-  color: var(--tooltip-content-fg, #ffffff);
-  box-shadow: var(--tooltip-content-shadow, 0 4px 12px rgba(0, 0, 0, 0.12));
-  padding: var(--tooltip-content-py, 4px) var(--tooltip-content-px, 8px);
+  max-width: min(
+    var(--tooltip-content-max-width, 240px),
+    var(--radix-tooltip-content-available-width, 100vw)
+  );
+  overflow-wrap: anywhere;
+  border-radius: var(--tooltip-content-radius, var(--tooltip-size-radius));
+  background-color: var(
+    --tooltip-content-bg,
+    var(--tooltip-color-background-default)
+  );
+  color: var(--tooltip-content-fg, var(--tooltip-color-text-default));
+  box-shadow: var(
+    --tooltip-content-shadow,
+    var(--tooltip-effect-shadow-offset-x)
+      var(--tooltip-effect-shadow-large-offset-y)
+      var(--tooltip-effect-shadow-large-blur)
+      var(--tooltip-effect-shadow-spread)
+      var(--tooltip-effect-shadow-large-color),
+    var(--tooltip-effect-shadow-offset-x)
+      var(--tooltip-effect-shadow-small-offset-y)
+      var(--tooltip-effect-shadow-small-blur)
+      var(--tooltip-effect-shadow-spread)
+      var(--tooltip-effect-shadow-small-color)
+  );
+  padding: var(--tooltip-content-py, var(--tooltip-size-padding-y))
+    var(--tooltip-content-px, var(--tooltip-size-padding-x));
+}
+
+.aviala-tooltip-content__copy {
+  min-width: 0;
+}
+
+.aviala-tooltip-content__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: var(--tooltip-size-icon-width);
+  height: var(--tooltip-size-icon-container-height);
+  color: var(--tooltip-color-icon-default);
+}
+
+.aviala-tooltip-content__icon > svg {
+  width: 100%;
+  height: auto;
 }
 
 /* Radix Popper arrow host — don't clip caret */
 .aviala-tooltip-content > span:has(> .aviala-tooltip-content__arrow) {
   pointer-events: none;
   overflow: visible;
-  min-width: 14px;
-  min-height: 5px;
+  min-width: var(--tooltip-size-pointer-width);
+  min-height: var(--tooltip-size-pointer-height);
 }
 
 .aviala-tooltip-content__arrow,
@@ -30,11 +72,11 @@
   display: block;
   overflow: visible;
   flex-shrink: 0;
-  width: 14px;
-  height: 5px;
-  min-width: 14px;
-  min-height: 5px;
-  color: var(--tooltip-content-bg, #262525);
+  width: var(--tooltip-size-pointer-width);
+  height: var(--tooltip-size-pointer-height);
+  min-width: var(--tooltip-size-pointer-width);
+  min-height: var(--tooltip-size-pointer-height);
+  color: var(--tooltip-content-bg, var(--tooltip-color-pointer-default));
 }
 
 /* Root fade — Radix Presence waits for animationend on Content, not child surface */

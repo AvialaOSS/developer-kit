@@ -1,27 +1,34 @@
 /* Input surface — import outside Tailwind to preserve runtime var() chains */
 :root {
-  --input-bg-default: var(--aviala-interaction-filled-default, #f0efef);
-  --input-bg-hover: var(--aviala-interaction-filled-hover, #e5e4e3);
-  --input-bg-activated: var(
+  --_legacy-input-bg-default: var(--aviala-interaction-filled-default, #f0efef);
+  --_legacy-input-bg-hover: var(
+    --base-input-color-background-hover,
+    var(--control-neutral-tertiary-background-hover)
+  );
+  --_legacy-input-bg-activated: var(
     --control-control-normal-background-whiteonly,
     #ffffff
   );
-  --input-border-activated: var(--border-border-theme-primary, #ff5532);
-  --input-fg: var(--text-text-normal-text-black, #262525);
-  --input-surface-shadow: inset 0 -0.5px 0
+  --_legacy-input-border-activated: var(--border-border-theme-primary, #ff5532);
+  --_legacy-input-fg: var(--text-text-normal-text-black, #262525);
+  --_legacy-input-surface-shadow: inset 0 -0.5px 0
     var(--special-effort-se-lineshadow-bottom, rgba(0, 0, 0, 0.04));
   --input-shell-ring-shadow: inset 0 0 0 1px transparent;
-  --input-shell-shadow:
-    var(--input-shell-ring-shadow), var(--input-surface-shadow);
-  --input-shell-focus-shadow:
-    inset 0 0 0 1px var(--input-border-activated), var(--input-surface-shadow);
-  --input-shell-error-shadow:
-    inset 0 0 0 1px var(--destructive, #ff646f), var(--input-surface-shadow);
+  --_legacy-input-shell-shadow:
+    var(--input-shell-ring-shadow),
+    var(--input-surface-shadow, var(--_legacy-input-surface-shadow));
+  --_legacy-input-shell-focus-shadow:
+    inset 0 0 0 1px
+      var(--input-border-activated, var(--_legacy-input-border-activated)),
+    var(--input-surface-shadow, var(--_legacy-input-surface-shadow));
+  --_legacy-input-shell-error-shadow:
+    inset 0 0 0 1px var(--destructive, #ff646f),
+    var(--input-surface-shadow, var(--_legacy-input-surface-shadow));
 
   --radio-card-hover-bg: var(--aviala-interaction-filled-hover, #e5e4e3);
-  --radio-card-press-bg: var(--aviala-interaction-filled-active, #d6d5d4);
+  --radio-card-press-bg: var(--aviala-interaction-filled-active);
 
-  --radio-checked-surface:
+  --_legacy-radio-checked-surface:
     linear-gradient(
       180deg,
       color-mix(in srgb, var(--button-gloss-color, #ffe9e5) 20%, transparent) 0%,
@@ -29,11 +36,11 @@
     ),
     linear-gradient(
       90deg,
-      var(--radio-checked-bg, #ff5532) 0%,
-      var(--radio-checked-bg, #ff5532) 100%
+      var(--radio-checked-bg, var(--_legacy-radio-checked-bg, #ff5532)) 0%,
+      var(--radio-checked-bg, var(--_legacy-radio-checked-bg, #ff5532)) 100%
     );
 
-  --checkbox-checked-surface:
+  --_legacy-checkbox-checked-surface:
     linear-gradient(
       180deg,
       color-mix(in srgb, var(--button-gloss-color, #ffe9e5) 20%, transparent) 0%,
@@ -41,11 +48,12 @@
     ),
     linear-gradient(
       90deg,
-      var(--checkbox-checked-bg, #ff5532) 0%,
-      var(--checkbox-checked-bg, #ff5532) 100%
+      var(--checkbox-checked-bg, var(--_legacy-checkbox-checked-bg, #ff5532)) 0%,
+      var(--checkbox-checked-bg, var(--_legacy-checkbox-checked-bg, #ff5532))
+        100%
     );
 
-  --checkbox-unchecked-surface:
+  --_legacy-checkbox-unchecked-surface:
     linear-gradient(
       90deg,
       var(--control-control-normal-lightbackground-1, #f0efef) 0%,
@@ -53,52 +61,100 @@
     ),
     linear-gradient(
       90deg,
-      var(--checkbox-bg-unchecked, #ffffff) 0%,
-      var(--checkbox-bg-unchecked, #ffffff) 100%
+      var(
+          --checkbox-bg-unchecked,
+          var(--_legacy-checkbox-bg-unchecked, #ffffff)
+        )
+        0%,
+      var(
+          --checkbox-bg-unchecked,
+          var(--_legacy-checkbox-bg-unchecked, #ffffff)
+        )
+        100%
     );
 }
 
 .aviala-input {
-  background-color: var(--input-bg-default);
-  box-shadow: var(--input-shell-shadow);
+  background-color: var(--input-bg-default, var(--_legacy-input-bg-default));
+  box-shadow: var(--input-shell-shadow, var(--_legacy-input-shell-shadow));
   border: 0;
-  color: var(--input-fg);
+  color: var(--input-fg, var(--_legacy-input-fg));
   display: inline-flex;
   align-items: center;
   min-width: 0;
   overflow: hidden;
-  padding: 0 var(--input-shell-px, var(--input-px-regular, 10px));
-  gap: var(--input-shell-gap, var(--input-gap-regular, 6px));
+  padding: 0
+    var(
+      --input-shell-px,
+      var(--input-px-regular, var(--_legacy-input-px-regular, 10px))
+    );
+  gap: var(
+    --input-shell-gap,
+    var(--input-gap-regular, var(--_legacy-input-gap-regular, 6px))
+  );
   font-family: var(--font-sans);
-  --input-shell-px: var(--input-px-regular, 10px);
-  --input-shell-gap: var(--input-gap-regular, 6px);
-  --input-shell-field-py: var(--input-field-py-regular, 6px);
-  --input-shell-slot-py: var(--input-slot-py-regular, 6px);
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--_legacy-input-px-regular, 10px)
+  );
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--_legacy-input-gap-regular, 6px)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--_legacy-input-field-py-regular, 6px)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--_legacy-input-slot-py-regular, 6px)
+  );
   transition:
     background-color 0.15s ease,
     box-shadow 0.15s ease;
 }
 
 .aviala-input[data-size="regular"] {
-  --input-shell-px: var(--input-px-regular, 10px);
-  --input-shell-gap: var(--input-gap-regular, 6px);
-  --input-shell-field-py: var(--input-field-py-regular, 6px);
-  --input-shell-slot-py: var(--input-slot-py-regular, 6px);
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--_legacy-input-px-regular, 10px)
+  );
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--_legacy-input-gap-regular, 6px)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--_legacy-input-field-py-regular, 6px)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--_legacy-input-slot-py-regular, 6px)
+  );
 }
 
 .aviala-input[data-size="big"] {
-  --input-shell-px: var(--input-px-big, 14px);
-  --input-shell-gap: var(--input-gap-big, 8px);
-  --input-shell-field-py: var(--input-field-py-big, 8px);
-  --input-shell-slot-py: var(--input-slot-py-big, 8px);
+  --input-shell-px: var(--input-px-big, var(--_legacy-input-px-big, 14px));
+  --input-shell-gap: var(--input-gap-big, var(--_legacy-input-gap-big, 8px));
+  --input-shell-field-py: var(
+    --input-field-py-big,
+    var(--_legacy-input-field-py-big, 8px)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-big,
+    var(--_legacy-input-slot-py-big, 8px)
+  );
 }
 
 .aviala-input[data-all-round="true"] {
-  border-radius: var(--input-radius-allround, 99px);
+  border-radius: var(
+    --input-radius-allround,
+    var(--_legacy-input-radius-allround, 99px)
+  );
 }
 
 .aviala-input:not([data-all-round="true"]) {
-  border-radius: var(--input-radius, 8px);
+  border-radius: var(--input-radius, var(--_legacy-input-radius, 8px));
 }
 
 .aviala-input__field {
@@ -106,7 +162,10 @@
 }
 
 .aviala-input__field input {
-  line-height: var(--input-line-height, 1.125rem);
+  line-height: var(
+    --input-line-height,
+    var(--_legacy-input-line-height, 1.125rem)
+  );
 }
 
 .aviala-input__slot,
@@ -115,24 +174,39 @@
 }
 
 .aviala-input:focus-within {
-  background-color: var(--input-bg-activated);
-  box-shadow: var(--input-shell-focus-shadow);
+  background-color: var(
+    --input-bg-activated,
+    var(--_legacy-input-bg-activated)
+  );
+  box-shadow: var(
+    --input-shell-focus-shadow,
+    var(--_legacy-input-shell-focus-shadow)
+  );
 }
 
 @media (hover: hover) and (pointer: fine) {
   .aviala-input:hover:not(:focus-within):not([data-disabled="true"]):not(
       :has(input:disabled)
     ) {
-    background-color: var(--input-bg-hover);
+    background-color: var(
+      --input-bg-hover,
+      var(--base-input-color-background-hover, var(--_legacy-input-bg-hover))
+    );
   }
 }
 
 .aviala-input[data-error="true"] {
-  box-shadow: var(--input-shell-error-shadow);
+  box-shadow: var(
+    --input-shell-error-shadow,
+    var(--_legacy-input-shell-error-shadow)
+  );
 }
 
 .aviala-input:focus-within[data-error="true"] {
-  box-shadow: var(--input-shell-error-shadow);
+  box-shadow: var(
+    --input-shell-error-shadow,
+    var(--_legacy-input-shell-error-shadow)
+  );
 }
 
 .aviala-input:has(input:disabled) {
@@ -143,7 +217,10 @@
   position: relative;
   z-index: 1;
   display: inline-flex;
-  height: var(--input-icon-slot-height, var(--input-line-height, 1.125rem));
+  height: var(
+    --input-icon-slot-height,
+    var(--input-line-height, var(--typography-text-line-height))
+  );
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
@@ -151,18 +228,27 @@
 }
 
 .aviala-input__slot svg {
-  width: var(--input-slot-icon-size, var(--size-regular, 0.875rem));
-  height: var(--input-slot-icon-size, var(--size-regular, 0.875rem));
+  width: var(
+    --input-slot-icon-size,
+    var(--_legacy-input-slot-icon-size, var(--size-regular, 0.875rem))
+  );
+  height: var(
+    --input-slot-icon-size,
+    var(--_legacy-input-slot-icon-size, var(--size-regular, 0.875rem))
+  );
 }
 
 .aviala-input__field input::placeholder {
-  color: var(--input-fg);
+  color: var(--input-fg, var(--_legacy-input-fg));
 }
 
 /* Empty — Figma Input State=Empty: Typography wrapper at transparency-placeholder (60%) */
 .aviala-input[data-input-state="empty"]:not([data-disabled="true"])
   > .aviala-input__field {
-  opacity: var(--input-placeholder-opacity, 0.6);
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--_legacy-input-placeholder-opacity, 0.6)
+  );
 }
 
 /* Fill / Typing — Figma Input State=Fill|Typing: Typography at 100% */
@@ -176,7 +262,10 @@
     input:placeholder-shown:not(:disabled)
   )
   > .aviala-input__field {
-  opacity: var(--input-placeholder-opacity, 0.6);
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--_legacy-input-placeholder-opacity, 0.6)
+  );
 }
 
 /* Disabled — Figma State=Disable: slots + input area at transparency-disable (55%) */
@@ -198,7 +287,10 @@
 .aviala-input:has(input:disabled:placeholder-shown)
   .aviala-input__field
   input::placeholder {
-  opacity: var(--input-placeholder-opacity, 0.6);
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--_legacy-input-placeholder-opacity, 0.6)
+  );
 }
 
 .aviala-input__badge-area {
@@ -214,12 +306,267 @@
 .aviala-input:focus-within .aviala-input__field input::selection {
   background-color: color-mix(
     in srgb,
-    var(--input-border-activated, var(--primary)) 25%,
+    var(
+        --input-border-activated,
+        var(--_legacy-input-border-activated, var(--primary))
+      )
+      25%,
     transparent
   );
 }
 
+/* BaseInput owns its geometry independently of other input-like controls. */
+.aviala-input[data-input-kind="text"][data-size="regular"] {
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--base-input-size-regular-padding-x)
+  );
+  --input-shell-py: var(--base-input-size-regular-padding-y);
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--base-input-size-regular-gap)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--base-input-size-regular-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--base-input-size-regular-slot-padding-y)
+  );
+}
+.aviala-input[data-input-kind="text"][data-size="big"] {
+  --input-shell-px: var(--input-px-big, var(--base-input-size-big-padding-x));
+  --input-shell-py: var(--base-input-size-big-padding-y);
+  --input-shell-gap: var(--input-gap-big, var(--base-input-size-big-gap));
+  --input-shell-field-py: var(
+    --input-field-py-big,
+    var(--base-input-size-big-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-big,
+    var(--base-input-size-big-slot-padding-y)
+  );
+}
+.aviala-input[data-input-kind="text"] {
+  padding: var(--input-shell-py) var(--input-shell-px);
+}
+.aviala-input[data-input-kind="text"]:not([data-all-round="true"]) {
+  border-radius: var(--input-radius, var(--base-input-size-radius));
+}
+.aviala-input[data-input-kind="text"][data-all-round="true"] {
+  border-radius: var(
+    --input-radius-allround,
+    var(--base-input-size-round-radius)
+  );
+}
+
 /* NumberInput — Figma Information Collect → NumberInput (197:3237) */
+.aviala-input[data-input-kind="text"] {
+  --_base-input-shadow: inset 0 -0.5px 0 var(--base-input-color-shadow-default);
+  background-color: var(
+    --input-bg-default,
+    var(--base-input-color-background-default)
+  );
+  color: var(--input-fg, var(--base-input-color-text-default));
+}
+.aviala-input[data-input-kind="text"]:not([data-error="true"]) {
+  box-shadow: var(
+    --input-shell-shadow,
+    var(--input-shell-ring-shadow),
+    var(--input-surface-shadow, var(--_base-input-shadow))
+  );
+}
+.aviala-input[data-input-kind="text"]:focus-within {
+  background-color: var(
+    --input-bg-activated,
+    var(--base-input-color-background-active)
+  );
+}
+.aviala-input[data-input-kind="text"]:focus-within:not([data-error="true"]) {
+  box-shadow: var(
+    --input-shell-focus-shadow,
+    inset 0 0 0 var(--base-input-size-border-width)
+      var(--input-border-activated, var(--base-input-color-border-active)),
+    var(--input-surface-shadow, var(--_base-input-shadow))
+  );
+}
+.aviala-input[data-input-kind="text"][data-disabled="true"] {
+  background-color: var(
+    --input-bg-default,
+    var(--base-input-color-background-disabled)
+  );
+}
+.aviala-input[data-input-kind="text"] > .aviala-input__field input,
+.aviala-input[data-input-kind="text"]
+  > .aviala-input__field
+  input::placeholder {
+  color: var(--input-fg, var(--base-input-color-text-default));
+}
+.aviala-input[data-input-kind="text"] > .aviala-input__field input {
+  line-height: var(--input-line-height, var(--typography-text-line-height));
+}
+.aviala-input[data-input-kind="text"] > .aviala-input__slot {
+  color: var(
+    --input-icon-fg,
+    var(--input-fg, var(--base-input-color-icon-default))
+  );
+  height: calc(
+    var(--input-icon-slot-height, var(--base-input-size-icon-height)) + 2 *
+      var(--input-shell-slot-py)
+  );
+}
+
+/* BaseInput keeps Figma's separate content and typography opacity layers. */
+.aviala-input[data-input-kind="text"]:is(
+    [data-disabled="true"],
+    :has(input:disabled)
+  )
+  > .aviala-input__field {
+  opacity: var(
+    --input-disabled-opacity,
+    var(--base-input-transparency-content-disabled)
+  );
+}
+.aviala-input[data-input-kind="text"]:is(
+    [data-disabled="true"],
+    :has(input:disabled)
+  )
+  > .aviala-input__field
+  input {
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--base-input-transparency-placeholder)
+  );
+}
+.aviala-input[data-input-kind="text"]:is(
+    [data-disabled="true"],
+    :has(input:disabled)
+  )
+  > .aviala-input__field
+  input::placeholder {
+  /* Typography owns the inner opacity; do not apply it again to the placeholder. */
+  opacity: 1;
+}
+.aviala-input[data-input-kind="text"]:is(
+    [data-disabled="true"],
+    :has(input:disabled)
+  )
+  > .aviala-input__slot {
+  opacity: var(--input-icon-opacity, 0.9);
+}
+.aviala-input[data-input-kind="text"] > .aviala-input__slot svg {
+  width: var(--input-slot-icon-size, var(--base-input-size-icon-width));
+  height: var(--input-slot-icon-size, var(--base-input-size-icon-width));
+}
+
+/* NumberInput consumes its own component tokens. */
+.aviala-input[data-input-kind="number"][data-size="regular"] {
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--number-input-size-regular-padding-x)
+  );
+  --input-shell-py: var(--number-input-size-regular-padding-y);
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--number-input-size-regular-gap)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--number-input-size-regular-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--number-input-size-regular-slot-padding-y)
+  );
+}
+.aviala-input[data-input-kind="number"][data-size="big"] {
+  --input-shell-px: var(--input-px-big, var(--number-input-size-big-padding-x));
+  --input-shell-py: var(--number-input-size-big-padding-y);
+  --input-shell-gap: var(--input-gap-big, var(--number-input-size-big-gap));
+  --input-shell-field-py: var(
+    --input-field-py-big,
+    var(--number-input-size-big-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-big,
+    var(--number-input-size-big-slot-padding-y)
+  );
+}
+.aviala-input[data-input-kind="number"] {
+  padding: var(--input-shell-py) var(--input-shell-px);
+}
+.aviala-input[data-input-kind="number"]:not([data-all-round="true"]) {
+  border-radius: var(--input-radius, var(--number-input-size-radius));
+}
+.aviala-input[data-input-kind="number"][data-all-round="true"] {
+  border-radius: var(
+    --input-radius-allround,
+    var(--number-input-size-round-radius)
+  );
+}
+
+/* NumberInput — Figma Information Collect → NumberInput (197:3237) */
+.aviala-input[data-input-kind="number"] {
+  --_number-input-shadow: inset 0 -0.5px 0
+    var(--number-input-color-shadow-default);
+  background-color: var(
+    --input-bg-default,
+    var(--number-input-color-background-default)
+  );
+  color: var(--input-fg, var(--number-input-color-text-default));
+}
+.aviala-input[data-input-kind="number"]:not([data-error="true"]) {
+  box-shadow: var(
+    --input-shell-shadow,
+    var(--input-shell-ring-shadow),
+    var(--input-surface-shadow, var(--_number-input-shadow))
+  );
+}
+.aviala-input[data-input-kind="number"]:focus-within {
+  background-color: var(
+    --input-bg-activated,
+    var(--number-input-color-background-active)
+  );
+}
+.aviala-input[data-input-kind="number"]:focus-within:not([data-error="true"]) {
+  box-shadow: var(
+    --input-shell-focus-shadow,
+    inset 0 0 0 var(--number-input-size-border-width)
+      var(--input-border-activated, var(--number-input-color-border-active)),
+    var(--input-surface-shadow, var(--_number-input-shadow))
+  );
+}
+.aviala-input[data-input-kind="number"][data-disabled="true"] {
+  background-color: var(
+    --input-bg-default,
+    var(--number-input-color-background-disabled)
+  );
+}
+.aviala-input[data-input-kind="number"] > .aviala-input__field input,
+.aviala-input[data-input-kind="number"]
+  > .aviala-input__field
+  input::placeholder {
+  color: var(--input-fg, var(--number-input-color-text-default));
+}
+.aviala-input[data-input-kind="number"] > .aviala-input__field input {
+  line-height: var(--input-line-height, var(--typography-text-line-height));
+}
+.aviala-input[data-input-kind="number"] > .aviala-input__slot {
+  color: var(
+    --input-icon-fg,
+    var(--input-fg, var(--number-input-color-icon-default))
+  );
+  height: calc(
+    var(--input-icon-slot-height, var(--number-input-size-icon-height)) + 2 *
+      var(--input-shell-slot-py)
+  );
+}
+.aviala-input[data-input-kind="number"] > .aviala-input__slot svg {
+  width: var(--input-slot-icon-size, var(--number-input-size-icon-width));
+  height: var(--input-slot-icon-size, var(--number-input-size-icon-width));
+}
+
 .aviala-input.aviala-number-input {
   /* Stretch steppers to the shell height; other children re-center themselves. */
   align-items: stretch;
@@ -251,48 +598,40 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--gap-none, 0px);
-  padding: 0;
+  gap: var(--number-input-size-stepper-gap);
+  padding: var(--number-input-size-stepper-padding-y) 0;
   box-sizing: border-box;
 }
 
 .aviala-number-input__step {
   display: inline-flex;
-  flex: 0 0 auto;
+  flex: 1 1 0;
+  min-height: 0;
+  height: 0;
   align-items: center;
   justify-content: center;
-  gap: var(--gap-inside, 4px);
+  gap: var(--button-size-small-gap);
   border: 0;
-  background: transparent;
-  padding: var(--padding-none, 0px) var(--padding-small, 6px);
-  color: inherit;
+  background: var(--button-color-no-background-background-default);
+  padding: var(--padding-none, 0px) var(--button-size-small-icon-only-padding-x);
+  color: var(--input-fg, var(--text-text-normal-text-black));
   cursor: pointer;
 }
 
 .aviala-number-input__step--up {
-  border-radius: var(--border-radius-extra-small-2, 6px)
-    var(--border-radius-extra-small-2, 6px) 0 0;
+  border-radius: var(--button-size-small-default-radius)
+    var(--button-size-small-default-radius) 0 0;
 }
 
 .aviala-number-input__step--down {
-  border-radius: 0 0 var(--border-radius-extra-small-2, 6px)
-    var(--border-radius-extra-small-2, 6px);
+  border-radius: 0 0 var(--button-size-small-default-radius)
+    var(--button-size-small-default-radius);
 }
 
 .aviala-number-input__step svg {
-  width: var(--input-slot-icon-size, var(--size-regular, 0.875rem));
-  height: var(--input-slot-icon-size, var(--size-regular, 0.875rem));
+  width: var(--input-slot-icon-size, var(--size-regular));
+  height: var(--input-slot-icon-size, var(--size-regular));
   pointer-events: none;
-}
-
-.aviala-number-input__step--up svg {
-  /* Arrow faces up — negative margin on the opposite side. */
-  margin-bottom: calc(-1 * var(--padding-tiny, 4px));
-}
-
-.aviala-number-input__step--down svg {
-  /* Arrow faces down — negative margin on the opposite side. */
-  margin-top: calc(-1 * var(--padding-tiny, 4px));
 }
 
 .aviala-number-input__step:disabled {
@@ -301,25 +640,27 @@
 
 @media (hover: hover) and (pointer: fine) {
   .aviala-number-input__step:hover:not(:disabled) {
-    background-color: color-mix(
-      in srgb,
-      var(--control-control-normal-background-3, #d6d5d4) 55%,
-      transparent
-    );
+    background-color: var(--button-color-no-background-background-hover);
   }
 }
 
 .aviala-number-input__step:focus-visible {
   outline: none;
-  background-color: color-mix(
-    in srgb,
-    var(--control-control-normal-background-3, #d6d5d4) 55%,
-    transparent
-  );
+  background-color: var(--button-color-no-background-background-hover);
+}
+.aviala-number-input__step:active:not(:disabled) {
+  background-color: var(--button-color-no-background-background-active);
 }
 
 /* Textarea — Figma Information Collect → TextareaInput */
 .aviala-textarea {
+  --_textarea-controller-height: calc(
+    max(
+        var(--typography-caption-line-height),
+        var(--controller-size-icon-height)
+      ) +
+      2 * var(--controller-size-padding-y)
+  );
   position: relative;
   display: inline-flex;
   width: 100%;
@@ -328,10 +669,18 @@
   align-items: flex-start;
   overflow: hidden;
   border: 0;
-  border-radius: var(--textarea-radius, 8px);
-  background-color: var(--input-bg-default);
-  box-shadow: var(--input-shell-shadow);
-  color: var(--input-fg);
+  border-radius: var(--textarea-radius, var(--textarea-input-size-radius));
+  background-color: var(
+    --input-bg-default,
+    var(--textarea-input-color-background-default)
+  );
+  --_textarea-shadow: inset 0 -0.5px 0
+    var(--textarea-input-color-shadow-default);
+  box-shadow: var(
+    --input-shell-shadow,
+    var(--input-surface-shadow, var(--_textarea-shadow))
+  );
+  color: var(--input-fg, var(--textarea-input-color-text-default));
   cursor: text;
   transition:
     background-color 0.15s ease,
@@ -339,37 +688,62 @@
 }
 
 .aviala-textarea[data-size="regular"] {
-  gap: var(--input-gap-regular, 6px);
-  padding: var(--padding-none, 0px) var(--input-px-regular, 10px);
+  gap: var(--input-gap-regular, var(--textarea-input-size-regular-gap));
+  padding: var(--textarea-input-size-regular-padding-y)
+    var(--input-px-regular, var(--textarea-input-size-regular-padding-x));
+  --_textarea-slot-py: var(--textarea-input-size-regular-slot-padding-y);
 }
 
 .aviala-textarea[data-size="big"] {
-  gap: var(--input-gap-big, 8px);
+  gap: var(--input-gap-big, var(--textarea-input-size-big-gap));
   min-height: var(--textarea-min-height-big, 70px);
-  padding: var(--padding-none, 0px) var(--input-px-big, 14px);
+  padding: var(--textarea-input-size-big-padding-y)
+    var(--input-px-big, var(--textarea-input-size-big-padding-x));
+  --_textarea-slot-py: var(--textarea-input-size-big-slot-padding-y);
 }
 
 .aviala-textarea:focus-within {
-  background-color: var(--input-bg-activated);
-  box-shadow: var(--input-shell-focus-shadow);
+  background-color: var(
+    --input-bg-activated,
+    var(--textarea-input-color-background-active)
+  );
+  box-shadow: var(
+    --input-shell-focus-shadow,
+    inset 0 0 0 var(--textarea-input-size-border-width)
+      var(--input-border-activated, var(--textarea-input-color-border-active)),
+    var(--input-surface-shadow, var(--_textarea-shadow))
+  );
 }
 
 @media (hover: hover) and (pointer: fine) {
   .aviala-textarea:hover:not(:focus-within):not(:has(textarea:disabled)) {
-    background-color: var(--input-bg-hover);
+    background-color: var(
+      --input-bg-hover,
+      var(--base-input-color-background-hover, var(--_legacy-input-bg-hover))
+    );
   }
 }
 
 .aviala-textarea[data-error="true"] {
-  box-shadow: var(--input-shell-error-shadow);
+  box-shadow: var(
+    --input-shell-error-shadow,
+    var(--_legacy-input-shell-error-shadow)
+  );
 }
 
 .aviala-textarea:focus-within[data-error="true"] {
-  box-shadow: var(--input-shell-error-shadow);
+  box-shadow: var(
+    --input-shell-error-shadow,
+    var(--_legacy-input-shell-error-shadow)
+  );
 }
 
 .aviala-textarea:has(textarea:disabled) {
   cursor: not-allowed;
+  background-color: var(
+    --input-bg-default,
+    var(--textarea-input-color-background-disabled)
+  );
 }
 
 .aviala-textarea__slot {
@@ -379,21 +753,28 @@
   /* content-box so slot-py sits outside the 18px icon row — Figma first/last
      icon frames are padding 6 + Icons 18 = 30px, aligning with the first text line. */
   box-sizing: content-box;
-  height: var(--input-icon-slot-height, var(--input-line-height, 1.125rem));
+  height: var(--input-icon-slot-height, var(--textarea-input-size-icon-height));
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
   opacity: var(--input-icon-opacity, 1);
+  color: var(
+    --input-icon-fg,
+    var(--input-fg, var(--textarea-input-color-icon-default))
+  );
 }
 
 .aviala-textarea__slot svg {
-  width: var(--input-slot-icon-size, var(--size-regular, 0.875rem));
-  height: var(--input-slot-icon-size, var(--size-regular, 0.875rem));
+  width: var(--input-slot-icon-size, var(--textarea-input-size-icon-width));
+  height: var(--input-slot-icon-size, var(--textarea-input-size-icon-width));
 }
 
 .aviala-textarea[data-input-state="empty"]:not([data-disabled="true"])
   .aviala-textarea__field {
-  opacity: var(--input-placeholder-opacity, 0.6);
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--textarea-input-transparency-placeholder)
+  );
 }
 
 .aviala-textarea[data-input-state="fill"] .aviala-textarea__field,
@@ -405,15 +786,18 @@
     textarea:placeholder-shown:not(:disabled)
   )
   .aviala-textarea__field {
-  opacity: var(--input-placeholder-opacity, 0.6);
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--textarea-input-transparency-placeholder)
+  );
 }
 
 .aviala-textarea[data-size="regular"] .aviala-textarea__slot {
-  padding: var(--input-slot-py-regular, 6px) 0;
+  padding: var(--input-slot-py-regular, var(--_textarea-slot-py)) 0;
 }
 
 .aviala-textarea[data-size="big"] .aviala-textarea__slot {
-  padding: var(--padding-middle, 10px) 0;
+  padding: var(--input-slot-py-big, var(--_textarea-slot-py)) 0;
 }
 
 .aviala-textarea__field {
@@ -428,23 +812,30 @@
 }
 
 .aviala-textarea[data-size="regular"] .aviala-textarea__field {
-  padding: var(--input-field-py-regular, 6px) 0;
+  padding: var(--input-field-py-regular, var(--_textarea-slot-py)) 0;
 }
 
 .aviala-textarea[data-size="big"] .aviala-textarea__field {
-  padding: var(--padding-middle, 10px) 0;
+  padding: var(--input-field-py-big, var(--_textarea-slot-py)) 0;
 }
 
 .aviala-textarea[data-has-controller="true"] .aviala-textarea__field {
-  padding-bottom: calc(var(--input-field-py-regular, 6px) + 22px);
+  padding-bottom: calc(
+    var(--input-field-py-regular, var(--_textarea-slot-py)) +
+      var(--_textarea-controller-height) + 6px
+  );
 }
 
 .aviala-textarea[data-size="big"][data-has-controller="true"]
   .aviala-textarea__field {
-  padding-bottom: calc(var(--padding-middle, 10px) + 22px);
+  padding-bottom: calc(
+    var(--input-field-py-big, var(--_textarea-slot-py)) +
+      var(--_textarea-controller-height) + 6px
+  );
 }
 
-.aviala-textarea__input {
+.aviala-textarea .aviala-textarea__input {
+  color: inherit;
   width: 100%;
   min-width: 0;
   min-height: 100%;
@@ -458,12 +849,13 @@
 }
 
 .aviala-textarea__input::placeholder {
-  color: var(--input-fg);
+  color: inherit;
 }
 
 .aviala-textarea[data-disabled="true"][data-input-state="empty"]
   .aviala-textarea__input::placeholder {
-  opacity: var(--input-placeholder-opacity, 0.6);
+  /* The inner typography layer already carries placeholder opacity. */
+  opacity: 1;
 }
 
 .aviala-textarea__input:disabled {
@@ -471,9 +863,18 @@
 }
 
 .aviala-textarea[data-disabled="true"] .aviala-textarea__slot,
-.aviala-textarea[data-disabled="true"] .aviala-textarea__field,
-.aviala-textarea[data-disabled="true"] .aviala-textarea__controller {
-  opacity: var(--input-disabled-opacity, 0.55);
+.aviala-textarea[data-disabled="true"] .aviala-textarea__field {
+  opacity: var(
+    --input-disabled-opacity,
+    var(--textarea-input-transparency-content-disabled)
+  );
+}
+
+.aviala-textarea[data-disabled="true"] .aviala-textarea__input {
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--textarea-input-transparency-placeholder)
+  );
 }
 
 .aviala-textarea__controller {
@@ -485,14 +886,17 @@
   align-items: flex-start;
   gap: 2px;
   overflow: hidden;
-  border-radius: var(--border-radius-extra-small-2, 6px);
-  background-color: var(--textarea-controller-bg, #f0efef);
-  padding: var(--padding-none, 0px) var(--padding-min, 2px);
+  border-radius: var(--controller-size-radius);
+  background-color: var(
+    --textarea-controller-bg,
+    var(--controller-color-background-default)
+  );
+  padding: var(--controller-size-padding-y) var(--controller-size-padding-x);
   pointer-events: none;
 }
 
-.aviala-textarea__counter {
-  color: var(--textarea-counter-fg, var(--typography-caption-fg));
+.aviala-textarea .aviala-textarea__counter {
+  color: var(--textarea-counter-fg, var(--controller-color-text-default));
   white-space: nowrap;
   pointer-events: none;
 }
@@ -500,8 +904,8 @@
 .aviala-textarea__resize-handle {
   position: relative;
   display: inline-flex;
-  width: 12px;
-  height: 16px;
+  width: var(--controller-size-icon-width);
+  height: var(--controller-size-icon-height);
   flex-shrink: 0;
   cursor: nwse-resize;
   align-items: center;
@@ -511,14 +915,14 @@
   border-radius: var(--border-radius-extra-small-2, 6px);
   background: transparent;
   padding: 0;
-  color: var(--textarea-counter-fg, #616060);
+  color: var(--textarea-counter-fg, var(--controller-color-icon-default));
   touch-action: none;
   pointer-events: auto;
 }
 
 .aviala-textarea__resize-handle svg {
-  width: 12px;
-  height: 12px;
+  width: var(--controller-size-icon-width);
+  height: var(--controller-size-icon-width);
   pointer-events: none;
 }
 
@@ -538,25 +942,32 @@
 
 .aviala-radio-group[data-direction="vertical"] {
   flex-direction: column;
-  gap: var(--radio-group-gap, 10px);
+  gap: var(
+    --radio-group-gap,
+    var(--radio-input-group-size-normal-vertical-gap)
+  );
 }
 
 .aviala-radio-group[data-direction="horizontal"] {
   flex-direction: row;
-  gap: var(--radio-group-gap, 10px);
+  gap: var(
+    --radio-group-gap,
+    var(--radio-input-group-size-normal-horizontal-gap)
+  );
 }
 
 .aviala-radio {
+  box-sizing: border-box;
   position: relative;
   display: inline-flex;
-  width: var(--radio-size, 1.25rem);
-  height: var(--radio-size, 1.25rem);
+  width: var(--radio-size, var(--radio-size-size));
+  height: var(--radio-size, var(--radio-size-size));
   flex-shrink: 0;
   cursor: pointer;
   align-items: center;
   justify-content: center;
   border: 0;
-  border-radius: var(--border-radius-allround, 99px);
+  border-radius: var(--radio-size-radius);
   background: transparent;
   padding: 0;
   transition: opacity 0.15s ease;
@@ -564,17 +975,21 @@
 
 .aviala-radio:disabled {
   cursor: not-allowed;
-  opacity: var(--radio-disabled-opacity, 0.55);
+  opacity: 1;
 }
 
 .aviala-radio[data-state="unchecked"] {
-  background-color: var(--radio-bg-unchecked);
-  border: 2px solid var(--radio-border-unchecked);
+  background-color: var(
+    --radio-bg-unchecked,
+    var(--radio-color-unselected-background-default)
+  );
+  border: 2px solid
+    var(--radio-border-unchecked, var(--radio-color-unselected-border-default));
   box-shadow: none;
 }
 
 .aviala-radio[data-state="checked"] {
-  border: 1px solid transparent;
+  border: 0;
   background-color: transparent;
 }
 
@@ -585,8 +1000,31 @@
   border-radius: inherit;
   opacity: 0;
   transition: opacity 0.15s ease;
-  background-image: var(--radio-checked-surface);
-  box-shadow: var(--radio-shadow), var(--input-surface-shadow);
+  background-color: var(--radio-checked-bg, var(--_radio-selected-bg));
+  background-image: var(
+    --radio-checked-surface,
+    linear-gradient(
+      180deg,
+      color-mix(
+          in srgb,
+          var(--radio-color-selected-highlight-top) 20%,
+          transparent
+        )
+        0%,
+      color-mix(
+          in srgb,
+          var(--radio-color-selected-highlight-bottom) 20%,
+          transparent
+        )
+        36%
+    )
+  );
+  box-shadow:
+    var(--radio-shadow, 0 0 0 transparent),
+    var(
+      --input-surface-shadow,
+      inset 0 -0.5px 0 var(--radio-color-selected-shadow-default)
+    );
 }
 
 .aviala-radio[data-state="checked"] .aviala-radio__surface {
@@ -594,14 +1032,18 @@
 }
 
 .aviala-radio__indicator {
+  flex-shrink: 0;
   position: relative;
   z-index: 1;
   display: block;
   width: var(--radio-indicator-size, 0.5rem);
   height: var(--radio-indicator-size, 0.5rem);
   border-radius: var(--border-radius-allround, 99px);
-  background-color: var(--radio-indicator-bg);
-  transform: scale(0);
+  background-color: var(
+    --radio-indicator-bg,
+    var(--radio-color-dot-background-default)
+  );
+  transform: scale(1);
   transition: transform 0.15s ease;
 }
 
@@ -614,14 +1056,16 @@
   min-width: 0;
   cursor: pointer;
   align-items: flex-start;
-  gap: var(--radio-input-gap, 8px);
+  gap: var(--radio-input-gap, var(--radio-input-size-normal-gap));
 }
 
 .aviala-radio-input[data-style="card"] {
   width: 100%;
   border: 1px solid transparent;
-  border-radius: var(--border-radius-small, 8px);
-  padding: var(--padding-default, 8px);
+  border-radius: var(--radio-input-size-card-radius);
+  padding: var(--radio-input-size-card-padding-y)
+    var(--radio-input-size-card-padding-x);
+  gap: var(--radio-input-gap, var(--radio-input-size-card-gap));
   transition:
     border-color 0.15s ease,
     background-color 0.15s ease;
@@ -630,30 +1074,33 @@
 .aviala-radio-input[data-style="card"]:has(
     .aviala-radio[data-state="checked"]
   ) {
-  border-color: var(--radio-card-border-selected);
+  border-color: var(
+    --radio-card-border-selected,
+    var(--radio-input-color-card-selected-border-default)
+  );
 }
 
 @media (hover: hover) and (pointer: fine) {
   .aviala-radio-input[data-style="card"]:hover:not([data-disabled="true"]):not(
-      :has(.aviala-radio[data-state="checked"])
-    ) {
+      :has(> .aviala-radio:disabled)
+    ):not(:has(.aviala-radio[data-state="checked"])) {
     background-color: var(--radio-card-hover-bg);
   }
 }
 
 .aviala-radio-input[data-style="card"]:active:not([data-disabled="true"]):not(
-    :has(.aviala-radio[data-state="checked"])
-  ) {
+    :has(> .aviala-radio:disabled)
+  ):not(:has(.aviala-radio[data-state="checked"])) {
   background-color: var(--radio-card-press-bg);
 }
 
-.aviala-radio-input[data-disabled="true"] {
+.aviala-radio-input:is([data-disabled="true"], :has(> .aviala-radio:disabled)) {
   cursor: not-allowed;
 }
 
 .aviala-radio-input__icon {
   display: inline-flex;
-  height: 24px;
+  height: var(--radio-input-size-icon-height);
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
@@ -670,8 +1117,8 @@
   /* Legacy hooks — RadioInput uses TypefacePair / Typography */
 }
 
-.aviala-radio-input[data-disabled="true"] .aviala-radio-input__content,
-.aviala-radio-input[data-disabled="true"] .aviala-radio-input__icon {
+.aviala-radio-input:is([data-disabled="true"], :has(> .aviala-radio:disabled))
+  .aviala-radio-input__icon {
   opacity: var(--radio-disabled-opacity, 0.55);
 }
 
@@ -680,6 +1127,79 @@
   min-width: 0;
 }
 
+.aviala-radio[data-state="checked"] {
+  padding: var(--radio-size-selected-padding-y)
+    var(--radio-size-selected-padding-x);
+}
+.aviala-radio[data-state="unchecked"] {
+  padding: var(--radio-size-unselected-padding-y)
+    var(--radio-size-unselected-padding-x);
+}
+.aviala-radio-group[data-direction="vertical"]:has(
+    > .aviala-radio-input[data-style="card"]
+  ):not(:has(> .aviala-radio-input[data-style="normal"])) {
+  gap: var(--radio-group-gap, var(--radio-input-group-size-card-vertical-gap));
+}
+.aviala-radio-group[data-direction="horizontal"]:has(
+    > .aviala-radio-input[data-style="card"]
+  ):not(:has(> .aviala-radio-input[data-style="normal"])) {
+  gap: var(
+    --radio-group-gap,
+    var(--radio-input-group-size-card-horizontal-gap)
+  );
+}
+
+.aviala-radio {
+  --_radio-selected-bg: var(--radio-color-selected-background-default);
+}
+.aviala-radio:disabled {
+  --_radio-selected-bg: var(--radio-color-selected-background-disabled);
+}
+.aviala-radio[data-state="unchecked"] .aviala-radio__indicator {
+  width: var(--radio-unselected-indicator-size, 16px);
+  height: var(--radio-unselected-indicator-size, 16px);
+}
+.aviala-radio[data-state="unchecked"]:disabled {
+  border: 0;
+  background-color: var(
+    --radio-bg-unchecked,
+    var(--radio-color-unselected-background-disabled)
+  );
+}
+.aviala-radio:disabled .aviala-radio__indicator {
+  opacity: var(--radio-disabled-opacity, 1);
+}
+.aviala-radio[data-state="unchecked"]:disabled .aviala-radio__indicator {
+  opacity: var(
+    --radio-disabled-opacity,
+    var(--radio-transparency-dot-disabled)
+  );
+}
+.aviala-radio:disabled .aviala-radio__surface {
+  box-shadow: var(--radio-shadow, var(--input-surface-shadow, none));
+}
+.aviala-radio-input[data-style="card"]:is(
+    [data-disabled="true"],
+    :has(> .aviala-radio:disabled)
+  ):has(.aviala-radio[data-state="checked"]) {
+  border-color: var(
+    --radio-card-border-selected,
+    var(--radio-input-color-card-selected-border-disabled)
+  );
+}
+.aviala-radio-input__content .aviala-typography--text {
+  color: var(--radio-label-fg, var(--radio-input-color-text-default));
+}
+.aviala-radio-input__content .aviala-typography--caption {
+  color: var(--radio-caption-fg, var(--radio-input-color-caption-default));
+}
+.aviala-radio-input:is([data-disabled="true"], :has(> .aviala-radio:disabled))
+  .aviala-radio-input__content {
+  opacity: var(
+    --radio-disabled-opacity,
+    var(--radio-input-transparency-text-disabled)
+  );
+}
 /* Checkbox — Figma Information Collect → Checkbox / CheckboxInput */
 .aviala-checkbox-group {
   display: flex;
@@ -688,46 +1208,62 @@
 
 .aviala-checkbox-group[data-direction="vertical"] {
   flex-direction: column;
-  gap: var(--checkbox-group-gap, 10px);
+  gap: var(--checkbox-group-gap, var(--checkbox-input-group-size-vertical-gap));
 }
 
 .aviala-checkbox-group[data-direction="horizontal"] {
   flex-direction: row;
-  gap: var(--checkbox-group-gap, 10px);
+  gap: var(
+    --checkbox-group-gap,
+    var(--checkbox-input-group-size-horizontal-gap)
+  );
 }
 
 .aviala-checkbox {
   box-sizing: border-box;
   position: relative;
   display: inline-flex;
-  width: var(--checkbox-size, 1.25rem);
-  height: var(--checkbox-size, 1.25rem);
+  width: var(--checkbox-size, var(--checkbox-size-default-size));
+  height: var(--checkbox-size, var(--checkbox-size-default-size));
   flex-shrink: 0;
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--checkbox-border-unchecked);
-  border-radius: var(--checkbox-radius, 6px);
+  border: 1px solid var(--checkbox-border-unchecked, var(--_checkbox-border));
+  border-radius: var(--checkbox-radius, var(--checkbox-size-default-radius));
   background-color: transparent;
-  background-image: var(--checkbox-unchecked-surface);
+  background-color: var(--checkbox-bg-unchecked, var(--_checkbox-unchecked-bg));
+  background-image: var(
+    --checkbox-unchecked-surface,
+    linear-gradient(
+      var(--_checkbox-unchecked-overlay),
+      var(--_checkbox-unchecked-overlay)
+    )
+  );
   box-shadow: none;
   padding: 0;
   transition: opacity 0.15s ease;
 }
 
 .aviala-checkbox[data-round="true"] {
-  border-radius: var(--checkbox-radius-round, 99px);
+  border-radius: var(
+    --checkbox-radius-round,
+    var(--checkbox-size-round-radius)
+  );
 }
 
 /* Figma Size=Huge — size-large (26px), radius-small (8px), icon/mark 14px */
 .aviala-checkbox[data-size="huge"] {
-  width: var(--checkbox-size-huge, 1.625rem);
-  height: var(--checkbox-size-huge, 1.625rem);
-  border-radius: var(--checkbox-radius-huge, 8px);
+  width: var(--checkbox-size-huge, var(--checkbox-size-huge-size));
+  height: var(--checkbox-size-huge, var(--checkbox-size-huge-size));
+  border-radius: var(--checkbox-radius-huge, var(--checkbox-size-huge-radius));
 }
 
 .aviala-checkbox[data-size="huge"][data-round="true"] {
-  border-radius: var(--checkbox-radius-round, 99px);
+  border-radius: var(
+    --checkbox-radius-round,
+    var(--checkbox-size-round-radius)
+  );
 }
 
 .aviala-checkbox[data-size="huge"] .aviala-checkbox__indicator-icon {
@@ -745,9 +1281,9 @@
 }
 
 .aviala-checkbox[data-state="unchecked"]:disabled {
-  background-color: var(--checkbox-bg-unchecked);
+  background-color: var(--checkbox-bg-unchecked, var(--_checkbox-unchecked-bg));
   background-image: none;
-  opacity: var(--checkbox-disabled-opacity, 0.55);
+  opacity: 1;
 }
 
 .aviala-checkbox[data-state="checked"],
@@ -762,8 +1298,29 @@
   inset: -1px;
   border-radius: inherit;
   opacity: 0;
-  background-image: var(--checkbox-checked-surface);
-  box-shadow: var(--input-surface-shadow);
+  background-color: var(--checkbox-checked-bg, var(--_checkbox-selected-bg));
+  background-image: var(
+    --checkbox-checked-surface,
+    linear-gradient(
+      180deg,
+      color-mix(
+          in srgb,
+          var(--checkbox-color-selected-highlight-top) 20%,
+          transparent
+        )
+        0%,
+      color-mix(
+          in srgb,
+          var(--checkbox-color-selected-highlight-bottom) 20%,
+          transparent
+        )
+        36%
+    )
+  );
+  box-shadow: var(
+    --input-surface-shadow,
+    inset 0 -0.5px 0 var(--_checkbox-shadow)
+  );
   transition: opacity var(--checkbox-check-duration, 300ms)
     var(--checkbox-surface-easing, ease);
 }
@@ -775,8 +1332,14 @@
 .aviala-checkbox[data-state="indeterminate"] .aviala-checkbox__surface {
   opacity: 1;
   background-image: none;
-  background-color: var(--checkbox-indeterminate-bg);
-  box-shadow: var(--input-surface-shadow);
+  background-color: var(
+    --checkbox-indeterminate-bg,
+    var(--_checkbox-indeterminate-bg)
+  );
+  box-shadow: var(
+    --input-surface-shadow,
+    inset 0 -0.5px 0 var(--_checkbox-shadow)
+  );
 }
 
 .aviala-checkbox__indicator {
@@ -786,7 +1349,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--checkbox-checked-icon);
+  color: var(--checkbox-checked-icon, var(--_checkbox-icon));
 }
 
 .aviala-checkbox__indicator-icon {
@@ -870,13 +1433,19 @@
 .aviala-checkbox__indeterminate-mark {
   width: var(--checkbox-indeterminate-mark-size, 0.75rem);
   height: var(--checkbox-indeterminate-mark-size, 0.75rem);
-  border-radius: var(--checkbox-indeterminate-mark-radius, 6px);
-  background-color: var(--checkbox-indeterminate-mark-bg);
+  border-radius: var(
+    --checkbox-indeterminate-mark-radius,
+    var(--checkbox-size-mark-radius)
+  );
+  background-color: var(
+    --checkbox-indeterminate-mark-bg,
+    var(--_checkbox-mark)
+  );
 }
 
 .aviala-checkbox[data-state="checked"]:disabled,
 .aviala-checkbox[data-state="indeterminate"]:disabled {
-  opacity: var(--checkbox-disabled-opacity, 0.55);
+  opacity: 1;
 }
 
 .aviala-checkbox-input {
@@ -884,7 +1453,7 @@
   min-width: 0;
   cursor: pointer;
   align-items: flex-start;
-  gap: var(--checkbox-input-gap, 8px);
+  gap: var(--checkbox-input-gap, var(--checkbox-input-size-gap));
 }
 
 .aviala-checkbox-input[data-disabled="true"] {
@@ -893,7 +1462,7 @@
 
 .aviala-checkbox-input__icon {
   display: inline-flex;
-  height: 24px;
+  height: var(--checkbox-input-size-icon-height);
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
@@ -911,7 +1480,7 @@
 
 .aviala-checkbox-input[data-disabled="true"] .aviala-checkbox-input__content,
 .aviala-checkbox-input[data-disabled="true"] .aviala-checkbox-input__icon {
-  opacity: var(--checkbox-disabled-opacity, 0.55);
+  opacity: 1;
 }
 
 .aviala-checkbox-group[data-direction="horizontal"] .aviala-checkbox-input {
@@ -919,8 +1488,91 @@
   min-width: 0;
 }
 
+.aviala-checkbox {
+  --_checkbox-unchecked-bg: var(--checkbox-color-unselected-background-default);
+  --_checkbox-unchecked-overlay: var(
+    --checkbox-color-unselected-background-overlay-default
+  );
+  --_checkbox-border: var(--checkbox-color-unselected-border-default);
+  --_checkbox-selected-bg: var(--checkbox-color-selected-background-default);
+  --_checkbox-indeterminate-bg: var(
+    --checkbox-color-indeterminate-background-default
+  );
+  --_checkbox-shadow: var(--checkbox-color-selected-shadow-default);
+  --_checkbox-icon: var(--checkbox-color-selected-icon-default);
+  --_checkbox-mark: var(--checkbox-color-indeterminate-mark-default);
+}
+.aviala-checkbox:disabled {
+  --_checkbox-unchecked-bg: var(
+    --checkbox-color-unselected-background-disabled
+  );
+  --_checkbox-border: var(--checkbox-color-unselected-border-disabled);
+  --_checkbox-selected-bg: var(--checkbox-color-selected-background-disabled);
+  --_checkbox-indeterminate-bg: var(
+    --checkbox-color-indeterminate-background-disabled
+  );
+  --_checkbox-shadow: var(--checkbox-color-selected-shadow-disabled);
+  --_checkbox-icon: var(--checkbox-color-selected-icon-disabled);
+  --_checkbox-mark: var(--checkbox-color-indeterminate-mark-disabled);
+}
+.aviala-checkbox[data-state="indeterminate"] {
+  --_checkbox-shadow: var(--checkbox-color-indeterminate-shadow-default);
+}
+.aviala-checkbox[data-state="indeterminate"]:disabled {
+  --_checkbox-shadow: var(--checkbox-color-indeterminate-shadow-disabled);
+}
+.aviala-checkbox:disabled > .aviala-checkbox__indicator {
+  opacity: var(
+    --checkbox-disabled-opacity,
+    var(--checkbox-transparency-mark-disabled)
+  );
+}
+
+/* Figma keeps fixed-size marks centered independently of frame padding. */
+.aviala-checkbox[data-size="default"][data-state="unchecked"] {
+  padding: var(--checkbox-size-default-unselected-padding-y)
+    var(--checkbox-size-default-unselected-padding-x);
+}
+.aviala-checkbox[data-size="default"][data-state="checked"] {
+  padding: var(--checkbox-size-default-selected-padding-y)
+    var(--checkbox-size-default-selected-padding-x);
+}
+.aviala-checkbox[data-size="default"][data-state="indeterminate"] {
+  padding: var(--checkbox-size-default-indeterminate-padding-y)
+    var(--checkbox-size-default-indeterminate-padding-x);
+}
+.aviala-checkbox[data-size="huge"][data-state="unchecked"] {
+  padding: var(--checkbox-size-huge-unselected-padding-y)
+    var(--checkbox-size-huge-unselected-padding-x);
+}
+.aviala-checkbox[data-size="huge"][data-state="checked"] {
+  padding: var(--checkbox-size-huge-selected-padding-y)
+    var(--checkbox-size-huge-selected-padding-x);
+}
+.aviala-checkbox[data-size="huge"][data-state="indeterminate"] {
+  padding: var(--checkbox-size-huge-indeterminate-padding-y)
+    var(--checkbox-size-huge-indeterminate-padding-x);
+}
+
+.aviala-checkbox-input__content .aviala-typography--text {
+  color: var(--checkbox-label-fg, var(--checkbox-input-color-text-default));
+}
+.aviala-checkbox-input__content .aviala-typography--caption {
+  color: var(
+    --checkbox-caption-fg,
+    var(--checkbox-input-color-caption-default)
+  );
+}
+.aviala-checkbox-input[data-disabled="true"] .aviala-checkbox-input__content {
+  opacity: var(
+    --checkbox-disabled-opacity,
+    var(--checkbox-input-transparency-text-disabled)
+  );
+}
+
 /* Select — Figma Information Collect → SelectInput / Select Menu */
 .aviala-select-trigger {
+  --_select-shadow: inset 0 -0.5px 0 var(--select-input-color-shadow-default);
   position: relative;
   display: inline-flex;
   width: 100%;
@@ -928,49 +1580,108 @@
   align-items: center;
   overflow: hidden;
   border: 0;
-  border-radius: var(--input-radius, 8px);
-  background-color: var(--input-bg-default);
-  box-shadow: var(--input-shell-shadow);
-  color: var(--input-fg);
+  border-radius: var(--input-radius, var(--select-input-size-radius));
+  background-color: var(
+    --input-bg-default,
+    var(--select-input-color-background-default)
+  );
+  box-shadow: var(
+    --input-shell-shadow,
+    var(--input-surface-shadow, var(--_select-shadow))
+  );
+  color: var(--input-fg, var(--select-input-color-text-default));
   font-family: var(--font-sans);
   cursor: pointer;
-  padding: 0 var(--input-shell-px, var(--input-px-regular, 10px));
-  gap: var(--input-shell-gap, var(--input-gap-regular, 6px));
-  --input-shell-px: var(--input-px-regular, 10px);
-  --input-shell-gap: var(--input-gap-regular, 6px);
-  --input-shell-field-py: var(--input-field-py-regular, 6px);
-  --input-shell-slot-py: var(--input-slot-py-regular, 6px);
+  padding: var(--_select-padding-y)
+    var(
+      --input-shell-px,
+      var(--input-px-regular, var(--select-input-size-regular-padding-x))
+    );
+  gap: var(
+    --input-shell-gap,
+    var(--input-gap-regular, var(--select-input-size-regular-gap))
+  );
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--select-input-size-regular-padding-x)
+  );
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--select-input-size-regular-gap)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--select-input-size-regular-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--select-input-size-regular-slot-padding-y)
+  );
   transition:
     background-color 0.15s ease,
     box-shadow 0.15s ease;
 }
 
 .aviala-select-trigger[data-size="regular"] {
-  --input-shell-px: var(--input-px-regular, 10px);
-  --input-shell-gap: var(--input-gap-regular, 6px);
-  --input-shell-field-py: var(--input-field-py-regular, 6px);
-  --input-shell-slot-py: var(--input-slot-py-regular, 6px);
+  --_select-padding-y: var(--select-input-size-regular-padding-y);
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--select-input-size-regular-padding-x)
+  );
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--select-input-size-regular-gap)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--select-input-size-regular-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--select-input-size-regular-slot-padding-y)
+  );
 }
 
 .aviala-select-trigger[data-size="big"] {
-  --input-shell-px: var(--input-px-big, 14px);
-  --input-shell-gap: var(--input-gap-big, 8px);
-  --input-shell-field-py: var(--padding-middle, 10px);
-  --input-shell-slot-py: var(--padding-middle, 10px);
+  --_select-padding-y: var(--select-input-size-big-padding-y);
+  --input-shell-px: var(--input-px-big, var(--select-input-size-big-padding-x));
+  --input-shell-gap: var(--input-gap-big, var(--select-input-size-big-gap));
+  --input-shell-field-py: var(
+    --input-field-py-big,
+    var(--select-input-size-big-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-big,
+    var(--select-input-size-big-slot-padding-y)
+  );
 }
 
 .aviala-select-trigger[data-all-round="true"] {
-  border-radius: var(--input-radius-allround, 99px);
+  border-radius: var(
+    --input-radius-allround,
+    var(--select-input-size-round-radius)
+  );
 }
 
 .aviala-select-trigger[data-state="open"] {
-  background-color: var(--input-bg-activated);
-  box-shadow: var(--input-shell-focus-shadow);
+  background-color: var(
+    --input-bg-activated,
+    var(--select-input-color-background-active)
+  );
+  box-shadow: var(
+    --input-shell-focus-shadow,
+    inset 0 0 0 var(--select-input-size-border-width)
+      var(--input-border-activated, var(--select-input-color-border-active)),
+    var(--input-surface-shadow, var(--_select-shadow))
+  );
   outline: none;
 }
 
 .aviala-select-trigger:focus-visible {
-  background-color: var(--input-bg-activated);
+  background-color: var(
+    --input-bg-activated,
+    var(--select-input-color-background-active)
+  );
   outline: none;
 }
 
@@ -978,22 +1689,61 @@
   .aviala-select-trigger:hover:not([data-state="open"]):not(:focus-visible):not(
       :disabled
     ) {
-    background-color: var(--input-bg-hover);
+    background-color: var(
+      --input-bg-hover,
+      var(--base-input-color-background-hover, var(--_legacy-input-bg-hover))
+    );
   }
 }
 
 .aviala-select-trigger[data-error="true"] {
-  box-shadow: var(--input-shell-error-shadow);
+  box-shadow: var(
+    --input-shell-error-shadow,
+    var(--_legacy-input-shell-error-shadow)
+  );
 }
 
 .aviala-select-trigger:disabled {
+  background-color: var(
+    --input-bg-default,
+    var(--select-input-color-background-disabled)
+  );
   cursor: not-allowed;
-  opacity: var(--input-disabled-opacity, 0.55);
+}
+
+.aviala-select-trigger:disabled > .aviala-select-trigger__field {
+  opacity: var(
+    --input-disabled-opacity,
+    var(--select-input-transparency-content-disabled)
+  );
+}
+
+.aviala-select-trigger:disabled > .aviala-select-trigger__slot,
+.aviala-select-trigger:disabled > .aviala-select-trigger__expand {
+  opacity: calc(
+    var(
+        --input-disabled-opacity,
+        var(--select-input-transparency-content-disabled)
+      ) *
+      var(--input-icon-opacity, 1)
+  );
+}
+
+.aviala-select-trigger:disabled .aviala-select-trigger__value {
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--select-input-transparency-placeholder)
+  );
 }
 
 .aviala-select-trigger__slot {
+  color: var(
+    --input-icon-fg,
+    var(--input-fg, var(--select-input-color-icon-default))
+  );
+  box-sizing: content-box;
   display: inline-flex;
-  height: var(--input-icon-slot-height, var(--input-line-height, 1.125rem));
+  height: var(--input-icon-slot-height, var(--select-input-size-icon-height));
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
@@ -1009,8 +1759,8 @@
   justify-content: center;
   padding: var(--input-shell-field-py) 0;
   text-align: start;
-  font-size: var(--input-font-size);
-  line-height: var(--input-line-height);
+  font-size: var(--input-font-size, var(--typography-text-size));
+  line-height: var(--input-line-height, var(--typography-text-line-height));
 }
 
 .aviala-select-trigger__value {
@@ -1025,19 +1775,27 @@
   color: inherit;
 }
 
-.aviala-select-trigger__value[data-placeholder] {
-  opacity: var(--input-placeholder-opacity, 0.6);
+.aviala-select-trigger[data-placeholder] .aviala-select-trigger__value {
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--select-input-transparency-placeholder)
+  );
 }
 
 .aviala-select-trigger__slot svg {
-  width: var(--input-slot-icon-size, var(--size-regular, 0.875rem));
-  height: var(--input-slot-icon-size, var(--size-regular, 0.875rem));
+  width: var(--input-slot-icon-size, var(--select-input-size-icon-width));
+  height: var(--input-slot-icon-size, var(--select-input-size-icon-width));
 }
 
 .aviala-select-trigger__expand {
+  color: var(
+    --input-icon-fg,
+    var(--input-fg, var(--select-input-color-icon-default))
+  );
+  box-sizing: content-box;
   display: inline-flex;
-  height: var(--input-icon-slot-height, var(--input-line-height, 1.125rem));
-  width: var(--input-icon-slot-height, var(--input-line-height, 1.125rem));
+  height: var(--input-icon-slot-height, var(--select-input-size-icon-height));
+  width: var(--input-slot-icon-size, var(--select-input-size-icon-width));
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
@@ -1048,22 +1806,39 @@
 
 .aviala-select-trigger__expand-icon {
   flex-shrink: 0;
-  width: var(--input-slot-icon-size, var(--size-regular, 0.875rem));
-  height: var(--input-slot-icon-size, var(--size-regular, 0.875rem));
+  width: var(--input-slot-icon-size, var(--select-input-size-icon-width));
+  height: var(--input-slot-icon-size, var(--select-input-size-icon-width));
 }
 
 .aviala-select-trigger[data-state="open"] .aviala-select-trigger__expand {
+  color: var(
+    --input-icon-fg,
+    var(--input-fg, var(--select-input-color-icon-default))
+  );
+  box-sizing: content-box;
   transform: rotate(180deg);
 }
 
 .aviala-select-content {
   z-index: 50;
   overflow: hidden;
-  border: 1px solid var(--select-menu-border);
-  border-radius: var(--select-menu-radius, 10px);
-  background-color: var(--select-menu-bg);
-  padding: var(--select-menu-py, 6px) 0;
-  box-shadow: var(--select-menu-shadow);
+  border: 1px solid
+    var(--select-menu-border, var(--select-menu-color-border-default));
+  border-radius: var(--select-menu-radius, var(--select-menu-size-radius));
+  background-color: var(
+    --select-menu-bg,
+    var(--select-menu-color-background-default)
+  );
+  padding: var(--select-menu-py, var(--select-menu-size-padding-y))
+    var(--select-menu-size-padding-x);
+  box-shadow: var(
+    --select-menu-shadow,
+    var(--select-menu-size-shadow-offset-x)
+      var(--select-menu-size-shadow-offset-y)
+      var(--select-menu-size-shadow-radius)
+      var(--select-menu-size-shadow-spread)
+      var(--select-menu-color-shadow-default)
+  );
 }
 
 .aviala-select-content[data-state="open"][data-side="bottom"] {
@@ -1085,31 +1860,41 @@
 .aviala-select-viewport {
   display: flex;
   flex-direction: column;
+  gap: var(--select-menu-size-gap);
   max-height: min(var(--radix-select-content-available-height, 320px), 320px);
   width: 100%;
   min-width: var(--radix-select-trigger-width, 165px);
-  padding: 0 var(--select-group-px, 6px);
+  padding: 0;
 }
 
 .aviala-select-group {
   display: flex;
   flex-direction: column;
-  gap: var(--select-group-gap, 4px);
+  gap: var(--select-group-gap, var(--select-menu-item-group-size-gap));
+  padding: var(--select-menu-item-group-size-padding-y)
+    var(--select-group-px, var(--select-menu-item-group-size-padding-x));
 }
 
 .aviala-select-group__slot {
   display: flex;
   flex-direction: column;
-  gap: var(--select-slot-gap, 4px);
+  gap: var(--select-slot-gap, var(--_legacy-select-slot-gap, 4px));
   width: 100%;
 }
 
 .aviala-select-label {
-  padding: var(--select-label-pt, 4px) var(--select-label-px, 8px)
-    var(--select-label-pb, 2px);
-  color: var(--select-label-fg);
-  font-size: var(--select-label-font-size);
-  line-height: var(--select-label-line-height);
+  padding: var(--select-label-pt, var(--_legacy-select-label-pt, 4px))
+    var(--select-label-px, var(--_legacy-select-label-px, 8px))
+    var(--select-label-pb, var(--_legacy-select-label-pb, 2px));
+  color: var(
+    --select-label-fg,
+    var(--select-menu-item-color-group-title-default)
+  );
+  font-size: var(--select-label-font-size, var(--typography-caption-size));
+  line-height: var(
+    --select-label-line-height,
+    var(--typography-caption-line-height)
+  );
 }
 
 .aviala-select-item {
@@ -1119,12 +1904,19 @@
   cursor: pointer;
   user-select: none;
   align-items: center;
-  gap: var(--select-item-gap, 8px);
-  border-radius: var(--border-radius-extra-small-2, 6px);
-  padding: var(--select-item-py, 4px) var(--select-item-px, 8px);
-  color: var(--select-item-fg);
-  font-size: var(--select-item-font-size);
-  line-height: var(--select-item-line-height);
+  gap: var(--select-item-gap, var(--select-menu-item-size-gap));
+  border-radius: var(--select-menu-item-size-radius);
+  padding: var(--select-item-py, var(--select-menu-item-size-padding-y))
+    var(--select-item-px, var(--select-menu-item-size-padding-x));
+  color: var(--select-item-fg, var(--select-menu-item-color-text-default));
+  font-size: var(
+    --select-item-font-size,
+    var(--input-font-size, var(--typography-text-size))
+  );
+  line-height: var(
+    --select-item-line-height,
+    var(--input-line-height, var(--typography-text-line-height))
+  );
   outline: none;
   transition:
     background-color 0.15s ease,
@@ -1137,42 +1929,46 @@
   animation: none;
 }
 
-.aviala-select-item[data-layout="people"] {
+.aviala-select-item[data-layout="people"]:not([data-function="form-radio"]):not(
+    [data-function="form-checkbox"]
+  ) {
   align-items: center;
-  padding-inline-start: var(--padding-tiny, 4px);
+  padding-inline-start: var(--select-menu-item-size-people-padding-x-start);
 }
 
 .aviala-select-item[data-layout="title"] {
   align-items: center;
-  padding-top: var(--select-item-py, 4px);
-  padding-bottom: var(--padding-min, 2px);
-  color: var(--select-label-fg);
+  font-size: var(--select-label-font-size, var(--typography-caption-size));
+  line-height: var(
+    --select-label-line-height,
+    var(--typography-caption-line-height)
+  );
+  padding-top: var(--select-item-py, var(--select-menu-item-size-padding-y));
+  padding-bottom: var(--select-menu-item-size-title-padding-y-end);
+  color: var(
+    --select-label-fg,
+    var(--select-menu-item-color-group-title-default)
+  );
 }
 
-.aviala-select-item:not([data-layout="title"]):not([data-state="checked"]):not(
+.aviala-select-item:not([data-layout="title"]):not([data-disabled]):hover,
+.aviala-select-item[data-highlighted]:not([data-layout="title"]):not(
     [data-disabled]
-  ):hover,
-.aviala-select-item[data-highlighted]:not([data-state="checked"]) {
-  background-color: var(--select-item-highlight-bg);
+  ) {
+  background-color: var(
+    --select-item-highlight-bg,
+    var(
+      --aviala-interaction-filled-hover,
+      var(--_legacy-select-item-highlight-bg)
+    )
+  );
 }
 
-.aviala-select-item:not([data-layout="title"]):not([data-state="checked"]):not(
-    [data-disabled]
-  ):active {
+.aviala-select-item:not([data-layout="title"]):not([data-disabled]):active {
   background-color: var(--aviala-interaction-filled-active, #d6d5d4);
 }
 
-.aviala-select-item[data-state="checked"] {
-  background-color: var(--select-item-selected-bg);
-  color: var(--select-item-selected-fg);
-  box-shadow: var(--input-surface-shadow);
-}
-
-.aviala-select-item[data-layout="checked"][data-state="checked"] {
-  background-color: var(--select-item-checked-bg);
-  color: var(--select-item-fg);
-  box-shadow: none;
-}
+/* Selection is communicated by the indicator; row states stay identical. */
 
 .aviala-select-item[data-layout="checked"][data-state="checked"]
   .aviala-select-item__function {
@@ -1186,21 +1982,53 @@
 
 .aviala-select-item__icon {
   display: inline-flex;
-  height: 24px;
+  height: var(--select-menu-item-size-icon-height);
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  color: inherit;
+  color: var(
+    --select-item-function-fg,
+    var(--select-menu-item-color-icon-default)
+  );
   opacity: var(--input-icon-opacity, 0.9);
 }
 
 .aviala-select-item__icon svg {
-  width: var(--select-item-icon-size, var(--size-regular, 0.875rem));
-  height: var(--select-item-icon-size, var(--size-regular, 0.875rem));
+  width: var(--select-item-icon-size, var(--select-menu-item-size-icon-width));
+  height: var(--select-item-icon-size, var(--select-menu-item-size-icon-width));
 }
 
 .aviala-select-item__icon--sm {
-  height: 20px;
+  height: var(--select-menu-item-size-title-icon-height);
+  color: var(
+    --select-item-function-fg,
+    var(--select-menu-item-color-title-icon-default)
+  );
+}
+
+.aviala-select-search {
+  padding: var(--select-menu-item-size-search-padding-y)
+    var(--select-menu-item-size-search-padding-x);
+  border-radius: var(--select-menu-item-size-radius);
+}
+
+.aviala-select-search
+  > .aviala-input[data-input-kind="text"]:not([data-all-round="true"]) {
+  border-radius: var(
+    --input-radius,
+    var(--select-menu-item-size-search-radius)
+  );
+}
+
+.aviala-select-item__icon--sm svg {
+  width: var(
+    --select-item-icon-size,
+    var(--select-menu-item-size-title-icon-width)
+  );
+  height: var(
+    --select-item-icon-size,
+    var(--select-menu-item-size-title-icon-width)
+  );
 }
 
 .aviala-select-item__content {
@@ -1223,11 +2051,24 @@
   word-break: break-word;
 }
 
-.aviala-select-item__subtitle {
+.aviala-select-item .aviala-select-item__text.aviala-typography {
+  color: inherit;
+}
+
+.aviala-select-item .aviala-select-item__subtitle.aviala-typography {
   font-family: var(--font-sans);
-  color: var(--select-item-subtitle-fg);
-  font-size: var(--select-item-subtitle-font-size);
-  line-height: var(--select-item-subtitle-line-height);
+  color: var(
+    --select-item-subtitle-fg,
+    var(--select-menu-item-color-caption-default)
+  );
+  font-size: var(
+    --select-item-subtitle-font-size,
+    var(--select-label-font-size, var(--typography-caption-size))
+  );
+  line-height: var(
+    --select-item-subtitle-line-height,
+    var(--select-label-line-height, var(--typography-caption-line-height))
+  );
   word-break: break-word;
 }
 
@@ -1241,7 +2082,7 @@
   overflow: hidden;
   border-radius: var(--border-radius-allround, 99px);
   background-color: var(--control-control-normal-lightbackground-2, #e5e4e3);
-  color: var(--select-label-fg);
+  color: var(--select-label-fg, var(--_legacy-select-label-fg));
 }
 
 .aviala-select-item__badge {
@@ -1249,36 +2090,58 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  padding-block: 1px;
+}
+
+.aviala-select-item__badge > .aviala-badge {
+  padding-inline: var(--select-menu-item-size-badge-padding-x);
 }
 
 .aviala-select-item__more {
   display: inline-flex;
-  height: 24px;
+  height: var(
+    --select-item-function-height,
+    var(--select-menu-item-size-function-height)
+  );
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
   margin-inline-start: auto;
-  border-inline-end: 1px solid var(--select-menu-border);
-  padding-inline-end: var(--select-item-gap, 8px);
+  border-inline-end: 1px solid
+    var(
+      --select-menu-border,
+      var(--select-menu-item-color-function-divider-default)
+    );
+  padding-inline-end: var(
+    --select-item-gap,
+    var(--select-menu-item-size-function-padding-x-end)
+  );
 }
 
 .aviala-select-item__function {
   display: inline-flex;
   height: var(
     --select-item-function-height,
-    var(--line-height-regular, 1.125rem)
+    var(--select-menu-item-size-icon-height)
   );
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  color: inherit;
+  color: var(
+    --select-item-function-fg,
+    var(--select-menu-item-color-icon-default)
+  );
   opacity: var(--input-icon-opacity, 0.9);
 }
 
 .aviala-select-item__function svg {
-  width: var(--select-item-function-icon-size, var(--size-regular, 0.875rem));
-  height: var(--select-item-function-icon-size, var(--size-regular, 0.875rem));
+  width: var(
+    --select-item-function-icon-size,
+    var(--select-menu-item-size-icon-width)
+  );
+  height: var(
+    --select-item-function-icon-size,
+    var(--select-menu-item-size-icon-width)
+  );
 }
 
 .aviala-select-item:not(:has(.aviala-select-item__more))
@@ -1303,8 +2166,12 @@
   position: absolute;
   inset: 0;
   border-radius: var(--border-radius-allround, 99px);
-  border: 2px solid var(--radio-border-unchecked);
-  background-color: var(--radio-bg-unchecked);
+  border: 2px solid
+    var(--radio-border-unchecked, var(--_legacy-radio-border-unchecked));
+  background-color: var(
+    --radio-bg-unchecked,
+    var(--_legacy-radio-bg-unchecked)
+  );
   opacity: 1;
   transition: opacity 0.15s ease;
 }
@@ -1316,7 +2183,10 @@
   width: var(--radio-indicator-size, 0.5rem);
   height: var(--radio-indicator-size, 0.5rem);
   border-radius: var(--border-radius-allround, 99px);
-  background-color: var(--radio-indicator-bg);
+  background-color: var(
+    --radio-indicator-bg,
+    var(--_legacy-radio-indicator-bg)
+  );
   transform: scale(0);
   transition: transform 0.15s ease;
 }
@@ -1338,8 +2208,13 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background-image: var(--radio-checked-surface);
-  box-shadow: var(--radio-shadow), var(--input-surface-shadow);
+  background-image: var(
+    --radio-checked-surface,
+    var(--_legacy-radio-checked-surface)
+  );
+  box-shadow:
+    var(--radio-shadow, var(--_legacy-radio-shadow)),
+    var(--input-surface-shadow, var(--_legacy-input-surface-shadow));
 }
 
 /* Leading form checkbox — Figma Form-CheckBox */
@@ -1352,23 +2227,30 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border-radius: var(--checkbox-radius, 6px);
-  border: 1px solid var(--checkbox-border-unchecked);
-  background-image: var(--checkbox-unchecked-surface);
+  border-radius: var(--checkbox-radius, var(--_legacy-checkbox-radius, 6px));
+  border: 1px solid
+    var(--checkbox-border-unchecked, var(--_legacy-checkbox-border-unchecked));
+  background-image: var(
+    --checkbox-unchecked-surface,
+    var(--_legacy-checkbox-unchecked-surface)
+  );
   box-shadow: none;
 }
 
 .aviala-select-item__form-checkbox-icon {
   opacity: 0;
-  color: var(--checkbox-checked-icon);
+  color: var(--checkbox-checked-icon, var(--_legacy-checkbox-checked-icon));
   transition: opacity 0.15s ease;
 }
 
 .aviala-select-item[data-state="checked"] .aviala-select-item__form-checkbox {
   border-color: transparent;
   background-color: transparent;
-  background-image: var(--checkbox-checked-surface);
-  box-shadow: var(--input-surface-shadow);
+  background-image: var(
+    --checkbox-checked-surface,
+    var(--_legacy-checkbox-checked-surface)
+  );
+  box-shadow: var(--input-surface-shadow, var(--_legacy-input-surface-shadow));
 }
 
 .aviala-select-item[data-state="checked"]
@@ -1381,7 +2263,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--select-item-selected-fg);
+  color: var(
+    --select-item-selected-fg,
+    var(--select-menu-item-color-selected-icon-default)
+  );
 }
 
 /* Trailing checkbox — Figma CheckBox function (selected only) */
@@ -1389,19 +2274,33 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--select-item-selected-fg);
+  color: var(
+    --select-item-selected-fg,
+    var(--select-menu-item-color-selected-icon-default)
+  );
 }
 
 .aviala-select-separator {
-  height: 6px;
-  margin: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent calc(50% - 0.5px),
-    var(--select-menu-border) calc(50% - 0.5px),
-    var(--select-menu-border) calc(50% + 0.5px),
-    transparent calc(50% + 0.5px)
+  position: relative;
+  height: calc(
+    var(--select-menu-item-group-size-divider-padding-y) +
+      var(--select-menu-item-group-size-divider-padding-y-end)
   );
+  flex-shrink: 0;
+  margin: 0;
+  background: transparent;
+}
+
+.aviala-select-separator::after {
+  content: "";
+  position: absolute;
+  top: var(--select-menu-item-group-size-divider-padding-y);
+  inset-inline: var(--select-menu-item-group-size-divider-padding-x);
+  border-top: 1px solid
+    var(
+      --select-menu-border,
+      var(--select-menu-item-group-color-divider-default)
+    );
 }
 
 .aviala-select-content:has(.aviala-select-sub-item[data-state="open"]) {
@@ -1428,14 +2327,21 @@
 
 .aviala-select-sub-item:not([data-disabled]):not([data-state="open"]):hover,
 .aviala-select-sub-item[data-state="open"] {
-  background-color: var(--select-item-highlight-bg);
+  background-color: var(
+    --select-item-highlight-bg,
+    var(
+      --aviala-interaction-filled-hover,
+      var(--_legacy-select-item-highlight-bg)
+    )
+  );
 }
 
 .aviala-select-sub-content {
   z-index: 51;
   width: max-content;
   min-width: var(--radix-select-trigger-width, 165px);
-  padding: var(--select-menu-py, 6px) 0;
+  padding: var(--select-menu-py, var(--select-menu-size-padding-y))
+    var(--select-menu-size-padding-x);
 }
 
 .aviala-select-sub-content[data-state="open"][data-side="right"] {
@@ -1477,7 +2383,7 @@
 .aviala-select-sub-content__viewport {
   max-height: min(var(--radix-popover-content-available-height, 320px), 320px);
   min-width: var(--radix-select-trigger-width, 165px);
-  padding: 0 var(--select-group-px, 6px);
+  padding: 0;
 }
 
 @keyframes aviala-select-sub-in-right {
@@ -1573,4 +2479,124 @@
   .aviala-select-content[data-state="closed"] {
     animation: none;
   }
+}
+.aviala-input-group-addon.aviala-typography {
+  color: var(--input-group-input-color-text-default);
+}
+
+/* NumberInput retains its opaque surface and independently faded content. */
+.aviala-input[data-input-kind="number"]:is(
+    [data-disabled="true"],
+    :has(input:disabled)
+  )
+  > :is(
+    .aviala-input__field,
+    .aviala-input__badge-area,
+    .aviala-number-input__controls
+  ) {
+  opacity: var(
+    --input-disabled-opacity,
+    var(--number-input-transparency-content-disabled)
+  );
+}
+.aviala-input[data-input-kind="number"]:is(
+    [data-disabled="true"],
+    :has(input:disabled)
+  )
+  > .aviala-input__slot {
+  opacity: calc(
+    var(
+        --input-disabled-opacity,
+        var(--number-input-transparency-content-disabled)
+      ) *
+      var(--input-icon-opacity, 1)
+  );
+}
+.aviala-input[data-input-kind="number"]:is(
+    [data-disabled="true"],
+    :has(input:disabled)
+  )
+  > .aviala-input__field
+  input {
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--number-input-transparency-placeholder)
+  );
+}
+.aviala-input[data-input-kind="number"]:is(
+    [data-disabled="true"],
+    :has(input:disabled)
+  )
+  > .aviala-input__field
+  input::placeholder {
+  opacity: 1;
+}
+
+/* Select Tag variant: the field owns opacity; tags retain normal internals. */
+.aviala-multi-select__tags {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--select-input-size-tag-gap);
+  overflow-x: auto;
+}
+.aviala-multi-select__tags > .aviala-tag {
+  flex-shrink: 0;
+  --tag-disabled-opacity: var(--tag-transparency-normal);
+}
+.aviala-multi-select__placeholder {
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--select-input-transparency-placeholder)
+  );
+  white-space: nowrap;
+}
+.aviala-multi-select[data-disabled="true"] {
+  background-color: var(
+    --input-bg-default,
+    var(--select-input-color-background-disabled)
+  );
+  cursor: not-allowed;
+}
+.aviala-multi-select[data-disabled="true"] > .aviala-select-trigger__field,
+.aviala-multi-select[data-disabled="true"] > .aviala-select-trigger__expand {
+  opacity: var(
+    --input-disabled-opacity,
+    var(--select-input-transparency-content-disabled)
+  );
+}
+.aviala-multi-select > button.aviala-select-trigger__expand {
+  background: transparent;
+  border: 0;
+  cursor: inherit;
+}
+.aviala-multi-select__content {
+  min-width: var(--radix-popover-trigger-width);
+}
+.aviala-multi-select__options {
+  overflow-y: auto;
+  max-height: min(320px, var(--radix-popover-content-available-height));
+}
+.aviala-multi-select__option:focus:not([data-disabled]) {
+  background-color: var(
+    --select-item-highlight-bg,
+    var(
+      --aviala-interaction-filled-hover,
+      var(--_legacy-select-item-highlight-bg)
+    )
+  );
+}
+.aviala-multi-select__option > .aviala-select-item__text {
+  flex: 1;
+}
+.aviala-multi-select__option > .aviala-select-item__indicator {
+  display: inline-flex;
+  color: var(
+    --select-item-selected-fg,
+    var(--select-menu-item-color-selected-icon-default)
+  );
+}
+.aviala-multi-select__option > .aviala-select-item__indicator > svg {
+  width: var(--select-menu-item-size-icon-width);
+  height: var(--select-menu-item-size-icon-height);
 }

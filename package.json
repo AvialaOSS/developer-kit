@@ -19,6 +19,7 @@
     "version:packages": "changeset version && pnpm --filter @aviala-design/spiral run changelog:stamp",
     "release:publish": "pnpm --filter @aviala-design/tokens build && pnpm --filter @aviala-design/icons run build:release && pnpm --filter @aviala-design/spiral build && pnpm changeset publish",
     "sync:ald": "node scripts/sync-ald.mjs",
+    "sync:themebuilder": "node packages/tokens/scripts/sync-themebuilder.mjs",
     "clean": "turbo run clean && rimraf node_modules"
   },
   "devDependencies": {

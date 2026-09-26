@@ -53,19 +53,9 @@ const AVATAR_TEXT_LEVEL: Record<AvatarLevel, TypographyLevel> = {
   text: "caption",
 };
 
-/** Inner icon sizes aligned to --size-* (rem) so they track root font-size. */
-const AVATAR_ICON_SIZE: Record<AvatarLevel, string> = {
-  display: "var(--size-middle, 1rem)",
-  headline1: "var(--size-regular, 0.875rem)",
-  headline2: "var(--size-small, 0.75rem)",
-  title: "var(--size-small, 0.75rem)",
-  subtitle: "var(--size-tiny, 0.625rem)",
-  text: "0.5rem",
-};
-
-function renderAvatarIcon(node: ReactNode, level: AvatarLevel): ReactNode {
+function renderAvatarIcon(node: ReactNode): ReactNode {
   if (!node) return null;
-  const size = AVATAR_ICON_SIZE[level];
+  const size = "var(--avata-size-icon-width)";
   if (isValidElement(node) && typeof node.type !== "string") {
     return cloneElement(
       node as ReactElement<{
@@ -136,15 +126,15 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(
         <span className="aviala-avatar__surface">
           {resolvedContent === "picture" && src ? (
             <img
-              className="aviala-avatar__image"
+              {...imgProps}
+              className={cn("aviala-avatar__image", imgProps?.className)}
               src={src}
               alt={alt}
-              {...imgProps}
             />
           ) : null}
           {resolvedContent === "icon" ? (
             <span className="aviala-avatar__icon" aria-hidden>
-              {renderAvatarIcon(icon, resolvedLevel)}
+              {renderAvatarIcon(icon)}
             </span>
           ) : null}
           {resolvedContent === "text" ? (
