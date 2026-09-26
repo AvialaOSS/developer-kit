@@ -1,6 +1,6 @@
 # Loading
 
-## [Unreleased]
+## 3.1.0
 
 ### Changed
 - 渐变分别消费组件起止色；lineHeightFix 新增 heightOnly、both、off，继续支持布尔值，both 使用组件容器宽度。

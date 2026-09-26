@@ -1,6 +1,6 @@
 # Cascader
 
-## [Unreleased]
+## 3.1.0
 
 ### Added
 - 新增 CascaderSearch：复用输入框，支持搜索行留白/圆角 Token、方向键进入结果及 Escape 关闭；过滤逻辑由调用方控制。

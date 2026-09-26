@@ -1,6 +1,6 @@
 # Slider
 
-## [Unreleased]
+## 3.1.0
 
 ### Fixed
 - 禁用 Slider 的隐藏输入不再参与原生表单提交，单值与范围滑块均生效。

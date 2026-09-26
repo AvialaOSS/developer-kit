@@ -1,6 +1,6 @@
 # Upload
 
-## [Unreleased]
+## 3.1.0
 
 ### Changed
 - 按钮阴影完整消费对应 Button Token 并跟随效果开关；普通图标使用组件尺寸和默认透明度。
