@@ -44,7 +44,7 @@ function useSegmentatorContext() {
   return ctx;
 }
 
-function renderIcon(node: ReactNode, dimmed?: boolean): ReactNode {
+function renderIcon(node: ReactNode): ReactNode {
   if (!node) return null;
   const content = cloneAvialaIconElement(node, {
     level: "text",
@@ -53,10 +53,7 @@ function renderIcon(node: ReactNode, dimmed?: boolean): ReactNode {
 
   return (
     <span
-      className={cn(
-        "aviala-segmentator-item__icon",
-        dimmed && "opacity-[var(--button-disabled-opacity,0.55)]"
-      )}
+      className="aviala-segmentator-item__icon"
     >
       {content}
     </span>
@@ -1034,7 +1031,6 @@ export const SegmentatorItem = forwardRef<
     const selected = ctx.value === value;
     const iconOnly = iconOnlyProp ?? (!!(leftIcon ?? rightIcon) && !children);
     const isDisabled = disabled || ctx.disabled;
-    const dimmed = isDisabled;
     const icon = iconOnly ? (leftIcon ?? rightIcon) : leftIcon;
 
     return (
@@ -1046,6 +1042,7 @@ export const SegmentatorItem = forwardRef<
         tabIndex={selected ? 0 : -1}
         data-selected={selected ? "true" : "false"}
         data-value={value}
+        data-icon-only={iconOnly ? "true" : undefined}
         data-mode={ctx.mode}
         data-all-round={ctx.allRound ? "true" : "false"}
         disabled={isDisabled}
@@ -1065,19 +1062,18 @@ export const SegmentatorItem = forwardRef<
         {...props}
       >
         <span className="aviala-segmentator-item__content">
-          {renderIcon(icon, dimmed && !!icon)}
+          {renderIcon(icon)}
           {!iconOnly && (
             <span
               className={cn(
                 "relative z-[1] shrink-0 [word-break:break-word]",
-                typographyVariants({ level: "text" }),
-                dimmed && "opacity-[var(--button-disabled-opacity,0.55)]"
+                typographyVariants({ level: "text" })
               )}
             >
               {children}
             </span>
           )}
-          {!iconOnly && renderIcon(rightIcon, dimmed && !!rightIcon)}
+          {!iconOnly && renderIcon(rightIcon)}
         </span>
       </button>
     );

@@ -11,7 +11,7 @@ import {
 import { useRtl } from "../config";
 import { cn } from "../lib/utils";
 import { interpolate, useLocaleMessages } from "../locale";
-import { Button, buttonVariants } from "./button";
+import { Button } from "./button";
 import { Input } from "./input";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import {
@@ -164,7 +164,7 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
             leftIcon={<PrevIcon aria-hidden />}
             onClick={() => setPage(currentPage - 1)}
           />
-          <div className="aviala-pagination__pages">
+          <div className="aviala-pagination__pages aviala-segmentator-group" data-mode="tiled">
             {pages.map((item, index) =>
               item === "ellipsis" ? (
                 <Popover
@@ -175,19 +175,17 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
                   <PopoverTrigger asChild>
                     <button
                       type="button"
-                      data-size="regular"
+                      data-mode="tiled"
+                      data-selected="false"
                       className={cn(
-                        buttonVariants({
-                          mode: "noBackgroundCustom",
-                          compact: true,
-                        })
+                        "aviala-segmentator-item aviala-focus-ring"
                       )}
                       aria-label={locale.morePages}
                       aria-haspopup="menu"
                     >
-                      <Typography level="text" as="span">
+                      <span className="aviala-segmentator-item__content"><Typography level="text" as="span">
                         …
-                      </Typography>
+                      </Typography></span>
                     </button>
                   </PopoverTrigger>
                   <PopoverContent showArrow flush>
@@ -196,21 +194,19 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
                         <button
                           key={p}
                           type="button"
-                          data-size="regular"
+                          data-mode="tiled"
+                      data-selected="false"
                           className={cn(
-                            buttonVariants({
-                              mode: "noBackgroundCustom",
-                              compact: true,
-                            })
+                            "aviala-segmentator-item aviala-focus-ring"
                           )}
                           onClick={() => {
                             setPage(p);
                             setOpenEllipsis(null);
                           }}
                         >
-                          <Typography level="text" as="span">
+                          <span className="aviala-segmentator-item__content"><Typography level="text" as="span">
                             {p}
-                          </Typography>
+                          </Typography></span>
                         </button>
                       ))}
                     </div>
@@ -220,21 +216,19 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
                 <button
                   key={item}
                   type="button"
-                  data-size="regular"
+                  data-mode="tiled"
                   className={cn(
-                    buttonVariants({
-                      mode: "noBackgroundCustom",
-                      compact: true,
-                    }),
+                    "aviala-segmentator-item aviala-focus-ring",
                     "aviala-pagination__page"
                   )}
                   data-active={item === currentPage ? "true" : undefined}
+                  data-selected={item === currentPage ? "true" : "false"}
                   aria-current={item === currentPage ? "page" : undefined}
                   onClick={() => setPage(item)}
                 >
-                  <Typography level="text" as="span">
+                  <span className="aviala-segmentator-item__content"><Typography level="text" as="span">
                     {item}
-                  </Typography>
+                  </Typography></span>
                 </button>
               )
             )}

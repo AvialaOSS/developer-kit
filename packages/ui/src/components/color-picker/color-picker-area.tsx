@@ -62,29 +62,31 @@ export function ColorPickerArea({
       className={cn("aviala-color-picker-area", className)}
       {...spiralDebugId("color-picker.content.area")}
     >
-      <div
-        ref={ref}
-        className="aviala-color-picker-area__surface aviala-focus-ring"
-        style={{ backgroundColor: hueColor }}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        role="slider"
-        aria-label={locale.saturationBrightness}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-valuenow={Math.round(hsva.s)}
-        tabIndex={isDisabled ? -1 : 0}
-      >
-        <div className="aviala-color-picker-area__white" aria-hidden />
-        <div className="aviala-color-picker-area__black" aria-hidden />
+      <div className="aviala-color-picker-area__palette">
         <div
-          className="aviala-color-picker-area__thumb"
-          style={{
-            left: `${hsva.s}%`,
-            top: `${100 - hsva.v}%`,
-          }}
-          aria-hidden
-        />
+          ref={ref}
+          className="aviala-color-picker-area__surface aviala-focus-ring"
+          style={{ backgroundColor: hueColor }}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          role="slider"
+          aria-label={locale.saturationBrightness}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(hsva.s)}
+          tabIndex={isDisabled ? -1 : 0}
+        >
+          <div className="aviala-color-picker-area__white" aria-hidden />
+          <div className="aviala-color-picker-area__black" aria-hidden />
+          <div
+            className="aviala-color-picker-area__thumb"
+            style={{
+              left: `${hsva.s}%`,
+              top: `${100 - hsva.v}%`,
+            }}
+            aria-hidden
+          />
+      </div>
       </div>
     </div>
   );

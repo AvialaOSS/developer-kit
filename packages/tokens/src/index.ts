@@ -1,4 +1,8 @@
 export {
+  applyProjectTheme,
+  removeProjectTheme,
+} from "./engine/project-runtime";
+export {
   generateTheme,
   themeVarsToCssText,
   type ThemeInput,

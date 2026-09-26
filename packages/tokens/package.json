@@ -17,11 +17,16 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+      "require": { "types": "./dist/index.d.cts", "default": "./dist/index.cjs" }
+    },
+    "./project": {
+      "import": { "types": "./dist/project.d.ts", "default": "./dist/project.js" },
+      "require": { "types": "./dist/project.d.cts", "default": "./dist/project.cjs" }
     },
     "./styles.css": "./dist/styles.css",
     "./ald-theme.css": "./dist/ald-theme.css",
+    "./component-tokens.css": "./dist/component-tokens.css",
     "./vite-plugin": {
       "types": "./vite-plugin.d.mts",
       "default": "./vite-plugin.mjs"
@@ -53,27 +58,35 @@
     "./structure-navigation-extras.css": "./dist/structure-navigation-extras.css",
     "./video-effects.css": "./dist/video-effects.css",
     "./node": {
-      "types": "./dist/node.d.ts",
-      "import": "./dist/node.js"
+      "import": { "types": "./dist/node.d.ts", "default": "./dist/node.js" },
+      "require": { "types": "./dist/node.d.cts", "default": "./dist/node.cjs" }
     },
     "./tailwind.preset": {
-      "types": "./dist/tailwind.preset.d.ts",
-      "import": "./dist/tailwind.preset.js"
+      "import": { "types": "./dist/tailwind.preset.d.ts", "default": "./dist/tailwind.preset.js" },
+      "require": { "types": "./dist/tailwind.preset.d.cts", "default": "./dist/tailwind.preset.cjs" }
     }
   },
   "files": [
     "dist",
     "source",
+    "src/semantic",
+    "src/non-color",
     "vite-plugin.mjs",
     "vite-plugin.d.mts",
-    "scripts/css-lib.mjs"
+    "scripts/css-lib.mjs",
+    "scripts/themebuilder-css.mjs",
+    "scripts/project-api.mjs",
+    "scripts/standard-css.mjs"
   ],
   "scripts": {
+    "prepack": "node --test scripts/default-theme.test.mjs scripts/standard-css.test.mjs scripts/package-entrypoints.test.mjs",
     "build": "tsup && node scripts/build-css.mjs",
     "build:css": "node scripts/build-css.mjs",
     "dev": "tsup --watch",
     "lint": "eslint .",
+    "test": "node --test scripts/themebuilder-css.test.mjs scripts/project.test.mjs scripts/snapshot-adapter.test.mjs scripts/standard-css.test.mjs scripts/project-theme.test.mjs scripts/figma-plan.test.mjs",
     "typecheck": "tsc --noEmit",
+    "test:integration": "tsup && node scripts/build-css.mjs && node --test scripts/default-theme.test.mjs scripts/project-store.test.mjs scripts/themebuilder-project-cli.test.mjs scripts/package-entrypoints.test.mjs scripts/project-types.test.mjs",
     "clean": "rimraf dist"
   },
   "dependencies": {

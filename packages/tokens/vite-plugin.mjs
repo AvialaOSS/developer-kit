@@ -1,11 +1,6 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import {
-  buildAldThemeCss,
-  buildCombinedStylesCss,
-  resolveStandaloneCssSource,
-} from "./scripts/css-lib.mjs";
 
 /**
  * Vite plugin: serve @aviala-design/tokens (and spiral's styles.css) straight
@@ -22,7 +17,7 @@ import {
  * Generated CSS lives in `<app>/node_modules/.cache/aviala-tokens-css/`. That
  * directory is inside Vite's default watch ignore list, so hot reload does NOT
  * rely on fs events for those files: handleHotUpdate watches the *sources*
- * (src/semantic, source/ald), regenerates the cache, then invalidates the
+ * (src/semantic, source/ald, source/themebuilder), regenerates the cache, then invalidates the
  * cache modules in the module graph so Vite pushes a normal css-update.
  *
  * Keep SPIRAL_LAYER_BASE in sync with packages/ui/scripts/copy-css.mjs.
@@ -43,6 +38,7 @@ const SPIRAL_LAYER_BASE = `@layer base {
 
 const GENERATED_FILES = {
   "@aviala-design/tokens/ald-theme.css": "ald-theme.css",
+  "@aviala-design/tokens/component-tokens.css": "component-tokens.css",
   "@aviala-design/tokens/styles.css": "tokens-styles.css",
   "@aviala-design/spiral/styles.css": "spiral-styles.css",
 };
@@ -56,14 +52,25 @@ export default function avialaTokensCss(options = {}) {
       join(process.cwd(), "node_modules", ".cache", "aviala-tokens-css")
   );
   const semanticDir = normalize(join(tokensRoot, "src", "semantic"));
+  const nonColorDir = normalize(join(tokensRoot, "src", "non-color"));
   const aldDir = normalize(join(tokensRoot, "source", "ald"));
+  const themeBuilderDir = normalize(join(tokensRoot, "source", "themebuilder"));
+  const standardProjectDir = normalize(
+    join(tokensRoot, "source", "theme-engine")
+  );
   const srcDir = normalize(join(tokensRoot, "src"));
 
-  function generateAll() {
+  async function generateAll() {
+    const { buildAldThemeCss, buildComponentTokenCss, buildCombinedStylesCss } =
+      await import("./scripts/css-lib.mjs");
     mkdirSync(cacheDir, { recursive: true });
     writeFileSync(
       join(cacheDir, "ald-theme.css"),
       buildAldThemeCss(tokensRoot)
+    );
+    writeFileSync(
+      join(cacheDir, "component-tokens.css"),
+      buildComponentTokenCss(tokensRoot)
     );
     const combined = buildCombinedStylesCss(tokensRoot);
     writeFileSync(join(cacheDir, "tokens-styles.css"), combined);
@@ -76,7 +83,10 @@ export default function avialaTokensCss(options = {}) {
   function isSourceFile(normalizedFile) {
     return (
       normalizedFile.startsWith(semanticDir + "/") ||
-      normalizedFile.startsWith(aldDir + "/")
+      normalizedFile.startsWith(nonColorDir + "/") ||
+      normalizedFile.startsWith(aldDir + "/") ||
+      normalizedFile.startsWith(themeBuilderDir + "/") ||
+      normalizedFile.startsWith(standardProjectDir + "/")
     );
   }
 
@@ -84,13 +94,22 @@ export default function avialaTokensCss(options = {}) {
     name: "aviala-tokens-css",
     enforce: "pre",
 
-    buildStart() {
-      generateAll();
+    async buildStart() {
+      await generateAll();
     },
 
     resolveId(id, importer) {
       if (id === "@aviala-design/tokens") {
-        return normalize(join(tokensRoot, "src", "index.ts"));
+        const source = join(tokensRoot, "src", "index.ts");
+        return normalize(
+          existsSync(source) ? source : join(tokensRoot, "dist", "index.js")
+        );
+      }
+      if (id === "@aviala-design/tokens/project") {
+        const source = join(tokensRoot, "src", "project.ts");
+        return normalize(
+          existsSync(source) ? source : join(tokensRoot, "dist", "project.js")
+        );
       }
       const generated = GENERATED_FILES[id];
       if (generated) {
@@ -98,8 +117,9 @@ export default function avialaTokensCss(options = {}) {
       }
       const sub = /^@aviala-design\/tokens\/([\w-]+\.css)$/.exec(id);
       if (sub) {
-        const source = resolveStandaloneCssSource(tokensRoot, sub[1]);
-        if (source) return normalize(source);
+        const source = join(semanticDir, sub[1]);
+        if (/-(effects|extras)\.css$/.test(sub[1]) && existsSync(source))
+          return normalize(source);
       }
       // Force .ts/.tsx for relative imports inside tokens/src: vite resolves
       // extensionless imports .js-first, which would otherwise pick up stale
@@ -120,14 +140,20 @@ export default function avialaTokensCss(options = {}) {
       // Watch the token *sources* — including files like colors.css and the
       // ALD JSON that are never imported directly, so Vite would otherwise
       // never fire hotUpdate for them.
-      server.watcher.add([semanticDir, aldDir]);
+      server.watcher.add([
+        semanticDir,
+        nonColorDir,
+        aldDir,
+        themeBuilderDir,
+        standardProjectDir,
+      ]);
     },
 
-    handleHotUpdate({ file, server }) {
+    async handleHotUpdate({ file, server }) {
       const f = normalize(file);
       if (f.startsWith(cacheDir + "/") || !isSourceFile(f)) return;
 
-      generateAll();
+      await generateAll();
 
       const modules = [];
       for (const name of Object.values(GENERATED_FILES)) {

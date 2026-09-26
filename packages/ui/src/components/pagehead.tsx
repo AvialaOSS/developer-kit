@@ -1,16 +1,20 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "../lib/utils";
-import { Typeface } from "./typeface";
+import { Typography, type TypographyLevel } from "./typography";
 
 /** Figma Components → Structure Navigation → Pagehead (643:172156) */
 
-export type PageheadProps = HTMLAttributes<HTMLElement> & {
+export type PageheadProps = Omit<HTMLAttributes<HTMLElement>, "title"> & {
   /** Optional leading control (typically back button) */
   back?: ReactNode;
   /** Optional breadcrumb above the title */
   breadcrumb?: ReactNode;
   /** Primary title line */
   title?: ReactNode;
+  /** Shared typography scale; does not change the document heading hierarchy. */
+  titleLevel?: TypographyLevel;
+  /** Semantic title element, independent from its visual size. */
+  titleAs?: "span" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   /** Secondary caption under title */
   description?: ReactNode;
   /** Trailing actions slot */
@@ -24,6 +28,8 @@ export const Pagehead = forwardRef<HTMLElement, PageheadProps>(
       back,
       breadcrumb,
       title,
+      titleLevel = "text",
+      titleAs = "span",
       description,
       actions,
       children,
@@ -42,11 +48,14 @@ export const Pagehead = forwardRef<HTMLElement, PageheadProps>(
           ) : null}
           {title != null || description != null ? (
             <div className="aviala-pagehead__title">
-              <Typeface
-                content="textCaption"
-                primary={title}
-                secondary={description}
-              />
+              <div className="aviala-typeface" data-content="textCaption">
+                {title != null && <Typography as={titleAs} level={titleLevel} className={cn(
+                  "aviala-pagehead__text",
+                  ["display", "headline1", "headline2", "title"].includes(titleLevel) && "aviala-pagehead__heading",
+                  titleLevel === "caption" && "aviala-pagehead__description"
+                )}>{title}</Typography>}
+                {description != null && <Typography level="caption" className="aviala-pagehead__description">{description}</Typography>}
+              </div>
             </div>
           ) : null}
           {children}

@@ -1,0 +1,32 @@
+{
+  "directory": "C:\\Users\\MXrek\\AppData\\Local\\Temp\\spiral-release-check-cf358e01e26448579e62e320d698ee8b",
+  "consumer": "C:\\Users\\MXrek\\AppData\\Local\\Temp\\spiral-release-check-cf358e01e26448579e62e320d698ee8b/consumer",
+  "packages": [
+    {
+      "file": "aviala-design-icons-2.4.0.tgz",
+      "sha256": "cd7990e78b4d394022f398457f63246b141ac833e9fcf6a493be5c837d11f189"
+    },
+    {
+      "file": "aviala-design-spiral-3.0.0.tgz",
+      "sha256": "092f0dec7e730c64d69781750d68ccd5d5f40f37b6a64f4bf06b7b6dcb716310"
+    },
+    {
+      "file": "aviala-design-tokens-2.6.0.tgz",
+      "sha256": "4720837e048f9c8c85f882c0107f3af1b6bed1d33bd2856c46a2b20d79bac2ce"
+    }
+  ],
+  "checks": [
+    "tokens prepack: 7 tests",
+    "Fresh isolated install: 80 packages, local archives only for Spiral packages, no workspace links",
+    "Installed ESM/CJS Card heading and TimePicker seconds SSR; legacy HH:mm retained",
+    "Installed ESM/CJS canonical CSS string escaping",
+    "Card heading and seconds-column CSS included",
+    "Existing installed-package checks: Rate/RateIcon, ListItem, Alert, Avatar, MultiSelect, ButtonGroup, props, finite-wheel CSS and eight-mode Nested shadow"
+  ],
+  "limitations": [
+    "No browser visual, keyboard, wheel or touch acceptance",
+    "No Figma plugin interaction or font recovery",
+    "No remote publication"
+  ],
+  "script": "installed-package-check-20260924.mjs"
+}

@@ -5,8 +5,13 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { resolveOverlayContainer } from "./resolve-overlay-container";
 
 const OverlayContainerContext = createContext<HTMLElement | null>(null);
+const ThemeOverlayContainerContext = createContext<HTMLElement | null>(null);
+
+/** Theme scopes remain local when contained by the active overlay boundary. */
+export const ThemeOverlayContainerProvider = ThemeOverlayContainerContext.Provider;
 
 export type OverlayContainerProviderProps = {
   container: HTMLElement | null;
@@ -36,11 +41,12 @@ function readFullscreenElement(): HTMLElement | null {
 
 /**
  * Portal target for floating layers.
- * Fullscreen element wins (browser only paints that subtree), then a nested
- * overlay container (Modal), otherwise `document.body`.
+ * Fullscreen and Modal define the boundary. A local theme inside that boundary
+ * retains inheritance; unrelated theme containers cannot escape the boundary.
  */
 export function useOverlayPortalContainer(): HTMLElement | undefined {
   const nested = useContext(OverlayContainerContext);
+  const theme = useContext(ThemeOverlayContainerContext);
   const [fullscreen, setFullscreen] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -54,5 +60,5 @@ export function useOverlayPortalContainer(): HTMLElement | undefined {
     };
   }, []);
 
-  return fullscreen ?? nested ?? undefined;
+  return resolveOverlayContainer(fullscreen, nested, theme);
 }

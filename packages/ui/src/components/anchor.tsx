@@ -1,7 +1,9 @@
 import { Slot } from "@radix-ui/react-slot";
 import {
   createElement,
+  cloneElement,
   forwardRef,
+  isValidElement,
   type AnchorHTMLAttributes,
   type HTMLAttributes,
   type ReactNode,
@@ -35,6 +37,8 @@ export type AnchorItemProps = Omit<
   activated?: boolean;
   indentLevel?: AnchorIndentLevel;
   asChild?: boolean;
+  /** Optional secondary caption, matching the Figma Text+Caption slot. */
+  description?: ReactNode;
   children: ReactNode;
 };
 
@@ -45,12 +49,36 @@ export const AnchorItem = forwardRef<HTMLAnchorElement, AnchorItemProps>(
       activated = false,
       indentLevel = 0,
       asChild = false,
+      description,
       children,
       ...props
     },
     ref
   ) => {
     const Comp = asChild ? Slot : "a";
+    const child = asChild && isValidElement<AnchorHTMLAttributes<HTMLAnchorElement>>(children)
+      ? children
+      : undefined;
+    const content = child ? child.props.children : children;
+    const inner = (
+      <>
+        <span className="aviala-anchor-item__rail" aria-hidden />
+        <span className="aviala-anchor-item__content">
+          <span className="aviala-anchor-item__surface">
+            <span className="aviala-anchor-item__text">
+              <Typography level="text" as="span" className="aviala-anchor-item__label">
+                {content}
+              </Typography>
+              {description != null && (
+                <Typography level="caption" as="span" className="aviala-anchor-item__description">
+                  {description}
+                </Typography>
+              )}
+            </span>
+          </span>
+        </span>
+      </>
+    );
 
     return (
       <Comp
@@ -58,18 +86,10 @@ export const AnchorItem = forwardRef<HTMLAnchorElement, AnchorItemProps>(
         className={cn("aviala-anchor-item aviala-focus-ring", className)}
         data-activated={activated ? "true" : "false"}
         data-indent={String(indentLevel)}
+        aria-current={activated ? "location" : undefined}
         {...props}
       >
-        <span className="aviala-anchor-item__rail" aria-hidden />
-        <span className="aviala-anchor-item__content">
-          <Typography
-            level="text"
-            as="span"
-            className="aviala-anchor-item__label"
-          >
-            {children}
-          </Typography>
-        </span>
+        {child ? cloneElement(child, {}, inner) : inner}
       </Comp>
     );
   }

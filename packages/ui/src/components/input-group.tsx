@@ -13,7 +13,7 @@ export const InputGroup = forwardRef<HTMLDivElement, InputGroupProps>(
       className={cn(
         "flex",
         orientation === "horizontal"
-          ? "flex-row items-center gap-[var(--gap-component,8px)]"
+          ? "flex-row items-center gap-[var(--input-group-gap,var(--input-group-size-gap))]"
           : "flex-col gap-[var(--gap-inside,4px)]",
         className
       )}
@@ -23,6 +23,14 @@ export const InputGroup = forwardRef<HTMLDivElement, InputGroupProps>(
 );
 InputGroup.displayName = "InputGroup";
 
+/** Figma InputGroupInput: optional prefix and an independently styled input. */
+export const InputGroupItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("flex min-w-0 items-center gap-[var(--input-group-input-size-gap)]", className)} {...props} />
+  )
+);
+InputGroupItem.displayName = "InputGroupItem";
+
 export const InputGroupAddon = forwardRef<
   HTMLDivElement,
   HTMLAttributes<HTMLDivElement>
@@ -31,7 +39,8 @@ export const InputGroupAddon = forwardRef<
     ref={ref}
     className={cn(
       "flex items-center shrink-0",
-      typographyVariants({ level: "caption" }),
+      typographyVariants({ level: "text" }),
+      "aviala-input-group-addon",
       className
     )}
     {...props}

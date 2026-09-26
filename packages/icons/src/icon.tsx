@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import { applyAvialaIconProps } from "./icon-size";
+import { IconFrame, type IconLineHeightFix } from "./icon-frame";
 import {
   DEFAULT_ICON_MODE,
   DEFAULT_ICON_THICKNESS,
@@ -11,6 +12,8 @@ export type IconProps = AvialaIconProps & {
   /** Explicit pixel/CSS size; ignored when `level` is set unless both width and height are provided */
   size?: number | string;
   title?: string;
+  /** Align the outer box to shared Typography; the SVG size stays independent. */
+  lineHeightFix?: IconLineHeightFix | boolean;
 };
 
 export function Icon({
@@ -24,6 +27,7 @@ export function Icon({
   className,
   width,
   height,
+  lineHeightFix = "off",
   ...props
 }: IconProps) {
   const ariaProps = title
@@ -42,13 +46,16 @@ export function Icon({
     ...props,
   });
 
-  return (
+  const glyph = (
     <IconComponent
       {...ariaProps}
       {...svgProps}
       thickness={thickness}
       mode={mode}
     />
+  );
+  return lineHeightFix === false || lineHeightFix === "off" ? glyph : (
+    <IconFrame level={level} lineHeightFix={lineHeightFix}>{glyph}</IconFrame>
   );
 }
 

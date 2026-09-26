@@ -19,6 +19,7 @@ import { useRtl } from "../config";
 import { cn } from "../lib/utils";
 import { useLocaleMessages } from "../locale";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
+import { Button } from "./button";
 import { Typography, type TypographyLevel } from "./typography";
 
 /** Figma Components → Structure Navigation → Breadcrumb (622:7883) */
@@ -71,12 +72,14 @@ export type BreadcrumbItemProps = ComponentPropsWithoutRef<"li"> & {
   href?: string;
   current?: boolean;
   icon?: ReactNode;
+  /** Optional caption in the default-size variant; small remains single-line. */
+  description?: ReactNode;
   onClick?: () => void;
 };
 
 export const BreadcrumbItem = forwardRef<HTMLLIElement, BreadcrumbItemProps>(
   (
-    { className, href, current = false, icon, onClick, children, ...props },
+    { className, href, current = false, icon, description, onClick, children, ...props },
     ref
   ) => {
     const size = useContext(BreadcrumbSizeContext);
@@ -85,6 +88,7 @@ export const BreadcrumbItem = forwardRef<HTMLLIElement, BreadcrumbItemProps>(
         {icon ? (
           <span className="aviala-breadcrumb-item__icon">{icon}</span>
         ) : null}
+        <span className="aviala-breadcrumb-item__text">
         {children != null ? (
           <Typography
             level={breadcrumbTypeLevel(size)}
@@ -94,6 +98,10 @@ export const BreadcrumbItem = forwardRef<HTMLLIElement, BreadcrumbItemProps>(
             {children}
           </Typography>
         ) : null}
+        {size === "default" && description != null ? (
+          <Typography level="caption" as="span" className="aviala-breadcrumb-item__description">{description}</Typography>
+        ) : null}
+        </span>
       </>
     );
 
@@ -103,6 +111,7 @@ export const BreadcrumbItem = forwardRef<HTMLLIElement, BreadcrumbItemProps>(
         className={cn("aviala-breadcrumb-item-wrap", className)}
         {...props}
       >
+        <span className="aviala-breadcrumb-item__wrapper">
         {href != null ? (
           <a
             href={href}
@@ -131,6 +140,7 @@ export const BreadcrumbItem = forwardRef<HTMLLIElement, BreadcrumbItemProps>(
             {label}
           </span>
         )}
+        </span>
       </li>
     );
   }
@@ -154,9 +164,11 @@ export const BreadcrumbSeparator = forwardRef<
       className={cn("aviala-breadcrumb-separator", className)}
       {...props}
     >
+      <span className="aviala-breadcrumb-item__wrapper"><span className="aviala-breadcrumb-separator__content">
       <Typography level={breadcrumbTypeLevel(size)} as="span">
         {children}
       </Typography>
+      </span></span>
     </li>
   );
 });
@@ -292,22 +304,22 @@ export const BreadcrumbEllipsis = forwardRef<
       [isControlled, onActivatedChange]
     );
 
-    /* Figma Small Storage item button still uses 14px SymbolMore */
-    const iconSize = 14;
     const icon = children ?? (
       <SymbolMore
-        width={iconSize}
-        height={iconSize}
         thickness="Light"
         aria-hidden
       />
     );
 
     const trigger = (
-      <button
+      <Button
         type="button"
-        className="aviala-breadcrumb-ellipsis aviala-focus-ring"
-        data-size={size}
+        mode="noBackgroundCustom"
+        size="tiny"
+        iconOnly
+        compact
+        leftIcon={icon}
+        className="aviala-breadcrumb-ellipsis"
         data-activated={activated ? "true" : undefined}
         aria-label={ariaLabel ?? locale.showMore}
         aria-expanded={menu != null ? activated : undefined}
@@ -318,16 +330,17 @@ export const BreadcrumbEllipsis = forwardRef<
           if (menu == null) setActivated(!activated);
         }}
         {...props}
-      >
-        {icon}
-      </button>
+      />
     );
 
     return (
       <li
         ref={ref}
         className={cn("aviala-breadcrumb-ellipsis-wrap", className)}
+        data-size={size}
       >
+        <span className="aviala-breadcrumb-ellipsis__wrapper">
+        <span className="aviala-breadcrumb-ellipsis__content">
         {menu != null ? (
           <Popover open={activated} onOpenChange={setActivated}>
             <PopoverTrigger asChild>{trigger}</PopoverTrigger>
@@ -347,6 +360,8 @@ export const BreadcrumbEllipsis = forwardRef<
         ) : (
           trigger
         )}
+        </span>
+        </span>
       </li>
     );
   }

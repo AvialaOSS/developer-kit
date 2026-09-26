@@ -32,7 +32,7 @@ export function VideoVolume({
             aria-label={label}
             onValueChange={(values) => onPercentChange(values[0] ?? 0)}
           />
-          <Typography level="text">{`${percent}%`}</Typography>
+          <Typography className="aviala-video__control-label" level="text">{`${percent}%`}</Typography>
         </div>
       </PopoverContent>
     </Popover>

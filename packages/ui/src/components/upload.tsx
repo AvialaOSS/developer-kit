@@ -103,6 +103,7 @@ export const Upload = forwardRef<HTMLDivElement, UploadProps>(
     };
 
     return (
+      <div className="aviala-upload-layout" data-style={resolvedStyle}>
       <div
         ref={ref}
         role="button"
@@ -145,7 +146,10 @@ export const Upload = forwardRef<HTMLDivElement, UploadProps>(
           {...inputProps}
         />
         <span className="aviala-upload__icon" aria-hidden>
-          <GeneralUpload width={16} height={16} />
+          <GeneralUpload
+            width={resolvedStyle === "default" ? "var(--button-regular-icon-size, var(--button-size-regular-icon-width))" : 16}
+            height={resolvedStyle === "default" ? "var(--button-regular-icon-size, var(--button-size-regular-icon-width))" : 16}
+          />
         </span>
         {resolvedStyle === "large" ? (
           <Typeface
@@ -159,6 +163,7 @@ export const Upload = forwardRef<HTMLDivElement, UploadProps>(
             {resolvedLabel}
           </Typography>
         )}
+      </div>
       </div>
     );
   }

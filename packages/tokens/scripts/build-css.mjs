@@ -3,6 +3,7 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   buildAldThemeCss,
+  buildComponentTokenCss,
   buildCombinedStylesCss,
   listStandaloneCssFiles,
 } from "./css-lib.mjs";
@@ -20,11 +21,15 @@ mkdirSync(distDir, { recursive: true });
 
 writeFileSync(join(distDir, "styles.css"), buildCombinedStylesCss(root));
 writeFileSync(join(distDir, "ald-theme.css"), buildAldThemeCss(root));
+writeFileSync(
+  join(distDir, "component-tokens.css"),
+  buildComponentTokenCss(root)
+);
 
 for (const { name, path } of listStandaloneCssFiles(root)) {
   writeFileSync(join(distDir, name), readFileSync(path, "utf8"));
 }
 
 console.log(
-  "Built dist/styles.css + dist/ald-theme.css + component effects (including badge/progress/layout/information-*/structure-navigation-extras)"
+  "Built dist/styles.css + dist/ald-theme.css + dist/component-tokens.css + component effects (including badge/progress/layout/information-*/structure-navigation-extras)"
 );

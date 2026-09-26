@@ -1,0 +1,98 @@
+[
+  {
+    "engineId": "token_fedf9fa7f7d1055819b017420007737e",
+    "externalId": "VariableID:239:53",
+    "collection": "Aviala Design Colors",
+    "path": "success/success-11",
+    "source": "ald/Aviala Design Colors",
+    "fileIdentityVerified": false
+  },
+  {
+    "engineId": "token_0481a334586c8725330f64b74871d9b7",
+    "externalId": "VariableID:239:54",
+    "collection": "Aviala Design Colors",
+    "path": "success/success-12",
+    "source": "ald/Aviala Design Colors",
+    "fileIdentityVerified": false
+  },
+  {
+    "engineId": "token_e88a455845f6f379f5f5538443c41a49",
+    "externalId": "VariableID:239:55",
+    "collection": "Aviala Design Colors",
+    "path": "warning/warning-1",
+    "source": "ald/Aviala Design Colors",
+    "fileIdentityVerified": false
+  },
+  {
+    "engineId": "token_2f1e843d7cb8a609d71c5de7db443aa1",
+    "externalId": "VariableID:239:65",
+    "collection": "Aviala Design Colors",
+    "path": "warning/warning-11",
+    "source": "ald/Aviala Design Colors",
+    "fileIdentityVerified": false
+  },
+  {
+    "engineId": "token_088f8aea8c576795ebc92292d304f324",
+    "externalId": "VariableID:239:66",
+    "collection": "Aviala Design Colors",
+    "path": "warning/warning-12",
+    "source": "ald/Aviala Design Colors",
+    "fileIdentityVerified": false
+  },
+  {
+    "engineId": "token_ebfdfb032c68a9e296200e02142810cd",
+    "externalId": "VariableID:239:77",
+    "collection": "Aviala Design Colors",
+    "path": "error/error-11",
+    "source": "ald/Aviala Design Colors",
+    "fileIdentityVerified": false
+  },
+  {
+    "engineId": "token_e88dcd4a72ee163f94aaae0d745e384d",
+    "externalId": "VariableID:239:78",
+    "collection": "Aviala Design Colors",
+    "path": "error/error-12",
+    "source": "ald/Aviala Design Colors",
+    "fileIdentityVerified": false
+  },
+  {
+    "engineId": "token_25f1279d55e2fed3dd546cb8b712f9e3",
+    "externalId": "VariableID:239:89",
+    "collection": "Aviala Design Colors",
+    "path": "info/info-11",
+    "source": "ald/Aviala Design Colors",
+    "fileIdentityVerified": false
+  },
+  {
+    "engineId": "token_2bcc09ca71e8086fe1ad3ea7a160f003",
+    "externalId": "VariableID:239:90",
+    "collection": "Aviala Design Colors",
+    "path": "info/info-12",
+    "source": "ald/Aviala Design Colors",
+    "fileIdentityVerified": false
+  },
+  {
+    "engineId": "token_b3fae9f4cafa574abaad02f517a11f23",
+    "externalId": "VariableID:239:99",
+    "collection": "Aviala Design Colors",
+    "path": "neutral/neutral-9",
+    "source": "ald/Aviala Design Colors",
+    "fileIdentityVerified": false
+  },
+  {
+    "engineId": "token_a553fd67122b6faf8354bf8f77712ddb",
+    "externalId": "VariableID:239:102",
+    "collection": "Aviala Design Colors",
+    "path": "neutral/neutral-12",
+    "source": "ald/Aviala Design Colors",
+    "fileIdentityVerified": false
+  },
+  {
+    "engineId": "token_f435c2b27e76a5302510a3a85f839bb3",
+    "externalId": "VariableID:239:149",
+    "collection": "Aviala Design Colors",
+    "path": "primary/primary-11",
+    "source": "ald/Aviala Design Colors",
+    "fileIdentityVerified": false
+  }
+]

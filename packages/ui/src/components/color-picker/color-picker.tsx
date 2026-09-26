@@ -7,7 +7,7 @@ import {
 } from "react";
 import { spiralDebugId } from "../../lib/spiral-debug";
 import { cn } from "../../lib/utils";
-import { useOverlayPortalContainer } from "../../overlay/overlay-container";
+import { ThemeOverlayContainerProvider, useOverlayPortalContainer } from "../../overlay/overlay-container";
 import { useLocaleMessages } from "../../locale";
 import { ColorPickerArea } from "./color-picker-area";
 import {
@@ -53,6 +53,7 @@ export function ColorPicker({
   onOpenChange,
 }: ColorPickerProps) {
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+  const [overlayScope, setOverlayScope] = useState<HTMLDivElement | null>(null);
   const open = controlledOpen ?? uncontrolledOpen;
 
   const handleOpenChange = (next: boolean) => {
@@ -82,6 +83,7 @@ export function ColorPicker({
   };
 
   return (
+    <ThemeOverlayContainerProvider value={overlayScope}>
     <ColorPickerContextProvider value={contextValue}>
       <PopoverPrimitive.Root
         open={open}
@@ -89,6 +91,7 @@ export function ColorPicker({
         modal={false}
       >
         <div
+          ref={setOverlayScope}
           className={cn("inline-flex", className)}
           {...spiralDebugId("color-picker")}
         >
@@ -96,6 +99,7 @@ export function ColorPicker({
         </div>
       </PopoverPrimitive.Root>
     </ColorPickerContextProvider>
+    </ThemeOverlayContainerProvider>
   );
 }
 
@@ -121,6 +125,8 @@ export type ColorPickerTriggerProps = ComponentPropsWithoutRef<
   size?: "regular" | "big";
   allRound?: boolean;
   placeholder?: string;
+  leadingIcon?: ReactNode;
+  trailingIcon?: ReactNode;
   className?: string;
 };
 
@@ -129,7 +135,7 @@ export const ColorPickerTrigger = forwardRef<
   ColorPickerTriggerProps
 >(
   (
-    { className, size = "regular", allRound = false, placeholder, ...props },
+    { className, size = "regular", allRound = false, placeholder, leadingIcon, trailingIcon, ...props },
     ref
   ) => {
     const locale = useLocaleMessages("ColorPicker");
@@ -153,6 +159,7 @@ export const ColorPickerTrigger = forwardRef<
           disabled={disabled}
           {...props}
         >
+          {leadingIcon != null && <span className="aviala-color-picker-trigger__icon" aria-hidden>{leadingIcon}</span>}
           <span
             className="aviala-color-picker-trigger__swatch"
             {...spiralDebugId("color-picker.trigger.swatch")}
@@ -167,14 +174,17 @@ export const ColorPickerTrigger = forwardRef<
             className="aviala-color-picker-trigger__value"
             {...spiralDebugId("color-picker.trigger.value")}
           >
-            {value ? (
-              value.replace(/^#/, "").slice(0, 6).toUpperCase()
-            ) : (
-              <span className="aviala-color-picker-trigger__placeholder">
-                {resolvedPlaceholder}
-              </span>
-            )}
+            <span className="aviala-color-picker-trigger__text">
+              {value ? (
+                value.replace(/^#/, "").slice(0, 6).toUpperCase()
+              ) : (
+                <span className="aviala-color-picker-trigger__placeholder">
+                  {resolvedPlaceholder}
+                </span>
+              )}
+            </span>
           </span>
+          {trailingIcon != null && <span className="aviala-color-picker-trigger__icon" aria-hidden>{trailingIcon}</span>}
         </button>
       </PopoverPrimitive.Trigger>
     );

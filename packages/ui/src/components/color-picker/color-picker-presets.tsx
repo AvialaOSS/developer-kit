@@ -59,7 +59,7 @@ export function ColorPickerPresets({
         <ColorPickButton
           key={color}
           color={color}
-          selected={value === color}
+          selected={value != null && parseColor(value).toHex() === parseColor(color).toHex()}
           disabled={isDisabled}
           onClick={() => setValue?.(color, { source: "preset" })}
         />

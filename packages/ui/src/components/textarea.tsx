@@ -193,7 +193,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {renderSlotIcon(
           leftIcon,
           "aviala-textarea__slot",
-          "textarea.left-icon"
+          "textarea.left-icon",
+          "var(--input-slot-icon-size, var(--textarea-input-size-icon-width))"
         )}
 
         <div
@@ -232,7 +233,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {renderSlotIcon(
           rightIcon,
           "aviala-textarea__slot",
-          "textarea.right-icon"
+          "textarea.right-icon",
+          "var(--input-slot-icon-size, var(--textarea-input-size-icon-width))"
         )}
 
         {showController ? (
@@ -259,7 +261,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               onPointerDown={handleResizePointerDown}
               {...spiralDebugId("textarea.resize")}
             >
-              <SymbolResize thickness="Regular" mode="default" aria-hidden />
+              <SymbolResize thickness="Regular" mode="default" width="var(--controller-size-icon-width)" height="var(--controller-size-icon-width)" aria-hidden />
             </button>
           </div>
         ) : null}

@@ -1,36 +1,36 @@
 /* Link / Switch / Segmentator — import outside Tailwind to preserve var() chains */
 
 :root {
-  --link-fg-theme: var(--text-text-theme-primary-black, #bf2300);
-  --link-fg-custom: var(--text-text-normal-text-black, #262525);
-  --button-no-bg-hover: var(--aviala-interaction-ghost-hover, #f9f8f8);
-  --button-no-bg-active: var(--aviala-interaction-ghost-active, #f0efef);
-  --button-no-bg-custom-hover: var(--aviala-interaction-ghost-hover, #f9f8f8);
-  --button-no-bg-custom-active: var(--aviala-interaction-ghost-active, #f0efef);
+  --_legacy-link-fg-theme: var(--text-text-theme-primary-black, #bf2300);
+  --_legacy-link-fg-custom: var(--text-text-normal-text-black, #262525);
+  --_legacy-button-no-bg-hover: var(--aviala-interaction-ghost-hover, #f9f8f8);
+  --_legacy-button-no-bg-active: var(--aviala-interaction-ghost-active, #f0efef);
+  --_legacy-button-no-bg-custom-hover: var(--aviala-interaction-ghost-hover, #f9f8f8);
+  --_legacy-button-no-bg-custom-active: var(--aviala-interaction-ghost-active, #f0efef);
 
   --switch-width: 34px;
   --switch-height-regular: 22px;
   --switch-height-small: 20px;
-  --switch-track-bg: var(--control-control-normal-background-3, #d6d5d4);
+  --_legacy-switch-track-bg: var(--control-control-normal-background-3, #d6d5d4);
   --switch-hover-bg: var(--aviala-neutral-neutral-7, #c4c2c2);
   --switch-press-bg: var(--aviala-neutral-neutral-8, #afadad);
-  --switch-checked-bg: var(--control-control-theme-background, #ff5532);
-  --switch-checked-bg-hover: var(--button-primary-bg-hover, #e92d00);
-  --switch-checked-bg-active: var(--button-primary-bg-active, #ff7b5b);
-  --switch-thumb-bg: var(
+  --_legacy-switch-checked-bg: var(--control-control-theme-background, #ff5532);
+  --switch-checked-bg-hover: var(--button-primary-bg-hover, var(--_legacy-button-primary-bg-hover, #e92d00));
+  --switch-checked-bg-active: var(--button-primary-bg-active, var(--_legacy-button-primary-bg-active, #ff7b5b));
+  --_legacy-switch-thumb-bg: var(
     --control-control-normal-background-whiteonly,
     #ffffff
   );
-  --switch-thumb-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.06);
+  --_legacy-switch-thumb-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.06);
   --switch-thumb-size-regular: 18px;
   --switch-thumb-size-small: 16px;
-  --switch-padding: var(--padding-min, 2px);
+  --_legacy-switch-padding: var(--padding-min, 2px);
   --switch-thumb-travel-regular: calc(
-    var(--switch-width) - 2 * var(--switch-padding) -
+    var(--switch-width) - 2 * var(--switch-padding, var(--_legacy-switch-padding)) -
       var(--switch-thumb-size-regular)
   );
   --switch-thumb-travel-small: calc(
-    var(--switch-width) - 2 * var(--switch-padding) -
+    var(--switch-width) - 2 * var(--switch-padding, var(--_legacy-switch-padding)) -
       var(--switch-thumb-size-small)
   );
   /*
@@ -76,8 +76,8 @@
     ),
     linear-gradient(
       90deg,
-      var(--switch-checked-bg) 0%,
-      var(--switch-checked-bg) 100%
+      var(--switch-checked-bg, var(--_legacy-switch-checked-bg)) 0%,
+      var(--switch-checked-bg, var(--_legacy-switch-checked-bg)) 100%
     );
   --switch-checked-surface-hover:
     linear-gradient(
@@ -102,28 +102,12 @@
       var(--switch-checked-bg-active, #ff7b5b) 100%
     );
   /* Gloss only — solid fill uses background-color so hover/press can ease. */
-  --switch-checked-gloss: linear-gradient(
+  --_legacy-switch-checked-gloss: linear-gradient(
     180deg,
     color-mix(in srgb, var(--button-gloss-color, #ffe9e5) 20%, transparent) 0%,
     transparent 36%
   );
 
-  --segmentator-bg: var(--control-control-normal-lightbackground-1, #f0efef);
-  --segmentator-bg-hover: var(--aviala-interaction-filled-hover, #e5e4e3);
-  --segmentator-selected-bg: var(
-    --control-control-normal-background-whiteonly,
-    #ffffff
-  );
-  --segmentator-selected-fg: var(--text-text-theme-primary-black, #bf2300);
-  --segmentator-fg: var(--text-text-normal-text-black, #262525);
-  --segmentator-tiled-bg: var(--box-box-theme-secondarybackground, #ffdad2);
-  --segmentator-shadow-selected: 0 4px 8px rgba(0, 0, 0, 0.06);
-  --segmentator-shadow-tiled: inset 0 -0.5px 0 rgba(0, 0, 0, 0.04);
-  --segmentator-item-hover-bg: var(--aviala-interaction-filled-hover, #e5e4e3);
-  --segmentator-item-active-bg: var(
-    --aviala-interaction-filled-active,
-    #d6d5d4
-  );
   --segmentator-press-scale: 0.98;
   --segmentator-press-height-scale: 0.88;
   --segmentator-press-transition-duration: var(
@@ -135,21 +119,10 @@
     cubic-bezier(0.22, 1.1, 0.36, 1)
   );
 
-  --segmentator-group-padding: var(--padding-min, 2px);
-  --segmentator-group-gap: var(--gap-inside, 4px);
-  --segmentator-group-radius: var(--border-radius-small, 8px);
-  --segmentator-item-gap: var(--gap-inside-space, 6px);
   --segmentator-item-line-height: var(--line-height-regular, 1.125rem);
-  --segmentator-icon-slot-height: var(--line-height-regular, 1.125rem);
-  --segmentator-item-nested-padding-y: var(--padding-tiny, 4px);
-  --segmentator-item-nested-padding-x: var(--padding-small, 6px);
-  --segmentator-item-nested-radius: var(--border-radius-extra-small-2, 6px);
-  --segmentator-item-tiled-padding-y: var(--padding-small, 6px);
-  --segmentator-item-tiled-padding-x: var(--padding-middle, 10px);
-  --segmentator-item-tiled-radius: var(--border-radius-small, 8px);
 }
 
-/* ---- Link (noBackground series — mirrors Button noBackground / noBackgroundCustom) ---- */
+/* ---- Link component tokens ---- */
 .aviala-link {
   display: inline-flex;
   flex-shrink: 0;
@@ -157,74 +130,82 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: var(--border-radius-extra-small-2, 6px);
-  background-color: transparent;
+  border-radius: var(--_link-radius);
+  padding: var(--_link-padding-y) var(--_link-padding-x);
+  gap: var(--_link-gap);
   font-family: var(--font-sans);
-  font-weight: var(--font-weight-regular, 400);
+  font-weight: var(--font-weight-regular);
   text-decoration: none;
   transition: background-color 250ms ease;
 }
-
-.aviala-link[data-mode="noBackground"] {
-  color: var(--link-fg-theme);
+.aviala-link .aviala-typography { color: inherit; }
+.aviala-link__icon {
+  box-sizing: border-box;
+  width: var(--_link-icon-width);
+  height: var(--_link-icon-height);
+}
+.aviala-link__icon:not([data-custom-icon-size="true"]) {
+  --icon-size-caption-bigger: var(--_link-glyph-width);
+  --icon-size-text-bigger: var(--_link-glyph-width);
+}
+.aviala-link--icon-only > .aviala-link__icon {
+  width: var(--_link-only-width);
+  padding-inline: var(--_link-only-icon-padding);
+  --_link-glyph-width: calc(var(--_link-only-width) - 2 * var(--_link-only-icon-padding));
+}
+.aviala-link[data-disabled="true"] { pointer-events: none; cursor: not-allowed; }
+.aviala-link[data-disabled="true"] > .aviala-link__icon,
+.aviala-link[data-disabled="true"] > .aviala-link__label {
+  opacity: var(--button-disabled-opacity, var(--link-transparency-disabled));
 }
 
-.aviala-link[data-mode="noBackgroundCustom"] {
-  color: var(--link-fg-custom);
+.aviala-link--caption {
+  --_link-padding-x: var(--link-size-caption-padding-x);
+  --_link-padding-y: var(--link-size-caption-padding-y);
+  --_link-gap: var(--link-size-caption-gap);
+  --_link-radius: var(--link-size-caption-radius);
+  --_link-icon-width: var(--link-size-caption-icon-width);
+  --_link-icon-height: var(--link-size-caption-icon-height);
+  --_link-glyph-width: var(--_link-icon-width);
+  --_link-only-width: var(--link-size-caption-icon-only-width);
+  --_link-only-icon-padding: var(--link-size-caption-icon-only-icon-padding-x);
 }
+.aviala-link--caption.aviala-link--icon-only { --_link-padding-x: var(--link-size-caption-icon-only-padding-x); }
+.aviala-link--caption[data-mode="noBackground"] { color: var(--link-fg-theme, var(--link-color-caption-no-background-text-default)); background-color: var(--link-color-caption-no-background-background-default); }
+.aviala-link--caption[data-mode="noBackground"] > .aviala-link__icon { color: var(--link-fg-theme, var(--link-color-caption-no-background-icon-default)); }
+.aviala-link--caption[data-mode="noBackground"]:hover:not([data-disabled="true"]) { background-color: var(--button-no-bg-hover, var(--link-color-caption-no-background-background-hover)); }
+.aviala-link--caption[data-mode="noBackground"]:active:not([data-disabled="true"]) { background-color: var(--button-no-bg-active, var(--link-color-caption-no-background-background-active)); }
+.aviala-link--caption[data-mode="noBackgroundCustom"] { color: var(--link-fg-custom, var(--link-color-caption-no-background-custom-text-default)); background-color: var(--link-color-caption-no-background-custom-background-default); }
+.aviala-link--caption[data-mode="noBackgroundCustom"] > .aviala-link__icon { color: var(--link-fg-custom, var(--link-color-caption-no-background-custom-icon-default)); }
+.aviala-link--caption[data-mode="noBackgroundCustom"]:hover:not([data-disabled="true"]) { background-color: var(--button-no-bg-custom-hover, var(--link-color-caption-no-background-custom-background-hover)); }
+.aviala-link--caption[data-mode="noBackgroundCustom"]:active:not([data-disabled="true"]) { background-color: var(--button-no-bg-custom-active, var(--link-color-caption-no-background-custom-background-active)); }
 
-.aviala-link[data-mode="noBackground"]:hover:not([data-disabled="true"]) {
-  background-color: var(--button-no-bg-hover);
-}
-
-.aviala-link[data-mode="noBackgroundCustom"]:hover:not([data-disabled="true"]) {
-  background-color: var(--button-no-bg-custom-hover);
-}
-
-.aviala-link[data-mode="noBackground"]:active:not([data-disabled="true"]),
-.aviala-link[data-mode="noBackground"]:hover:active:not(
-    [data-disabled="true"]
-  ) {
-  background-color: var(--button-no-bg-active);
-}
-
-.aviala-link[data-mode="noBackgroundCustom"]:active:not([data-disabled="true"]),
-.aviala-link[data-mode="noBackgroundCustom"]:hover:active:not(
-    [data-disabled="true"]
-  ) {
-  background-color: var(--button-no-bg-custom-active);
-}
-
-.aviala-link[data-disabled="true"] {
-  pointer-events: none;
-  cursor: not-allowed;
-  opacity: var(--button-disabled-opacity, 0.55);
-}
-
-.aviala-link--caption,
 .aviala-link--text {
-  /* Level markers emitted by Link; sizing comes from .aviala-typography on the label span. */
+  --_link-padding-x: var(--link-size-text-padding-x);
+  --_link-padding-y: var(--link-size-text-padding-y);
+  --_link-gap: var(--link-size-text-gap);
+  --_link-radius: var(--link-size-text-radius);
+  --_link-icon-width: var(--link-size-text-icon-width);
+  --_link-icon-height: var(--link-size-text-icon-height);
+  --_link-glyph-width: var(--_link-icon-width);
+  --_link-only-width: var(--link-size-text-icon-only-width);
+  --_link-only-icon-padding: var(--link-size-text-icon-only-icon-padding-x);
 }
-
-.aviala-link .aviala-typography {
-  color: inherit;
-}
-
-.aviala-link--icon-only {
-  gap: 0;
-  padding: var(--padding-min, 2px) var(--padding-smaller, 5px);
-}
-
-.aviala-link:not(.aviala-link--icon-only) {
-  gap: var(--gap-inside-space, 6px);
-  padding: var(--padding-min, 2px) var(--padding-small, 6px);
-}
+.aviala-link--text.aviala-link--icon-only { --_link-padding-x: var(--link-size-text-icon-only-padding-x); }
+.aviala-link--text[data-mode="noBackground"] { color: var(--link-fg-theme, var(--link-color-text-no-background-text-default)); background-color: var(--link-color-text-no-background-background-default); }
+.aviala-link--text[data-mode="noBackground"] > .aviala-link__icon { color: var(--link-fg-theme, var(--link-color-text-no-background-icon-default)); }
+.aviala-link--text[data-mode="noBackground"]:hover:not([data-disabled="true"]) { background-color: var(--button-no-bg-hover, var(--link-color-text-no-background-background-hover)); }
+.aviala-link--text[data-mode="noBackground"]:active:not([data-disabled="true"]) { background-color: var(--button-no-bg-active, var(--link-color-text-no-background-background-active)); }
+.aviala-link--text[data-mode="noBackgroundCustom"] { color: var(--link-fg-custom, var(--link-color-text-no-background-custom-text-default)); background-color: var(--link-color-text-no-background-custom-background-default); }
+.aviala-link--text[data-mode="noBackgroundCustom"] > .aviala-link__icon { color: var(--link-fg-custom, var(--link-color-text-no-background-custom-icon-default)); }
+.aviala-link--text[data-mode="noBackgroundCustom"]:hover:not([data-disabled="true"]) { background-color: var(--button-no-bg-custom-hover, var(--link-color-text-no-background-custom-background-hover)); }
+.aviala-link--text[data-mode="noBackgroundCustom"]:active:not([data-disabled="true"]) { background-color: var(--button-no-bg-custom-active, var(--link-color-text-no-background-custom-background-active)); }
 
 /* ---- Anchor (in-page TOC) ---- */
 .aviala-anchor {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-none, 0);
+  gap: var(--anchor-size-gap);
   width: 100%;
 }
 
@@ -232,7 +213,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: var(--padding-none, 0);
+  padding: var(--anchor-item-size-padding-y) var(--anchor-item-size-padding-x);
   border: 0;
   background: transparent;
   text-decoration: none;
@@ -241,60 +222,74 @@
 }
 
 .aviala-anchor-item[data-indent="0"] {
-  gap: var(--gap-inside, 4px);
+  gap: var(--anchor-item-size-level-0-gap);
 }
 
 .aviala-anchor-item[data-indent="1"] {
-  gap: var(--gap-content-space, 10px);
+  gap: var(--anchor-item-size-level-1-gap);
 }
 
 .aviala-anchor-item[data-indent="2"] {
-  gap: var(--gap-chapter-space, 18px);
+  gap: var(--anchor-item-size-level-2-gap);
 }
 
 .aviala-anchor-item[data-indent="3"] {
-  gap: var(--gap-page-space, 24px);
+  gap: var(--anchor-item-size-level-3-gap);
 }
 
 .aviala-anchor-item__rail {
   align-self: stretch;
-  width: 1px;
+  width: var(--anchor-item-size-stroke-width);
   flex-shrink: 0;
-  background: var(--border-border-normal-3, #d6d5d4);
+  background: var(--anchor-item-color-unselected-border-default);
 }
 
 .aviala-anchor-item[data-activated="true"] .aviala-anchor-item__rail {
-  background: var(--text-text-theme-primary-black, var(--primary, #bf2300));
+  background: var(--anchor-item-color-selected-border-default);
 }
 
 .aviala-anchor-item__content {
   flex: 1 1 auto;
   min-width: 0;
-  padding: var(--padding-min, 2px) 0;
+  padding: var(--anchor-item-size-wrapper-padding-y) 0;
 }
 
-.aviala-anchor-item__content > .aviala-anchor-item__label {
+.aviala-anchor-item__surface {
   display: block;
-  padding: var(--padding-none, 0) var(--padding-tiny, 4px);
-  border-radius: var(--border-radius-extra-small-2, 6px);
+  padding: var(--anchor-item-size-content-padding-y) var(--anchor-item-size-content-padding-x);
+  border-radius: var(--anchor-item-size-content-radius);
   word-break: break-word;
 }
 
-.aviala-anchor-item .aviala-typography {
-  color: var(--text-text-normal-text-black, #262525);
+.aviala-anchor-item__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--anchor-item-size-text-gap);
 }
 
-.aviala-anchor-item[data-activated="false"] .aviala-typography {
-  opacity: var(--transparency-placeholder, 0.6);
+.aviala-anchor-item .aviala-anchor-item__label {
+  color: var(--anchor-item-color-text-default);
 }
 
-.aviala-anchor-item:hover .aviala-typography,
-.aviala-anchor-item[data-activated="true"] .aviala-typography {
+.aviala-anchor-item .aviala-anchor-item__description {
+  color: var(--anchor-item-color-description-default);
+}
+
+.aviala-anchor-item[data-activated="false"] .aviala-anchor-item__text {
+  opacity: var(--anchor-item-transparency-unselected-text);
+}
+
+.aviala-anchor-item:hover .aviala-anchor-item__text,
+.aviala-anchor-item[data-activated="true"] .aviala-anchor-item__text {
   opacity: 1;
 }
 
 /* ---- Switch ---- */
 .aviala-switch {
+  --_switch-padding-x: var(--switch-padding, var(--switch-size-regular-padding-x));
+  --_switch-padding-y: var(--switch-padding, var(--switch-size-regular-padding-y));
+  --_switch-selected-bg: var(--switch-color-selected-background-default);
+  --_switch-unselected-bg: var(--switch-color-unselected-background-default);
   position: relative;
   display: inline-flex;
   width: var(--switch-width);
@@ -304,16 +299,18 @@
   align-items: center;
   overflow: hidden;
   border: 0;
-  border-radius: var(--border-radius-allround, 99px);
-  padding: var(--padding-min, 2px);
-  background-color: var(--switch-track-bg);
+  border-radius: var(--switch-size-regular-radius);
+  padding: var(--_switch-padding-y) var(--_switch-padding-x);
+  background-color: var(--switch-track-bg, var(--_switch-unselected-bg));
   transition: background-color var(--switch-track-transition-duration, 0.22s)
     var(--switch-press-transition-easing, cubic-bezier(0.2, 0, 0.2, 1));
 }
 
 .aviala-switch:disabled {
+  --_switch-selected-bg: var(--switch-color-selected-background-disabled);
+  --_switch-unselected-bg: var(--switch-color-unselected-background-disabled);
   cursor: not-allowed;
-  opacity: var(--switch-disabled-opacity, 0.55);
+  opacity: 1;
 }
 
 .aviala-switch[data-state="checked"] {
@@ -326,8 +323,8 @@
   inset: 0;
   border-radius: inherit;
   opacity: 0;
-  background-color: var(--switch-checked-bg);
-  background-image: var(--switch-checked-gloss);
+  background-color: var(--switch-checked-bg, var(--_switch-selected-bg));
+  background-image: var(--switch-checked-gloss, linear-gradient(180deg, color-mix(in srgb, var(--switch-color-selected-highlight-top) 20%, transparent) 0%, color-mix(in srgb, var(--switch-color-selected-highlight-bottom) 20%, transparent) 36%));
   transition:
     opacity var(--switch-transition-duration, 0.26s)
       var(--switch-transition-easing, cubic-bezier(0.16, 1, 0.3, 1)),
@@ -343,19 +340,19 @@
   position: absolute;
   z-index: 1;
   box-sizing: border-box;
-  top: var(--switch-padding, 2px);
-  bottom: var(--switch-padding, 2px);
+  top: var(--_switch-padding-y);
+  bottom: var(--_switch-padding-y);
   /* Resting width = thumb size via start/end insets (fluid stretch mid-travel). */
-  inset-inline-start: var(--switch-padding, 2px);
+  inset-inline-start: var(--_switch-padding-x);
   inset-inline-end: calc(
-    100% - var(--switch-padding, 2px) -
+    100% - var(--_switch-padding-x) -
       var(--switch-thumb-size, var(--switch-thumb-size-regular))
   );
   width: auto;
   height: auto;
-  border-radius: var(--border-radius-allround, 99px);
-  background-color: var(--switch-thumb-bg);
-  box-shadow: var(--switch-thumb-shadow);
+  border-radius: var(--switch-size-pointer-radius);
+  background-color: var(--switch-thumb-bg, var(--switch-color-pointer-background-default));
+  box-shadow: var(--switch-thumb-shadow, var(--switch-size-pointer-shadow-offset-x) var(--switch-size-pointer-shadow-offset-y) var(--switch-size-pointer-shadow-radius) var(--switch-size-pointer-shadow-spread) var(--switch-color-pointer-shadow-default));
   transition-property: inset-inline-start, inset-inline-end;
   transition-duration:
     var(--switch-transition-duration, 0.26s),
@@ -368,10 +365,10 @@
 
 .aviala-switch[data-state="checked"] .aviala-switch__thumb {
   inset-inline-start: calc(
-    100% - var(--switch-padding, 2px) -
+    100% - var(--_switch-padding-x) -
       var(--switch-thumb-size, var(--switch-thumb-size-regular))
   );
-  inset-inline-end: var(--switch-padding, 2px);
+  inset-inline-end: var(--_switch-padding-x);
   /* Turning on: inline-end leads, inline-start trails → mid-travel pill stretch. */
   transition-timing-function:
     var(--switch-thumb-trail-ease, cubic-bezier(0.35, 0, 0.15, 1)),
@@ -382,7 +379,7 @@
 .aviala-switch[data-state="unchecked"]:active:not(:disabled)
   .aviala-switch__thumb {
   inset-inline-end: calc(
-    100% - var(--switch-padding, 2px) -
+    100% - var(--_switch-padding-x) -
       var(--switch-thumb-press-width, var(--switch-thumb-press-width-regular))
   );
   transition-duration:
@@ -396,7 +393,7 @@
 .aviala-switch[data-state="checked"]:active:not(:disabled)
   .aviala-switch__thumb {
   inset-inline-start: calc(
-    100% - var(--switch-padding, 2px) -
+    100% - var(--_switch-padding-x) -
       var(--switch-thumb-press-width, var(--switch-thumb-press-width-regular))
   );
   transition-duration:
@@ -408,9 +405,24 @@
 }
 
 .aviala-switch--small {
+  --_switch-padding-x: var(--switch-padding, var(--switch-size-small-padding-x));
+  --_switch-padding-y: var(--switch-padding, var(--switch-size-small-padding-y));
+  border-radius: var(--switch-size-small-radius);
   height: var(--switch-height-small);
   --switch-thumb-size: var(--switch-thumb-size-small);
   --switch-thumb-press-width: var(--switch-thumb-press-width-small);
+}
+
+.aviala-switch:disabled .aviala-switch__surface {
+  background-image: none;
+}
+
+.aviala-switch:disabled .aviala-switch__thumb {
+  opacity: var(--switch-disabled-opacity, 1);
+}
+
+.aviala-switch[data-state="unchecked"]:disabled .aviala-switch__thumb {
+  opacity: var(--switch-disabled-opacity, var(--switch-transparency-pointer-disabled));
 }
 
 /* hover / press — Figma matrix fill swaps (unchecked deepen; checked primary steps) */
@@ -445,8 +457,6 @@
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-x: contain;
-  gap: var(--segmentator-group-gap);
-  border-radius: var(--segmentator-group-radius);
   scrollbar-width: none;
 }
 
@@ -471,8 +481,11 @@
 }
 
 .aviala-segmentator-group[data-mode="nested"] {
-  padding: var(--segmentator-group-padding);
-  background-color: var(--segmentator-bg);
+  gap: var(--segmentator-group-gap, var(--segmentator-group-size-nested-gap));
+  padding: var(--segmentator-group-padding, var(--segmentator-group-size-nested-padding-y))
+    var(--segmentator-group-padding, var(--segmentator-group-size-nested-padding-x));
+  border-radius: var(--segmentator-group-radius, var(--segmentator-group-size-nested-default-radius));
+  background-color: var(--segmentator-bg, var(--segmentator-group-color-nested-background-default));
   transition: background-color 0.15s ease;
 }
 
@@ -481,18 +494,29 @@
   .aviala-segmentator-group[data-mode="nested"]:hover {
     background-color: var(
       --segmentator-bg-hover,
-      var(--aviala-interaction-filled-hover, #e5e4e3)
+      var(--segmentator-group-color-nested-background-hover)
     );
   }
 }
 
 .aviala-segmentator-group[data-mode="tiled"] {
-  padding: 0;
-  background-color: transparent;
+  gap: var(--segmentator-group-gap, var(--segmentator-group-size-tiled-gap));
+  padding: var(--segmentator-group-padding, var(--segmentator-group-size-tiled-padding-y))
+    var(--segmentator-group-padding, var(--segmentator-group-size-tiled-padding-x));
+  border-radius: var(--segmentator-group-radius, var(--segmentator-group-size-tiled-default-radius));
+  background-color: var(--segmentator-group-color-tiled-background-default);
 }
 
-.aviala-segmentator-group[data-all-round="true"] {
-  border-radius: var(--border-radius-allround, 99px);
+.aviala-segmentator-group[data-mode="nested"]:active {
+  background-color: var(--segmentator-bg-active, var(--segmentator-group-color-nested-background-active));
+}
+
+.aviala-segmentator-group[data-mode="nested"][data-all-round="true"] {
+  border-radius: var(--segmentator-group-size-nested-rounded-radius);
+}
+
+.aviala-segmentator-group[data-mode="tiled"][data-all-round="true"] {
+  border-radius: var(--segmentator-group-size-tiled-rounded-radius);
 }
 
 .aviala-segmentator-group[data-equal-width="true"] {
@@ -634,19 +658,33 @@
 }
 
 .aviala-segmentator-thumb[data-mode="nested"] {
-  border-radius: var(--segmentator-item-nested-radius);
-  background-color: var(--segmentator-selected-bg);
-  box-shadow: var(--segmentator-shadow-selected);
+  border-radius: var(--segmentator-item-nested-radius, var(--segmentator-button-size-nested-selected-radius));
+  background-color: var(--segmentator-selected-bg, var(--segmentator-button-color-nested-selected-background-default));
+  box-shadow: var(--segmentator-shadow-selected,
+    var(--segmentator-button-size-nested-selected-shadow-offset-x)
+    var(--segmentator-button-size-nested-selected-shadow-offset-y)
+    var(--segmentator-button-size-nested-selected-shadow-blur)
+    var(--segmentator-button-size-nested-selected-shadow-spread)
+    var(--segmentator-button-color-nested-selected-shadow));
 }
 
 .aviala-segmentator-thumb[data-mode="tiled"] {
-  border-radius: var(--segmentator-item-tiled-radius);
-  background-color: var(--segmentator-tiled-bg);
-  box-shadow: var(--segmentator-shadow-tiled);
+  border-radius: var(--segmentator-item-tiled-radius, var(--segmentator-button-size-tiled-selected-radius));
+  background-color: var(--segmentator-tiled-bg, var(--segmentator-button-color-tiled-selected-background-default));
+  box-shadow: var(--segmentator-shadow-tiled, inset
+    var(--segmentator-button-size-tiled-selected-shadow-offset-x)
+    var(--segmentator-button-size-tiled-selected-shadow-offset-y)
+    var(--segmentator-button-size-tiled-selected-shadow-blur)
+    var(--segmentator-button-size-tiled-selected-shadow-spread)
+    var(--segmentator-button-color-tiled-selected-shadow));
 }
 
-.aviala-segmentator-thumb[data-all-round="true"] {
-  border-radius: var(--border-radius-allround, 99px);
+.aviala-segmentator-thumb[data-mode="nested"][data-all-round="true"] {
+  border-radius: var(--segmentator-button-size-nested-rounded-radius);
+}
+
+.aviala-segmentator-thumb[data-mode="tiled"][data-all-round="true"] {
+  border-radius: var(--segmentator-button-size-tiled-rounded-radius);
 }
 
 .aviala-segmentator-item {
@@ -660,7 +698,7 @@
   overflow: hidden;
   border: 0;
   background: transparent;
-  color: var(--segmentator-fg);
+  color: var(--segmentator-fg, var(--_segmentator-text));
   transform-origin: center center;
   transition:
     color 0.15s ease,
@@ -669,6 +707,7 @@
 }
 
 .aviala-segmentator-item__content {
+  opacity: var(--segmentator-button-transparency-text-default);
   position: relative;
   z-index: 1;
   display: inline-flex;
@@ -702,33 +741,50 @@
 
 @media (hover: hover) and (pointer: fine) {
   .aviala-segmentator-item[data-selected="false"]:hover:not(:disabled) {
-    background-color: var(--segmentator-item-hover-bg, #e5e4e3);
+    background-color: var(--segmentator-item-hover-bg, var(--_segmentator-hover-bg));
   }
 }
 
 .aviala-segmentator-item[data-selected="false"]:active:not(:disabled) {
-  background-color: var(--segmentator-item-active-bg, #d6d5d4);
+  background-color: var(--segmentator-item-active-bg, var(--_segmentator-active-bg));
 }
 
 .aviala-segmentator-item:disabled {
   pointer-events: none;
   cursor: not-allowed;
-  opacity: var(--button-disabled-opacity, 0.55);
+}
+
+.aviala-segmentator-item:disabled .aviala-segmentator-item__content {
+  opacity: var(--segmentator-text-disabled-opacity, var(--segmentator-button-transparency-text-disabled));
 }
 
 .aviala-segmentator-item[data-mode="nested"] {
-  gap: var(--segmentator-item-gap);
-  padding: var(--segmentator-item-nested-padding-y)
-    var(--segmentator-item-nested-padding-x);
+  --_segmentator-icon-width: var(--segmentator-button-size-nested-icon-width);
+  --_segmentator-icon-height: var(--segmentator-button-size-nested-icon-height);
+  --_segmentator-default-bg: var(--segmentator-button-color-nested-unselected-background-default);
+  --_segmentator-hover-bg: var(--segmentator-button-color-nested-unselected-background-hover);
+  --_segmentator-active-bg: var(--segmentator-button-color-nested-unselected-background-active);
+  --_segmentator-text: var(--segmentator-button-color-nested-unselected-text-default);
+  --_segmentator-selected-text: var(--segmentator-button-color-nested-selected-text-default);
+  gap: var(--segmentator-item-gap, var(--segmentator-button-size-nested-gap));
+  padding: var(--segmentator-item-nested-padding-y, var(--segmentator-button-size-nested-padding-y))
+    var(--segmentator-item-nested-padding-x, var(--segmentator-button-size-nested-padding-x));
   /* Match sliding thumb radius (selected indicator), including hover/focus fills */
-  border-radius: var(--segmentator-item-nested-radius);
+  border-radius: var(--segmentator-item-nested-radius, var(--segmentator-button-size-nested-unselected-radius));
 }
 
 .aviala-segmentator-item[data-mode="tiled"] {
-  gap: var(--segmentator-item-gap);
-  padding: var(--segmentator-item-tiled-padding-y)
-    var(--segmentator-item-tiled-padding-x);
-  border-radius: var(--segmentator-item-tiled-radius);
+  --_segmentator-icon-width: var(--segmentator-button-size-tiled-icon-width);
+  --_segmentator-icon-height: var(--segmentator-button-size-tiled-icon-height);
+  --_segmentator-default-bg: var(--segmentator-button-color-tiled-unselected-background-default);
+  --_segmentator-hover-bg: var(--segmentator-button-color-tiled-unselected-background-hover);
+  --_segmentator-active-bg: var(--segmentator-button-color-tiled-unselected-background-active);
+  --_segmentator-text: var(--segmentator-button-color-tiled-unselected-text-default);
+  --_segmentator-selected-text: var(--segmentator-button-color-tiled-selected-text-default);
+  gap: var(--segmentator-item-gap, var(--segmentator-button-size-tiled-gap));
+  padding: var(--segmentator-item-tiled-padding-y, var(--segmentator-button-size-tiled-padding-y))
+    var(--segmentator-item-tiled-padding-x, var(--segmentator-button-size-tiled-padding-x));
+  border-radius: var(--segmentator-item-tiled-radius, var(--segmentator-button-size-tiled-unselected-radius));
 }
 
 .aviala-segmentator-item .aviala-typography {
@@ -736,36 +792,67 @@
 }
 
 .aviala-segmentator-item__icon {
+  --icon-size-text-bigger: var(--_segmentator-icon-width);
+  box-sizing: border-box;
+  width: var(--_segmentator-icon-width);
   position: relative;
   z-index: 1;
   display: inline-flex;
-  height: var(--segmentator-icon-slot-height);
+  height: var(--segmentator-icon-slot-height, var(--_segmentator-icon-height));
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
 }
 
 .aviala-segmentator-item__icon svg {
-  height: var(--icon-size-text-bigger, var(--size-middle, 1rem));
-  width: auto;
+  height: var(--_segmentator-icon-width);
+  width: var(--_segmentator-icon-width);
   flex-shrink: 0;
 }
 
 .aviala-segmentator-item[data-mode="nested"][data-selected="true"] {
-  color: var(--segmentator-selected-fg);
+  border-radius: var(--segmentator-item-nested-radius, var(--segmentator-button-size-nested-selected-radius));
+  color: var(--segmentator-selected-fg, var(--_segmentator-selected-text));
 }
 
-.aviala-segmentator-item[data-all-round="true"] {
-  border-radius: var(--border-radius-allround, 99px);
+.aviala-segmentator-item[data-selected="false"] {
+  background-color: var(--_segmentator-default-bg);
 }
 
 .aviala-segmentator-item[data-mode="tiled"][data-selected="true"] {
-  color: var(--segmentator-selected-fg);
+  border-radius: var(--segmentator-item-tiled-radius, var(--segmentator-button-size-tiled-selected-radius));
+  color: var(--segmentator-selected-fg, var(--_segmentator-selected-text));
+}
+
+.aviala-segmentator-item[data-mode="nested"][data-icon-only="true"] {
+  padding-inline: var(--segmentator-item-nested-padding-x, var(--segmentator-button-size-nested-icon-only-padding-x));
+}
+
+.aviala-segmentator-item[data-mode="tiled"][data-icon-only="true"] {
+  padding-inline: var(--segmentator-item-tiled-padding-x, var(--segmentator-button-size-tiled-icon-only-padding-x));
+}
+
+.aviala-segmentator-item[data-mode="nested"][data-icon-only="true"] .aviala-segmentator-item__icon {
+  width: var(--segmentator-button-size-nested-icon-only-width);
+  padding-inline: var(--segmentator-button-size-nested-icon-only-icon-padding-x);
+}
+
+.aviala-segmentator-item[data-mode="tiled"][data-icon-only="true"] .aviala-segmentator-item__icon {
+  width: var(--segmentator-button-size-tiled-icon-only-width);
+  padding-inline: var(--segmentator-button-size-tiled-icon-only-icon-padding-x);
+}
+
+.aviala-segmentator-item[data-mode="nested"][data-all-round="true"] {
+  border-radius: var(--segmentator-button-size-nested-rounded-radius);
+}
+
+.aviala-segmentator-item[data-mode="tiled"][data-all-round="true"] {
+  border-radius: var(--segmentator-button-size-tiled-rounded-radius);
 }
 
 /* Sticky drag preview: highlight follows the near item (and un-highlight the old selection). */
 .aviala-segmentator-item[data-drag-preview="true"] {
-  color: var(--segmentator-selected-fg);
+  color: var(--segmentator-selected-fg, var(--_segmentator-selected-text));
 }
 
 .aviala-segmentator-group[data-pressing="true"]
@@ -776,7 +863,7 @@
   .aviala-segmentator-item[data-selected="true"]:not(
     [data-drag-preview="true"]
   ) {
-  color: var(--segmentator-fg);
+  color: var(--segmentator-fg, var(--_segmentator-text));
 }
 
 @media (prefers-reduced-motion: reduce) {

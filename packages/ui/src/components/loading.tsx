@@ -19,6 +19,7 @@ export type LoadingLevel =
   | "caption";
 
 export type LoadingMode = "theme" | "themeText" | "black" | "white" | "inherit";
+export type LoadingAlignment = "heightOnly" | "both" | "off";
 
 const loadingVariants = cva("aviala-loading", {
   variants: {
@@ -59,19 +60,22 @@ export function loadingLevelForButtonSize(
 
 /** Conic fill — inline so theme tokens still apply inside SVG foreignObject. */
 function loadingRingStyle(mode: LoadingMode): CSSProperties {
-  const conic = (fg: string): CSSProperties => ({
-    background: `conic-gradient(from 90deg, color-mix(in srgb, ${fg} 0%, transparent) 0deg, ${fg} 360deg)`,
-  });
+  const conic = (legacy: string, start: string, end: string): CSSProperties => ({
+    // An absent legacy variable invalidates only this custom property,
+    // allowing the gradient start to fall back to its independent token.
+    "--_loading-legacy-start": `color-mix(in srgb, var(${legacy}) 0%, transparent)`,
+    background: `conic-gradient(from 90deg, var(--_loading-legacy-start, var(${start})) 0deg, var(${legacy}, var(${end})) 360deg)`,
+  } as CSSProperties);
 
   switch (mode) {
     case "theme":
-      return conic("var(--loading-fg-theme)");
+      return conic("--loading-fg-theme", "--loading-icon-color-theme-gradient-start", "--loading-icon-color-theme-gradient-end");
     case "themeText":
-      return conic("var(--loading-fg-theme-text)");
+      return conic("--loading-fg-theme-text", "--loading-icon-color-theme-text-gradient-start", "--loading-icon-color-theme-text-gradient-end");
     case "black":
-      return conic("var(--loading-fg-black)");
+      return conic("--loading-fg-black", "--loading-icon-color-black-gradient-start", "--loading-icon-color-black-gradient-end");
     case "white":
-      return conic("var(--loading-fg-white)");
+      return conic("--loading-fg-white", "--loading-icon-color-white-gradient-start", "--loading-icon-color-white-gradient-end");
     case "inherit":
       return {
         background:
@@ -81,7 +85,9 @@ function loadingRingStyle(mode: LoadingMode): CSSProperties {
 }
 
 export type LoadingProps = HTMLAttributes<HTMLSpanElement> &
-  VariantProps<typeof loadingVariants> & {
+  Omit<VariantProps<typeof loadingVariants>, "lineHeightFix"> & {
+    /** true = heightOnly; false = off. `both` aligns width and height. */
+    lineHeightFix?: boolean | LoadingAlignment | null;
     /** Ring color source; applied through the inline conic gradient, not a class. */
     mode?: LoadingMode;
     /** Accessible name; omit when decorative (`aria-hidden`). */
@@ -109,7 +115,8 @@ export const Loading = forwardRef<HTMLSpanElement, LoadingProps>(
     return (
       <span
         ref={ref}
-        className={cn(loadingVariants({ level, lineHeightFix }), className)}
+        className={cn(loadingVariants({ level, lineHeightFix: !!lineHeightFix && lineHeightFix !== "off" }), className)}
+        data-alignment={lineHeightFix === "both" ? "both" : lineHeightFix && lineHeightFix !== "off" ? "heightOnly" : "off"}
         role={isDecorative ? undefined : "status"}
         aria-label={isDecorative ? undefined : resolvedLabel}
         aria-live={isDecorative ? undefined : "polite"}

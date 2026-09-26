@@ -28,6 +28,8 @@ export type LocaleTimePicker = {
   selectTime: string;
   hour: string;
   minute: string;
+  /** Optional for compatibility with existing locale packs. */
+  second?: string;
 };
 
 export type LocalePagination = {

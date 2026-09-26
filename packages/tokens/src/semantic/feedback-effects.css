@@ -3,25 +3,26 @@
 .aviala-feedback {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-none, 0);
+  gap: var(--feedback-size-gap);
+  padding: var(--feedback-size-padding-y) var(--feedback-size-padding-x);
   overflow: hidden;
-  border: 1px solid transparent;
+  border: var(--feedback-size-stroke-width) solid transparent;
   box-shadow: var(--feedback-shadow);
 }
 
 .aviala-feedback--size-default {
-  border-radius: var(--feedback-radius-default);
+  border-radius: var(--feedback-radius-default, var(--feedback-size-default-radius));
 }
 
 .aviala-feedback--size-small {
-  border-radius: var(--feedback-radius-small);
+  border-radius: var(--feedback-radius-small, var(--feedback-size-small-radius));
 }
 
 .aviala-feedback__body {
   display: flex;
   align-items: flex-start;
-  gap: var(--feedback-body-gap);
-  padding: var(--feedback-body-py) var(--feedback-body-px);
+  gap: var(--feedback-body-gap, var(--feedback-size-info-gap));
+  padding: var(--feedback-body-py, var(--feedback-size-info-padding-y)) var(--feedback-body-px, var(--feedback-size-info-padding-x));
   overflow: hidden;
 }
 
@@ -38,17 +39,18 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: var(--feedback-icon-slot-height);
-  height: var(--feedback-icon-slot-height);
+  width: var(--feedback-icon-slot-height, var(--feedback-size-icon-width));
+  height: var(--feedback-icon-slot-height, var(--feedback-size-icon-height));
   color: var(--feedback-icon-fg);
 }
 
 .aviala-feedback__icon svg {
-  width: var(--feedback-icon-size);
-  height: var(--feedback-icon-size);
+  width: var(--feedback-icon-size, var(--feedback-size-icon-width));
+  height: var(--feedback-icon-size, var(--feedback-size-icon-width));
 }
 
 .aviala-feedback__typeface {
+  gap: var(--feedback-size-text-gap);
   flex: 1 1 auto;
   min-width: 0;
   max-width: var(--feedback-content-max-width);
@@ -56,7 +58,7 @@
 
 .aviala-feedback--size-default
   .aviala-feedback__typeface
-  .aviala-typeface__line:first-child
+  .aviala-typeface__line[data-line="0"]
   .aviala-typography {
   font-weight: var(--font-weight-bold, 700);
 }
@@ -67,7 +69,14 @@
 }
 
 .aviala-feedback__action {
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.aviala-feedback__action > .aviala-link__label {
+  flex-shrink: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .aviala-feedback__close {
@@ -81,8 +90,9 @@
   height: var(--feedback-close-icon-size);
 }
 
-.aviala-feedback--mode-primary .aviala-feedback__close {
-  color: var(--feedback-close-fg-on-primary);
+.aviala-feedback--mode-primary .aviala-feedback__close,
+.aviala-feedback--mode-primary .aviala-feedback__close > .aviala-link__icon {
+  color: var(--feedback-close-fg-on-primary, var(--text-text-normal-text-white));
 }
 
 .aviala-feedback--mode-primary .aviala-feedback__close svg {
@@ -93,57 +103,61 @@
 /* ---- Type × mode surfaces ---- */
 
 .aviala-feedback--type-information.aviala-feedback--mode-default {
-  background: var(--feedback-information-bg-default);
-  border-color: var(--feedback-information-border);
-  --feedback-icon-fg: var(--feedback-information-icon-fg);
+  background: var(--feedback-information-bg-default, var(--feedback-color-default-infomation-background-default));
+  border-color: var(--feedback-information-border, var(--feedback-color-default-infomation-border-default));
+  --feedback-icon-fg: var(--feedback-information-icon-fg, var(--feedback-color-default-infomation-icon-default));
 }
 
 .aviala-feedback--type-information.aviala-feedback--mode-primary {
-  background: var(--feedback-information-bg-primary);
-  border-color: var(--feedback-information-border);
-  --feedback-icon-fg: var(--feedback-icon-fg-primary);
+  background: var(--feedback-information-bg-primary, var(--feedback-color-primary-infomation-background-default));
+  border-color: var(--feedback-information-border, var(--feedback-color-primary-infomation-border-default));
+  --feedback-icon-fg: var(--feedback-icon-fg-primary, var(--feedback-color-primary-infomation-icon-default));
 }
 
 .aviala-feedback--type-warning.aviala-feedback--mode-default {
-  background: var(--feedback-warning-bg-default);
-  border-color: var(--feedback-warning-border);
-  --feedback-icon-fg: var(--feedback-warning-icon-fg);
+  background: var(--feedback-warning-bg-default, var(--feedback-color-default-warning-background-default));
+  border-color: var(--feedback-warning-border, var(--feedback-color-default-warning-border-default));
+  --feedback-icon-fg: var(--feedback-warning-icon-fg, var(--feedback-color-default-warning-icon-default));
 }
 
 .aviala-feedback--type-warning.aviala-feedback--mode-primary {
-  background: var(--feedback-warning-bg-primary);
-  border-color: var(--feedback-warning-border);
-  --feedback-icon-fg: var(--feedback-icon-fg-primary);
+  background: var(--feedback-warning-bg-primary, var(--feedback-color-primary-warning-background-default));
+  border-color: var(--feedback-warning-border, var(--feedback-color-primary-warning-border-default));
+  --feedback-icon-fg: var(--feedback-icon-fg-primary, var(--feedback-color-primary-warning-icon-default));
 }
 
 .aviala-feedback--type-wrong.aviala-feedback--mode-default {
-  background: var(--feedback-wrong-bg-default);
-  border-color: var(--feedback-wrong-border);
-  --feedback-icon-fg: var(--feedback-wrong-icon-fg);
+  background: var(--feedback-wrong-bg-default, var(--feedback-color-default-wrong-background-default));
+  border-color: var(--feedback-wrong-border, var(--feedback-color-default-wrong-border-default));
+  --feedback-icon-fg: var(--feedback-wrong-icon-fg, var(--feedback-color-default-wrong-icon-default));
 }
 
 .aviala-feedback--type-wrong.aviala-feedback--mode-primary {
-  background: var(--feedback-wrong-bg-primary);
-  border-color: var(--feedback-wrong-border);
-  --feedback-icon-fg: var(--feedback-icon-fg-primary);
+  background: var(--feedback-wrong-bg-primary, var(--feedback-color-primary-wrong-background-default));
+  border-color: var(--feedback-wrong-border, var(--feedback-color-primary-wrong-border-default));
+  --feedback-icon-fg: var(--feedback-icon-fg-primary, var(--feedback-color-primary-wrong-default-icon-default));
 }
 
 .aviala-feedback--type-success.aviala-feedback--mode-default {
-  background: var(--feedback-success-bg-default);
-  border-color: var(--feedback-success-border);
-  --feedback-icon-fg: var(--feedback-success-icon-fg);
+  background: var(--feedback-success-bg-default, var(--feedback-color-default-success-background-default));
+  border-color: var(--feedback-success-border, var(--feedback-color-default-success-border-default));
+  --feedback-icon-fg: var(--feedback-success-icon-fg, var(--feedback-color-default-success-icon-default));
 }
 
 .aviala-feedback--type-success.aviala-feedback--mode-primary {
-  background: var(--feedback-success-bg-primary);
-  border-color: var(--feedback-success-border);
-  --feedback-icon-fg: var(--feedback-icon-fg-primary);
+  background: var(--feedback-success-bg-primary, var(--feedback-color-primary-success-background-default));
+  border-color: var(--feedback-success-border, var(--feedback-color-primary-success-border-default));
+  --feedback-icon-fg: var(--feedback-icon-fg-primary, var(--feedback-color-primary-success-icon-default));
 }
 
 .aviala-feedback--type-normal.aviala-feedback--mode-default {
-  background: var(--feedback-normal-bg-default);
-  border-color: var(--feedback-normal-border);
-  --feedback-icon-fg: var(--feedback-normal-icon-fg);
+  background: var(--feedback-normal-bg-default, var(--feedback-color-default-normal-background-default));
+  border-color: var(--feedback-normal-border, var(--feedback-color-default-normal-border-default));
+  --feedback-icon-fg: var(--feedback-normal-icon-fg, var(--feedback-color-default-normal-icon-default));
+}
+
+.aviala-feedback--type-wrong.aviala-feedback--mode-primary.aviala-feedback--size-small {
+  --feedback-icon-fg: var(--feedback-icon-fg-primary, var(--feedback-color-primary-wrong-small-icon-default));
 }
 
 .aviala-feedback .aviala-typography {
@@ -152,30 +166,30 @@
 
 .aviala-feedback--mode-default
   .aviala-feedback__typeface
-  .aviala-typeface__line:first-child
+  .aviala-typeface__line[data-line="0"]
   .aviala-typography,
-.aviala-feedback--mode-default .aviala-feedback__title {
-  color: var(--feedback-title-fg-default);
+.aviala-feedback--mode-default .aviala-feedback__title.aviala-typography {
+  color: var(--feedback-title-fg-default, var(--feedback-color-default-text-default));
 }
 
 .aviala-feedback--mode-default
   .aviala-feedback__typeface
-  .aviala-typeface__line:last-child
+  .aviala-typeface__line[data-line="1"]
   .aviala-typography {
-  color: var(--feedback-description-fg-default);
+  color: var(--feedback-description-fg-default, var(--feedback-color-default-description-default));
 }
 
 .aviala-feedback--mode-primary
   .aviala-feedback__typeface
-  .aviala-typeface__line:first-child
+  .aviala-typeface__line[data-line="0"]
   .aviala-typography,
-.aviala-feedback--mode-primary .aviala-feedback__title {
-  color: var(--feedback-title-fg-primary);
+.aviala-feedback--mode-primary .aviala-feedback__title.aviala-typography {
+  color: var(--feedback-title-fg-primary, var(--feedback-color-primary-text-default));
 }
 
 .aviala-feedback--mode-primary
   .aviala-feedback__typeface
-  .aviala-typeface__line:last-child
+  .aviala-typeface__line[data-line="1"]
   .aviala-typography {
-  color: var(--feedback-description-fg-primary);
+  color: var(--feedback-description-fg-primary, var(--feedback-color-primary-description-default));
 }

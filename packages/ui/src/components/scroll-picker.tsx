@@ -12,6 +12,8 @@ import {
 import { cn } from "../lib/utils";
 import {
   consumeWheelSteps,
+  pickerWheelDeltaPixels,
+  shouldCapturePickerWheel,
   nearestLoopIndex,
   normalizeWheelIndex,
   recenterLoopIndex,
@@ -180,9 +182,12 @@ export function ScrollPickerColumn<T = string>({
       const metrics = readMetrics(container);
       if (!metrics) return;
 
-      isProgrammaticScrollRef.current = true;
+      const top = scrollTopForIndex(container, metrics, index);
+      // A no-op scroll emits no completion event; do not leave ownership pending.
+      isProgrammaticScrollRef.current = top !== container.scrollTop;
+      if (!isProgrammaticScrollRef.current) smoothTargetValueRef.current = null;
       container.scrollTo({
-        top: scrollTopForIndex(container, metrics, index),
+        top,
         behavior,
       });
       if (behavior === "auto") {
@@ -277,8 +282,8 @@ export function ScrollPickerColumn<T = string>({
 
   const handleScroll = useCallback(() => {
     syncClipTrack();
-    if (isProgrammaticScrollRef.current) return;
-    isUserScrollingRef.current = true;
+    // Also settle programmatic scrolls when native scrollend is not delivered.
+    if (!isProgrammaticScrollRef.current) isUserScrollingRef.current = true;
     if (scrollEndTimerRef.current) {
       clearTimeout(scrollEndTimerRef.current);
     }
@@ -327,6 +332,36 @@ export function ScrollPickerColumn<T = string>({
 
   useEffect(() => {
     const container = scrollRef.current;
+    if (!container || typeof ResizeObserver === "undefined") return;
+    const item = container.querySelector<HTMLElement>(".aviala-scroll-picker-item");
+    const list = container.querySelector<HTMLElement>(".aviala-scroll-picker-column__list");
+    const geometry = () => `${container.clientHeight}/${item?.offsetHeight}/${list?.offsetHeight}`;
+    let previousGeometry = geometry();
+    // Density and local token overrides can change the pitch without a React render.
+    const observer = new ResizeObserver(() => {
+      const nextGeometry = geometry();
+      if (nextGeometry === previousGeometry) return;
+      previousGeometry = nextGeometry;
+      if (!values.length) return;
+      if (scrollEndTimerRef.current) clearTimeout(scrollEndTimerRef.current);
+      isUserScrollingRef.current = false;
+      smoothTargetValueRef.current = null;
+      const metrics = readMetrics(container);
+      if (!metrics) return;
+      const index = getIndex(selectedValueRef.current);
+      const target = loop
+        ? nearestLoopIndex(readRawIndex(container, metrics), index, values.length, LOOP_SECTIONS)
+        : index;
+      scrollToIndex(target, "auto");
+    });
+    observer.observe(container);
+    if (item) observer.observe(item);
+    if (list) observer.observe(list);
+    return () => observer.disconnect();
+  }, [getIndex, loop, scrollToIndex, values.length]);
+
+  useEffect(() => {
+    const container = scrollRef.current;
     if (!container) return;
 
     const onScrollEnd = () => {
@@ -350,27 +385,19 @@ export function ScrollPickerColumn<T = string>({
     if (!container) return;
 
     const onWheel = (event: WheelEvent) => {
-      if (values.length === 0) return;
-
-      // A non-looping column that is already pinned to an end has nothing left
-      // to consume — leave the event alone so the page keeps scrolling.
-      if (!loop) {
-        const maxScroll = Math.max(
-          container.scrollHeight - container.clientHeight,
-          0
-        );
-        const atStart = event.deltaY < 0 && container.scrollTop <= 1;
-        const atEnd = event.deltaY > 0 && container.scrollTop >= maxScroll - 1;
-        if (atStart || atEnd) {
-          wheelAccumRef.current = 0;
-          return;
-        }
+      if (!shouldCapturePickerWheel(event, {
+        count: values.length, loop, scrollTop: container.scrollTop,
+        scrollHeight: container.scrollHeight, clientHeight: container.clientHeight,
+      })) {
+        wheelAccumRef.current = 0;
+        return;
       }
-
-      event.preventDefault();
 
       const metrics = readMetrics(container);
       if (!metrics) return;
+      const delta = pickerWheelDeltaPixels(event.deltaY, event.deltaMode, metrics.pitch, container.clientHeight);
+      if (delta === 0) return;
+      event.preventDefault();
 
       if (wheelAccumIdleTimerRef.current) {
         clearTimeout(wheelAccumIdleTimerRef.current);
@@ -382,7 +409,7 @@ export function ScrollPickerColumn<T = string>({
       const threshold = metrics.pitch * WHEEL_STEP_THRESHOLD_FACTOR;
       const { nextAccum, steps } = consumeWheelSteps(
         wheelAccumRef.current,
-        event.deltaY,
+        delta,
         threshold
       );
       wheelAccumRef.current = nextAccum;
@@ -499,7 +526,10 @@ export function ScrollPickerColumn<T = string>({
     }
   };
 
-  const selectedOptionId = `${reactId}-${getIndex(value)}`;
+  const selectedIndex = values.findIndex((item) => Object.is(item, value));
+  const selectedOptionId = selectedIndex < 0
+    ? undefined
+    : `${reactId}-${selectedIndex + (loop ? MIDDLE_SECTION * values.length : 0)}`;
 
   return (
     <div className={cn("aviala-scroll-picker-column", className)}>
@@ -508,6 +538,7 @@ export function ScrollPickerColumn<T = string>({
         <div
           ref={scrollRef}
           className="aviala-scroll-picker-column__scroll aviala-focus-ring"
+          data-loop={loop && values.length > 1}
           onScroll={handleScroll}
           role="listbox"
           aria-label={ariaLabel}
@@ -525,15 +556,12 @@ export function ScrollPickerColumn<T = string>({
               const key =
                 getValueKey?.(itemValue, index) ??
                 `${String(itemValue)}-${index}`;
-              const useSelectedId =
-                isCommitted &&
-                (!loop || Math.floor(index / values.length) === MIDDLE_SECTION);
-
               return (
                 <li key={key} className="contents">
                   <ScrollPickerItem
-                    id={useSelectedId ? selectedOptionId : optionId}
+                    id={optionId}
                     selected={isCommitted}
+                    aria-selected={optionId === selectedOptionId}
                     onSelect={() => {
                       isUserScrollingRef.current = false;
                       smoothTargetValueRef.current = itemValue;
@@ -583,6 +611,8 @@ export function ScrollPickerColumn<T = string>({
 export type ScrollPickerItemProps = {
   id?: string;
   selected?: boolean;
+  /** Loop copies may share visual state but only one option is announced selected. */
+  "aria-selected"?: boolean;
   children?: ReactNode;
   className?: string;
   onSelect?: () => void;
@@ -591,6 +621,7 @@ export type ScrollPickerItemProps = {
 export function ScrollPickerItem({
   id,
   selected = false,
+  "aria-selected": ariaSelected = selected,
   children,
   className,
   onSelect,
@@ -600,7 +631,7 @@ export function ScrollPickerItem({
       type="button"
       id={id}
       role="option"
-      aria-selected={selected}
+      aria-selected={ariaSelected}
       className={cn(
         "aviala-scroll-picker-item",
         typographyVariants({ level: "text" }),

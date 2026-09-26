@@ -71,6 +71,7 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
     const normalizedRadius = center - stroke / 2;
     const circumference = normalizedRadius * 2 * Math.PI;
     const strokeDashoffset = circumference - (percent / 100) * circumference;
+    const tokenRing = resolvedType !== "success";
 
     return (
       <div
@@ -107,6 +108,7 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
                 content="number"
                 as="span"
                 className="aviala-progress__label"
+                title={displayLabel}
               >
                 {displayLabel}
               </Typography>
@@ -117,28 +119,32 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
             className="aviala-progress__ring"
             width={diameter}
             height={diameter}
-            viewBox={`0 0 ${diameter} ${diameter}`}
+            viewBox={tokenRing ? undefined : `0 0 ${diameter} ${diameter}`}
             aria-hidden
           >
-            <circle
+            <ellipse
               className="aviala-progress__ring-track"
-              cx={center}
-              cy={center}
-              r={normalizedRadius}
+              cx={tokenRing ? "50%" : center}
+              cy={tokenRing ? "50%" : center}
+              rx={normalizedRadius}
+              ry={normalizedRadius}
               fill="none"
               strokeWidth={stroke}
             />
-            <circle
+            <ellipse
               className="aviala-progress__ring-fill"
-              cx={center}
-              cy={center}
-              r={normalizedRadius}
+              cx={tokenRing ? "50%" : center}
+              cy={tokenRing ? "50%" : center}
+              rx={normalizedRadius}
+              ry={normalizedRadius}
               fill="none"
               strokeWidth={stroke}
-              strokeDasharray={`${circumference} ${circumference}`}
-              strokeDashoffset={strokeDashoffset}
+              pathLength={tokenRing ? 100 : undefined}
+              strokeDasharray={tokenRing ? `${percent} ${100 - percent}` : `${circumference} ${circumference}`}
+              strokeDashoffset={tokenRing ? 25 : strokeDashoffset}
+              visibility={percent === 0 ? "hidden" : undefined}
               strokeLinecap="round"
-              transform={`rotate(-90 ${center} ${center})`}
+              transform={tokenRing ? undefined : `rotate(-90 ${center} ${center})`}
             />
           </svg>
         )}

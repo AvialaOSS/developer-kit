@@ -28,6 +28,7 @@ const zhCN: Locale = {
     selectTime: "选择时间",
     hour: "小时",
     minute: "分钟",
+    second: "秒",
   },
   Pagination: {
     jumpTo: "跳转至",

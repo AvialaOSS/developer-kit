@@ -28,6 +28,7 @@ const enUS: Locale = {
     selectTime: "Select time",
     hour: "Hour",
     minute: "Minute",
+    second: "Second",
   },
   Pagination: {
     jumpTo: "Go to",

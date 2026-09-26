@@ -1,0 +1,28 @@
+{
+  "directory": "C:\\Users\\MXrek\\AppData\\Local\\Temp\\spiral-current-package-2cc33a303f2f4723a9971b01edb9cc27",
+  "packages": [
+    {
+      "file": "aviala-design-icons-2.4.0.tgz",
+      "sha256": "cd7990e78b4d394022f398457f63246b141ac833e9fcf6a493be5c837d11f189"
+    },
+    {
+      "file": "aviala-design-spiral-3.0.0.tgz",
+      "sha256": "f79fd63e0841461e2e139f8dc1af7774e60d3d3556e178c1753e90095e5ede4d"
+    },
+    {
+      "file": "aviala-design-tokens-2.6.0.tgz",
+      "sha256": "6328aaf4a204a7302bf658963a07dd6316f5b1d3783313a77231ac4cb1af6f2b"
+    }
+  ],
+  "checks": [
+    "prepack: 7 tests",
+    "ESM/CJS Rate SSR and 18 dynamic token combinations",
+    "ListItem divider CSS and no per-item corner overrides",
+    "Avatar six component height references",
+    "Alert four neutral Link modes in ESM/CJS SSR"
+  ],
+  "limitations": [
+    "No Computer Use or browser interaction tests",
+    "No remote publication"
+  ]
+}

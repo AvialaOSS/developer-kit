@@ -105,7 +105,9 @@ const preview: Preview = {
           defaultPresetId={presetId}
           storageKey="aviala-storybook-theme"
         >
-          <StorybookThemeSync presetId={presetId} mode={mode} />
+          {!context.parameters.localThemeControls && (
+            <StorybookThemeSync presetId={presetId} mode={mode} />
+          )}
           <div
             className="bg-background text-foreground p-4 font-sans"
             data-storybook-theme={presetId}

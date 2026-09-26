@@ -82,7 +82,9 @@ type DatePickerBaseProps = {
   className?: string;
   /** Figma DatePickerLIstGroup — footer date/time Segmentator */
   enableTime?: boolean;
+  /** Explicit time overrides the selected Date's hours and minutes. */
   timeValue?: DatePickerTimeValue;
+  /** Use a separate initial time; otherwise inherit it from the selected Date. */
   defaultTimeValue?: DatePickerTimeValue;
   onTimeChange?: (value: DatePickerTimeValue) => void;
 };
@@ -134,7 +136,7 @@ export function DatePicker(props: DatePickerProps) {
     className,
     enableTime = true,
     timeValue: timeValueProp,
-    defaultTimeValue = { hours: 17, minutes: 0 },
+    defaultTimeValue,
     onTimeChange,
   } = props;
 
@@ -151,13 +153,36 @@ export function DatePicker(props: DatePickerProps) {
     undefined
   );
   const [activePanel, setActivePanel] = useState<DatePickerPanel>("date");
-  const [internalTime, setInternalTime] =
-    useState<DatePickerTimeValue>(defaultTimeValue);
+  const [internalTime, setInternalTime] = useState<DatePickerTimeValue>(
+    defaultTimeValue ?? { hours: 17, minutes: 0 }
+  );
 
   const isOpenControlled = openProp !== undefined;
   const open = isOpenControlled ? openProp : internalOpen;
 
-  const timeValue = timeValueProp !== undefined ? timeValueProp : internalTime;
+  const singleValue =
+    mode === "single"
+      ? (props as DatePickerSingleProps).value !== undefined
+        ? (props as DatePickerSingleProps).value
+        : internalSingle
+      : undefined;
+
+  const rangeValue =
+    mode === "range"
+      ? (props as DatePickerRangeProps).value !== undefined
+        ? ((props as DatePickerRangeProps).value ?? {})
+        : internalRange
+      : { from: rangeDraftFrom };
+
+  // A separately configured time keeps its own state. Otherwise the selected
+  // Date is authoritative, including subsequent controlled value updates.
+  const timeAnchor =
+    mode === "single" ? singleValue : (rangeValue.from ?? rangeValue.to);
+  const timeValue =
+    timeValueProp ??
+    (defaultTimeValue === undefined && timeAnchor
+      ? { hours: timeAnchor.getHours(), minutes: timeAnchor.getMinutes() }
+      : internalTime);
 
   const setTimeValue = useCallback(
     (next: DatePickerTimeValue) => {
@@ -212,20 +237,6 @@ export function DatePicker(props: DatePickerProps) {
       timeValueProp,
     ]
   );
-
-  const singleValue =
-    mode === "single"
-      ? (props as DatePickerSingleProps).value !== undefined
-        ? (props as DatePickerSingleProps).value
-        : internalSingle
-      : undefined;
-
-  const rangeValue =
-    mode === "range"
-      ? (props as DatePickerRangeProps).value !== undefined
-        ? ((props as DatePickerRangeProps).value ?? {})
-        : internalRange
-      : { from: rangeDraftFrom };
 
   const [viewMonth, setViewMonth] = useState(() =>
     getInitialViewMonth(

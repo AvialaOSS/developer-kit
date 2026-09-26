@@ -59,6 +59,20 @@ export const Tiled: Story = {
   ),
 };
 
+export const DisabledContent: Story = {
+  render: () => (
+    <div className="flex flex-col gap-6">
+      {(["nested", "tiled"] as const).map((mode) => (
+        <SegmentatorGroup key={mode} mode={mode} defaultValue="a" aria-label={mode}>
+          <SegmentatorItem value="a" leftIcon={<GeneralSetting aria-hidden />}>选中</SegmentatorItem>
+          <SegmentatorItem value="b" leftIcon={<GeneralSetting aria-hidden />}>可用</SegmentatorItem>
+          <SegmentatorItem value="c" disabled leftIcon={<GeneralSetting aria-hidden />}>禁用</SegmentatorItem>
+        </SegmentatorGroup>
+      ))}
+    </div>
+  ),
+};
+
 export const Vertical: Story = {
   render: () => (
     <div className="flex flex-wrap items-start gap-6">

@@ -28,10 +28,10 @@ export function VideoSettings({
       <PopoverTrigger asChild>{trigger}</PopoverTrigger>
       <PopoverContent side="top" align="end" showArrow flush sideOffset={8}>
         <div className="aviala-video__settings-body">
-          <Typography level="subtitle">{locale.settingsTitle}</Typography>
+          <Typography className="aviala-video__control-label" level="subtitle">{locale.settingsTitle}</Typography>
 
           <div className="aviala-video__settings-section">
-            <Typography level="text">{locale.aspectRatio}</Typography>
+            <Typography className="aviala-video__control-label" level="text">{locale.aspectRatio}</Typography>
             <SegmentatorGroup
               equalWidth
               value={objectFit}
@@ -52,7 +52,7 @@ export function VideoSettings({
           </div>
 
           <div className="aviala-video__settings-row">
-            <Typography level="text">{locale.volumeBalance}</Typography>
+            <Typography className="aviala-video__control-label" level="text">{locale.volumeBalance}</Typography>
             <Switch
               size="small"
               checked={volumeBalance}

@@ -3,32 +3,35 @@
 .aviala-navigation {
   display: flex;
   width: 100%;
-  gap: var(--navigation-gap, 10px);
+  gap: var(--navigation-gap, var(--navigation-size-vertical-gap));
 }
 
 .aviala-navigation[data-direction="vertical"] {
   flex-direction: column;
   align-items: stretch;
-  padding-block: var(--navigation-py, 14px);
+  padding-block: var(--navigation-py, var(--navigation-size-vertical-padding-y));
+  padding-inline: var(--navigation-size-vertical-padding-x);
 }
 
 .aviala-navigation[data-direction="vertical"][data-dividing-line="true"] {
-  border-inline-end: 1px solid var(--navigation-divider);
+  border-inline-end: var(--navigation-size-stroke-width) solid var(--navigation-divider, var(--navigation-color-border-default));
 }
 
 .aviala-navigation[data-direction="horizontal"] {
   flex-direction: row;
   align-items: center;
   height: var(--navigation-height-horizontal, 48px);
-  padding-inline: var(--navigation-px-horizontal, 18px);
+  gap: var(--navigation-gap, var(--navigation-size-horizontal-gap));
+  padding-inline: var(--navigation-px-horizontal, var(--navigation-size-horizontal-padding-x));
+  padding-block: var(--navigation-size-horizontal-padding-y);
 }
 
 .aviala-navigation[data-direction="horizontal"][data-dividing-line="true"] {
-  border-bottom: 1px solid var(--navigation-divider);
+  border-bottom: var(--navigation-size-stroke-width) solid var(--navigation-divider, var(--navigation-color-border-default));
 }
 
 .aviala-navigation[data-background="default"] {
-  background-color: var(--navigation-bg);
+  background-color: var(--navigation-bg, var(--navigation-color-background-default));
 }
 
 .aviala-navigation-brand {
@@ -40,15 +43,17 @@
 }
 
 .aviala-navigation[data-direction="vertical"] .aviala-navigation-brand {
-  padding-inline: var(--navigation-brand-px, 14px);
+  gap: var(--navigation-item-size-vertical-brand-gap);
+  padding: var(--navigation-item-size-vertical-brand-padding-y) var(--navigation-brand-px, var(--navigation-item-size-vertical-brand-padding-x));
 }
 
 .aviala-navigation[data-direction="horizontal"] .aviala-navigation-brand {
   flex: 1 1 0;
   width: auto;
   min-width: 0;
-  padding-inline: 0;
-  padding-block: var(--navigation-item-py-horizontal, 8px);
+  gap: var(--navigation-item-size-horizontal-brand-gap);
+  padding-inline: var(--navigation-item-size-horizontal-brand-padding-x);
+  padding-block: var(--navigation-item-py-horizontal, var(--navigation-item-size-horizontal-brand-padding-y));
 }
 
 .aviala-navigation-brand__title {
@@ -56,16 +61,17 @@
   align-items: center;
   justify-content: flex-start;
   height: var(--navigation-brand-title-height, 26px);
-  padding: var(--padding-tiny, 4px);
-  border-radius: var(--border-radius-small, 8px);
-  color: var(--navigation-brand-fg);
+  gap: var(--navigation-item-size-brand-title-gap);
+  padding: var(--navigation-item-size-brand-title-padding-y) var(--navigation-item-size-brand-title-padding-x);
+  border-radius: var(--navigation-item-size-brand-title-radius);
+  color: var(--navigation-brand-fg, var(--navigation-item-color-brand-text-default));
   text-decoration: none;
   overflow: hidden;
   flex-shrink: 0;
 }
 
 .aviala-navigation-brand__title .aviala-typography.aviala-typography--text {
-  color: var(--navigation-brand-fg);
+  color: var(--navigation-brand-fg, var(--navigation-item-color-brand-text-default));
 }
 
 .aviala-navigation-section {
@@ -86,13 +92,26 @@
   width: 100%;
 }
 
+.aviala-navigation-indicator-size {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  width: var(--navigation-rail-width, var(--navigation-item-size-vertical-indicator-width));
+  height: 0;
+}
+
+.aviala-navigation[data-direction="horizontal"] .aviala-navigation-indicator-size {
+  width: var(--navigation-indicator-width-horizontal, var(--navigation-item-size-horizontal-indicator-width));
+  height: var(--navigation-rail-width, var(--navigation-item-size-horizontal-indicator-height));
+}
+
 .aviala-navigation-indicator {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 2;
   pointer-events: none;
-  background: var(--navigation-item-rail);
+  background: var(--navigation-item-rail, var(--navigation-item-color-selected-indicator-default));
   opacity: 0;
   will-change: transform, width, height;
   transition:
@@ -114,18 +133,18 @@
 }
 
 .aviala-navigation[data-direction="vertical"] .aviala-navigation-indicator {
-  border-radius: var(--border-radius-allround, 999px);
+  border-radius: var(--navigation-item-size-indicator-radius);
 }
 
 .aviala-navigation[data-direction="horizontal"] .aviala-navigation-indicator {
-  border-radius: var(--border-radius-extra-small-2, 6px)
-    var(--border-radius-extra-small-2, 6px) 0 0;
+  border-radius: var(--navigation-item-size-indicator-radius)
+    var(--navigation-item-size-indicator-radius) 0 0;
 }
 
 .aviala-navigation[data-direction="vertical"] .aviala-navigation-group {
   flex: 1 1 auto;
   flex-direction: column;
-  gap: var(--navigation-group-gap, 6px);
+  gap: var(--navigation-group-gap, var(--_legacy-navigation-group-gap, 6px));
 }
 
 .aviala-navigation[data-direction="horizontal"] .aviala-navigation-group {
@@ -149,7 +168,7 @@
 .aviala-navigation-item-group:not([data-expanded]) {
   display: flex;
   flex-direction: column;
-  gap: var(--navigation-group-gap, 6px);
+  gap: var(--navigation-group-gap, var(--navigation-child-group-size-gap));
 }
 
 .aviala-navigation[data-direction="horizontal"]
@@ -202,7 +221,7 @@
 .aviala-navigation-item-group__inner {
   display: flex;
   flex-direction: column;
-  gap: var(--navigation-group-gap, 6px);
+  gap: var(--navigation-group-gap, var(--navigation-child-group-size-gap));
   overflow: hidden;
   min-height: 0;
 }
@@ -225,19 +244,23 @@
 
 .aviala-navigation[data-direction="vertical"]
   .aviala-navigation-item[data-item-type="default"] {
-  padding-inline: var(--navigation-item-px, 8px);
+  gap: var(--navigation-item-size-vertical-tab-gap);
+  padding: var(--navigation-item-size-vertical-tab-padding-y) var(--navigation-item-px, var(--navigation-item-size-vertical-tab-padding-x));
 }
 
 .aviala-navigation[data-direction="vertical"]
   .aviala-navigation-item[data-item-type="child"] {
-  padding-inline-start: var(--navigation-item-child-pl, 26px);
-  padding-inline-end: var(--navigation-item-px, 8px);
+  gap: var(--navigation-item-size-vertical-child-gap);
+  padding-block: var(--navigation-item-size-vertical-child-padding-y);
+  padding-inline-start: var(--navigation-item-child-pl, var(--navigation-item-size-vertical-child-padding-x-start));
+  padding-inline-end: var(--navigation-item-px, var(--navigation-item-size-vertical-child-padding-x-end));
 }
 
 .aviala-navigation[data-direction="horizontal"] .aviala-navigation-item {
   width: auto;
-  padding-inline: 0;
-  padding-block: var(--navigation-item-py-horizontal, 8px);
+  gap: var(--navigation-item-size-horizontal-tab-gap);
+  padding-inline: var(--navigation-item-size-horizontal-tab-padding-x);
+  padding-block: var(--navigation-item-py-horizontal, var(--navigation-item-size-horizontal-tab-padding-y));
 }
 
 .aviala-navigation-item__control {
@@ -259,14 +282,14 @@
   width: auto;
 }
 
-/* Active tab — Button `second` surface (works with asChild where DOM surface span is omitted) */
+/* Keep the existing Button class/API; Navigation owns the selected surface tokens. */
 .aviala-navigation-item__control.aviala-button--mode-second::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background-color: var(--button-surface-bg, var(--button-second-bg));
-  box-shadow: var(--button-shadow-light);
+  background-color: var(--navigation-item-active-bg, var(--navigation-item-color-selected-background-default));
+  box-shadow: var(--navigation-item-active-shadow, inset var(--navigation-item-size-selected-shadow-inner-offset-x) var(--navigation-item-size-selected-shadow-inner-offset-y) var(--navigation-item-size-selected-shadow-inner-blur) var(--navigation-item-size-selected-shadow-inner-spread) var(--navigation-item-color-selected-shadow-inner));
   pointer-events: none;
   transition:
     filter 250ms ease,
@@ -276,16 +299,21 @@
 .aviala-navigation-item__control.aviala-button--mode-second:hover:not(
     :disabled
   )::before {
-  background-color: var(--button-second-bg-hover, var(--button-second-bg));
+  background-color: var(--navigation-item-active-bg-hover, var(--navigation-item-color-selected-background-hover));
 }
 
 .aviala-navigation-item__control.aviala-button--mode-second:active:not(
     :disabled
   )::before {
-  background-color: var(
-    --button-second-bg-active,
-    var(--button-second-bg-hover)
-  );
+  background-color: var(--navigation-item-active-bg-pressed, var(--navigation-item-color-selected-background-active));
+}
+
+.aviala-navigation-item__control.aviala-button--mode-second .aviala-navigation-item__label {
+  color: var(--navigation-item-active-fg, var(--navigation-item-color-selected-text-default));
+}
+
+.aviala-navigation-item__control.aviala-button--mode-second > .aviala-navigation-item__icon {
+  color: var(--navigation-item-active-fg, var(--navigation-item-color-selected-icon-default));
 }
 
 .aviala-navigation-item__icon,
@@ -296,15 +324,15 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: var(--navigation-icon-box, 18px);
-  height: var(--navigation-icon-box, 18px);
+  width: var(--navigation-icon-box, var(--_legacy-navigation-icon-box, 18px));
+  height: var(--navigation-icon-box, var(--_legacy-navigation-icon-box, 18px));
   color: inherit;
 }
 
 .aviala-navigation-item__icon svg,
 .aviala-navigation-item__chevron svg {
-  width: var(--navigation-icon-size, 14px);
-  height: var(--navigation-icon-size, 14px);
+  width: var(--navigation-icon-size, var(--_legacy-navigation-icon-size, 14px));
+  height: var(--navigation-icon-size, var(--_legacy-navigation-icon-size, 14px));
 }
 
 /* Parent expand chevron — rotate when immediately followed by collapsible group */
@@ -345,8 +373,8 @@
 
 .aviala-navigation[data-direction="vertical"] .aviala-navigation-actions {
   justify-content: space-between;
-  gap: var(--gap-component-space, 8px);
-  padding-inline: var(--padding-middle, 10px);
+  gap: var(--navigation-item-size-vertical-action-gap);
+  padding: var(--navigation-item-size-vertical-action-padding-y) var(--navigation-item-size-vertical-action-padding-x);
 }
 
 .aviala-navigation[data-direction="horizontal"] .aviala-navigation-actions {
@@ -354,9 +382,9 @@
   width: auto;
   min-width: 0;
   justify-content: flex-end;
-  gap: var(--gap-inside, 4px);
-  padding-inline: 0;
-  padding-block: var(--navigation-item-py-horizontal, 8px);
+  gap: var(--navigation-item-size-horizontal-action-gap);
+  padding-inline: var(--navigation-item-size-horizontal-action-padding-x);
+  padding-block: var(--navigation-item-py-horizontal, var(--navigation-item-size-horizontal-action-padding-y));
 }
 
 .aviala-navigation-actions__slot {
@@ -370,15 +398,17 @@
   z-index: 50;
   display: flex;
   flex-direction: column;
-  gap: var(--select-slot-gap, 4px);
+  gap: var(--select-slot-gap, var(--select-group-gap, var(--select-menu-item-group-size-gap)));
   min-width: var(--navigation-menu-min-width, 165px);
   max-height: min(var(--radix-popover-content-available-height, 320px), 320px);
   overflow-y: auto;
-  border: 1px solid var(--select-menu-border);
-  border-radius: var(--select-menu-radius, 10px);
-  background-color: var(--select-menu-bg);
-  padding: var(--select-menu-py, 6px) var(--select-group-px, 6px);
-  box-shadow: var(--select-menu-shadow);
+  border: 1px solid var(--select-menu-border, var(--select-menu-color-border-default));
+  border-radius: var(--select-menu-radius, var(--select-menu-size-radius));
+  background-color: var(--select-menu-bg, var(--select-menu-color-background-default));
+  /* The public flyout has one flat item group; compose both layers' insets. */
+  padding-block: calc(var(--select-menu-py, var(--select-menu-size-padding-y)) + var(--select-menu-item-group-size-padding-y));
+  padding-inline: calc(var(--select-menu-size-padding-x) + var(--select-group-px, var(--select-menu-item-group-size-padding-x)));
+  box-shadow: var(--select-menu-shadow, var(--_legacy-select-menu-shadow));
   outline: none;
 }
 
@@ -415,15 +445,15 @@
 .aviala-navigation-menu-item {
   display: flex;
   align-items: center;
-  gap: var(--select-item-gap, 8px);
+  gap: var(--select-item-gap, var(--select-menu-item-size-gap));
   width: 100%;
   border: 0;
   background: transparent;
   cursor: pointer;
   user-select: none;
-  border-radius: var(--border-radius-extra-small-2, 6px);
-  padding: var(--select-item-py, 4px) var(--select-item-px, 8px);
-  color: var(--select-item-fg);
+  border-radius: var(--select-menu-item-size-radius);
+  padding: var(--select-item-py, var(--select-menu-item-size-padding-y)) var(--select-item-px, var(--select-menu-item-size-padding-x));
+  color: var(--select-item-fg, var(--select-menu-item-color-text-default));
   font-family: inherit;
   text-align: start;
   text-decoration: none;
@@ -433,14 +463,14 @@
 }
 
 .aviala-navigation-menu-item:hover:not(:disabled):not([data-selected="true"]) {
-  background-color: var(--select-item-highlight-bg);
+  background-color: var(--select-item-highlight-bg, var(--aviala-interaction-filled-hover, var(--_legacy-select-item-highlight-bg)));
 }
 
 /* Selected child — highlight only, no check icon (Figma: active tab surface) */
 .aviala-navigation-menu-item[data-selected="true"] {
-  background-color: var(--select-item-selected-bg);
-  color: var(--select-item-selected-fg);
-  box-shadow: var(--input-surface-shadow);
+  background-color: var(--select-item-selected-bg, var(--_legacy-select-item-selected-bg));
+  color: var(--select-item-selected-fg, var(--_legacy-select-item-selected-fg));
+  box-shadow: var(--input-surface-shadow, var(--_legacy-input-surface-shadow));
 }
 
 .aviala-navigation-menu-item:disabled {
@@ -452,6 +482,25 @@
   flex: 1 1 auto;
   min-width: 0;
   word-break: break-word;
+}
+
+.aviala-navigation-menu-item .aviala-navigation-menu-item__label.aviala-typography {
+  color: var(--select-item-selected-fg, var(--select-item-fg, var(--select-menu-item-color-text-default)));
+}
+
+.aviala-navigation-menu-item:not([data-selected="true"]) .aviala-navigation-menu-item__label.aviala-typography {
+  color: var(--select-item-fg, var(--select-menu-item-color-text-default));
+}
+
+.aviala-navigation-menu-item .aviala-navigation-item__icon {
+  width: var(--navigation-icon-box, var(--select-menu-item-size-icon-width));
+  height: var(--navigation-icon-box, var(--select-menu-item-size-icon-height));
+  color: var(--select-item-function-fg, var(--select-menu-item-color-icon-default));
+}
+
+.aviala-navigation-menu-item .aviala-navigation-item__icon svg {
+  width: var(--navigation-icon-size, var(--select-item-icon-size, var(--select-menu-item-size-icon-width)));
+  height: var(--navigation-icon-size, var(--select-item-icon-size, var(--select-menu-item-size-icon-width)));
 }
 
 .aviala-navigation-menu-item__trailing {

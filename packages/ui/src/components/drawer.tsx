@@ -202,8 +202,10 @@ export const DrawerHeader = forwardRef<HTMLDivElement, DrawerHeaderProps>(
       >
         <div className="aviala-drawer__header-row">
           {showIcon ? renderDrawerIcon(icon) : null}
+          <div className="aviala-drawer__header-content">
           <div className="aviala-drawer__header-main">{children}</div>
           {showClose ? (
+            <div className="aviala-drawer__close-slot">
             <DialogPrimitive.Close asChild>
               <Button
                 type="button"
@@ -214,7 +216,9 @@ export const DrawerHeader = forwardRef<HTMLDivElement, DrawerHeaderProps>(
                 leftIcon={<SymbolWrong aria-hidden />}
               />
             </DialogPrimitive.Close>
+            </div>
           ) : null}
+          </div>
         </div>
       </div>
     );
@@ -301,7 +305,7 @@ export const DrawerBody = forwardRef<HTMLDivElement, DrawerBodyProps>(
           secondary={description ?? children}
         />
       ) : (
-        children
+        <div className="aviala-drawer__body-slot">{children}</div>
       )}
     </div>
   )
@@ -311,12 +315,18 @@ DrawerBody.displayName = "DrawerBody";
 export type DrawerFooterProps = HTMLAttributes<HTMLDivElement>;
 
 export const DrawerFooter = forwardRef<HTMLDivElement, DrawerFooterProps>(
-  ({ className, ...props }, ref) => (
+  ({ className, children, ...props }, ref) => (
     <div
       ref={ref}
       className={cn("aviala-drawer__footer", className)}
       {...props}
-    />
+    >
+      <div className="aviala-drawer__footer-slot">
+        <div className="aviala-drawer__button-group">
+          <div className="aviala-drawer__button-slot">{children}</div>
+        </div>
+      </div>
+    </div>
   )
 );
 DrawerFooter.displayName = "DrawerFooter";

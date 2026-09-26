@@ -28,6 +28,8 @@ import { TimePickerWheels } from "./time-picker-wheels";
 export type { TimePickerSize, TimePickerValue } from "./time-picker-context";
 
 export type TimePickerProps = {
+  /** Show seconds; omitted seconds start at zero. Defaults to false. */
+  showSeconds?: boolean;
   children: ReactNode;
   value?: TimePickerValue;
   defaultValue?: TimePickerValue;
@@ -50,6 +52,7 @@ export function TimePicker({
   onOpenChange,
   disabled = false,
   size = "regular",
+  showSeconds = false,
   className,
 }: TimePickerProps) {
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
@@ -58,7 +61,8 @@ export function TimePicker({
 
   const isOpenControlled = openProp !== undefined;
   const open = isOpenControlled ? openProp : internalOpen;
-  const value = valueProp !== undefined ? valueProp : internalValue;
+  const sourceValue = valueProp !== undefined ? valueProp : internalValue;
+  const value = useMemo(() => showSeconds ? { ...sourceValue, seconds: sourceValue.seconds ?? 0 } : sourceValue, [sourceValue, showSeconds]);
 
   const setValue = useCallback(
     (next: TimePickerValue) => {
@@ -88,10 +92,11 @@ export function TimePicker({
       open,
       disabled,
       size,
+      showSeconds,
       value,
       setValue,
     }),
-    [disabled, open, size, value, setValue]
+    [disabled, open, size, showSeconds, value, setValue]
   );
 
   return (
@@ -144,6 +149,7 @@ export const TimePickerTrigger = forwardRef<
       open,
       disabled: disabledContext,
       size: sizeContext,
+      showSeconds,
       value,
     } = useTimePickerContext();
     const size = sizeProp ?? sizeContext;
@@ -153,7 +159,7 @@ export const TimePickerTrigger = forwardRef<
     const formatted =
       displayValue !== undefined
         ? displayValue
-        : formatTimeValue(value.hours, value.minutes);
+        : formatTimeValue(value.hours, value.minutes, showSeconds ? value.seconds ?? 0 : undefined);
     const hasValue = formatted != null && formatted !== "";
 
     return (
@@ -249,7 +255,7 @@ export type TimePickerPanelProps = {
 
 export function TimePickerPanel({ className }: TimePickerPanelProps) {
   const locale = useLocaleMessages("TimePicker");
-  const { value, setValue } = useTimePickerContext();
+  const { value, setValue, showSeconds } = useTimePickerContext();
 
   // Hour/minute wheels already expose listbox + aria-activedescendant + Up/Down/
   // Home/End. The panel is a group so those widgets stay in browse mode; a
@@ -260,15 +266,16 @@ export function TimePickerPanel({ className }: TimePickerPanelProps) {
       role="group"
       aria-label={locale.panel}
     >
-      <TimePickerWheels value={value} onChange={setValue} />
+      <TimePickerWheels value={value} onChange={setValue} showSeconds={showSeconds} />
     </div>
   );
 }
 
 export type TimePickerFieldProps = Omit<
   TimePickerTriggerProps,
-  "displayValue"
+  "displayValue" | "defaultValue"
 > & {
+  showSeconds?: boolean;
   contentClassName?: string;
   panelClassName?: string;
   value?: TimePickerValue;
@@ -288,6 +295,7 @@ export function TimePickerField({
   panelClassName,
   className,
   size = "regular",
+  showSeconds = false,
   allRound,
   leftIcon,
   rightIcon,
@@ -311,6 +319,7 @@ export function TimePickerField({
       onOpenChange={onOpenChange}
       disabled={disabled}
       size={size}
+      showSeconds={showSeconds}
       className={className}
     >
       <TimePickerTrigger

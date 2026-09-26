@@ -102,7 +102,7 @@ function defaultStatusIcon(type: AlertType): ReactNode {
   }
 }
 
-export type AlertProps = HTMLAttributes<HTMLDivElement> &
+export type AlertProps = Omit<HTMLAttributes<HTMLDivElement>, "title"> &
   VariantProps<typeof alertVariants> & {
     /** Primary line — bold on default size */
     title: ReactNode;
@@ -193,7 +193,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
           {quickAction ? (
             <Link
               level="text"
-              mode="noBackground"
+              mode="noBackgroundCustom"
               href={onQuickAction ? "#" : undefined}
               className="aviala-alert__quick-action"
               onClick={(event) => {
@@ -231,7 +231,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
             {action ? (
               <Link
                 level="caption"
-                mode="noBackground"
+                mode="noBackgroundCustom"
                 href={onAction ? "#" : undefined}
                 className="aviala-alert__action"
                 onClick={(event) => {

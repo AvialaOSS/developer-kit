@@ -1,5 +1,20 @@
 # SegmentatorGroup
 
+## [Unreleased]
+
+### Fixed
+
+- Nested 选中阴影对齐 Figma 的 16px 模糊半径，消费组件阴影 Token 并跟随效果 ON/OFF；显式 segmentator-shadow-selected 覆盖继续优先。
+
+### Changed
+
+- 按 nested / tiled 与选中状态消费组件文字颜色 Token；禁用时仅对内容应用一次组件透明度，避免容器与文字/图标重复变淡。字号、行高与字重仍使用共享 Typography。
+- 按钮背景、横纵内边距、间距与选中/未选中/圆形圆角使用组件 Token，保留对应的旧专属覆盖入口。
+- 图标容器及 iconOnly 的宽高、横向内边距分别消费组件 Token，避免普通按钮与纯图标按钮共用尺寸规则。
+
+- nested / tiled 轨道的间距、横纵内边距、圆角和背景改为消费各自的组件 Token；nested 的 Hover / Active 背景跟随对应状态 Token。
+- 保留旧 group padding / gap / radius 和 nested 背景自定义覆盖入口，移除会遮蔽新 Token 的全局默认定义。
+
 ## 3.0.0
 
 ### Added

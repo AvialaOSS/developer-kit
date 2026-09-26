@@ -1,4 +1,4 @@
-import type { ComponentPropsWithoutRef } from "react";
+import { forwardRef, type ComponentPropsWithoutRef } from "react";
 
 /** Figma System Composition → Tooltip pointer (14×5). */
 export const TOOLTIP_POINTER = {
@@ -7,11 +7,11 @@ export const TOOLTIP_POINTER = {
   path: "M14 0L0 0C4.97025 1 3.98967 5 7 5C10.0103 5 9.02975 1 14 0Z",
 } as const;
 
-/** Figma System Composition → Popover pointer (16×5). */
+/** Figma Information Display → Popover pointer (14×5). */
 export const POPOVER_POINTER = {
-  width: 16,
+  width: 14,
   height: 5,
-  path: "M16 0H0C4.12448 0 4.76977 5 8 5C11.2302 5 11.8755 0 16 0Z",
+  path: "M14 0L0 0C3.608921468257904 0 4.173548877239227 5.000000370104402 7 5C9.826451122760773 4.999999629895626 10.391078531742096 0 14 0Z",
 } as const;
 
 export type OverlayPointerSvgProps = ComponentPropsWithoutRef<"svg"> & {
@@ -23,7 +23,7 @@ export type OverlayPointerSvgProps = ComponentPropsWithoutRef<"svg"> & {
 };
 
 /** Curved caret SVG — fill via parent `color` / CSS token on the svg class. */
-export function OverlayPointerSvg({
+export const OverlayPointerSvg = forwardRef<SVGSVGElement, OverlayPointerSvgProps>(({
   width,
   height,
   path,
@@ -31,12 +31,13 @@ export function OverlayPointerSvg({
   className,
   style,
   ...props
-}: OverlayPointerSvgProps) {
+}, ref) => {
   const isPopover = variant === "popover";
 
   return (
     <svg
       {...props}
+      ref={ref}
       width={width}
       height={height}
       viewBox={`0 0 ${width} ${height}`}
@@ -45,7 +46,7 @@ export function OverlayPointerSvg({
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden
       className={className}
-      style={{ ...style, width, height }}
+      style={{ width, height, ...style }}
     >
       {isPopover ? (
         <>
@@ -57,4 +58,5 @@ export function OverlayPointerSvg({
       )}
     </svg>
   );
-}
+});
+OverlayPointerSvg.displayName = "OverlayPointerSvg";

@@ -49,6 +49,7 @@ export function DatePickerMonthYearWheels({
     >
       <div className="aviala-datepicker-month__columns">
         <DatePickerTimeWheelColumn
+          className="aviala-datepicker-month__year"
           aria-label={locale.year}
           values={yearValues}
           value={year}
@@ -58,6 +59,7 @@ export function DatePickerMonthYearWheels({
           onChange={(nextYear) => setYearMonth(nextYear, month)}
         />
         <DatePickerTimeWheelColumn
+          className="aviala-datepicker-month__month"
           aria-label={locale.month}
           values={MONTH_VALUES}
           value={month}

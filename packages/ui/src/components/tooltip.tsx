@@ -60,9 +60,11 @@ export type TooltipContentProps = ComponentPropsWithoutRef<
   showArrow?: boolean;
   /**
    * Typography level for the surface copy.
-   * Figma default is `caption`; pass `text` for body-sized tooltip copy.
+   * Figma default is `text`; pass `caption` for explicitly compact copy.
    */
   level?: TooltipContentLevel;
+  leadingIcon?: ReactNode;
+  trailingIcon?: ReactNode;
 };
 
 export const TooltipContent = forwardRef<
@@ -76,7 +78,9 @@ export const TooltipContent = forwardRef<
       sideOffset = 4,
       collisionPadding = 8,
       showArrow = true,
-      level = "caption",
+      level = "text",
+      leadingIcon,
+      trailingIcon,
       ...props
     },
     ref
@@ -98,7 +102,9 @@ export const TooltipContent = forwardRef<
               typographyVariants({ level })
             )}
           >
-            {children}
+            {leadingIcon != null && <span className="aviala-tooltip-content__icon" aria-hidden>{leadingIcon}</span>}
+            <div className="aviala-tooltip-content__copy">{children}</div>
+            {trailingIcon != null && <span className="aviala-tooltip-content__icon" aria-hidden>{trailingIcon}</span>}
           </div>
           {showArrow ? (
             <TooltipPrimitive.Arrow
@@ -111,6 +117,10 @@ export const TooltipContent = forwardRef<
                 width={TOOLTIP_POINTER.width}
                 height={TOOLTIP_POINTER.height}
                 path={TOOLTIP_POINTER.path}
+                style={{
+                  width: "var(--tooltip-size-pointer-width)",
+                  height: "var(--tooltip-size-pointer-height)",
+                }}
               />
             </TooltipPrimitive.Arrow>
           ) : null}

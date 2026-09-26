@@ -33,6 +33,11 @@ export const Default: Story = {
   args: { appearance: "default" },
 };
 
+/** Uncontrolled settings allow consumer interaction regression checks. */
+export const InteractiveSettings: Story = {
+  args: { objectFit: undefined },
+};
+
 export const Light: Story = {
   args: { appearance: "light" },
 };

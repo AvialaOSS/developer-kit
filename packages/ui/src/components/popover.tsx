@@ -60,6 +60,17 @@ export const PopoverAnchor = PopoverPrimitive.Anchor;
 export type PopoverAppearance = "default" | "tooltip" | "primary";
 export type PopoverContentLevel = "caption" | "text";
 
+export type PopoverIconProps = ComponentPropsWithoutRef<"span">;
+
+/** Decorative icon placed in the Popover content slot. */
+export const PopoverIcon = forwardRef<HTMLSpanElement, PopoverIconProps>(
+  ({ className, ...props }, ref) => (
+    <span ref={ref} aria-hidden="true" {...props}
+      className={cn("aviala-popover-content__icon", className)} />
+  )
+);
+PopoverIcon.displayName = "PopoverIcon";
+
 export type PopoverContentProps = ComponentPropsWithoutRef<
   typeof PopoverPrimitive.Content
 > & {
@@ -67,18 +78,18 @@ export type PopoverContentProps = ComponentPropsWithoutRef<
   portalled?: boolean;
   /** Show a caret arrow pointing at the trigger (Figma with-arrow variant). */
   showArrow?: boolean;
-  /** Strip surface padding — consumer controls inner spacing. */
+  /** Strip surface and slot padding — consumer controls inner spacing. */
   flush?: boolean;
   /**
    * Visual skin of the surface:
-   * - `default` — light bordered panel (select-menu aligned), text typography, stroked caret.
-   * - `tooltip` — shared inverted tooltip skin (dark, caption text by default, borderless, solid caret).
-   * - `primary` — brand primary surface with white text, borderless, solid caret.
+   * - `default` — neutral panel and caret using Popover component tokens.
+   * - `tooltip` — shared inverted tooltip skin (Text typography, borderless, solid caret).
+   * - `primary` — theme surface and foreground using Popover component tokens.
    */
   appearance?: PopoverAppearance;
   /**
    * Typography level for the surface copy.
-   * Defaults to `caption` for `appearance="tooltip"`, otherwise `text`.
+   * Defaults to `text`, matching the shared Tooltip surface.
    */
   level?: PopoverContentLevel;
 };
@@ -105,9 +116,8 @@ export const PopoverContent = forwardRef<
   ) => {
     const overlayContainer = useOverlayPortalContainer();
     const isDefaultAppearance = appearance === "default";
-    const surfaceLevel =
-      level ?? (appearance === "tooltip" ? "caption" : "text");
-    const pointer = isDefaultAppearance ? POPOVER_POINTER : TOOLTIP_POINTER;
+    const surfaceLevel = level ?? "text";
+    const pointer = appearance === "tooltip" ? TOOLTIP_POINTER : POPOVER_POINTER;
 
     const content = (
       <PopoverPrimitive.Content
@@ -126,7 +136,9 @@ export const PopoverContent = forwardRef<
           )}
           data-flush={flush ? "true" : undefined}
         >
-          {children}
+          {appearance === "tooltip" ? children : (
+            <div className="aviala-popover-content__slot">{children}</div>
+          )}
         </div>
         {showArrow ? (
           <PopoverPrimitive.Arrow
@@ -140,6 +152,13 @@ export const PopoverContent = forwardRef<
               width={pointer.width}
               height={pointer.height}
               path={pointer.path}
+              style={appearance === "tooltip" ? {
+                width: "var(--tooltip-size-pointer-width)",
+                height: "var(--tooltip-size-pointer-height)",
+              } : {
+                width: "var(--popover-size-pointer-width)",
+                height: "var(--popover-size-pointer-height)",
+              }}
             />
           </PopoverPrimitive.Arrow>
         ) : null}

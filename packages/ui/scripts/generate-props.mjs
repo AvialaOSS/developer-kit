@@ -29,6 +29,9 @@ const parser = ts.withDefaultConfig({
 
 /** @type {ComponentSpec[]} */
 const components = [
+  { key: "ButtonGroup", file: "components/button-group.tsx", exportName: "ButtonGroup" },
+  { key: "MultiSelect", file: "components/multi-select.tsx", exportName: "MultiSelect" },
+  { key: "Rate", file: "components/rate.tsx", exportName: "Rate", parts: [{ exportName: "RateIcon" }] },
   { key: "Button", file: "components/button.tsx", exportName: "Button" },
   { key: "Input", file: "components/input.tsx", exportName: "Input" },
   {
@@ -218,6 +221,7 @@ const components = [
     parts: [
       { exportName: "PopoverTrigger" },
       { exportName: "PopoverContent" },
+      { exportName: "PopoverIcon" },
       { exportName: "PopoverAnchor" },
     ],
   },
