@@ -1,4 +1,4 @@
-# Spiral 2 Audit — 50-Item Verification Report
+# Spiral Audit — 50-Item Verification Report
 
 Condensed record of the item-by-item verification of a 50-point repository audit.
 

@@ -1,5 +1,23 @@
 # @aviala-design/spiral
 
+## 3.0.2
+
+### Patch Changes
+
+- 4ca65db: Publish a slim `component-catalog.json` export for consumer agents (import paths and ThemeProvider hints alongside existing `props.json`).
+- 2e8bade: Aggregate all component effects and the ALD theme into `@aviala-design/spiral/styles.css`, and precompile residual Tailwind utilities at package build so consumers only need one CSS import (no Tailwind toolchain).
+- Updated dependencies [2e8bade]
+  - @aviala-design/tokens@2.6.2
+
+## 3.0.1
+
+### Patch Changes
+
+- 4c0c986: Point package `repository.url` metadata at `AvialaOSS/developer-kit` (npm names unchanged).
+- Updated dependencies [4c0c986]
+  - @aviala-design/tokens@2.6.1
+  - @aviala-design/icons@2.4.1
+
 ## 3.0.0
 
 ### Major Changes

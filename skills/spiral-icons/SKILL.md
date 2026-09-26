@@ -1,6 +1,7 @@
 ---
 name: spiral-icons
 description: Aviala Design Icons pipeline for @aviala-design/icons — SVG export, SVGR build, naming. Use when adding or updating icons.
+audience: maintainer
 ---
 
 # Spiral Icons

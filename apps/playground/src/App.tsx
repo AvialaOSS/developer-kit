@@ -1079,7 +1079,7 @@ export function App() {
       <header className="border-b border-border px-6 py-4">
         <div className="mx-auto flex max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold">Spiral 2 Playground</h1>
+            <h1 className="text-2xl font-bold">Spiral Playground</h1>
             <p className="text-sm text-muted-foreground">
               Aviala Design · React Component Library
             </p>

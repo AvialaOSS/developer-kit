@@ -1,6 +1,7 @@
 ---
 name: spiral-theme
-description: Spiral 2 theme engine — generateTheme, applyTheme, ThemeProvider, ALD alias rules. Use when working on theming or @aviala-design/tokens.
+description: Spiral theme engine — generateTheme, applyTheme, ThemeProvider, ALD alias rules. Use when working on theming or @aviala-design/tokens.
+audience: maintainer
 ---
 
 # Spiral Theme
@@ -32,7 +33,9 @@ import { loadAldTheme } from "@aviala-design/tokens/node";
 const vars = loadAldTheme("light");
 ```
 
-Browser apps use `generateTheme` / `ThemeProvider` / CSS imports (`styles.css`, `ald-theme.css`), not `loadAldTheme`.
+Browser apps use `generateTheme` / `ThemeProvider` / a single CSS import
+(`@aviala-design/spiral/styles.css`, which already includes the ALD theme).
+Do not use `loadAldTheme` in the browser.
 
 ## Forbidden
 

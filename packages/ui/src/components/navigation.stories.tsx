@@ -347,7 +347,7 @@ export const DocsPattern: Story = {
         aria-label="Docs"
       >
         <NavigationBrand>
-          <NavigationBrandTitle href="#">Spiral 2</NavigationBrandTitle>
+          <NavigationBrandTitle href="#">Spiral</NavigationBrandTitle>
           <Typography level="caption" as="p">
             Aviala Design React 组件库
           </Typography>

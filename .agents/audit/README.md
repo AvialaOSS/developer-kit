@@ -1,6 +1,6 @@
 # `.agents/audit/` — Repository audit record
 
-Durable record of a 50-item repository audit and its remediation plan, kept for agents and maintainers working on Spiral 2.
+Durable record of a 50-item repository audit and its remediation plan, kept for agents and maintainers working on Spiral.
 
 | File                     | What it is                                                                                                                                                      |
 | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |

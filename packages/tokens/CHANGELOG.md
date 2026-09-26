@@ -1,5 +1,17 @@
 # @aviala-design/tokens
 
+## 2.6.2
+
+### Patch Changes
+
+- 2e8bade: Aggregate all component effects and the ALD theme into `@aviala-design/spiral/styles.css`, and precompile residual Tailwind utilities at package build so consumers only need one CSS import (no Tailwind toolchain).
+
+## 2.6.1
+
+### Patch Changes
+
+- 4c0c986: Point package `repository.url` metadata at `AvialaOSS/developer-kit` (npm names unchanged).
+
 ## 2.6.0
 
 ### Minor Changes

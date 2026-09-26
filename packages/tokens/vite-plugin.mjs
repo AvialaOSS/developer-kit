@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 /**
  * Vite plugin: serve @aviala-design/tokens (and spiral's styles.css) straight
@@ -12,15 +12,17 @@ import { fileURLToPath } from "node:url";
  *   @aviala-design/tokens/ald-theme.css       → generated on the fly (cache file)
  *   @aviala-design/tokens/<name>-effects.css  → src/semantic/<name>-effects.css
  *   @aviala-design/tokens/<name>-extras.css   → src/semantic/<name>-extras.css
- *   @aviala-design/spiral/styles.css          → tokens styles + @layer base reset
+ *   @aviala-design/spiral/styles.css          → full aggregate (effects + ald +
+ *                                               base reset + residual TW utils)
  *
  * Generated CSS lives in `<app>/node_modules/.cache/aviala-tokens-css/`. That
  * directory is inside Vite's default watch ignore list, so hot reload does NOT
  * rely on fs events for those files: handleHotUpdate watches the *sources*
- * (src/semantic, source/ald, source/themebuilder), regenerates the cache, then invalidates the
- * cache modules in the module graph so Vite pushes a normal css-update.
+ * (token sources, standard projects, and ui/src for utils), regenerates the cache, then
+ * invalidates the cache modules in the module graph so Vite pushes a normal
+ * css-update.
  *
- * Keep SPIRAL_LAYER_BASE in sync with packages/ui/scripts/copy-css.mjs.
+ * Keep SPIRAL_LAYER_BASE in sync with packages/ui/scripts/assemble-styles.mjs.
  */
 
 const SPIRAL_LAYER_BASE = `@layer base {
@@ -45,6 +47,17 @@ const GENERATED_FILES = {
 
 const normalize = (p) => p.replace(/\\/g, "/");
 
+async function compileSpiralUtilsCss(tokensRoot) {
+  const compilePath = join(tokensRoot, "../ui/scripts/compile-utils-css.mjs");
+  if (!existsSync(compilePath)) {
+    return "/* residual utilities unavailable — ui package not adjacent */\n";
+  }
+  const { compileAvialaUtilsCss } = await import(
+    pathToFileURL(compilePath).href
+  );
+  return compileAvialaUtilsCss();
+}
+
 export default function avialaTokensCss(options = {}) {
   const tokensRoot = dirname(fileURLToPath(import.meta.url));
   const cacheDir = normalize(
@@ -59,9 +72,10 @@ export default function avialaTokensCss(options = {}) {
     join(tokensRoot, "source", "theme-engine")
   );
   const srcDir = normalize(join(tokensRoot, "src"));
+  const uiSrcDir = normalize(join(tokensRoot, "../ui/src"));
 
   async function generateAll() {
-    const { buildAldThemeCss, buildComponentTokenCss, buildCombinedStylesCss } =
+    const { buildAldThemeCss, buildComponentTokenCss, buildCombinedStylesCss, buildSpiralAggregateCss } =
       await import("./scripts/css-lib.mjs");
     mkdirSync(cacheDir, { recursive: true });
     writeFileSync(
@@ -74,9 +88,15 @@ export default function avialaTokensCss(options = {}) {
     );
     const combined = buildCombinedStylesCss(tokensRoot);
     writeFileSync(join(cacheDir, "tokens-styles.css"), combined);
+
+    const utils = await compileSpiralUtilsCss(tokensRoot);
     writeFileSync(
       join(cacheDir, "spiral-styles.css"),
-      combined + "\n\n" + SPIRAL_LAYER_BASE
+      buildSpiralAggregateCss(tokensRoot) +
+        "\n\n" +
+        SPIRAL_LAYER_BASE +
+        "\n\n" +
+        utils
     );
   }
 
@@ -86,7 +106,8 @@ export default function avialaTokensCss(options = {}) {
       normalizedFile.startsWith(nonColorDir + "/") ||
       normalizedFile.startsWith(aldDir + "/") ||
       normalizedFile.startsWith(themeBuilderDir + "/") ||
-      normalizedFile.startsWith(standardProjectDir + "/")
+      normalizedFile.startsWith(standardProjectDir + "/") ||
+      normalizedFile.startsWith(uiSrcDir + "/")
     );
   }
 
@@ -139,14 +160,16 @@ export default function avialaTokensCss(options = {}) {
     configureServer(server) {
       // Watch the token *sources* — including files like colors.css and the
       // ALD JSON that are never imported directly, so Vite would otherwise
-      // never fire hotUpdate for them.
-      server.watcher.add([
+      // never fire hotUpdate for them. Include UI source for utility generation.
+      const watchRoots = [
         semanticDir,
         nonColorDir,
         aldDir,
         themeBuilderDir,
         standardProjectDir,
-      ]);
+      ];
+      if (existsSync(uiSrcDir)) watchRoots.push(uiSrcDir);
+      server.watcher.add(watchRoots);
     },
 
     async handleHotUpdate({ file, server }) {

@@ -1,6 +1,6 @@
 # Lint 与格式化
 
-Spiral 2 使用 **ESLint 10 flat config** + **Prettier 3**，配置集中在仓库根目录：
+Spiral 使用 **ESLint 10 flat config** + **Prettier 3**，配置集中在仓库根目录：
 
 | 文件                | 作用                                            |
 | ------------------- | ----------------------------------------------- |
