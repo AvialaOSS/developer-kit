@@ -30,6 +30,12 @@ const parser = ts.withDefaultConfig({
 /** @type {ComponentSpec[]} */
 const components = [
   {
+    key: "InputGroup",
+    file: "components/input-group.tsx",
+    exportName: "InputGroup",
+    parts: [{ exportName: "InputGroupItem" }, { exportName: "InputGroupAddon" }],
+  },
+  {
     key: "ButtonGroup",
     file: "components/button-group.tsx",
     exportName: "ButtonGroup",
