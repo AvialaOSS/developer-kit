@@ -1,6 +1,6 @@
 # Typeface
 
-## [Unreleased]
+## 3.1.0
 
 ### Changed
 

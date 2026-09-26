@@ -1,6 +1,6 @@
 # Table
 
-## [Unreleased]
+## 3.1.0
 
 ### Added
 - TableHead 增加可选 leftIcon/rightIcon，使用表头独立图标尺寸、槽留白、间距及颜色 Token；默认不渲染，Checkbox 表头保持原内容。

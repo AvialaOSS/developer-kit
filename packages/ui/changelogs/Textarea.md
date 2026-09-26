@@ -1,6 +1,6 @@
 # Textarea
 
-## [Unreleased]
+## 3.1.0
 
 ### Changed
 - 底部计数与拖拽区接入 Controller 的8项Token，支持独立文字/图标颜色及尺寸；文字区预留空间随控制区高度变化，避免遮挡末行。

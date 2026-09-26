@@ -1,6 +1,6 @@
 # ScrollPicker
 
-## [Unreleased]
+## 3.1.0
 
 ### Fixed
 - 已在边界时重复按 Home 等无位移操作不再留下程序滚动标记，下一次手动滚动可正常选值。

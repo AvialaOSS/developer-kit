@@ -1,6 +1,6 @@
 # DatePickerField
 
-## [Unreleased]
+## 3.1.0
 
 ### Fixed
 - 时间滚轮的程序滚动补齐结束兜底，避免缺少 scrollend 时阻塞后续用户选值。

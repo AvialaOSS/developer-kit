@@ -1,6 +1,6 @@
 # Video
 
-## [Unreleased]
+## 3.1.0
 
 ### Changed
 - 设置标题、设置字段标签与音量百分比接入 Video 文字 Token，字体指标继续使用共享 Typography。

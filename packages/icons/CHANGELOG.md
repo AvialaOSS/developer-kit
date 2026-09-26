@@ -1,5 +1,11 @@
 # @aviala-design/icons
 
+## 2.5.0
+
+### Minor Changes
+
+- 4f3c16d: Add Icon line-height alignment modes and a reusable IconFrame. Use square typography line boxes and equal default padding for icon-only buttons across all modes, preserving explicit legacy overrides.
+
 ## 2.4.1
 
 ### Patch Changes
