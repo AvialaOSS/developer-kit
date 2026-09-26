@@ -1,6 +1,10 @@
 import source from "../../source/theme-engine/ald.project.json";
 import { parseProject, type TokenProject } from "./project";
-import { avialaProjectCssOptions, projectCssVariables, type ProjectCssOptions } from "./project-css";
+import {
+  avialaProjectCssOptions,
+  projectCssVariables,
+  type ProjectCssOptions,
+} from "./project-css";
 import type { BaseNumbersDensity } from "./base-numbers";
 
 let profile: { project: TokenProject; options: ProjectCssOptions } | undefined;

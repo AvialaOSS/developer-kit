@@ -66,12 +66,17 @@ export type ThemeBuilderValue =
   | { kind: "composed"; color: ThemeBuilderValue; opacity: ThemeBuilderValue };
 export interface ThemeBuilderSnapshot {
   collections: {
-    id: string; name: string; defaultModeId: string;
+    id: string;
+    name: string;
+    defaultModeId: string;
     modes: { id: string; name: string }[];
     metadata?: Record<string, unknown>;
   }[];
   variables: {
-    id: string; name: string; type: string; collectionId: string;
+    id: string;
+    name: string;
+    type: string;
+    collectionId: string;
     values: Record<string, ThemeBuilderValue>;
     external?: boolean;
   }[];
@@ -82,28 +87,50 @@ export function importThemeBuilderSnapshot(
   input: ThemeBuilderSnapshot,
   options: SnapshotImportOptions
 ): { project: TokenProject; bindings: SourceBinding[] } {
-  const encode = (value: ThemeBuilderValue, path: string, depth = 0): EncodedValue => {
+  const encode = (
+    value: ThemeBuilderValue,
+    path: string,
+    depth = 0
+  ): EncodedValue => {
     if (!value || typeof value !== "object" || depth > 64)
       throw new Error(`Invalid or excessively nested editor value at ${path}`);
     if (value.kind === "literal") return ["l", value.value];
-    if (value.kind === "alias" && typeof value.target === "string") return ["a", value.target];
+    if (value.kind === "alias" && typeof value.target === "string")
+      return ["a", value.target];
     if (value.kind === "composed")
-      return ["c", encode(value.color, `${path}.color`, depth + 1), encode(value.opacity, `${path}.opacity`, depth + 1)];
+      return [
+        "c",
+        encode(value.color, `${path}.color`, depth + 1),
+        encode(value.opacity, `${path}.opacity`, depth + 1),
+      ];
     throw new Error(`Unsupported editor value at ${path}`);
   };
   const snapshot: VariableSnapshot = {
-    collections: input.collections.map(collection => ({
-      id: collection.id, name: collection.name,
+    collections: input.collections.map((collection) => ({
+      id: collection.id,
+      name: collection.name,
       defaultModeId: collection.defaultModeId,
-      modes: collection.modes.map(mode => ({ id: mode.id, name: mode.name })),
+      modes: collection.modes.map((mode) => ({ id: mode.id, name: mode.name })),
       // Absence of metadata does not revoke a previously known restriction.
-      ...(typeof collection.metadata?.remote === "boolean" ? { remote: collection.metadata.remote } : {}),
-      ...(typeof collection.metadata?.isExtension === "boolean" ? { isExtension: collection.metadata.isExtension } : {}),
+      ...(typeof collection.metadata?.remote === "boolean"
+        ? { remote: collection.metadata.remote }
+        : {}),
+      ...(typeof collection.metadata?.isExtension === "boolean"
+        ? { isExtension: collection.metadata.isExtension }
+        : {}),
     })),
-    variables: input.variables.map(variable => ({
-      i: variable.id, n: variable.name, t: variable.type, c: variable.collectionId,
-      ...(typeof variable.external === "boolean" ? { remote: variable.external } : {}),
-      v: Object.entries(variable.values).map(([mode, value]) => [mode, encode(value, `${variable.name}/${mode}`)]),
+    variables: input.variables.map((variable) => ({
+      i: variable.id,
+      n: variable.name,
+      t: variable.type,
+      c: variable.collectionId,
+      ...(typeof variable.external === "boolean"
+        ? { remote: variable.external }
+        : {}),
+      v: Object.entries(variable.values).map(([mode, value]) => [
+        mode,
+        encode(value, `${variable.name}/${mode}`),
+      ]),
     })),
   };
   return importVariableSnapshot(snapshot, {
@@ -193,35 +220,55 @@ export function importVariableSnapshot(
   for (const variable of snapshot.variables) identity("token", variable.i);
   for (const binding of bindings) {
     if (binding.retired || binding.source !== options.source) continue;
-    const collection = binding.kind === "collection"
-      ? collectionMap.get(binding.externalId)
-      : binding.kind === "token"
-        ? collectionMap.get(variableMap.get(binding.externalId)?.c ?? "")
+    const collection =
+      binding.kind === "collection"
+        ? collectionMap.get(binding.externalId)
+        : binding.kind === "token"
+          ? collectionMap.get(variableMap.get(binding.externalId)?.c ?? "")
+          : undefined;
+    const variable =
+      binding.kind === "token"
+        ? variableMap.get(binding.externalId)
         : undefined;
-    const variable = binding.kind === "token" ? variableMap.get(binding.externalId) : undefined;
-    if (collection?.remote === true || collection?.isExtension === true || variable?.remote === true)
+    if (
+      collection?.remote === true ||
+      collection?.isExtension === true ||
+      variable?.remote === true
+    )
       binding.readOnly = true;
-    else if (collection?.remote === false && collection?.isExtension === false &&
-      (binding.kind === "collection" || variable?.remote === false))
+    else if (
+      collection?.remote === false &&
+      collection?.isExtension === false &&
+      (binding.kind === "collection" || variable?.remote === false)
+    )
       binding.readOnly = false;
     // Missing metadata cannot silently revoke a previously known restriction.
   }
   const unitCache = new Map<string, NumberUnit>();
-  if (options.remPixels !== undefined && (!Number.isFinite(options.remPixels) || options.remPixels <= 0))
+  if (
+    options.remPixels !== undefined &&
+    (!Number.isFinite(options.remPixels) || options.remPixels <= 0)
+  )
     throw new Error("Invalid rem conversion");
-  const knownSourceTokens = new Set(bindings
-    .filter(binding => binding.source === options.source && binding.kind === "token")
-    .map(binding => binding.externalId));
+  const knownSourceTokens = new Set(
+    bindings
+      .filter(
+        (binding) =>
+          binding.source === options.source && binding.kind === "token"
+      )
+      .map((binding) => binding.externalId)
+  );
   for (const [id, unit] of Object.entries(options.numericUnits ?? {})) {
     if (!["px", "rem", "ratio", "fontWeight", "scalar"].includes(unit))
       throw new Error(`Invalid numeric unit for ${id}`);
     const variable = variableMap.get(id);
     // Preserve configuration for deleted, previously mapped source identities.
     // Unknown keys still fail so an ID typo cannot silently change import units.
-    if (!variable && knownSourceTokens.has(id))
-      continue;
+    if (!variable && knownSourceTokens.has(id)) continue;
     if (variable?.t !== "FLOAT")
-      throw new Error(`Numeric unit rule requires a source FLOAT variable: ${id}`);
+      throw new Error(
+        `Numeric unit rule requires a source FLOAT variable: ${id}`
+      );
   }
   const unitActive = new Set<string>();
   const unitFor = (id: string): NumberUnit => {
@@ -242,17 +289,19 @@ export function importVariableSnapshot(
       if (value[0] === "a") units.add(unitFor(value[1]));
       else if (value[0] === "l") {
         if (!explicitUnit && options.requireExplicitNumericUnits)
-          throw new Error(`Explicit numeric unit required for ${variable.n} (${id})`);
+          throw new Error(
+            `Explicit numeric unit required for ${variable.n} (${id})`
+          );
         units.add(
-          explicitUnit ?? (variable.s?.includes("FONT_WEIGHT")
-            ? "fontWeight"
-            : /(^|\/)transparency(\/|$)/i.test(variable.n) ||
-                variable.s?.includes("OPACITY")
-              ? "ratio"
-              : "px")
+          explicitUnit ??
+            (variable.s?.includes("FONT_WEIGHT")
+              ? "fontWeight"
+              : /(^|\/)transparency(\/|$)/i.test(variable.n) ||
+                  variable.s?.includes("OPACITY")
+                ? "ratio"
+                : "px")
         );
-      }
-      else throw new Error(`Unexpected numeric composition at ${variable.n}`);
+      } else throw new Error(`Unexpected numeric composition at ${variable.n}`);
     }
     if (units.size !== 1)
       throw new Error(`Inconsistent or missing numeric units at ${variable.n}`);
@@ -303,14 +352,30 @@ export function importVariableSnapshot(
         return { kind: "literal", value: raw * 1000 };
       }
       if (type === "cubicBezier") {
-        if (!raw || typeof raw !== "object" || !("type" in raw) || raw.type !== "CUSTOM_CUBIC_BEZIER" ||
-            !("easingFunctionCubicBezier" in raw) || !raw.easingFunctionCubicBezier || typeof raw.easingFunctionCubicBezier !== "object")
-          throw new Error(`Unsupported easing expression at ${variable.n}; only custom cubic Bezier is currently mapped`);
+        if (
+          !raw ||
+          typeof raw !== "object" ||
+          !("type" in raw) ||
+          raw.type !== "CUSTOM_CUBIC_BEZIER" ||
+          !("easingFunctionCubicBezier" in raw) ||
+          !raw.easingFunctionCubicBezier ||
+          typeof raw.easingFunctionCubicBezier !== "object"
+        )
+          throw new Error(
+            `Unsupported easing expression at ${variable.n}; only custom cubic Bezier is currently mapped`
+          );
         const curve = raw.easingFunctionCubicBezier as Record<string, unknown>;
         const coordinates = [curve.x1, curve.y1, curve.x2, curve.y2];
-        if (!coordinates.every((value) => typeof value === "number" && Number.isFinite(value)))
+        if (
+          !coordinates.every(
+            (value) => typeof value === "number" && Number.isFinite(value)
+          )
+        )
           throw new Error(`Invalid cubic Bezier at ${variable.n}`);
-        return { kind: "literal", value: coordinates as [number, number, number, number] };
+        return {
+          kind: "literal",
+          value: coordinates as [number, number, number, number],
+        };
       }
       if (
         type === "color" &&
@@ -341,7 +406,7 @@ export function importVariableSnapshot(
           ? raw / 100
           : numericUnit === "rem" && typeof raw === "number"
             ? raw / options.remPixels!
-          : raw) as Literal,
+            : raw) as Literal,
       };
     };
     const valuesByMode: Record<string, TokenValue> = Object.create(
@@ -369,7 +434,9 @@ export function importVariableSnapshot(
       layer: rule.layer,
       type,
       ...(unit ? { unit } : {}),
-      ...(rule.css === "path" ? {} : { cssName: tokenCssName({ path: cssPath }) }),
+      ...(rule.css === "path"
+        ? {}
+        : { cssName: tokenCssName({ path: cssPath }) }),
       valuesByMode,
     };
   });

@@ -13,10 +13,22 @@ const repoRoot = join(packageRoot, "../..");
 const snapshot = loadThemeBuilderSnapshot(packageRoot);
 const registry = createVariableRegistry(snapshot);
 const project = loadStandardProject(packageRoot);
-const candidate = JSON.parse(readFileSync(join(packageRoot, "source/theme-engine/import-candidate.json"), "utf8"));
-const engineIds = new Map(candidate.bindings
-  .filter((binding) => binding.kind === "token" && !binding.retired && binding.source === candidate.source)
-  .map((binding) => [binding.externalId, binding.engineId]));
+const candidate = JSON.parse(
+  readFileSync(
+    join(packageRoot, "source/theme-engine/import-candidate.json"),
+    "utf8"
+  )
+);
+const engineIds = new Map(
+  candidate.bindings
+    .filter(
+      (binding) =>
+        binding.kind === "token" &&
+        !binding.retired &&
+        binding.source === candidate.source
+    )
+    .map((binding) => [binding.externalId, binding.engineId])
+);
 const tokens = new Map(project.tokens.map((token) => [token.id, token]));
 const source = JSON.parse(
   readFileSync(
@@ -78,7 +90,9 @@ const rows = snapshot.variables
     const collection = registry.collections.get(variable.c);
     const engineId = engineIds.get(variable.i);
     const token = tokens.get(engineId);
-    const cssName = token ? projectApi.tokenCssName(token) : registry.cssName(variable);
+    const cssName = token
+      ? projectApi.tokenCssName(token)
+      : registry.cssName(variable);
     const oldPath = ["numbers", "fontWeight"].includes(collection.name)
       ? variable.n.split("/").at(-1)
       : variable.n;
@@ -108,14 +122,22 @@ const rows = snapshot.variables
     (a, b) =>
       a.collection.localeCompare(b.collection) || a.path.localeCompare(b.path)
   );
-const mappedIds = new Set(rows.filter((row) => row.presentInStandardProject).map((row) => row.engineId));
-const standardOnlyTokens = project.tokens.filter((token) => !mappedIds.has(token.id)).map((token) => ({
-  id: token.id,
-  collection: project.collections.find((collection) => collection.id === token.collectionId)?.name,
-  path: token.path.join("/"),
-  cssName: projectApi.tokenCssName(token),
-}));
-const unmappedSourceVariables = rows.filter((row) => !row.presentInStandardProject);
+const mappedIds = new Set(
+  rows.filter((row) => row.presentInStandardProject).map((row) => row.engineId)
+);
+const standardOnlyTokens = project.tokens
+  .filter((token) => !mappedIds.has(token.id))
+  .map((token) => ({
+    id: token.id,
+    collection: project.collections.find(
+      (collection) => collection.id === token.collectionId
+    )?.name,
+    path: token.path.join("/"),
+    cssName: projectApi.tokenCssName(token),
+  }));
+const unmappedSourceVariables = rows.filter(
+  (row) => !row.presentInStandardProject
+);
 const report = {
   baseline: { file: source.file, exportedAt: source.exportedAt },
   standardProject: {
@@ -167,8 +189,13 @@ const md = [
   "",
   "| 标准项目独有 Token | Collection | CSS 名 |",
   "| --- | --- | --- |",
-  ...standardOnlyTokens.map((token) => `| ${token.path} | ${token.collection} | ${token.cssName} |`),
-  ...unmappedSourceVariables.map((row) => `\n未映射快照变量：${row.collection} / ${row.path}（${row.sourceId}）`),
+  ...standardOnlyTokens.map(
+    (token) => `| ${token.path} | ${token.collection} | ${token.cssName} |`
+  ),
+  ...unmappedSourceVariables.map(
+    (row) =>
+      `\n未映射快照变量：${row.collection} / ${row.path}（${row.sourceId}）`
+  ),
   "",
   "## 被引用但未生成定义的变量",
   "",

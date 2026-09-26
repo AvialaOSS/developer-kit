@@ -320,7 +320,9 @@ export function DatePickerTimeWheelColumn({
       scrollToIndex(loop ? values.length * MIDDLE_SECTION + index : index);
     });
     resizeObserver.observe(container);
-    const firstItem = container.querySelector(".aviala-datepicker-time__wheel-item");
+    const firstItem = container.querySelector(
+      ".aviala-datepicker-time__wheel-item"
+    );
     if (firstItem) resizeObserver.observe(firstItem);
     if (band) resizeObserver.observe(band);
 
@@ -340,17 +342,27 @@ export function DatePickerTimeWheelColumn({
     if (!container) return;
 
     const onWheel = (event: WheelEvent) => {
-      if (!shouldCapturePickerWheel(event, {
-        count: values.length, loop, scrollTop: container.scrollTop,
-        scrollHeight: container.scrollHeight, clientHeight: container.clientHeight,
-      })) {
+      if (
+        !shouldCapturePickerWheel(event, {
+          count: values.length,
+          loop,
+          scrollTop: container.scrollTop,
+          scrollHeight: container.scrollHeight,
+          clientHeight: container.clientHeight,
+        })
+      ) {
         wheelAccumRef.current = 0;
         return;
       }
 
       const itemHeight = readItemHeight(container);
       if (itemHeight <= 0) return;
-      const delta = pickerWheelDeltaPixels(event.deltaY, event.deltaMode, itemHeight, container.clientHeight);
+      const delta = pickerWheelDeltaPixels(
+        event.deltaY,
+        event.deltaMode,
+        itemHeight,
+        container.clientHeight
+      );
       if (delta === 0) return;
       event.preventDefault();
 
@@ -486,9 +498,10 @@ export function DatePickerTimeWheelColumn({
 
   const instanceId = useId();
   const committedIndex = values.indexOf(value);
-  const selectedOptionId = committedIndex < 0
-    ? undefined
-    : `${instanceId}-${committedIndex + (loop ? values.length * MIDDLE_SECTION : 0)}`;
+  const selectedOptionId =
+    committedIndex < 0
+      ? undefined
+      : `${instanceId}-${committedIndex + (loop ? values.length * MIDDLE_SECTION : 0)}`;
 
   return (
     <div className={cn("aviala-datepicker-time__wheel", className)}>

@@ -14,55 +14,37 @@
   "collections": [
     {
       "name": "numbers",
-      "modes": [
-        "Default",
-        "Mobile Friendly"
-      ],
+      "modes": ["Default", "Mobile Friendly"],
       "count": 58
     },
     {
       "name": "fontWeight",
-      "modes": [
-        "Mode 1"
-      ],
+      "modes": ["Mode 1"],
       "count": 6
     },
     {
       "name": "colorSystem",
-      "modes": [
-        "Light",
-        "Dark"
-      ],
+      "modes": ["Light", "Dark"],
       "count": 138
     },
     {
       "name": "specialEffort",
-      "modes": [
-        "ON",
-        "OFF"
-      ],
+      "modes": ["ON", "OFF"],
       "count": 5
     },
     {
       "name": "componentToken",
-      "modes": [
-        "Default"
-      ],
+      "modes": ["Default"],
       "count": 1705
     },
     {
       "name": "Aviala Design Colors",
-      "modes": [
-        "Light",
-        "Dark"
-      ],
+      "modes": ["Light", "Dark"],
       "count": 62
     },
     {
       "name": "control",
-      "modes": [
-        "default"
-      ],
+      "modes": ["default"],
       "count": 2
     }
   ],
@@ -560,9 +542,7 @@
       "type": "COLOR",
       "cssName": "--aviala-neutral-neutral-10",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/components.css:564"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/components.css:564"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -622,9 +602,7 @@
       "type": "COLOR",
       "cssName": "--aviala-neutral-neutral-2",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/components.css:568"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/components.css:568"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -639,9 +617,7 @@
       "type": "COLOR",
       "cssName": "--aviala-neutral-neutral-3",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/colors.css:43"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/colors.css:43"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -1434,9 +1410,7 @@
         "packages/tokens/src/semantic/input-effects.css:9",
         "packages/tokens/src/semantic/tab-effects.css:25"
       ],
-      "handwrittenDefinitions": [
-        "packages/tokens/src/semantic/colors.css"
-      ],
+      "handwrittenDefinitions": ["packages/tokens/src/semantic/colors.css"],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
       "references": [
@@ -3766,9 +3740,7 @@
         "packages/ui/src/components/input.tsx:131",
         "packages/ui/src/components/number-input.tsx:238"
       ],
-      "handwrittenDefinitions": [
-        "packages/tokens/src/semantic/colors.css"
-      ],
+      "handwrittenDefinitions": ["packages/tokens/src/semantic/colors.css"],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
       "references": [
@@ -3818,9 +3790,7 @@
         "packages/tokens/src/semantic/layout-effects.css:180",
         "packages/tokens/src/semantic/modal-effects.css:161"
       ],
-      "handwrittenDefinitions": [
-        "packages/tokens/src/semantic/colors.css"
-      ],
+      "handwrittenDefinitions": ["packages/tokens/src/semantic/colors.css"],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
       "references": [
@@ -3845,9 +3815,7 @@
         "packages/tokens/src/semantic/components.css:714",
         "packages/tokens/src/semantic/components.css:917"
       ],
-      "handwrittenDefinitions": [
-        "packages/tokens/src/semantic/colors.css"
-      ],
+      "handwrittenDefinitions": ["packages/tokens/src/semantic/colors.css"],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
       "references": [
@@ -3877,9 +3845,7 @@
         "packages/tokens/src/semantic/components.css:719",
         "packages/tokens/src/semantic/feedback-effects.css:95"
       ],
-      "handwrittenDefinitions": [
-        "packages/tokens/src/semantic/colors.css"
-      ],
+      "handwrittenDefinitions": ["packages/tokens/src/semantic/colors.css"],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
       "references": [
@@ -3921,9 +3887,7 @@
       "type": "COLOR",
       "cssName": "--text-text-normal-title-white",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/non-color/typography.css:54"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/non-color/typography.css:54"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -4007,12 +3971,8 @@
       "type": "COLOR",
       "cssName": "--text-text-theme-light-black",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/colors.css:12"
-      ],
-      "handwrittenDefinitions": [
-        "packages/tokens/src/semantic/colors.css"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/colors.css:12"],
+      "handwrittenDefinitions": ["packages/tokens/src/semantic/colors.css"],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
       "references": [
@@ -4047,9 +4007,7 @@
         "packages/tokens/src/semantic/components.css:915",
         "packages/tokens/src/semantic/components.css:938"
       ],
-      "handwrittenDefinitions": [
-        "packages/tokens/src/semantic/colors.css"
-      ],
+      "handwrittenDefinitions": ["packages/tokens/src/semantic/colors.css"],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
       "references": [
@@ -4072,9 +4030,7 @@
         "packages/tokens/src/semantic/colors.css:11",
         "packages/tokens/src/semantic/components.css:362"
       ],
-      "handwrittenDefinitions": [
-        "packages/tokens/src/semantic/colors.css"
-      ],
+      "handwrittenDefinitions": ["packages/tokens/src/semantic/colors.css"],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
       "references": [
@@ -4758,9 +4714,7 @@
       "type": "FLOAT",
       "cssName": "--alert-size-gap",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/alert-effects.css:6"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/alert-effects.css:6"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -4911,9 +4865,7 @@
       "type": "FLOAT",
       "cssName": "--alert-size-padding-x",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/alert-effects.css:7"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/alert-effects.css:7"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -4933,9 +4885,7 @@
       "type": "FLOAT",
       "cssName": "--alert-size-padding-y",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/alert-effects.css:7"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/alert-effects.css:7"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -4977,9 +4927,7 @@
       "type": "FLOAT",
       "cssName": "--alert-size-stroke-width",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/alert-effects.css:9"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/alert-effects.css:9"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -5780,9 +5728,7 @@
       "type": "FLOAT",
       "cssName": "--avata-size-icon-width",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/ui/src/components/avatar.tsx:58"
-      ],
+      "sourceOccurrences": ["packages/ui/src/components/avatar.tsx:58"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -21679,9 +21625,7 @@
       "type": "FLOAT",
       "cssName": "--input-group-size-gap",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/ui/src/components/input-group.tsx:16"
-      ],
+      "sourceOccurrences": ["packages/ui/src/components/input-group.tsx:16"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--inputgroup-size-gap",
       "legacySourceOccurrences": [],
@@ -21723,9 +21667,7 @@
       "type": "FLOAT",
       "cssName": "--input-group-input-size-gap",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/ui/src/components/input-group.tsx:29"
-      ],
+      "sourceOccurrences": ["packages/ui/src/components/input-group.tsx:29"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--inputgroupinput-size-gap",
       "legacySourceOccurrences": [],
@@ -22897,9 +22839,7 @@
       "type": "FLOAT",
       "cssName": "--list-size-content-gap",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/list-effects.css:36"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/list-effects.css:36"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -22914,9 +22854,7 @@
       "type": "FLOAT",
       "cssName": "--list-size-content-padding-x",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/list-effects.css:37"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/list-effects.css:37"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -22936,9 +22874,7 @@
       "type": "FLOAT",
       "cssName": "--list-size-content-padding-y",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/list-effects.css:37"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/list-effects.css:37"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -22958,9 +22894,7 @@
       "type": "FLOAT",
       "cssName": "--list-size-content-radius",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/list-effects.css:38"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/list-effects.css:38"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -23003,9 +22937,7 @@
       "type": "FLOAT",
       "cssName": "--list-size-heading-gap",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/list-effects.css:13"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/list-effects.css:13"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -23020,9 +22952,7 @@
       "type": "FLOAT",
       "cssName": "--list-size-heading-padding-x",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/list-effects.css:15"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/list-effects.css:15"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -23037,9 +22967,7 @@
       "type": "FLOAT",
       "cssName": "--list-size-heading-padding-y",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/list-effects.css:14"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/list-effects.css:14"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -23054,9 +22982,7 @@
       "type": "FLOAT",
       "cssName": "--list-size-heading-radius",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/list-effects.css:16"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/list-effects.css:16"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -23111,9 +23037,7 @@
       "type": "FLOAT",
       "cssName": "--list-size-title-gap",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/list-effects.css:23"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/list-effects.css:23"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -23133,9 +23057,7 @@
       "type": "FLOAT",
       "cssName": "--list-size-title-padding-x",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/list-effects.css:24"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/list-effects.css:24"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -23150,9 +23072,7 @@
       "type": "FLOAT",
       "cssName": "--list-size-title-padding-y",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/list-effects.css:24"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/list-effects.css:24"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -23167,9 +23087,7 @@
       "type": "FLOAT",
       "cssName": "--list-size-title-radius",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/list-effects.css:25"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/list-effects.css:25"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -23702,9 +23620,7 @@
       "type": "FLOAT",
       "cssName": "--list-item-size-no-icon-padding-x-start",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/list-effects.css:88"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/list-effects.css:88"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--listitem-size-noicon-padding-x-start",
       "legacySourceOccurrences": [],
@@ -23747,9 +23663,7 @@
       "type": "FLOAT",
       "cssName": "--list-item-size-padding-y",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/list-effects.css:50"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/list-effects.css:50"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--listitem-size-padding-y",
       "legacySourceOccurrences": [],
@@ -23769,9 +23683,7 @@
       "type": "FLOAT",
       "cssName": "--list-item-size-radius",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/list-effects.css:51"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/list-effects.css:51"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--listitem-size-radius",
       "legacySourceOccurrences": [],
@@ -23835,9 +23747,7 @@
       "type": "FLOAT",
       "cssName": "--list-item-size-with-icon-padding-x-start",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/list-effects.css:83"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/list-effects.css:83"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--listitem-size-withicon-padding-x-start",
       "legacySourceOccurrences": [],
@@ -23857,9 +23767,7 @@
       "type": "COLOR",
       "cssName": "--loading-icon-color-black-gradient-end",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/ui/src/components/loading.tsx:76"
-      ],
+      "sourceOccurrences": ["packages/ui/src/components/loading.tsx:76"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--loadingicon-color-black-gradient-end",
       "legacySourceOccurrences": [],
@@ -23879,9 +23787,7 @@
       "type": "COLOR",
       "cssName": "--loading-icon-color-black-gradient-start",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/ui/src/components/loading.tsx:76"
-      ],
+      "sourceOccurrences": ["packages/ui/src/components/loading.tsx:76"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--loadingicon-color-black-gradient-start",
       "legacySourceOccurrences": [],
@@ -23901,9 +23807,7 @@
       "type": "COLOR",
       "cssName": "--loading-icon-color-theme-text-gradient-end",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/ui/src/components/loading.tsx:74"
-      ],
+      "sourceOccurrences": ["packages/ui/src/components/loading.tsx:74"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--loadingicon-color-theme-text-gradient-end",
       "legacySourceOccurrences": [],
@@ -23923,9 +23827,7 @@
       "type": "COLOR",
       "cssName": "--loading-icon-color-theme-text-gradient-start",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/ui/src/components/loading.tsx:74"
-      ],
+      "sourceOccurrences": ["packages/ui/src/components/loading.tsx:74"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--loadingicon-color-theme-text-gradient-start",
       "legacySourceOccurrences": [],
@@ -23945,9 +23847,7 @@
       "type": "COLOR",
       "cssName": "--loading-icon-color-theme-gradient-end",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/ui/src/components/loading.tsx:72"
-      ],
+      "sourceOccurrences": ["packages/ui/src/components/loading.tsx:72"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--loadingicon-color-theme-gradient-end",
       "legacySourceOccurrences": [],
@@ -23967,9 +23867,7 @@
       "type": "COLOR",
       "cssName": "--loading-icon-color-theme-gradient-start",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/ui/src/components/loading.tsx:72"
-      ],
+      "sourceOccurrences": ["packages/ui/src/components/loading.tsx:72"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--loadingicon-color-theme-gradient-start",
       "legacySourceOccurrences": [],
@@ -23989,9 +23887,7 @@
       "type": "COLOR",
       "cssName": "--loading-icon-color-white-gradient-end",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/ui/src/components/loading.tsx:78"
-      ],
+      "sourceOccurrences": ["packages/ui/src/components/loading.tsx:78"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--loadingicon-color-white-gradient-end",
       "legacySourceOccurrences": [],
@@ -24006,9 +23902,7 @@
       "type": "COLOR",
       "cssName": "--loading-icon-color-white-gradient-start",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/ui/src/components/loading.tsx:78"
-      ],
+      "sourceOccurrences": ["packages/ui/src/components/loading.tsx:78"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--loadingicon-color-white-gradient-start",
       "legacySourceOccurrences": [],
@@ -35423,9 +35317,7 @@
       "type": "COLOR",
       "cssName": "--tab-color-card-background-default",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:62"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:62"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -35445,9 +35337,7 @@
       "type": "COLOR",
       "cssName": "--tab-color-default-background-default",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:42"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:42"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -35467,9 +35357,7 @@
       "type": "COLOR",
       "cssName": "--tab-color-tiled-background-default",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:49"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:49"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -35489,9 +35377,7 @@
       "type": "FLOAT",
       "cssName": "--tab-size-card-background-padding-y-end",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:64"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:64"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -35511,9 +35397,7 @@
       "type": "FLOAT",
       "cssName": "--tab-size-card-background-padding-y-start",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:63"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:63"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -35533,9 +35417,7 @@
       "type": "FLOAT",
       "cssName": "--tab-size-card-gap",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:55"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:55"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -35555,9 +35437,7 @@
       "type": "FLOAT",
       "cssName": "--tab-size-card-padding-x",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:56"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:56"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -35577,9 +35457,7 @@
       "type": "FLOAT",
       "cssName": "--tab-size-card-padding-y",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:57"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:57"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -35599,9 +35477,7 @@
       "type": "FLOAT",
       "cssName": "--tab-size-default-gap",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:35"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:35"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -35621,9 +35497,7 @@
       "type": "FLOAT",
       "cssName": "--tab-size-default-padding-x",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:36"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:36"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -35643,9 +35517,7 @@
       "type": "FLOAT",
       "cssName": "--tab-size-default-padding-y",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:36"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:36"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -35665,9 +35537,7 @@
       "type": "FLOAT",
       "cssName": "--tab-size-tiled-gap",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:46"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:46"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -35687,9 +35557,7 @@
       "type": "FLOAT",
       "cssName": "--tab-size-tiled-padding-x",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:47"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:47"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -35709,9 +35577,7 @@
       "type": "FLOAT",
       "cssName": "--tab-size-tiled-padding-y",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:48"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:48"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -35755,9 +35621,7 @@
       "type": "COLOR",
       "cssName": "--tab-item-color-card-selected-icon-default",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:293"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:293"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-color-card-selected-icon-default",
       "legacySourceOccurrences": [],
@@ -35777,9 +35641,7 @@
       "type": "COLOR",
       "cssName": "--tab-item-color-card-selected-text-default",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:297"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:297"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-color-card-selected-text-default",
       "legacySourceOccurrences": [],
@@ -35799,9 +35661,7 @@
       "type": "COLOR",
       "cssName": "--tab-item-color-default-selected-indicator-default",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:118"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:118"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-color-default-selected-indicator-default",
       "legacySourceOccurrences": [],
@@ -35821,9 +35681,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-card-selected-content-gap",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:213"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:213"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-card-selected-content-gap",
       "legacySourceOccurrences": [],
@@ -35843,9 +35701,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-card-selected-content-padding-x",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:214"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:214"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-card-selected-content-padding-x",
       "legacySourceOccurrences": [],
@@ -35865,9 +35721,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-card-selected-content-padding-y",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:214"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:214"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-card-selected-content-padding-y",
       "legacySourceOccurrences": [],
@@ -35963,9 +35817,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-card-selected-gap",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:161"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:161"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-card-selected-gap",
       "legacySourceOccurrences": [],
@@ -35985,9 +35837,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-card-selected-icon-container-height",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:289"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:289"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-card-selected-icon-container-height",
       "legacySourceOccurrences": [],
@@ -36007,9 +35857,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-card-selected-icon-width",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:288"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:288"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-card-selected-icon-width",
       "legacySourceOccurrences": [],
@@ -36029,9 +35877,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-card-selected-padding-x",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:162"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:162"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-card-selected-padding-x",
       "legacySourceOccurrences": [],
@@ -36051,9 +35897,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-card-selected-padding-y",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:162"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:162"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-card-selected-padding-y",
       "legacySourceOccurrences": [],
@@ -36073,9 +35917,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-card-unselected-gap",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:154"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:154"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-card-unselected-gap",
       "legacySourceOccurrences": [],
@@ -36090,9 +35932,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-card-unselected-padding-x",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:156"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:156"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-card-unselected-padding-x",
       "legacySourceOccurrences": [],
@@ -36112,9 +35952,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-card-unselected-padding-y",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:156"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:156"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-card-unselected-padding-y",
       "legacySourceOccurrences": [],
@@ -36129,9 +35967,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-default-gap",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:143"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:143"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-default-gap",
       "legacySourceOccurrences": [],
@@ -36151,9 +35987,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-default-indicator-height",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:116"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:116"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-default-indicator-height",
       "legacySourceOccurrences": [],
@@ -36191,9 +36025,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-default-indicator-width",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:115"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:115"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-default-indicator-width",
       "legacySourceOccurrences": [],
@@ -36208,9 +36040,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-default-padding-x",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:144"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:144"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-default-padding-x",
       "legacySourceOccurrences": [],
@@ -36230,9 +36060,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-default-padding-y-end",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:144"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:144"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-default-padding-y-end",
       "legacySourceOccurrences": [],
@@ -36252,9 +36080,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-default-padding-y-start",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:144"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:144"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-default-padding-y-start",
       "legacySourceOccurrences": [],
@@ -36274,9 +36100,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-tiled-gap",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:148"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:148"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-tiled-gap",
       "legacySourceOccurrences": [],
@@ -36296,9 +36120,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-tiled-padding-x",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:149"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:149"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-tiled-padding-x",
       "legacySourceOccurrences": [],
@@ -36318,9 +36140,7 @@
       "type": "FLOAT",
       "cssName": "--tab-item-size-tiled-padding-y",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/tab-effects.css:149"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/tab-effects.css:149"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": "--tabitem-size-tiled-padding-y",
       "legacySourceOccurrences": [],
@@ -40885,9 +40705,7 @@
       "type": "FLOAT",
       "cssName": "--font-weight-semibold",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/non-color/typography.css:35"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/non-color/typography.css:35"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -40998,9 +40816,7 @@
       "type": "FLOAT",
       "cssName": "--border-radius-large",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/non-color/radius.css:7"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/non-color/radius.css:7"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -41039,9 +40855,7 @@
       "type": "FLOAT",
       "cssName": "--border-radius-none",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/non-color/radius.css:2"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/non-color/radius.css:2"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -41342,9 +41156,7 @@
       "type": "FLOAT",
       "cssName": "--gap-page-space",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/ui/src/components/stack.tsx:15"
-      ],
+      "sourceOccurrences": ["packages/ui/src/components/stack.tsx:15"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -41393,9 +41205,7 @@
       "type": "FLOAT",
       "cssName": "--line-height-large",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/non-color/typography.css:24"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/non-color/typography.css:24"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -41530,9 +41340,7 @@
       "type": "FLOAT",
       "cssName": "--line-height-tiny",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/non-color/typography.css:11"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/non-color/typography.css:11"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -41832,9 +41640,7 @@
       "type": "FLOAT",
       "cssName": "--padding-tinyer",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/components.css:836"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/components.css:836"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -41906,9 +41712,7 @@
       "type": "FLOAT",
       "cssName": "--size-huger",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/components.css:96"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/components.css:96"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],
@@ -42070,9 +41874,7 @@
       "type": "FLOAT",
       "cssName": "--size-semilarger",
       "emitted": true,
-      "sourceOccurrences": [
-        "packages/tokens/src/semantic/components.css:100"
-      ],
+      "sourceOccurrences": ["packages/tokens/src/semantic/components.css:100"],
       "handwrittenDefinitions": [],
       "legacySpellingCandidate": null,
       "legacySourceOccurrences": [],

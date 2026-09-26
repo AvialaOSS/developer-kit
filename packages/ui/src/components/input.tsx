@@ -112,7 +112,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         data-disabled={disabled ? "true" : undefined}
         {...spiralDebugId("input")}
       >
-        {renderSlotIcon(leftIcon, "aviala-input__slot", "input.left-icon", "var(--input-slot-icon-size, var(--base-input-size-icon-width))")}
+        {renderSlotIcon(
+          leftIcon,
+          "aviala-input__slot",
+          "input.left-icon",
+          "var(--input-slot-icon-size, var(--base-input-size-icon-width))"
+        )}
         {renderBadgeArea(leftBadge)}
 
         <div
@@ -150,7 +155,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         </div>
 
         {renderBadgeArea(rightBadge)}
-        {renderSlotIcon(rightIcon, "aviala-input__slot", "input.right-icon", "var(--input-slot-icon-size, var(--base-input-size-icon-width))")}
+        {renderSlotIcon(
+          rightIcon,
+          "aviala-input__slot",
+          "input.right-icon",
+          "var(--input-slot-icon-size, var(--base-input-size-icon-width))"
+        )}
       </div>
     );
   }

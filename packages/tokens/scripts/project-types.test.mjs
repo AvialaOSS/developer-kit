@@ -20,9 +20,13 @@ test("project declarations work with ES libraries only, without DOM or host type
     },
   });
   const diagnostics = ts.getPreEmitDiagnostics(program);
-  assert.equal(diagnostics.length, 0, ts.formatDiagnosticsWithColorAndContext(diagnostics, {
-    getCurrentDirectory: () => process.cwd(),
-    getCanonicalFileName: (file) => file,
-    getNewLine: () => "\n",
-  }));
+  assert.equal(
+    diagnostics.length,
+    0,
+    ts.formatDiagnosticsWithColorAndContext(diagnostics, {
+      getCurrentDirectory: () => process.cwd(),
+      getCanonicalFileName: (file) => file,
+      getNewLine: () => "\n",
+    })
+  );
 });

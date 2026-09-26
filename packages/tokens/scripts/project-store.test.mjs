@@ -130,18 +130,35 @@ test("store rejects ambiguous Engine identities but retains retired source histo
   const file = await fixture(t);
   const original = state();
   original.sources[0].bindings = [
-    { source: "figma-file", kind: "token", externalId: "old", engineId: "t", retired: true },
-    { source: "figma-file", kind: "token", externalId: "current", engineId: "t" },
+    {
+      source: "figma-file",
+      kind: "token",
+      externalId: "old",
+      engineId: "t",
+      retired: true,
+    },
+    {
+      source: "figma-file",
+      kind: "token",
+      externalId: "current",
+      engineId: "t",
+    },
   ];
   const saved = await commitProjectStore(file, original, null);
   const ambiguous = structuredClone(saved.state);
   ambiguous.sources[0].bindings.push({
-    source: "figma-file", kind: "token", externalId: "another", engineId: "t",
+    source: "figma-file",
+    kind: "token",
+    externalId: "another",
+    engineId: "t",
   });
   await assert.rejects(
     commitProjectStore(file, ambiguous, saved.revision),
     /Duplicate active Engine ID/
   );
   assert.equal((await readProjectStore(file)).revision, saved.revision);
-  assert.deepEqual((await readProjectStore(file)).state.sources[0].bindings, original.sources[0].bindings);
+  assert.deepEqual(
+    (await readProjectStore(file)).state.sources[0].bindings,
+    original.sources[0].bindings
+  );
 });

@@ -75,23 +75,23 @@
 - ScrollPicker 动态几何、八模式和覆盖所有权已有本日记录，见 `SCROLL_PICKER_MIGRATION.md`；不能再将动态几何统称为未验收。触摸设备、边界滚轮传递及全部嵌入消费者仍未完整验收。
 - 用户现要求暂不进行 Computer Use 相关测试；这些交互待办保留，不能由本轮构建或包入口测试替代。全组件迁移仍以逐组件记录为准，Goal 尚未完成。
 
-| 要求 | 当前证据 | 状态 |
-| --- | --- | --- |
-| 独立标准模型、结构/类型/单位/引用/循环/模式校验 | project.ts、project.test.mjs；核心不依赖 DOM/Figma | 已实现并测试 |
-| 1964 Token 完整依赖、7 Collection | alignment.json；标准输出缺失引用 0 | 已验证本地基线 |
-| 来源 ID、重复导入、同名重建显式接替 | snapshot-adapter、project-edit 测试 | 已实现并测试 |
-| 三方合并、草稿/基线原子存储 | project-merge、project-store 集成测试 | 已实现并测试 |
-| 版本快照、精确基础版本覆盖、冲突先行升级、脱离保留图 | project-theme 测试 | 核心已实现；产品界面未接入 |
-| 可读 CSS、固定名、改名兼容、破坏性移除控制 | renameProjectToken、release 校验；1845 名迁移前后八模式输出相同 | 已实现并测试 |
-| 旧 control 独立语义层 | css-lib 的旧层与标准层；ALIGNMENT.md 已记录用户决定 | 已保留 |
-| CSS/runtime 共用、局部作用域、三个独立模式维度 | standard-css 测试；ScrollPicker Project 实际浏览器验收 | 已验证 |
-| 清理只移除自有属性、恢复原值 | runtime 测试；Override Ownership 浏览器前/中/后值 | 已验证 |
-| ScrollPicker 新/旧覆盖与共享 Typography | 浏览器背景覆盖四场景、密度字号；组件 CSS 仍需最终逐属性汇总 | 部分验收待汇总 |
-| Figma 来源只读、受限项定位、禁止静默展开 | bindings.readOnly、planFigmaValues、导出/回读测试 | 已实现并测试 |
-| 标准项目生成 Figma 回写包 | ThemeBuilder 实际解析器/规划器接受 1964 项；单值编辑只有一个动作 | 格式桥接已验证 |
-| 实际写入、回读、恢复/撤销 | 桌面插件成功新增 5 个变量；真实回执和独立 Figma 读取均通过；此前 scopes 错误后的撤销也已独立核对 | 创建/回读/失败撤销已验证；更新后主动撤销待验收 |
-| TIMING/EASING 编码 | 官方秒单位、0.25s↔250ms 测试；真实自定义贝塞尔样本往返 | TIMING/自定义贝塞尔支持；其他缓动明确拒绝 |
-| 发布包入口 | 最新包在 package-current/consumer 独立安装，新增改名、导出、回读 API 及 Vite/CSS 均通过 | 已验证当前代码 |
+| 要求                                                 | 当前证据                                                                                         | 状态                                           |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ---------------------------------------------- |
+| 独立标准模型、结构/类型/单位/引用/循环/模式校验      | project.ts、project.test.mjs；核心不依赖 DOM/Figma                                               | 已实现并测试                                   |
+| 1964 Token 完整依赖、7 Collection                    | alignment.json；标准输出缺失引用 0                                                               | 已验证本地基线                                 |
+| 来源 ID、重复导入、同名重建显式接替                  | snapshot-adapter、project-edit 测试                                                              | 已实现并测试                                   |
+| 三方合并、草稿/基线原子存储                          | project-merge、project-store 集成测试                                                            | 已实现并测试                                   |
+| 版本快照、精确基础版本覆盖、冲突先行升级、脱离保留图 | project-theme 测试                                                                               | 核心已实现；产品界面未接入                     |
+| 可读 CSS、固定名、改名兼容、破坏性移除控制           | renameProjectToken、release 校验；1845 名迁移前后八模式输出相同                                  | 已实现并测试                                   |
+| 旧 control 独立语义层                                | css-lib 的旧层与标准层；ALIGNMENT.md 已记录用户决定                                              | 已保留                                         |
+| CSS/runtime 共用、局部作用域、三个独立模式维度       | standard-css 测试；ScrollPicker Project 实际浏览器验收                                           | 已验证                                         |
+| 清理只移除自有属性、恢复原值                         | runtime 测试；Override Ownership 浏览器前/中/后值                                                | 已验证                                         |
+| ScrollPicker 新/旧覆盖与共享 Typography              | 浏览器背景覆盖四场景、密度字号；组件 CSS 仍需最终逐属性汇总                                      | 部分验收待汇总                                 |
+| Figma 来源只读、受限项定位、禁止静默展开             | bindings.readOnly、planFigmaValues、导出/回读测试                                                | 已实现并测试                                   |
+| 标准项目生成 Figma 回写包                            | ThemeBuilder 实际解析器/规划器接受 1964 项；单值编辑只有一个动作                                 | 格式桥接已验证                                 |
+| 实际写入、回读、恢复/撤销                            | 桌面插件成功新增 5 个变量；真实回执和独立 Figma 读取均通过；此前 scopes 错误后的撤销也已独立核对 | 创建/回读/失败撤销已验证；更新后主动撤销待验收 |
+| TIMING/EASING 编码                                   | 官方秒单位、0.25s↔250ms 测试；真实自定义贝塞尔样本往返                                           | TIMING/自定义贝塞尔支持；其他缓动明确拒绝      |
+| 发布包入口                                           | 最新包在 package-current/consumer 独立安装，新增改名、导出、回读 API 及 Vite/CSS 均通过          | 已验证当前代码                                 |
 
 ## TestVar 现场状态
 
@@ -125,23 +125,23 @@ ThemeBuilder/ThemeCat 产品界面、命名缓动与弹簧模型扩展仍属未�
 
 此表记录实现与验收边界，不按 Token 引用数量推算组件完成率。
 
-| 组件 | 当前进展 | 未完成边界 |
-| --- | --- | --- |
-| ScrollPicker | 已接入组件 Token；局部主题和覆盖已有浏览器证据；行高已改为 Typography 加组件 padding，并监听尺寸变化 | 新增动态几何尚未完成浏览器验收，不能沿用此前背景/覆盖证据；还需逐属性汇总 |
-| Button | 普通尺寸、圆角、内容透明度、primary 颜色/阴影、描边/无背景颜色、部分仅图标布局已接入 | 其他颜色语义、描边仅图标尺寸冲突、全状态回归；详见 BUTTON_MIGRATION.md |
-| Segmentator | group/button Token 接入与多模式布局验证 | selected nested 阴影决策及剩余交互回归 |
-| Link | 39 Token 消费、asChild、禁用行为与八模式默认状态/覆盖验证 | text 自定义模式默认背景冲突、hover/active、嵌入回归；详见 LINK_MIGRATION.md |
-| Checkbox / Input / Group | 外框、三态内边距/颜色/效果颜色、文字与组合间距已接入，八模式验证 | 标记尺寸Token决策、效果几何与嵌入/完整交互；详见 CHECKBOX_MIGRATION.md |
-| Radio / Input / Group | 31项Token、整组禁用、八模式与键盘对照已验证 | 尺寸/效果常量、复杂主题键盘偶发现象、嵌入回归；详见 RADIO_MIGRATION.md |
-| Switch | 15项Token、八模式基础状态、RTL与表单验证 | hover/active及阴影Token决策、尺寸缺口、连续动画和嵌入回归；详见 SWITCH_MIGRATION.md |
-| Badge | 62项Token已接入，48变体×8模式几何、颜色与旧覆盖；六类消费者基本交互及192px窄输入已验证 | 消费者全模式组合与受限宽度截断策略；详见 BADGE_MIGRATION.md |
-| Loading | 31项Token接入，84组合×8模式几何、渐变、新旧覆盖、Button加载状态验证 | BiggerSize设计缺口待决定，其他消费者随组件验收；详见 LOADING_MIGRATION.md |
-| Input / NumberInput | BaseInput 20项及NumberInput 22项Token接入；BaseInput八模式、NumberInput嵌套按钮及24组合×八模式、覆盖与步进验证 | 透明度冲突、共享消费者回归；详见 INPUT_MIGRATION.md |
-| 其他公共组件 | 已纳入 COMPONENT_MIGRATION 清单 | 仍需逐组件迁移与验收 |
-| Slider | 34项Token；普通/禁用八模式、32方向圆角组合、键盘/拖拽/范围间隔/表单及ColorPicker基本复用验证；修复禁用提交 | 阴影效果开关语义、完整状态/消费者、动态禁用与表单重置；详见 SLIDER_MIGRATION.md |
-| Cascader | 输入框20/22项及16组合×八模式；菜单/分组/列、菜单项主要Token、独立菜单八模式与选中阴影开关；新增Search并验证空结果及键盘选择 | 透明度语义、菜单外投影、左右图标颜色、表单复合项、搜索高级交互和消费者；详见 CASCADER_MIGRATION.md |
-| Select | 输入框20项Token；菜单/分组及多数菜单项Token，局部Portal、共享字体、子菜单标签与键盘关闭已修复；菜单亮暗/密度/效果八组合已有浏览器证据 | 效果OFF仍显示旧菜单阴影、普通选中态语义待Ask、左右图标色、Search/Tag、透明度、其他Portal消费者与完整状态回归；详见 SELECT_MIGRATION.md |
-| Textarea / Controller | 19+8项Token，12组合×八模式、独立/状态覆盖、FormField错误传递与拖拽/计数验证 | 透明度语义、badge隐藏分支、hover/error语义；详见 TEXTAREA_MIGRATION.md |
+| 组件                     | 当前进展                                                                                                                              | 未完成边界                                                                                                                             |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| ScrollPicker             | 已接入组件 Token；局部主题和覆盖已有浏览器证据；行高已改为 Typography 加组件 padding，并监听尺寸变化                                  | 新增动态几何尚未完成浏览器验收，不能沿用此前背景/覆盖证据；还需逐属性汇总                                                              |
+| Button                   | 普通尺寸、圆角、内容透明度、primary 颜色/阴影、描边/无背景颜色、部分仅图标布局已接入                                                  | 其他颜色语义、描边仅图标尺寸冲突、全状态回归；详见 BUTTON_MIGRATION.md                                                                 |
+| Segmentator              | group/button Token 接入与多模式布局验证                                                                                               | selected nested 阴影决策及剩余交互回归                                                                                                 |
+| Link                     | 39 Token 消费、asChild、禁用行为与八模式默认状态/覆盖验证                                                                             | text 自定义模式默认背景冲突、hover/active、嵌入回归；详见 LINK_MIGRATION.md                                                            |
+| Checkbox / Input / Group | 外框、三态内边距/颜色/效果颜色、文字与组合间距已接入，八模式验证                                                                      | 标记尺寸Token决策、效果几何与嵌入/完整交互；详见 CHECKBOX_MIGRATION.md                                                                 |
+| Radio / Input / Group    | 31项Token、整组禁用、八模式与键盘对照已验证                                                                                           | 尺寸/效果常量、复杂主题键盘偶发现象、嵌入回归；详见 RADIO_MIGRATION.md                                                                 |
+| Switch                   | 15项Token、八模式基础状态、RTL与表单验证                                                                                              | hover/active及阴影Token决策、尺寸缺口、连续动画和嵌入回归；详见 SWITCH_MIGRATION.md                                                    |
+| Badge                    | 62项Token已接入，48变体×8模式几何、颜色与旧覆盖；六类消费者基本交互及192px窄输入已验证                                                | 消费者全模式组合与受限宽度截断策略；详见 BADGE_MIGRATION.md                                                                            |
+| Loading                  | 31项Token接入，84组合×8模式几何、渐变、新旧覆盖、Button加载状态验证                                                                   | BiggerSize设计缺口待决定，其他消费者随组件验收；详见 LOADING_MIGRATION.md                                                              |
+| Input / NumberInput      | BaseInput 20项及NumberInput 22项Token接入；BaseInput八模式、NumberInput嵌套按钮及24组合×八模式、覆盖与步进验证                        | 透明度冲突、共享消费者回归；详见 INPUT_MIGRATION.md                                                                                    |
+| 其他公共组件             | 已纳入 COMPONENT_MIGRATION 清单                                                                                                       | 仍需逐组件迁移与验收                                                                                                                   |
+| Slider                   | 34项Token；普通/禁用八模式、32方向圆角组合、键盘/拖拽/范围间隔/表单及ColorPicker基本复用验证；修复禁用提交                            | 阴影效果开关语义、完整状态/消费者、动态禁用与表单重置；详见 SLIDER_MIGRATION.md                                                        |
+| Cascader                 | 输入框20/22项及16组合×八模式；菜单/分组/列、菜单项主要Token、独立菜单八模式与选中阴影开关；新增Search并验证空结果及键盘选择           | 透明度语义、菜单外投影、左右图标颜色、表单复合项、搜索高级交互和消费者；详见 CASCADER_MIGRATION.md                                     |
+| Select                   | 输入框20项Token；菜单/分组及多数菜单项Token，局部Portal、共享字体、子菜单标签与键盘关闭已修复；菜单亮暗/密度/效果八组合已有浏览器证据 | 效果OFF仍显示旧菜单阴影、普通选中态语义待Ask、左右图标色、Search/Tag、透明度、其他Portal消费者与完整状态回归；详见 SELECT_MIGRATION.md |
+| Textarea / Controller    | 19+8项Token，12组合×八模式、独立/状态覆盖、FormField错误传递与拖拽/计数验证                                                           | 透明度语义、badge隐藏分支、hover/error语义；详见 TEXTAREA_MIGRATION.md                                                                 |
 
 Link 的 text/noBackgroundCustom 白背景虽然按现有标准正确解析，但与 Figma 无填充设计冲突，仍然属于未完成项。
 
@@ -161,6 +161,7 @@ Tooltip：表面/文字/阴影/指针颜色及指针几何已接入，已修复�
 - Input 的待决定项是禁用已填文字的最终透明度：Figma 的 input area 0.55 与内部 Typography 0.6 叠加为 0.33；当前 Web 已填文字为 0.55、占位文字为 0.33。当前 Web 已经只降低内容透明度，不能再把此冲突描述为“整个输入框或仅内容”。BaseInput 图标插槽的固定 0.9 与 Web 禁用图标 0.55 是另一项尚未确认的差异。
 - Navigation 的三个选中背景与阴影已回读确认绑定组件 Token。用户补齐文字后，2026-09-21 回读确认三个 Text 节点均绑定 `navigationItem/color/selected/text-default`（`VariableID:2740:10504`）；共享字号、行高、字重绑定保留，Web 已消费对应 CSS 变量。文字绑定阻碍已解除；其余状态、菜单与完整交互验收仍未完成，详见 NAVIGATION_MIGRATION.md。
 - ThemeBuilder 导入窗口现在会在外部标准配置更新后重新加载配置，并在保存配置/草稿的事务内拒绝过期项目快照。10 项导入定向测试和类型检查通过；此结果不替代桌面 Figma 回写或浏览器验证。
+
 # 2026-09-24 最新安装包补充
 
 当前门槛以CURRENT_GATES.md为准，下文保留历史批次证据与当时的未完成项。最新独立安装记录为package-verification-runtime-profile-20260924.json，包含可选表头图标、共享Aviala字体单位配置、ALD惰性初始化，以及此前Card heading和TimePicker秒列。ESM/CJS与CSS/SSR检查通过，不代表视觉、键盘、滚轮、触摸或Figma插件验收通过。

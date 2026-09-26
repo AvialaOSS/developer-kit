@@ -1,4 +1,9 @@
-import { SymbolRight, SymbolWarning, SymbolWrong, TimeAndDateAlarm } from "@aviala-design/icons";
+import {
+  SymbolRight,
+  SymbolWarning,
+  SymbolWrong,
+  TimeAndDateAlarm,
+} from "@aviala-design/icons";
 import { cva, type VariantProps } from "class-variance-authority";
 import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "../lib/utils";
@@ -49,18 +54,36 @@ function defaultStepsIconContent(state: StepsState, index?: number): ReactNode {
   switch (state) {
     case "done":
       return (
-        <SymbolRight className="aviala-steps-icon__glyph" thickness="Bold" aria-hidden />
+        <SymbolRight
+          className="aviala-steps-icon__glyph"
+          thickness="Bold"
+          aria-hidden
+        />
       );
     case "fail":
       return (
-        <SymbolWrong className="aviala-steps-icon__glyph" thickness="Bold" aria-hidden />
+        <SymbolWrong
+          className="aviala-steps-icon__glyph"
+          thickness="Bold"
+          aria-hidden
+        />
       );
     case "warning":
       return (
-        <SymbolWarning className="aviala-steps-icon__glyph" thickness="Bold" aria-hidden />
+        <SymbolWarning
+          className="aviala-steps-icon__glyph"
+          thickness="Bold"
+          aria-hidden
+        />
       );
     case "waiting":
-      return <TimeAndDateAlarm className="aviala-steps-icon__glyph" thickness="Medium" aria-hidden />;
+      return (
+        <TimeAndDateAlarm
+          className="aviala-steps-icon__glyph"
+          thickness="Medium"
+          aria-hidden
+        />
+      );
     case "inProgress":
     case "default":
     default:

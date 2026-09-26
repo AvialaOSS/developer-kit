@@ -11,12 +11,21 @@
   --_legacy-tab-item-control-gap: var(--gap-inside, 4px);
   --_legacy-tab-item-control-radius: var(--border-radius-small, 8px);
   --_legacy-tab-icon-box: 18px;
-  --_legacy-tab-icon-size: var(--icon-size-text-bigger, var(--size-middle, 1rem));
+  --_legacy-tab-icon-size: var(
+    --icon-size-text-bigger,
+    var(--size-middle, 1rem)
+  );
   --tab-fg: var(--text-text-normal-text-black, #262525);
   --_legacy-tab-bg: var(--box-box-normal-background-whiteonly, #ffffff);
   /* Figma Background=Default + Style=Card → control lightBackground-1 (#f0efef), not whiteonly */
-  --_legacy-tab-bg-card: var(--control-control-normal-lightbackground-1, #f0efef);
-  --_legacy-tab-card-active-bg: var(--box-box-normal-background-whiteonly, #ffffff);
+  --_legacy-tab-bg-card: var(
+    --control-control-normal-lightbackground-1,
+    #f0efef
+  );
+  --_legacy-tab-card-active-bg: var(
+    --box-box-normal-background-whiteonly,
+    #ffffff
+  );
   --tab-card-ear-size: 8px;
   --_legacy-tab-indicator-height: 4px;
   /* Figma Rectangle 1 on active Default TabItem: inset 12px from item edges */
@@ -33,13 +42,17 @@
   max-width: 100%;
   align-items: center;
   gap: var(--tab-gap, var(--_tab-gap, var(--tab-size-default-gap)));
-  padding: var(--_tab-py, var(--tab-size-default-padding-y)) var(--tab-px, var(--_tab-px, var(--tab-size-default-padding-x)));
+  padding: var(--_tab-py, var(--tab-size-default-padding-y))
+    var(--tab-px, var(--_tab-px, var(--tab-size-default-padding-x)));
   background: transparent;
   color: var(--tab-fg);
 }
 
 .aviala-tab[data-background="default"] {
-  background-color: var(--tab-bg, var(--_tab-bg, var(--tab-color-default-background-default)));
+  background-color: var(
+    --tab-bg,
+    var(--_tab-bg, var(--tab-color-default-background-default))
+  );
 }
 
 .aviala-tab[data-style="tiled"] {
@@ -59,7 +72,10 @@
 
 /* Figma 1866:38218 — Card + Background=Default is gray bar so white active + ears read. */
 .aviala-tab[data-style="card"][data-background="default"] {
-  background-color: var(--tab-bg-card, var(--tab-color-card-background-default));
+  background-color: var(
+    --tab-bg-card,
+    var(--tab-color-card-background-default)
+  );
   padding-top: var(--tab-size-card-background-padding-y-start);
   padding-bottom: var(--tab-size-card-background-padding-y-end);
 }
@@ -112,10 +128,24 @@
   left: 0;
   z-index: 2;
   pointer-events: none;
-  width: var(--_tab-indicator-measured-width, var(--tab-item-size-default-indicator-width));
-  height: var(--tab-indicator-height, var(--tab-item-size-default-indicator-height));
-  border-radius: var(--tab-indicator-radius, var(--tab-item-size-default-indicator-radius)) var(--tab-indicator-radius, var(--tab-item-size-default-indicator-radius)) 0 0;
-  background: var(--tab-indicator-color, var(--tab-item-color-default-selected-indicator-default));
+  width: var(
+    --_tab-indicator-measured-width,
+    var(--tab-item-size-default-indicator-width)
+  );
+  height: var(
+    --tab-indicator-height,
+    var(--tab-item-size-default-indicator-height)
+  );
+  border-radius: var(
+      --tab-indicator-radius,
+      var(--tab-item-size-default-indicator-radius)
+    )
+    var(--tab-indicator-radius, var(--tab-item-size-default-indicator-radius)) 0
+    0;
+  background: var(
+    --tab-indicator-color,
+    var(--tab-item-color-default-selected-indicator-default)
+  );
   opacity: 0;
   will-change: transform, width;
   transition:
@@ -141,25 +171,30 @@
 
 .aviala-tab[data-style="default"] .aviala-tab-item {
   gap: var(--tab-item-size-default-gap);
-  padding: var(--tab-item-size-default-padding-y-start) var(--tab-item-size-default-padding-x) var(--tab-item-indicator-space, var(--tab-item-size-default-padding-y-end));
+  padding: var(--tab-item-size-default-padding-y-start)
+    var(--tab-item-size-default-padding-x)
+    var(--tab-item-indicator-space, var(--tab-item-size-default-padding-y-end));
 }
 
 .aviala-tab[data-style="tiled"] .aviala-tab-item {
   gap: var(--tab-item-size-tiled-gap);
-  padding: var(--tab-item-size-tiled-padding-y) var(--tab-item-size-tiled-padding-x);
+  padding: var(--tab-item-size-tiled-padding-y)
+    var(--tab-item-size-tiled-padding-x);
 }
 
 .aviala-tab[data-style="card"] .aviala-tab-item {
   align-items: flex-end;
   gap: var(--tab-item-size-card-unselected-gap);
   /* Figma Card inactive TabItem: padding-min (2px); active clears to 0 */
-  padding: var(--tab-item-size-card-unselected-padding-y) var(--tab-item-size-card-unselected-padding-x);
+  padding: var(--tab-item-size-card-unselected-padding-y)
+    var(--tab-item-size-card-unselected-padding-x);
 }
 
 .aviala-tab[data-style="card"] .aviala-tab-item[data-active="true"] {
   /* Figma active Card: ear(2) + button + ear(2), no outer padding */
   gap: var(--tab-item-size-card-selected-gap);
-  padding: var(--tab-item-size-card-selected-padding-y) var(--tab-item-size-card-selected-padding-x);
+  padding: var(--tab-item-size-card-selected-padding-y)
+    var(--tab-item-size-card-selected-padding-x);
   z-index: 1;
 }
 
@@ -178,7 +213,10 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background-color: var(--button-surface-bg, var(--button-second-bg, var(--_legacy-button-second-bg)));
+  background-color: var(
+    --button-surface-bg,
+    var(--button-second-bg, var(--_legacy-button-second-bg))
+  );
   box-shadow: var(--button-shadow-light, var(--_legacy-button-shadow-light));
   pointer-events: none;
   transition:
@@ -189,7 +227,10 @@
 .aviala-tab-item__control.aviala-button--mode-second:hover:not(
     :disabled
   )::before {
-  background-color: var(--button-second-bg-hover, var(--_legacy-button-second-bg-hover));
+  background-color: var(
+    --button-second-bg-hover,
+    var(--_legacy-button-second-bg-hover)
+  );
 }
 
 .aviala-tab-item__control.aviala-button--mode-second:active:not(
@@ -209,10 +250,26 @@
   .aviala-tab-item[data-active="true"]
   .aviala-tab-item__control.aviala-button {
   overflow: visible;
-  background-color: var(--tab-card-active-bg, var(--tab-item-color-card-selected-background-default));
-  gap: var(--tab-item-control-gap, var(--tab-item-size-card-selected-content-gap));
-  padding: var(--tab-item-size-card-selected-content-padding-y) var(--tab-item-size-card-selected-content-padding-x);
-  border-radius: var(--tab-item-control-radius, var(--tab-item-size-card-selected-content-radius-top)) var(--tab-item-control-radius, var(--tab-item-size-card-selected-content-radius-top)) var(--tab-item-size-card-selected-content-radius-bottom) var(--tab-item-size-card-selected-content-radius-bottom);
+  background-color: var(
+    --tab-card-active-bg,
+    var(--tab-item-color-card-selected-background-default)
+  );
+  gap: var(
+    --tab-item-control-gap,
+    var(--tab-item-size-card-selected-content-gap)
+  );
+  padding: var(--tab-item-size-card-selected-content-padding-y)
+    var(--tab-item-size-card-selected-content-padding-x);
+  border-radius: var(
+      --tab-item-control-radius,
+      var(--tab-item-size-card-selected-content-radius-top)
+    )
+    var(
+      --tab-item-control-radius,
+      var(--tab-item-size-card-selected-content-radius-top)
+    )
+    var(--tab-item-size-card-selected-content-radius-bottom)
+    var(--tab-item-size-card-selected-content-radius-bottom);
 }
 
 .aviala-tab[data-style="card"]
@@ -221,7 +278,10 @@
 .aviala-tab[data-style="card"]
   .aviala-tab-item[data-active="true"]
   .aviala-tab-item__control.aviala-button:active:not(:disabled) {
-  background-color: var(--tab-card-active-bg, var(--tab-item-color-card-selected-background-default));
+  background-color: var(
+    --tab-card-active-bg,
+    var(--tab-item-color-card-selected-background-default)
+  );
 }
 
 .aviala-tab-item__ear {
@@ -234,7 +294,10 @@
   height: var(--tab-card-ear-size);
   overflow: visible;
   pointer-events: none;
-  color: var(--tab-card-active-bg, var(--tab-item-color-card-selected-background-default));
+  color: var(
+    --tab-card-active-bg,
+    var(--tab-item-color-card-selected-background-default)
+  );
 }
 
 .aviala-tab-item__ear svg {
@@ -274,8 +337,14 @@
 }
 
 .aviala-tab-item__icon svg {
-  width: var(--tab-icon-size, var(--_tab-icon-width, var(--icon-size-text-bigger, var(--size-middle))));
-  height: var(--tab-icon-size, var(--_tab-icon-width, var(--icon-size-text-bigger, var(--size-middle))));
+  width: var(
+    --tab-icon-size,
+    var(--_tab-icon-width, var(--icon-size-text-bigger, var(--size-middle)))
+  );
+  height: var(
+    --tab-icon-size,
+    var(--_tab-icon-width, var(--icon-size-text-bigger, var(--size-middle)))
+  );
   flex-shrink: 0;
 }
 
@@ -293,7 +362,8 @@
   color: var(--tab-item-color-card-selected-icon-default);
 }
 
-.aviala-tab-item[data-style="card"][data-active="true"] .aviala-tab-item__label {
+.aviala-tab-item[data-style="card"][data-active="true"]
+  .aviala-tab-item__label {
   color: var(--tab-item-color-card-selected-text-default);
 }
 

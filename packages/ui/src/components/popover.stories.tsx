@@ -27,11 +27,15 @@ type Story = StoryObj<typeof Popover>;
 export const ContentIcon: Story = {
   render: () => (
     <div className="flex gap-8 p-16">
-      {(["default", "primary", "tooltip"] as const).map(appearance => (
+      {(["default", "primary", "tooltip"] as const).map((appearance) => (
         <Popover key={appearance}>
-          <PopoverTrigger asChild><Button>{appearance}</Button></PopoverTrigger>
+          <PopoverTrigger asChild>
+            <Button>{appearance}</Button>
+          </PopoverTrigger>
           <PopoverContent appearance={appearance} showArrow>
-            <PopoverIcon><EditColorPicker /></PopoverIcon>
+            <PopoverIcon>
+              <EditColorPicker />
+            </PopoverIcon>
             <span>选择颜色</span>
           </PopoverContent>
         </Popover>
@@ -42,44 +46,107 @@ export const ContentIcon: Story = {
 
 const popoverProject = parseProject(JSON.stringify(standardProject));
 function PopoverModeCases() {
-  const { mode, setMode, density, setDensity, effects, setEffects } = useTheme();
+  const { mode, setMode, density, setDensity, effects, setEffects } =
+    useTheme();
   const [overrides, setOverrides] = useState(false);
   const [flush, setFlush] = useState(false);
   const [layoutOverrides, setLayoutOverrides] = useState(false);
   const sides = ["bottom", "left", "top", "right"] as const;
   const [sideIndex, setSideIndex] = useState(0);
-  return <div className="flex flex-col gap-24 p-16">
-    <div className="flex flex-wrap gap-4">
-      <Button onClick={() => setMode(mode === "light" ? "dark" : "light")}>外观：{mode}</Button>
-      <Button onClick={() => setDensity(density === "default" ? "mobile-friendly" : "default")}>密度：{density}</Button>
-      <Button onClick={() => setEffects(!effects)}>效果：{effects ? "ON" : "OFF"}</Button>
-      <Button onClick={() => setOverrides(!overrides)}>旧覆盖：{overrides ? "ON" : "OFF"}</Button>
-      <Button onClick={() => setFlush(!flush)}>内边距：{flush ? "清空" : "主题"}</Button>
-      <Button onClick={() => setLayoutOverrides(!layoutOverrides)}>布局覆盖：{layoutOverrides ? "ON" : "OFF"}</Button>
-      <Button onClick={() => setSideIndex((sideIndex + 1) % sides.length)}>方位：{sides[sideIndex]}</Button>
+  return (
+    <div className="flex flex-col gap-24 p-16">
+      <div className="flex flex-wrap gap-4">
+        <Button onClick={() => setMode(mode === "light" ? "dark" : "light")}>
+          外观：{mode}
+        </Button>
+        <Button
+          onClick={() =>
+            setDensity(density === "default" ? "mobile-friendly" : "default")
+          }
+        >
+          密度：{density}
+        </Button>
+        <Button onClick={() => setEffects(!effects)}>
+          效果：{effects ? "ON" : "OFF"}
+        </Button>
+        <Button onClick={() => setOverrides(!overrides)}>
+          旧覆盖：{overrides ? "ON" : "OFF"}
+        </Button>
+        <Button onClick={() => setFlush(!flush)}>
+          内边距：{flush ? "清空" : "主题"}
+        </Button>
+        <Button onClick={() => setLayoutOverrides(!layoutOverrides)}>
+          布局覆盖：{layoutOverrides ? "ON" : "OFF"}
+        </Button>
+        <Button onClick={() => setSideIndex((sideIndex + 1) % sides.length)}>
+          方位：{sides[sideIndex]}
+        </Button>
+      </div>
+      <div className="flex justify-around gap-16">
+        {(["default", "primary", "tooltip"] as const).map((appearance) => (
+          <Popover key={appearance} open>
+            <PopoverTrigger asChild>
+              <Button>{appearance}</Button>
+            </PopoverTrigger>
+            <PopoverContent
+              appearance={appearance}
+              showArrow
+              flush={flush}
+              side={sides[sideIndex]}
+              onOpenAutoFocus={(event) => event.preventDefault()}
+              style={
+                {
+                  ...(overrides
+                    ? {
+                        "--popover-content-bg": "#123456",
+                        "--popover-content-fg": "#fedcba",
+                        "--popover-content-radius": "13px",
+                        "--popover-content-shadow": "none",
+                        "--popover-content-px": "5px",
+                        "--popover-content-py": "3px",
+                        "--popover-content-border": "#a855f7",
+                        "--popover-content-arrow-stroke": "#a855f7",
+                      }
+                    : {}),
+                  ...(layoutOverrides
+                    ? {
+                        "--popover-size-padding-x": "7px",
+                        "--popover-size-padding-y": "9px",
+                        "--popover-slot-size-padding-x": "11px",
+                        "--popover-slot-size-padding-y": "13px",
+                        "--popover-size-pointer-width": "22px",
+                        "--popover-size-pointer-height": "9px",
+                      }
+                    : {}),
+                } as CSSProperties
+              }
+            >
+              示例 {appearance}
+            </PopoverContent>
+          </Popover>
+        ))}
+      </div>
     </div>
-    <div className="flex justify-around gap-16">
-      {(["default", "primary", "tooltip"] as const).map(appearance => <Popover key={appearance} open>
-        <PopoverTrigger asChild><Button>{appearance}</Button></PopoverTrigger>
-        <PopoverContent appearance={appearance} showArrow flush={flush} side={sides[sideIndex]} onOpenAutoFocus={event => event.preventDefault()} style={{...(overrides ? {
-          "--popover-content-bg": "#123456", "--popover-content-fg": "#fedcba",
-          "--popover-content-radius": "13px", "--popover-content-shadow": "none",
-          "--popover-content-px": "5px", "--popover-content-py": "3px",
-          "--popover-content-border": "#a855f7", "--popover-content-arrow-stroke": "#a855f7",
-        } : {}), ...(layoutOverrides ? {
-          "--popover-size-padding-x": "7px", "--popover-size-padding-y": "9px",
-          "--popover-slot-size-padding-x": "11px", "--popover-slot-size-padding-y": "13px",
-          "--popover-size-pointer-width": "22px", "--popover-size-pointer-height": "9px",
-        } : {})} as CSSProperties}>示例 {appearance}</PopoverContent>
-      </Popover>)}
-    </div>
-  </div>;
+  );
 }
 
 export const ProjectModes: Story = {
   render: function ProjectModesStory() {
     const [target, setTarget] = useState<HTMLDivElement | null>(null);
-    return <div ref={setTarget}>{target && <ThemeProvider project={popoverProject} projectTarget={target} defaultMode="light" storageKey="popover-project-modes"><PopoverModeCases /></ThemeProvider>}</div>;
+    return (
+      <div ref={setTarget}>
+        {target && (
+          <ThemeProvider
+            project={popoverProject}
+            projectTarget={target}
+            defaultMode="light"
+            storageKey="popover-project-modes"
+          >
+            <PopoverModeCases />
+          </ThemeProvider>
+        )}
+      </div>
+    );
   },
 };
 
@@ -102,16 +169,31 @@ export const Default: Story = {
 export const NarrowContent: Story = {
   render: function NarrowContentStory() {
     const [primary, setPrimary] = useState(false);
-    return <div className="flex flex-col items-center gap-8 p-8">
-      <Button onClick={() => setPrimary(!primary)}>外观：{primary ? "primary" : "default"}</Button>
-      <Popover defaultOpen>
-        <PopoverTrigger asChild><Button>编辑 Token</Button></PopoverTrigger>
-        <PopoverContent appearance={primary ? "primary" : "default"} side="bottom" showArrow>
-          <span>componentToken/segmentatorButton/color/primary/unselected/background-default-with-a-very-long-unbroken-suffix</span>
-          <label className="flex min-w-0 flex-col gap-2">变量名称<input className="min-w-0" defaultValue="background-default" /></label>
-        </PopoverContent>
-      </Popover>
-    </div>;
+    return (
+      <div className="flex flex-col items-center gap-8 p-8">
+        <Button onClick={() => setPrimary(!primary)}>
+          外观：{primary ? "primary" : "default"}
+        </Button>
+        <Popover defaultOpen>
+          <PopoverTrigger asChild>
+            <Button>编辑 Token</Button>
+          </PopoverTrigger>
+          <PopoverContent
+            appearance={primary ? "primary" : "default"}
+            side="bottom"
+            showArrow
+          >
+            <span>
+              componentToken/segmentatorButton/color/primary/unselected/background-default-with-a-very-long-unbroken-suffix
+            </span>
+            <label className="flex min-w-0 flex-col gap-2">
+              变量名称
+              <input className="min-w-0" defaultValue="background-default" />
+            </label>
+          </PopoverContent>
+        </Popover>
+      </div>
+    );
   },
 };
 

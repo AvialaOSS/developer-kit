@@ -49,18 +49,57 @@ test("JSON boundary validates semantics after structure", () => {
 
 test("validation catches cycles formed by independent collection defaults", () => {
   const project = {
-    schemaVersion: 1, id: "defaults", draftRevision: 0, cssCompatibility: [],
+    schemaVersion: 1,
+    id: "defaults",
+    draftRevision: 0,
+    cssCompatibility: [],
     collections: [
-      { id: "a-col", name: "A", axis: "color", modes: [{ id: "light", name: "Light" }, { id: "dark", name: "Dark" }], defaultModeId: "dark" },
-      { id: "b-col", name: "B", axis: "color", modes: [{ id: "light", name: "Light" }, { id: "dark", name: "Dark" }], defaultModeId: "light" },
+      {
+        id: "a-col",
+        name: "A",
+        axis: "color",
+        modes: [
+          { id: "light", name: "Light" },
+          { id: "dark", name: "Dark" },
+        ],
+        defaultModeId: "dark",
+      },
+      {
+        id: "b-col",
+        name: "B",
+        axis: "color",
+        modes: [
+          { id: "light", name: "Light" },
+          { id: "dark", name: "Dark" },
+        ],
+        defaultModeId: "light",
+      },
     ],
     tokens: [
-      { id: "a", collectionId: "a-col", path: ["a"], layer: "foundation", type: "number", unit: "px", valuesByMode: { light: literal(1), dark: alias("b") } },
-      { id: "b", collectionId: "b-col", path: ["b"], layer: "foundation", type: "number", unit: "px", valuesByMode: { light: alias("a"), dark: literal(2) } },
+      {
+        id: "a",
+        collectionId: "a-col",
+        path: ["a"],
+        layer: "foundation",
+        type: "number",
+        unit: "px",
+        valuesByMode: { light: literal(1), dark: alias("b") },
+      },
+      {
+        id: "b",
+        collectionId: "b-col",
+        path: ["b"],
+        layer: "foundation",
+        type: "number",
+        unit: "px",
+        valuesByMode: { light: alias("a"), dark: literal(2) },
+      },
     ],
   };
   // Explicit Light and Dark are acyclic; omitted color uses A/Dark + B/Light.
-  const cycle = validateProject(project).find((issue) => issue.code === "resolution" && /cycle/.test(issue.message));
+  const cycle = validateProject(project).find(
+    (issue) => issue.code === "resolution" && /cycle/.test(issue.message)
+  );
   assert.ok(cycle);
   assert.equal(cycle.tokenId, "a");
   assert.equal(cycle.path, "a");
@@ -69,7 +108,7 @@ test("validation catches cycles formed by independent collection defaults", () =
   project.collections[0].defaultModeId = "light";
   assert.deepEqual(validateProject(project), []);
   assert.equal(resolveProject(project).b, 1);
-  assert.equal(resolveProject(project, {color: "Dark"}).a, 2);
+  assert.equal(resolveProject(project, { color: "Dark" }).a, 2);
 });
 function fixture() {
   return {

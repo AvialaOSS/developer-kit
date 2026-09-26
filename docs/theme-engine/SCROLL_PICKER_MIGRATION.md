@@ -54,17 +54,18 @@ CSS 构建和 Docs 类型检查通过。浏览器挂载再次超时，尚未验�
 
 源码消费汇总（`information-collect-extras.css`）：
 
-| 属性 | 标准入口 / 规则 | 旧覆盖入口 |
-| --- | --- | --- |
-| 容器间距、内边距、圆角 | scroll-picker-size-gap / padding-x / padding-y / radius | scroll-picker-gap / padding-x / padding-y / radius |
-| 表面、边框 | scroll-picker-color-background / border | scroll-picker-bg / border |
-| 列分隔线、内边距 | scroll-picker-column-color-divider、column-size-padding-x/y | scroll-picker-border、column-px/py |
-| 选项间距、内边距、圆角 | column-size-gap、item-size-padding-x/y、item-size-radius | item-gap、item-px/py、item-radius |
-| 普通/选中文字及高亮背景 | item-color-unselected-text-default、item-color-selected-text-default、item-color-background-selected | item-fg、item-fg-selected、item-bg-selected |
-| 普通项透明度 | scroll-picker-item-transparency-default | scroll-picker-item-opacity |
-| 字体指标和派生高度 | 共享 Typography text；行高 + 上下组件内边距 | scroll-picker-item-height 优先 |
+| 属性                    | 标准入口 / 规则                                                                                      | 旧覆盖入口                                         |
+| ----------------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| 容器间距、内边距、圆角  | scroll-picker-size-gap / padding-x / padding-y / radius                                              | scroll-picker-gap / padding-x / padding-y / radius |
+| 表面、边框              | scroll-picker-color-background / border                                                              | scroll-picker-bg / border                          |
+| 列分隔线、内边距        | scroll-picker-column-color-divider、column-size-padding-x/y                                          | scroll-picker-border、column-px/py                 |
+| 选项间距、内边距、圆角  | column-size-gap、item-size-padding-x/y、item-size-radius                                             | item-gap、item-px/py、item-radius                  |
+| 普通/选中文字及高亮背景 | item-color-unselected-text-default、item-color-selected-text-default、item-color-background-selected | item-fg、item-fg-selected、item-bg-selected        |
+| 普通项透明度            | scroll-picker-item-transparency-default                                                              | scroll-picker-item-opacity                         |
+| 字体指标和派生高度      | 共享 Typography text；行高 + 上下组件内边距                                                          | scroll-picker-item-height 优先                     |
 
 表内省略前缀的 column/item 项均以 `scroll-picker-` 开头。容器 width/height 的 200px/230px 仍为可覆盖默认布局尺寸；容器 shadow 是可选旧覆盖。高亮内阴影当前消费共享 `line-shadow-bottom`，几何为 inset 0 -0.5px；这些值不能因上表存在便被称为全部组件级 Token。此前实际效果 ON/OFF 检查只证明颜色效果开关与几何稳定。
+
 # 2026-09-24 滚动结束兜底
 
 后续边界检查补充：已在第一项时按Home，ScrollPicker会调用无位移scrollTo而没有scroll事件，仍残留programmatic标记；新增用例先失败后通过。scrollToIndex现在仅在目标位置不同于当前位置时设置该标记，无位移时同时清除smooth目标。相同用例在时间轮列原实现已通过，未为此修改时间轮列。当前4项回调序列与8项SSR检查合计12项通过；范围仍限模拟事件与几何。

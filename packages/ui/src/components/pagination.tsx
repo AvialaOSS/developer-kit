@@ -164,7 +164,10 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
             leftIcon={<PrevIcon aria-hidden />}
             onClick={() => setPage(currentPage - 1)}
           />
-          <div className="aviala-pagination__pages aviala-segmentator-group" data-mode="tiled">
+          <div
+            className="aviala-pagination__pages aviala-segmentator-group"
+            data-mode="tiled"
+          >
             {pages.map((item, index) =>
               item === "ellipsis" ? (
                 <Popover
@@ -183,9 +186,11 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
                       aria-label={locale.morePages}
                       aria-haspopup="menu"
                     >
-                      <span className="aviala-segmentator-item__content"><Typography level="text" as="span">
-                        …
-                      </Typography></span>
+                      <span className="aviala-segmentator-item__content">
+                        <Typography level="text" as="span">
+                          …
+                        </Typography>
+                      </span>
                     </button>
                   </PopoverTrigger>
                   <PopoverContent showArrow flush>
@@ -195,7 +200,7 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
                           key={p}
                           type="button"
                           data-mode="tiled"
-                      data-selected="false"
+                          data-selected="false"
                           className={cn(
                             "aviala-segmentator-item aviala-focus-ring"
                           )}
@@ -204,9 +209,11 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
                             setOpenEllipsis(null);
                           }}
                         >
-                          <span className="aviala-segmentator-item__content"><Typography level="text" as="span">
-                            {p}
-                          </Typography></span>
+                          <span className="aviala-segmentator-item__content">
+                            <Typography level="text" as="span">
+                              {p}
+                            </Typography>
+                          </span>
                         </button>
                       ))}
                     </div>
@@ -226,9 +233,11 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
                   aria-current={item === currentPage ? "page" : undefined}
                   onClick={() => setPage(item)}
                 >
-                  <span className="aviala-segmentator-item__content"><Typography level="text" as="span">
-                    {item}
-                  </Typography></span>
+                  <span className="aviala-segmentator-item__content">
+                    <Typography level="text" as="span">
+                      {item}
+                    </Typography>
+                  </span>
                 </button>
               )
             )}

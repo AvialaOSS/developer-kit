@@ -49,12 +49,29 @@ export const Pagehead = forwardRef<HTMLElement, PageheadProps>(
           {title != null || description != null ? (
             <div className="aviala-pagehead__title">
               <div className="aviala-typeface" data-content="textCaption">
-                {title != null && <Typography as={titleAs} level={titleLevel} className={cn(
-                  "aviala-pagehead__text",
-                  ["display", "headline1", "headline2", "title"].includes(titleLevel) && "aviala-pagehead__heading",
-                  titleLevel === "caption" && "aviala-pagehead__description"
-                )}>{title}</Typography>}
-                {description != null && <Typography level="caption" className="aviala-pagehead__description">{description}</Typography>}
+                {title != null && (
+                  <Typography
+                    as={titleAs}
+                    level={titleLevel}
+                    className={cn(
+                      "aviala-pagehead__text",
+                      ["display", "headline1", "headline2", "title"].includes(
+                        titleLevel
+                      ) && "aviala-pagehead__heading",
+                      titleLevel === "caption" && "aviala-pagehead__description"
+                    )}
+                  >
+                    {title}
+                  </Typography>
+                )}
+                {description != null && (
+                  <Typography
+                    level="caption"
+                    className="aviala-pagehead__description"
+                  >
+                    {description}
+                  </Typography>
+                )}
               </div>
             </div>
           ) : null}

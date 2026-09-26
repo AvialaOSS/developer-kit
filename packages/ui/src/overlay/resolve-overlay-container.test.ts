@@ -2,7 +2,11 @@ import { describe, expect, it } from "vitest";
 import { resolveOverlayContainer } from "./resolve-overlay-container";
 
 function container(...children: HTMLElement[]): HTMLElement {
-  const node = { contains: (other: HTMLElement): boolean => other === node as unknown as HTMLElement || children.some(child => child.contains(other)) };
+  const node = {
+    contains: (other: HTMLElement): boolean =>
+      other === (node as unknown as HTMLElement) ||
+      children.some((child) => child.contains(other)),
+  };
   return node as unknown as HTMLElement;
 }
 
@@ -23,12 +27,16 @@ describe("overlay theme containment", () => {
   });
   it("keeps fullscreen overlays away from unrelated modal and theme roots", () => {
     const fullscreen = container();
-    expect(resolveOverlayContainer(fullscreen, container(), container())).toBe(fullscreen);
+    expect(resolveOverlayContainer(fullscreen, container(), container())).toBe(
+      fullscreen
+    );
   });
   it("does not escape a modal inside fullscreen for a sibling theme", () => {
     const theme = container();
     const modal = container();
-    expect(resolveOverlayContainer(container(modal, theme), modal, theme)).toBe(modal);
+    expect(resolveOverlayContainer(container(modal, theme), modal, theme)).toBe(
+      modal
+    );
   });
   it("falls back to the local theme or the default body target", () => {
     const theme = container();

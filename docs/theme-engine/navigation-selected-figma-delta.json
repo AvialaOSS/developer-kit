@@ -13,10 +13,7 @@
           "id": "VariableID:527:56693"
         }
       },
-      "scopes": [
-        "FRAME_FILL",
-        "SHAPE_FILL"
-      ]
+      "scopes": ["FRAME_FILL", "SHAPE_FILL"]
     },
     {
       "id": "VariableID:2740:10502",
@@ -30,10 +27,7 @@
           "id": "VariableID:2240:3315"
         }
       },
-      "scopes": [
-        "FRAME_FILL",
-        "SHAPE_FILL"
-      ]
+      "scopes": ["FRAME_FILL", "SHAPE_FILL"]
     },
     {
       "id": "VariableID:2740:10503",
@@ -47,10 +41,7 @@
           "id": "VariableID:2240:3316"
         }
       },
-      "scopes": [
-        "FRAME_FILL",
-        "SHAPE_FILL"
-      ]
+      "scopes": ["FRAME_FILL", "SHAPE_FILL"]
     },
     {
       "id": "VariableID:2740:10504",
@@ -64,9 +55,7 @@
           "id": "VariableID:2319:22985"
         }
       },
-      "scopes": [
-        "TEXT_FILL"
-      ]
+      "scopes": ["TEXT_FILL"]
     },
     {
       "id": "VariableID:2740:10505",
@@ -80,9 +69,7 @@
           "id": "VariableID:2319:22984"
         }
       },
-      "scopes": [
-        "SHAPE_FILL"
-      ]
+      "scopes": ["SHAPE_FILL"]
     },
     {
       "id": "VariableID:2740:10506",
@@ -96,9 +83,7 @@
           "id": "VariableID:2520:32072"
         }
       },
-      "scopes": [
-        "EFFECT_COLOR"
-      ]
+      "scopes": ["EFFECT_COLOR"]
     },
     {
       "id": "VariableID:2740:10507",
@@ -112,9 +97,7 @@
           "id": "VariableID:2520:32073"
         }
       },
-      "scopes": [
-        "EFFECT_FLOAT"
-      ]
+      "scopes": ["EFFECT_FLOAT"]
     },
     {
       "id": "VariableID:2740:10508",
@@ -128,9 +111,7 @@
           "id": "VariableID:2520:32074"
         }
       },
-      "scopes": [
-        "EFFECT_FLOAT"
-      ]
+      "scopes": ["EFFECT_FLOAT"]
     },
     {
       "id": "VariableID:2740:10509",
@@ -144,9 +125,7 @@
           "id": "VariableID:2520:32075"
         }
       },
-      "scopes": [
-        "EFFECT_FLOAT"
-      ]
+      "scopes": ["EFFECT_FLOAT"]
     },
     {
       "id": "VariableID:2740:10510",
@@ -160,9 +139,7 @@
           "id": "VariableID:2520:32076"
         }
       },
-      "scopes": [
-        "EFFECT_FLOAT"
-      ]
+      "scopes": ["EFFECT_FLOAT"]
     }
   ]
 }

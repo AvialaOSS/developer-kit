@@ -56,9 +56,11 @@ export const AnchorItem = forwardRef<HTMLAnchorElement, AnchorItemProps>(
     ref
   ) => {
     const Comp = asChild ? Slot : "a";
-    const child = asChild && isValidElement<AnchorHTMLAttributes<HTMLAnchorElement>>(children)
-      ? children
-      : undefined;
+    const child =
+      asChild &&
+      isValidElement<AnchorHTMLAttributes<HTMLAnchorElement>>(children)
+        ? children
+        : undefined;
     const content = child ? child.props.children : children;
     const inner = (
       <>
@@ -66,11 +68,19 @@ export const AnchorItem = forwardRef<HTMLAnchorElement, AnchorItemProps>(
         <span className="aviala-anchor-item__content">
           <span className="aviala-anchor-item__surface">
             <span className="aviala-anchor-item__text">
-              <Typography level="text" as="span" className="aviala-anchor-item__label">
+              <Typography
+                level="text"
+                as="span"
+                className="aviala-anchor-item__label"
+              >
                 {content}
               </Typography>
               {description != null && (
-                <Typography level="caption" as="span" className="aviala-anchor-item__description">
+                <Typography
+                  level="caption"
+                  as="span"
+                  className="aviala-anchor-item__description"
+                >
                   {description}
                 </Typography>
               )}

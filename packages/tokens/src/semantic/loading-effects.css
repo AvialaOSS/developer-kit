@@ -18,7 +18,10 @@
   display: inline-flex;
   flex-shrink: 0;
   width: var(--loading-icon-size, var(--_loading-icon-size));
-  height: var(--loading-icon-size, var(--_loading-icon-height, var(--_loading-icon-size)));
+  height: var(
+    --loading-icon-size,
+    var(--_loading-icon-height, var(--_loading-icon-size))
+  );
 }
 
 .aviala-loading__ring {
@@ -31,8 +34,13 @@
 
 /* Figma 30×30 ring is r15 − r13 (2px stroke). Same geometry as Progress ring. */
 .aviala-loading__path {
-  r: calc(50% - var(--loading-ring-stroke, var(--loading-icon-size-stroke-width)) / 2);
-  stroke-width: var(--loading-ring-stroke, var(--loading-icon-size-stroke-width));
+  r: calc(
+    50% - var(--loading-ring-stroke, var(--loading-icon-size-stroke-width)) / 2
+  );
+  stroke-width: var(
+    --loading-ring-stroke,
+    var(--loading-icon-size-stroke-width)
+  );
   stroke: var(--loading-mask-reveal, #ffffff);
 }
 

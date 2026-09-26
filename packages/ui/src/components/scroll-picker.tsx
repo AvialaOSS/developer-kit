@@ -333,9 +333,14 @@ export function ScrollPickerColumn<T = string>({
   useEffect(() => {
     const container = scrollRef.current;
     if (!container || typeof ResizeObserver === "undefined") return;
-    const item = container.querySelector<HTMLElement>(".aviala-scroll-picker-item");
-    const list = container.querySelector<HTMLElement>(".aviala-scroll-picker-column__list");
-    const geometry = () => `${container.clientHeight}/${item?.offsetHeight}/${list?.offsetHeight}`;
+    const item = container.querySelector<HTMLElement>(
+      ".aviala-scroll-picker-item"
+    );
+    const list = container.querySelector<HTMLElement>(
+      ".aviala-scroll-picker-column__list"
+    );
+    const geometry = () =>
+      `${container.clientHeight}/${item?.offsetHeight}/${list?.offsetHeight}`;
     let previousGeometry = geometry();
     // Density and local token overrides can change the pitch without a React render.
     const observer = new ResizeObserver(() => {
@@ -350,7 +355,12 @@ export function ScrollPickerColumn<T = string>({
       if (!metrics) return;
       const index = getIndex(selectedValueRef.current);
       const target = loop
-        ? nearestLoopIndex(readRawIndex(container, metrics), index, values.length, LOOP_SECTIONS)
+        ? nearestLoopIndex(
+            readRawIndex(container, metrics),
+            index,
+            values.length,
+            LOOP_SECTIONS
+          )
         : index;
       scrollToIndex(target, "auto");
     });
@@ -385,17 +395,27 @@ export function ScrollPickerColumn<T = string>({
     if (!container) return;
 
     const onWheel = (event: WheelEvent) => {
-      if (!shouldCapturePickerWheel(event, {
-        count: values.length, loop, scrollTop: container.scrollTop,
-        scrollHeight: container.scrollHeight, clientHeight: container.clientHeight,
-      })) {
+      if (
+        !shouldCapturePickerWheel(event, {
+          count: values.length,
+          loop,
+          scrollTop: container.scrollTop,
+          scrollHeight: container.scrollHeight,
+          clientHeight: container.clientHeight,
+        })
+      ) {
         wheelAccumRef.current = 0;
         return;
       }
 
       const metrics = readMetrics(container);
       if (!metrics) return;
-      const delta = pickerWheelDeltaPixels(event.deltaY, event.deltaMode, metrics.pitch, container.clientHeight);
+      const delta = pickerWheelDeltaPixels(
+        event.deltaY,
+        event.deltaMode,
+        metrics.pitch,
+        container.clientHeight
+      );
       if (delta === 0) return;
       event.preventDefault();
 
@@ -527,9 +547,10 @@ export function ScrollPickerColumn<T = string>({
   };
 
   const selectedIndex = values.findIndex((item) => Object.is(item, value));
-  const selectedOptionId = selectedIndex < 0
-    ? undefined
-    : `${reactId}-${selectedIndex + (loop ? MIDDLE_SECTION * values.length : 0)}`;
+  const selectedOptionId =
+    selectedIndex < 0
+      ? undefined
+      : `${reactId}-${selectedIndex + (loop ? MIDDLE_SECTION * values.length : 0)}`;
 
   return (
     <div className={cn("aviala-scroll-picker-column", className)}>

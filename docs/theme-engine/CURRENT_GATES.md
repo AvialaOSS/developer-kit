@@ -4,11 +4,11 @@
 
 ## 等待产品决定
 
-| 项目 | 已核对证据 | 等待决定 |
-| --- | --- | --- |
-| Card heading | 用户确认新增可选Title行并保留title/description；Web已实现 | Figma连接器缺少OPPO Sans 4.0 SemiBold，写入前字体加载失败，原文件未变；待字体可用后同步 |
-| Upload图标 | 普通/大号图标直连基础文字色；大号尺寸固定16px、无组件绑定 | 新增Upload组件Token保持外观，或改用Button图标规格 |
-| Button destructive | 线上Button集合129:5仅8种Mode，无destructive，局部变量也没有相应路径；Web仍用旧错误色 | Ask待选择补齐Figma/组件Token、明确Web兼容例外，或审阅迁移后停用 |
+| 项目               | 已核对证据                                                                           | 等待决定                                                                                |
+| ------------------ | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| Card heading       | 用户确认新增可选Title行并保留title/description；Web已实现                            | Figma连接器缺少OPPO Sans 4.0 SemiBold，写入前字体加载失败，原文件未变；待字体可用后同步 |
+| Upload图标         | 普通/大号图标直连基础文字色；大号尺寸固定16px、无组件绑定                            | 新增Upload组件Token保持外观，或改用Button图标规格                                       |
+| Button destructive | 线上Button集合129:5仅8种Mode，无destructive，局部变量也没有相应路径；Web仍用旧错误色 | Ask待选择补齐Figma/组件Token、明确Web兼容例外，或审阅迁移后停用                         |
 
 Upload与Button选项正在Ask面板中；不把未答选项视为授权，不提前改写Figma语义。Card产品决定已确认，剩余为字体环境阻碍。此表不是全部未验收属性的穷举。
 

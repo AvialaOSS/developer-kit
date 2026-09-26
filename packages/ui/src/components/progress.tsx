@@ -140,11 +140,17 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
               fill="none"
               strokeWidth={stroke}
               pathLength={tokenRing ? 100 : undefined}
-              strokeDasharray={tokenRing ? `${percent} ${100 - percent}` : `${circumference} ${circumference}`}
+              strokeDasharray={
+                tokenRing
+                  ? `${percent} ${100 - percent}`
+                  : `${circumference} ${circumference}`
+              }
               strokeDashoffset={tokenRing ? 25 : strokeDashoffset}
               visibility={percent === 0 ? "hidden" : undefined}
               strokeLinecap="round"
-              transform={tokenRing ? undefined : `rotate(-90 ${center} ${center})`}
+              transform={
+                tokenRing ? undefined : `rotate(-90 ${center} ${center})`
+              }
             />
           </svg>
         )}

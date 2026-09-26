@@ -24,11 +24,19 @@ export const InputGroup = forwardRef<HTMLDivElement, InputGroupProps>(
 InputGroup.displayName = "InputGroup";
 
 /** Figma InputGroupInput: optional prefix and an independently styled input. */
-export const InputGroupItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn("flex min-w-0 items-center gap-[var(--input-group-input-size-gap)]", className)} {...props} />
-  )
-);
+export const InputGroupItem = forwardRef<
+  HTMLDivElement,
+  HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "flex min-w-0 items-center gap-[var(--input-group-input-size-gap)]",
+      className
+    )}
+    {...props}
+  />
+));
 InputGroupItem.displayName = "InputGroupItem";
 
 export const InputGroupAddon = forwardRef<

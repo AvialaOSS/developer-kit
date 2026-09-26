@@ -103,11 +103,21 @@ function renderItemIcon(
     level: iconLevel,
     biggerSize: true,
   });
-  const iconProps = isValidElement(node) ? (node as ReactElement<AvialaIconProps>).props : undefined;
-  const useComponentSize = iconProps?.level === undefined && iconProps?.biggerSize === undefined;
-  if (useComponentSize && isValidElement(content) && typeof content.type !== "string") {
+  const iconProps = isValidElement(node)
+    ? (node as ReactElement<AvialaIconProps>).props
+    : undefined;
+  const useComponentSize =
+    iconProps?.level === undefined && iconProps?.biggerSize === undefined;
+  if (
+    useComponentSize &&
+    isValidElement(content) &&
+    typeof content.type !== "string"
+  ) {
     const size = `var(--cascader-item-icon-size, var(--cascader-menu-item-size-${iconLevel === "caption" ? "title-" : ""}icon-width))`;
-    content = cloneElement(content as ReactElement<AvialaIconProps>, { width: size, height: size });
+    content = cloneElement(content as ReactElement<AvialaIconProps>, {
+      width: size,
+      height: size,
+    });
   }
 
   return (
@@ -116,12 +126,16 @@ function renderItemIcon(
         "aviala-cascader-item__icon",
         iconLevel === "caption" && "aviala-cascader-item__icon--sm"
       )}
-      style={useComponentSize ? undefined : iconSlotCssVarStyle(
-        node,
-        "--cascader-item-icon-size",
-        iconLevel,
-        true
-      )}
+      style={
+        useComponentSize
+          ? undefined
+          : iconSlotCssVarStyle(
+              node,
+              "--cascader-item-icon-size",
+              iconLevel,
+              true
+            )
+      }
       {...(debugId ? spiralDebugId(debugId) : undefined)}
     >
       {content}
@@ -166,14 +180,19 @@ function CascaderItemFormCheckbox() {
   );
 }
 
-const cascaderFunctionIconSize = "var(--cascader-item-function-icon-size, var(--select-item-function-icon-size, var(--cascader-menu-item-size-icon-width)))";
+const cascaderFunctionIconSize =
+  "var(--cascader-item-function-icon-size, var(--select-item-function-icon-size, var(--cascader-menu-item-size-icon-width)))";
 
 function CascaderItemTrailingRadio({ selected }: { selected: boolean }) {
   if (!selected) return null;
 
   return (
     <span className="aviala-cascader-item__trailing-radio" aria-hidden>
-      <SymbolRight width={cascaderFunctionIconSize} height={cascaderFunctionIconSize} aria-hidden />
+      <SymbolRight
+        width={cascaderFunctionIconSize}
+        height={cascaderFunctionIconSize}
+        aria-hidden
+      />
     </span>
   );
 }
@@ -183,7 +202,11 @@ function CascaderItemTrailingCheckbox({ selected }: { selected: boolean }) {
 
   return (
     <span className="aviala-cascader-item__trailing-checkbox" aria-hidden>
-      <SymbolRight width={cascaderFunctionIconSize} height={cascaderFunctionIconSize} aria-hidden />
+      <SymbolRight
+        width={cascaderFunctionIconSize}
+        height={cascaderFunctionIconSize}
+        aria-hidden
+      />
     </span>
   );
 }
@@ -191,7 +214,13 @@ function CascaderItemTrailingCheckbox({ selected }: { selected: boolean }) {
 function CascaderExpandChevron() {
   const rtl = useRtl();
   const Icon = rtl ? DirectionArrowLeftLight : DirectionArrowRightLight;
-  return <Icon width={cascaderFunctionIconSize} height={cascaderFunctionIconSize} aria-hidden />;
+  return (
+    <Icon
+      width={cascaderFunctionIconSize}
+      height={cascaderFunctionIconSize}
+      aria-hidden
+    />
+  );
 }
 
 function renderFunctionSlot(
@@ -205,13 +234,42 @@ function renderFunctionSlot(
   if (!showFunctionIcon || layout === "title") return null;
 
   if (icon !== undefined) {
-    const iconProps = isValidElement(icon) ? (icon as ReactElement<AvialaIconProps>).props : undefined;
-    const useComponentSize = iconProps?.level === undefined && iconProps?.biggerSize === undefined;
-    let content = cloneAvialaIconElement(icon, { level: "text", biggerSize: true });
-    if (useComponentSize && isValidElement(content) && typeof content.type !== "string") {
-      content = cloneElement(content as ReactElement<AvialaIconProps>, { width: cascaderFunctionIconSize, height: cascaderFunctionIconSize });
+    const iconProps = isValidElement(icon)
+      ? (icon as ReactElement<AvialaIconProps>).props
+      : undefined;
+    const useComponentSize =
+      iconProps?.level === undefined && iconProps?.biggerSize === undefined;
+    let content = cloneAvialaIconElement(icon, {
+      level: "text",
+      biggerSize: true,
+    });
+    if (
+      useComponentSize &&
+      isValidElement(content) &&
+      typeof content.type !== "string"
+    ) {
+      content = cloneElement(content as ReactElement<AvialaIconProps>, {
+        width: cascaderFunctionIconSize,
+        height: cascaderFunctionIconSize,
+      });
     }
-    return <span className="aviala-cascader-item__function" style={useComponentSize ? undefined : iconSlotCssVarStyle(icon, "--cascader-item-function-icon-size", "text", true)}>{content}</span>;
+    return (
+      <span
+        className="aviala-cascader-item__function"
+        style={
+          useComponentSize
+            ? undefined
+            : iconSlotCssVarStyle(
+                icon,
+                "--cascader-item-function-icon-size",
+                "text",
+                true
+              )
+        }
+      >
+        {content}
+      </span>
+    );
   }
 
   switch (itemFunction) {
@@ -232,7 +290,11 @@ function renderFunctionSlot(
       return (
         <span className="aviala-cascader-item__function">
           {selected ? (
-            <SymbolRight width={cascaderFunctionIconSize} height={cascaderFunctionIconSize} aria-hidden />
+            <SymbolRight
+              width={cascaderFunctionIconSize}
+              height={cascaderFunctionIconSize}
+              aria-hidden
+            />
           ) : null}
           {hasChildren ? <CascaderExpandChevron /> : null}
         </span>
@@ -594,7 +656,11 @@ export const CascaderTrigger = forwardRef<
             {...spiralDebugId("cascader.trigger.expand")}
           >
             {expandIcon ?? (
-              <DirectionArrowDownLight width="var(--input-slot-icon-size, var(--cascader-input-size-icon-width))" height="var(--input-slot-icon-size, var(--cascader-input-size-icon-width))" aria-hidden />
+              <DirectionArrowDownLight
+                width="var(--input-slot-icon-size, var(--cascader-input-size-icon-width))"
+                height="var(--input-slot-icon-size, var(--cascader-input-size-icon-width))"
+                aria-hidden
+              />
             )}
           </span>
         </button>
@@ -748,17 +814,35 @@ export type CascaderSearchProps = InputProps;
 export const CascaderSearch = forwardRef<HTMLInputElement, CascaderSearchProps>(
   ({ onKeyDown, ...props }, ref) => (
     <div className="aviala-cascader-search">
-      <Input type="search" {...props} ref={ref} onKeyDown={(event) => {
-        onKeyDown?.(event);
-        if (event.defaultPrevented || event.key === "Escape") return;
-        event.stopPropagation();
-        if (event.nativeEvent.isComposing || event.ctrlKey || event.metaKey || event.altKey) return;
-        if (event.key === "Enter") event.preventDefault();
-        if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
-        event.preventDefault();
-        const column = event.currentTarget.closest(".aviala-cascader-column__surface");
-        focusRovingSibling(column, event.currentTarget, event.key === "ArrowDown" ? "first" : "last", CASCADER_OPTION_SELECTOR);
-      }} />
+      <Input
+        type="search"
+        {...props}
+        ref={ref}
+        onKeyDown={(event) => {
+          onKeyDown?.(event);
+          if (event.defaultPrevented || event.key === "Escape") return;
+          event.stopPropagation();
+          if (
+            event.nativeEvent.isComposing ||
+            event.ctrlKey ||
+            event.metaKey ||
+            event.altKey
+          )
+            return;
+          if (event.key === "Enter") event.preventDefault();
+          if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+          event.preventDefault();
+          const column = event.currentTarget.closest(
+            ".aviala-cascader-column__surface"
+          );
+          focusRovingSibling(
+            column,
+            event.currentTarget,
+            event.key === "ArrowDown" ? "first" : "last",
+            CASCADER_OPTION_SELECTOR
+          );
+        }}
+      />
     </div>
   )
 );

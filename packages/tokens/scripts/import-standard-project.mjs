@@ -28,7 +28,9 @@ const previous = existsSync(output) ? read(output) : undefined;
 if (previous && previous.source !== local.file)
   throw new Error("Existing import candidate belongs to a different source");
 // Persist roles by source identity so display-name edits cannot change semantics.
-const collections = read(join(root, "source/theme-engine/import-collections.json"));
+const collections = read(
+  join(root, "source/theme-engine/import-collections.json")
+);
 if (collections.source !== local.file)
   throw new Error("Collection configuration belongs to a different source");
 const imported = importVariableSnapshot(snapshot, {

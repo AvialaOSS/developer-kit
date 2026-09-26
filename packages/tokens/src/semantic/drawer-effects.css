@@ -4,7 +4,10 @@
   position: fixed;
   inset: 0;
   z-index: 50;
-  background-color: var(--drawer-overlay-bg, var(--drawer-wrapper-color-background));
+  background-color: var(
+    --drawer-overlay-bg,
+    var(--drawer-wrapper-color-background)
+  );
 }
 
 .aviala-drawer-overlay[data-state="open"] {
@@ -28,7 +31,12 @@
   bottom: var(--drawer-inset, var(--drawer-wrapper-size-padding-y));
   width: min(
     var(--drawer-content-width, 310px),
-    var(--drawer-content-max-width, calc(100vw - 2 * var(--drawer-inset, var(--drawer-wrapper-size-padding-x))))
+    var(
+      --drawer-content-max-width,
+      calc(
+        100vw - 2 * var(--drawer-inset, var(--drawer-wrapper-size-padding-x))
+      )
+    )
   );
 }
 
@@ -38,7 +46,12 @@
   bottom: var(--drawer-inset, var(--drawer-wrapper-size-padding-y));
   width: min(
     var(--drawer-content-width, 310px),
-    var(--drawer-content-max-width, calc(100vw - 2 * var(--drawer-inset, var(--drawer-wrapper-size-padding-x))))
+    var(
+      --drawer-content-max-width,
+      calc(
+        100vw - 2 * var(--drawer-inset, var(--drawer-wrapper-size-padding-x))
+      )
+    )
   );
 }
 
@@ -47,7 +60,12 @@
   left: 50%;
   width: min(
     var(--drawer-content-width, 310px),
-    var(--drawer-content-max-width, calc(100vw - 2 * var(--drawer-inset, var(--drawer-wrapper-size-padding-x))))
+    var(
+      --drawer-content-max-width,
+      calc(
+        100vw - 2 * var(--drawer-inset, var(--drawer-wrapper-size-padding-x))
+      )
+    )
   );
   max-height: var(--drawer-content-max-height-edge, 400px);
   transform: translateX(-50%);
@@ -58,7 +76,12 @@
   left: 50%;
   width: min(
     var(--drawer-content-width, 310px),
-    var(--drawer-content-max-width, calc(100vw - 2 * var(--drawer-inset, var(--drawer-wrapper-size-padding-x))))
+    var(
+      --drawer-content-max-width,
+      calc(
+        100vw - 2 * var(--drawer-inset, var(--drawer-wrapper-size-padding-x))
+      )
+    )
   );
   max-height: var(--drawer-content-max-height-edge, 400px);
   transform: translateX(-50%);
@@ -77,7 +100,8 @@
   height: 100%;
   max-height: inherit;
   overflow: hidden;
-  border: var(--drawer-view-size-stroke-width) solid var(--drawer-content-border, var(--drawer-view-color-border-default));
+  border: var(--drawer-view-size-stroke-width) solid
+    var(--drawer-content-border, var(--drawer-view-color-border-default));
   border-radius: var(--drawer-content-radius, var(--drawer-view-size-radius));
   background-color: var(
     --drawer-content-bg,
@@ -136,9 +160,18 @@
   flex-direction: column;
   gap: var(--drawer-head-area-size-gap);
   flex-shrink: 0;
-  background-color: var(--drawer-header-bg, var(--drawer-content-bg, var(--drawer-head-area-color-background)));
-  padding-block: var(--drawer-header-py, var(--drawer-head-area-size-padding-y));
-  padding-inline: var(--drawer-header-pl, var(--drawer-head-area-size-padding-x-start))
+  background-color: var(
+    --drawer-header-bg,
+    var(--drawer-content-bg, var(--drawer-head-area-color-background))
+  );
+  padding-block: var(
+    --drawer-header-py,
+    var(--drawer-head-area-size-padding-y)
+  );
+  padding-inline: var(
+      --drawer-header-pl,
+      var(--drawer-head-area-size-padding-x-start)
+    )
     var(--drawer-header-pr, var(--drawer-head-area-size-padding-x-end));
 }
 
@@ -163,7 +196,11 @@
   align-items: stretch;
   min-width: 0;
   gap: var(--drawer-head-area-size-headline-gap);
-  padding: var(--drawer-header-main-py, var(--drawer-head-area-size-headline-padding-y)) var(--drawer-head-area-size-headline-padding-x);
+  padding: var(
+      --drawer-header-main-py,
+      var(--drawer-head-area-size-headline-padding-y)
+    )
+    var(--drawer-head-area-size-headline-padding-x);
 }
 
 .aviala-drawer__icon {
@@ -174,14 +211,21 @@
   flex-direction: column;
   align-self: stretch;
   gap: var(--drawer-head-area-size-icon-slot-gap);
-  padding: var(--drawer-icon-py, var(--drawer-head-area-size-icon-slot-padding-y)) var(--drawer-head-area-size-icon-slot-padding-x);
+  padding: var(
+      --drawer-icon-py,
+      var(--drawer-head-area-size-icon-slot-padding-y)
+    )
+    var(--drawer-head-area-size-icon-slot-padding-x);
   width: var(--drawer-icon-slot-size, auto);
   color: var(--drawer-icon-fg, var(--drawer-head-area-color-icon-default));
 }
 
 .aviala-drawer__icon svg {
   width: var(--drawer-icon-size, var(--drawer-head-area-size-icon-width));
-  height: var(--drawer-icon-size, var(--drawer-head-area-size-icon-container-height));
+  height: var(
+    --drawer-icon-size,
+    var(--drawer-head-area-size-icon-container-height)
+  );
 }
 
 .aviala-drawer__header-typeface {
@@ -205,7 +249,10 @@
 }
 
 .aviala-drawer__title {
-  color: var(--drawer-content-fg, var(--drawer-head-area-color-heading-text-default));
+  color: var(
+    --drawer-content-fg,
+    var(--drawer-head-area-color-heading-text-default)
+  );
 }
 
 .aviala-drawer__close-slot {
@@ -215,7 +262,8 @@
   justify-content: center;
   flex-shrink: 0;
   gap: var(--drawer-head-area-size-button-slot-gap);
-  padding: var(--drawer-head-area-size-button-slot-padding-y) var(--drawer-head-area-size-button-slot-padding-x);
+  padding: var(--drawer-head-area-size-button-slot-padding-y)
+    var(--drawer-head-area-size-button-slot-padding-x);
 }
 
 .aviala-drawer__close {
@@ -240,17 +288,36 @@
   min-height: 0;
   overflow: auto;
   border-top: var(--drawer-content-area-size-stroke-width) solid
-    var(--drawer-section-border, var(--drawer-content-area-color-border-default));
-  background-color: var(--drawer-body-bg, var(--drawer-content-bg, var(--drawer-content-area-color-background)));
-  padding: var(--drawer-section-padding, var(--_drawer-body-py, var(--drawer-content-area-size-padding-y))) var(--drawer-section-padding, var(--_drawer-body-px, var(--drawer-content-area-size-padding-x)));
+    var(
+      --drawer-section-border,
+      var(--drawer-content-area-color-border-default)
+    );
+  background-color: var(
+    --drawer-body-bg,
+    var(--drawer-content-bg, var(--drawer-content-area-color-background))
+  );
+  padding: var(
+      --drawer-section-padding,
+      var(--_drawer-body-py, var(--drawer-content-area-size-padding-y))
+    )
+    var(
+      --drawer-section-padding,
+      var(--_drawer-body-px, var(--drawer-content-area-size-padding-x))
+    );
 }
 
 .aviala-drawer__body-typeface .aviala-typography--title {
-  color: var(--drawer-content-fg, var(--drawer-content-area-color-heading-text-default));
+  color: var(
+    --drawer-content-fg,
+    var(--drawer-content-area-color-heading-text-default)
+  );
 }
 
 .aviala-drawer__body-typeface .aviala-typography--text {
-  color: var(--drawer-content-fg, var(--drawer-content-area-color-body-text-default));
+  color: var(
+    --drawer-content-fg,
+    var(--drawer-content-area-color-body-text-default)
+  );
 }
 
 .aviala-drawer__body-slot {
@@ -258,7 +325,8 @@
   flex-direction: column;
   min-width: 0;
   gap: var(--drawer-content-area-size-slot-gap);
-  padding: var(--drawer-content-area-size-slot-padding-y) var(--drawer-content-area-size-slot-padding-x);
+  padding: var(--drawer-content-area-size-slot-padding-y)
+    var(--drawer-content-area-size-slot-padding-x);
 }
 
 .aviala-drawer__footer-slot {
@@ -267,7 +335,8 @@
   min-width: 0;
   justify-content: flex-end;
   gap: var(--drawer-action-area-size-slot-gap);
-  padding: var(--drawer-action-area-size-slot-padding-y) var(--drawer-action-area-size-slot-padding-x);
+  padding: var(--drawer-action-area-size-slot-padding-y)
+    var(--drawer-action-area-size-slot-padding-x);
 }
 
 .aviala-drawer__button-group {
@@ -280,7 +349,10 @@
 .aviala-drawer__button-slot {
   display: flex;
   align-items: center;
-  gap: var(--drawer-footer-actions-gap, var(--button-group-size-button-slot-gap));
+  gap: var(
+    --drawer-footer-actions-gap,
+    var(--button-group-size-button-slot-gap)
+  );
 }
 
 .aviala-drawer__footer {
@@ -291,8 +363,18 @@
   gap: var(--drawer-action-area-size-gap);
   border-top: var(--drawer-action-area-size-stroke-width) solid
     var(--drawer-section-border, var(--drawer-action-area-color-border-default));
-  background-color: var(--drawer-footer-bg, var(--drawer-content-bg, var(--drawer-action-area-color-background)));
-  padding: var(--drawer-section-padding, var(--_drawer-footer-py, var(--drawer-action-area-size-padding-y))) var(--drawer-section-padding, var(--_drawer-footer-px, var(--drawer-action-area-size-padding-x)));
+  background-color: var(
+    --drawer-footer-bg,
+    var(--drawer-content-bg, var(--drawer-action-area-color-background))
+  );
+  padding: var(
+      --drawer-section-padding,
+      var(--_drawer-footer-py, var(--drawer-action-area-size-padding-y))
+    )
+    var(
+      --drawer-section-padding,
+      var(--_drawer-footer-px, var(--drawer-action-area-size-padding-x))
+    );
 }
 
 @keyframes aviala-drawer-overlay-in {

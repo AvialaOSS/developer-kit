@@ -586,7 +586,11 @@ export function validateProject(project: TokenProject): ProjectDiagnostic[] {
 }
 
 class ProjectResolutionError extends Error {
-  constructor(message: string, readonly token: ProjectToken, readonly modeId: string) {
+  constructor(
+    message: string,
+    readonly token: ProjectToken,
+    readonly modeId: string
+  ) {
     super(message);
     this.name = "ProjectResolutionError";
   }
@@ -630,9 +634,7 @@ function resolveUnchecked(
       const alpha = resolveValue(value.alpha) as number;
       return { ...color, a: color.a * alpha };
     };
-    result[id] = resolveValue(
-      token.valuesByMode[modeId]!
-    );
+    result[id] = resolveValue(token.valuesByMode[modeId]!);
     active.delete(id);
     return result[id]!;
   };

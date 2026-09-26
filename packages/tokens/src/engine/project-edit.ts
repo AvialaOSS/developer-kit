@@ -28,7 +28,11 @@ export function renameProjectToken(
     next.cssCompatibility = next.cssCompatibility.filter(
       (alias) => !(alias.name === current && alias.targetId === tokenId)
     );
-    if (!next.cssCompatibility.some((alias) => alias.name === previous && alias.targetId === tokenId))
+    if (
+      !next.cssCompatibility.some(
+        (alias) => alias.name === previous && alias.targetId === tokenId
+      )
+    )
       next.cssCompatibility.push({ name: previous, targetId: tokenId });
   }
   next.draftRevision++;

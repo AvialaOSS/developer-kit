@@ -20,38 +20,141 @@ function FeedbackCases() {
   const [narrow, setNarrow] = useState(false);
   const [rtl, setRtl] = useState(false);
   const [clicks, setClicks] = useState(0);
-  return <div className="flex flex-col gap-4">
-    <div className="flex gap-4">
-      <Button onClick={() => setMode(mode === "light" ? "dark" : "light")}>外观：{mode}</Button>
-      <Button onClick={() => setDensity(density === "default" ? "mobile-friendly" : "default")}>密度：{density}</Button>
-      <Button onClick={() => setCustom(!custom)}>覆盖：{custom ? "ON" : "OFF"}</Button>
-      <Button onClick={() => setLegacy(!legacy)}>旧覆盖：{legacy ? "ON" : "OFF"}</Button>
-      <Button onClick={() => setNarrow(!narrow)}>窄屏：{narrow ? "ON" : "OFF"}</Button>
-      <Button onClick={() => setRtl(!rtl)}>方向：{rtl ? "RTL" : "LTR"}</Button>
-    </div>
-    <output>操作次数：{clicks}</output>
-    {(["information", "warning", "wrong", "success", "normal"] as const).flatMap(type =>
-      (["default", "small"] as const).flatMap(size =>
-        (type === "normal" ? ["default"] as const : ["default", "primary"] as const).map(feedbackMode =>
-          <Feedback key={`${type}-${size}-${feedbackMode}`} type={type} size={size} mode={feedbackMode}
-            title={narrow ? `${type}: LongTitleWithoutWordBreaksForLayoutVerification` : `${type} ${size} ${feedbackMode}`} description="Supporting details"
-            dir={rtl ? "rtl" : "ltr"}
-            action={narrow ? "QuickActionWithoutWordBreaksForLayoutVerification" : "操作"}
-            onAction={() => setClicks(v => v + 1)} onClose={() => setClicks(v => v + 1)}
-            style={{width:narrow ? 320 : undefined,...(custom ? {"--feedback-size-info-gap":"13px", "--feedback-size-info-padding-x":"17px", "--feedback-size-info-padding-y":"11px", "--feedback-size-icon-width":"26px", "--feedback-size-icon-height":"30px", "--feedback-size-text-gap":"5px", "--feedback-color-default-text-default":"#123456", "--feedback-color-primary-text-default":"#123456", "--feedback-color-default-description-default":"#705020", "--feedback-color-primary-description-default":"#705020", "--feedback-color-primary-wrong-default-icon-default":"#603080", "--feedback-color-primary-wrong-small-icon-default":"#204060"} : {}), ...(legacy ? {"--feedback-body-gap":"7px", "--feedback-icon-slot-height":"24px", "--feedback-title-fg-default":"#406020", "--feedback-title-fg-primary":"#406020", "--feedback-icon-fg-primary":"#406020", "--feedback-close-fg-on-primary":"#603080"} : {})} as CSSProperties}
-          />
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="flex gap-4">
+        <Button onClick={() => setMode(mode === "light" ? "dark" : "light")}>
+          外观：{mode}
+        </Button>
+        <Button
+          onClick={() =>
+            setDensity(density === "default" ? "mobile-friendly" : "default")
+          }
+        >
+          密度：{density}
+        </Button>
+        <Button onClick={() => setCustom(!custom)}>
+          覆盖：{custom ? "ON" : "OFF"}
+        </Button>
+        <Button onClick={() => setLegacy(!legacy)}>
+          旧覆盖：{legacy ? "ON" : "OFF"}
+        </Button>
+        <Button onClick={() => setNarrow(!narrow)}>
+          窄屏：{narrow ? "ON" : "OFF"}
+        </Button>
+        <Button onClick={() => setRtl(!rtl)}>
+          方向：{rtl ? "RTL" : "LTR"}
+        </Button>
+      </div>
+      <output>操作次数：{clicks}</output>
+      {(
+        ["information", "warning", "wrong", "success", "normal"] as const
+      ).flatMap((type) =>
+        (["default", "small"] as const).flatMap((size) =>
+          (type === "normal"
+            ? (["default"] as const)
+            : (["default", "primary"] as const)
+          ).map((feedbackMode) => (
+            <Feedback
+              key={`${type}-${size}-${feedbackMode}`}
+              type={type}
+              size={size}
+              mode={feedbackMode}
+              title={
+                narrow
+                  ? `${type}: LongTitleWithoutWordBreaksForLayoutVerification`
+                  : `${type} ${size} ${feedbackMode}`
+              }
+              description="Supporting details"
+              dir={rtl ? "rtl" : "ltr"}
+              action={
+                narrow
+                  ? "QuickActionWithoutWordBreaksForLayoutVerification"
+                  : "操作"
+              }
+              onAction={() => setClicks((v) => v + 1)}
+              onClose={() => setClicks((v) => v + 1)}
+              style={
+                {
+                  width: narrow ? 320 : undefined,
+                  ...(custom
+                    ? {
+                        "--feedback-size-info-gap": "13px",
+                        "--feedback-size-info-padding-x": "17px",
+                        "--feedback-size-info-padding-y": "11px",
+                        "--feedback-size-icon-width": "26px",
+                        "--feedback-size-icon-height": "30px",
+                        "--feedback-size-text-gap": "5px",
+                        "--feedback-color-default-text-default": "#123456",
+                        "--feedback-color-primary-text-default": "#123456",
+                        "--feedback-color-default-description-default":
+                          "#705020",
+                        "--feedback-color-primary-description-default":
+                          "#705020",
+                        "--feedback-color-primary-wrong-default-icon-default":
+                          "#603080",
+                        "--feedback-color-primary-wrong-small-icon-default":
+                          "#204060",
+                      }
+                    : {}),
+                  ...(legacy
+                    ? {
+                        "--feedback-body-gap": "7px",
+                        "--feedback-icon-slot-height": "24px",
+                        "--feedback-title-fg-default": "#406020",
+                        "--feedback-title-fg-primary": "#406020",
+                        "--feedback-icon-fg-primary": "#406020",
+                        "--feedback-close-fg-on-primary": "#603080",
+                      }
+                    : {}),
+                } as CSSProperties
+              }
+            />
+          ))
         )
-      )
-    )}
-    <Feedback title={<span>Title without description</span>} showClose={false} style={{"--feedback-title-fg-default":"#123456", "--feedback-description-fg-default":"#705020"} as CSSProperties}/>
-    <Feedback title="Custom notification icon" icon={<GeneralNotification mode="default" thickness="Light" data-feedback-custom-icon="true"/>} showClose={false}/>
-  </div>;
+      )}
+      <Feedback
+        title={<span>Title without description</span>}
+        showClose={false}
+        style={
+          {
+            "--feedback-title-fg-default": "#123456",
+            "--feedback-description-fg-default": "#705020",
+          } as CSSProperties
+        }
+      />
+      <Feedback
+        title="Custom notification icon"
+        icon={
+          <GeneralNotification
+            mode="default"
+            thickness="Light"
+            data-feedback-custom-icon="true"
+          />
+        }
+        showClose={false}
+      />
+    </div>
+  );
 }
 
 export const ProjectModes: StoryObj<typeof Feedback> = {
   render: function FeedbackProjectStory() {
     const [target, setTarget] = useState<HTMLDivElement | null>(null);
-    return <div ref={setTarget}>{target && <ThemeProvider project={feedbackProject} projectTarget={target} defaultMode="light" storageKey="feedback-project"><FeedbackCases/></ThemeProvider>}</div>;
+    return (
+      <div ref={setTarget}>
+        {target && (
+          <ThemeProvider
+            project={feedbackProject}
+            projectTarget={target}
+            defaultMode="light"
+            storageKey="feedback-project"
+          >
+            <FeedbackCases />
+          </ThemeProvider>
+        )}
+      </div>
+    );
   },
 };
 

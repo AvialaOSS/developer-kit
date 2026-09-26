@@ -38,7 +38,10 @@ describe("close suppression event handling", () => {
   });
 
   it("allows the first keyboard close after returning from another window", () => {
-    const control = useCloseSuppression({ open: true, keepPointerDownFlagAfterClose: true });
+    const control = useCloseSuppression({
+      open: true,
+      keepPointerDownFlagAfterClose: true,
+    });
     document.dispatchEvent(new Event("pointerdown"));
     window.dispatchEvent(new Event("blur"));
     document.dispatchEvent(new Event("keydown"));
@@ -47,7 +50,10 @@ describe("close suppression event handling", () => {
   });
 
   it("preserves pointer dismissal focus behavior", () => {
-    const control = useCloseSuppression({ open: true, keepPointerDownFlagAfterClose: true });
+    const control = useCloseSuppression({
+      open: true,
+      keepPointerDownFlagAfterClose: true,
+    });
     window.dispatchEvent(new Event("blur"));
     document.dispatchEvent(new Event("pointerdown"));
     expect(control.shouldCommitOpenChange(false)).toBe(true);

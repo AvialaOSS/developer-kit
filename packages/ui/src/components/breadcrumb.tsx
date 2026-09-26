@@ -79,7 +79,16 @@ export type BreadcrumbItemProps = ComponentPropsWithoutRef<"li"> & {
 
 export const BreadcrumbItem = forwardRef<HTMLLIElement, BreadcrumbItemProps>(
   (
-    { className, href, current = false, icon, description, onClick, children, ...props },
+    {
+      className,
+      href,
+      current = false,
+      icon,
+      description,
+      onClick,
+      children,
+      ...props
+    },
     ref
   ) => {
     const size = useContext(BreadcrumbSizeContext);
@@ -89,18 +98,24 @@ export const BreadcrumbItem = forwardRef<HTMLLIElement, BreadcrumbItemProps>(
           <span className="aviala-breadcrumb-item__icon">{icon}</span>
         ) : null}
         <span className="aviala-breadcrumb-item__text">
-        {children != null ? (
-          <Typography
-            level={breadcrumbTypeLevel(size)}
-            as="span"
-            className="aviala-breadcrumb-item__label"
-          >
-            {children}
-          </Typography>
-        ) : null}
-        {size === "default" && description != null ? (
-          <Typography level="caption" as="span" className="aviala-breadcrumb-item__description">{description}</Typography>
-        ) : null}
+          {children != null ? (
+            <Typography
+              level={breadcrumbTypeLevel(size)}
+              as="span"
+              className="aviala-breadcrumb-item__label"
+            >
+              {children}
+            </Typography>
+          ) : null}
+          {size === "default" && description != null ? (
+            <Typography
+              level="caption"
+              as="span"
+              className="aviala-breadcrumb-item__description"
+            >
+              {description}
+            </Typography>
+          ) : null}
         </span>
       </>
     );
@@ -112,34 +127,34 @@ export const BreadcrumbItem = forwardRef<HTMLLIElement, BreadcrumbItemProps>(
         {...props}
       >
         <span className="aviala-breadcrumb-item__wrapper">
-        {href != null ? (
-          <a
-            href={href}
-            className="aviala-breadcrumb-item aviala-focus-ring"
-            data-current={current ? "true" : undefined}
-            aria-current={current ? "page" : undefined}
-          >
-            {label}
-          </a>
-        ) : onClick != null ? (
-          <button
-            type="button"
-            className="aviala-breadcrumb-item aviala-focus-ring"
-            data-current={current ? "true" : undefined}
-            aria-current={current ? "page" : undefined}
-            onClick={onClick}
-          >
-            {label}
-          </button>
-        ) : (
-          <span
-            className="aviala-breadcrumb-item"
-            data-current={current ? "true" : undefined}
-            aria-current={current ? "page" : undefined}
-          >
-            {label}
-          </span>
-        )}
+          {href != null ? (
+            <a
+              href={href}
+              className="aviala-breadcrumb-item aviala-focus-ring"
+              data-current={current ? "true" : undefined}
+              aria-current={current ? "page" : undefined}
+            >
+              {label}
+            </a>
+          ) : onClick != null ? (
+            <button
+              type="button"
+              className="aviala-breadcrumb-item aviala-focus-ring"
+              data-current={current ? "true" : undefined}
+              aria-current={current ? "page" : undefined}
+              onClick={onClick}
+            >
+              {label}
+            </button>
+          ) : (
+            <span
+              className="aviala-breadcrumb-item"
+              data-current={current ? "true" : undefined}
+              aria-current={current ? "page" : undefined}
+            >
+              {label}
+            </span>
+          )}
         </span>
       </li>
     );
@@ -164,11 +179,13 @@ export const BreadcrumbSeparator = forwardRef<
       className={cn("aviala-breadcrumb-separator", className)}
       {...props}
     >
-      <span className="aviala-breadcrumb-item__wrapper"><span className="aviala-breadcrumb-separator__content">
-      <Typography level={breadcrumbTypeLevel(size)} as="span">
-        {children}
-      </Typography>
-      </span></span>
+      <span className="aviala-breadcrumb-item__wrapper">
+        <span className="aviala-breadcrumb-separator__content">
+          <Typography level={breadcrumbTypeLevel(size)} as="span">
+            {children}
+          </Typography>
+        </span>
+      </span>
     </li>
   );
 });
@@ -304,12 +321,7 @@ export const BreadcrumbEllipsis = forwardRef<
       [isControlled, onActivatedChange]
     );
 
-    const icon = children ?? (
-      <SymbolMore
-        thickness="Light"
-        aria-hidden
-      />
-    );
+    const icon = children ?? <SymbolMore thickness="Light" aria-hidden />;
 
     const trigger = (
       <Button
@@ -340,27 +352,27 @@ export const BreadcrumbEllipsis = forwardRef<
         data-size={size}
       >
         <span className="aviala-breadcrumb-ellipsis__wrapper">
-        <span className="aviala-breadcrumb-ellipsis__content">
-        {menu != null ? (
-          <Popover open={activated} onOpenChange={setActivated}>
-            <PopoverTrigger asChild>{trigger}</PopoverTrigger>
-            <PopoverContent
-              className="aviala-breadcrumb-ellipsis-menu"
-              align="center"
-              side="bottom"
-              sideOffset={7}
-              showArrow={false}
-              role="menu"
-            >
-              <div className="aviala-breadcrumb-ellipsis-menu__items">
-                {menu}
-              </div>
-            </PopoverContent>
-          </Popover>
-        ) : (
-          trigger
-        )}
-        </span>
+          <span className="aviala-breadcrumb-ellipsis__content">
+            {menu != null ? (
+              <Popover open={activated} onOpenChange={setActivated}>
+                <PopoverTrigger asChild>{trigger}</PopoverTrigger>
+                <PopoverContent
+                  className="aviala-breadcrumb-ellipsis-menu"
+                  align="center"
+                  side="bottom"
+                  sideOffset={7}
+                  showArrow={false}
+                  role="menu"
+                >
+                  <div className="aviala-breadcrumb-ellipsis-menu__items">
+                    {menu}
+                  </div>
+                </PopoverContent>
+              </Popover>
+            ) : (
+              trigger
+            )}
+          </span>
         </span>
       </li>
     );

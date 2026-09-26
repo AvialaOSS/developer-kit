@@ -159,12 +159,15 @@ export function mergeProjects(
     }
   }
   const diagnostics = validateProject(merged);
-  if (diagnostics.length) return {
-    ok: false, conflicts: [], diagnostics,
-    ...(diagnostics.every((issue) => issue.code === "alias-missing")
-      ? { repairDraft: parseProjectDraft(JSON.stringify(merged)) }
-      : {}),
-  };
+  if (diagnostics.length)
+    return {
+      ok: false,
+      conflicts: [],
+      diagnostics,
+      ...(diagnostics.every((issue) => issue.code === "alias-missing")
+        ? { repairDraft: parseProjectDraft(JSON.stringify(merged)) }
+        : {}),
+    };
   return { ok: true, project: parseProjectDraft(JSON.stringify(merged)) };
 }
 

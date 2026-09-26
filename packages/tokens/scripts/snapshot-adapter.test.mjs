@@ -28,7 +28,11 @@ const { applyProjectTheme, removeProjectTheme } = await import(
     )
   )
 );
-const { importVariableSnapshot, importThemeBuilderSnapshot, adoptTokenSourceBinding } = await import(
+const {
+  importVariableSnapshot,
+  importThemeBuilderSnapshot,
+  adoptTokenSourceBinding,
+} = await import(
   url(
     compile("snapshot-adapter").replace(
       '"./project"',
@@ -36,58 +40,166 @@ const { importVariableSnapshot, importThemeBuilderSnapshot, adoptTokenSourceBind
     )
   )
 );
-const { exportThemeBuilderSnapshot } = await import(url(compile("themebuilder-export").replace('"./project"', JSON.stringify(projectUrl))));
+const { exportThemeBuilderSnapshot } = await import(
+  url(
+    compile("themebuilder-export").replace(
+      '"./project"',
+      JSON.stringify(projectUrl)
+    )
+  )
+);
 
 test("string tokens use CSS escapes rather than JSON control escapes", () => {
   const value = '第一行\nA\tB\rC\fD\bE\\"\u0000\u007f';
   const project = {
-    schemaVersion: 1, id: "strings", draftRevision: 0,
-    collections: [{ id: "c", name: "Strings", axis: "none", defaultModeId: "m", modes: [{ id: "m", name: "Default" }] }],
-    tokens: [{ id: "text", collectionId: "c", path: ["label"], layer: "foundation", type: "string", valuesByMode: { m: { kind: "literal", value } } }],
+    schemaVersion: 1,
+    id: "strings",
+    draftRevision: 0,
+    collections: [
+      {
+        id: "c",
+        name: "Strings",
+        axis: "none",
+        defaultModeId: "m",
+        modes: [{ id: "m", name: "Default" }],
+      },
+    ],
+    tokens: [
+      {
+        id: "text",
+        collectionId: "c",
+        path: ["label"],
+        layer: "foundation",
+        type: "string",
+        valuesByMode: { m: { kind: "literal", value } },
+      },
+    ],
     cssCompatibility: [],
   };
   const expected = '"第一行\\a A\\9 B\\d C\\c D\\8 E\\\\\\"�\\7f "';
   const declarations = projectCssVariables(project);
   assert.equal(declarations["--label"], expected);
-  assert.equal(projectCssText(project), `:root {\n  --label: ${expected};\n}\n`);
+  assert.equal(
+    projectCssText(project),
+    `:root {\n  --label: ${expected};\n}\n`
+  );
   const values = new Map();
-  const target = { style: {
-    getPropertyValue: (name) => values.get(name) ?? "",
-    getPropertyPriority: () => "",
-    setProperty: (name, text) => values.set(name, text),
-    removeProperty: (name) => values.delete(name),
-  } };
+  const target = {
+    style: {
+      getPropertyValue: (name) => values.get(name) ?? "",
+      getPropertyPriority: () => "",
+      setProperty: (name, text) => values.set(name, text),
+      removeProperty: (name) => values.delete(name),
+    },
+  };
   applyProjectTheme(target, project);
   assert.equal(values.get("--label"), expected);
   assert.equal(project.tokens[0].valuesByMode.m.value, value);
 });
 
 test("timing seconds convert to CSS milliseconds and roundtrip without expanding aliases", () => {
-  const source = {collections:[{id:"c",name:"QA",defaultModeId:"m",modes:[{id:"m",name:"Day"}]}],
-    variables:[{i:"v",n:"motion/duration",t:"TIMING",c:"c",v:[["m",["l",0.25]]]},{i:"a",n:"motion/alias",t:"TIMING",c:"c",v:[["m",["a","v"]]]}]};
-  let count=0;
-  const imported=importVariableSnapshot(source,{projectId:"qa",source:"TestVar",rules:{c:{axis:"none",layer:"foundation",css:"path"}},createId:()=>`timing-${++count}`});
-  assert.equal(Object.values(imported.project.tokens[0].valuesByMode)[0].value,250);
-  const css=projectCssVariables(imported.project);
-  assert.equal(css["--motion-duration"],"250ms");
-  assert.equal(css["--motion-alias"],"var(--motion-duration)");
-  const exported=exportThemeBuilderSnapshot(imported.project,{source:"TestVar",bindings:imported.bindings});
-  assert.equal(exported.variables[0].type,"TIMING");
-  assert.equal(Object.values(exported.variables[0].values)[0].value,0.25);
-  assert.equal(Object.values(exported.variables[1].values)[0].target,imported.project.tokens[0].id);
+  const source = {
+    collections: [
+      {
+        id: "c",
+        name: "QA",
+        defaultModeId: "m",
+        modes: [{ id: "m", name: "Day" }],
+      },
+    ],
+    variables: [
+      {
+        i: "v",
+        n: "motion/duration",
+        t: "TIMING",
+        c: "c",
+        v: [["m", ["l", 0.25]]],
+      },
+      {
+        i: "a",
+        n: "motion/alias",
+        t: "TIMING",
+        c: "c",
+        v: [["m", ["a", "v"]]],
+      },
+    ],
+  };
+  let count = 0;
+  const imported = importVariableSnapshot(source, {
+    projectId: "qa",
+    source: "TestVar",
+    rules: { c: { axis: "none", layer: "foundation", css: "path" } },
+    createId: () => `timing-${++count}`,
+  });
+  assert.equal(
+    Object.values(imported.project.tokens[0].valuesByMode)[0].value,
+    250
+  );
+  const css = projectCssVariables(imported.project);
+  assert.equal(css["--motion-duration"], "250ms");
+  assert.equal(css["--motion-alias"], "var(--motion-duration)");
+  const exported = exportThemeBuilderSnapshot(imported.project, {
+    source: "TestVar",
+    bindings: imported.bindings,
+  });
+  assert.equal(exported.variables[0].type, "TIMING");
+  assert.equal(Object.values(exported.variables[0].values)[0].value, 0.25);
+  assert.equal(
+    Object.values(exported.variables[1].values)[0].target,
+    imported.project.tokens[0].id
+  );
 });
 
 test("observed TestVar custom easing preserves exact coordinates through import and export", () => {
-  const curve = {type:"CUSTOM_CUBIC_BEZIER",easingFunctionCubicBezier:{x1:0.41999998688697815,y1:0,x2:0.5799999833106995,y2:1}};
-  const source = {collections:[{id:"c",name:"QA",defaultModeId:"m",modes:[{id:"m",name:"Day"}]}],
-    variables:[{i:"v",n:"qa/easing",t:"EASING",c:"c",v:[["m",["l",curve]]]}]};
+  const curve = {
+    type: "CUSTOM_CUBIC_BEZIER",
+    easingFunctionCubicBezier: {
+      x1: 0.41999998688697815,
+      y1: 0,
+      x2: 0.5799999833106995,
+      y2: 1,
+    },
+  };
+  const source = {
+    collections: [
+      {
+        id: "c",
+        name: "QA",
+        defaultModeId: "m",
+        modes: [{ id: "m", name: "Day" }],
+      },
+    ],
+    variables: [
+      { i: "v", n: "qa/easing", t: "EASING", c: "c", v: [["m", ["l", curve]]] },
+    ],
+  };
   let count = 0;
-  const imported = importVariableSnapshot(source,{projectId:"qa",source:"TestVar",rules:{c:{axis:"none",layer:"foundation",css:"path"}},createId:()=>`id-${++count}`});
-  const output = exportThemeBuilderSnapshot(imported.project,{source:"TestVar",bindings:imported.bindings});
-  assert.equal(output.variables[0].type,"EASING");
-  assert.deepEqual(Object.values(output.variables[0].values)[0].value,curve);
-  source.variables[0].v[0][1][1] = {type:"CUSTOM_SPRING",easingFunctionSpring:{bounce:0.5}};
-  assert.throws(()=>importVariableSnapshot(source,{projectId:"qa",source:"TestVar",rules:{c:{axis:"none",layer:"foundation",css:"path"}},createId:()=>`id-${++count}`}),/Unsupported easing/);
+  const imported = importVariableSnapshot(source, {
+    projectId: "qa",
+    source: "TestVar",
+    rules: { c: { axis: "none", layer: "foundation", css: "path" } },
+    createId: () => `id-${++count}`,
+  });
+  const output = exportThemeBuilderSnapshot(imported.project, {
+    source: "TestVar",
+    bindings: imported.bindings,
+  });
+  assert.equal(output.variables[0].type, "EASING");
+  assert.deepEqual(Object.values(output.variables[0].values)[0].value, curve);
+  source.variables[0].v[0][1][1] = {
+    type: "CUSTOM_SPRING",
+    easingFunctionSpring: { bounce: 0.5 },
+  };
+  assert.throws(
+    () =>
+      importVariableSnapshot(source, {
+        projectId: "qa",
+        source: "TestVar",
+        rules: { c: { axis: "none", layer: "foundation", css: "path" } },
+        createId: () => `id-${++count}`,
+      }),
+    /Unsupported easing/
+  );
 });
 const read = (file) =>
   JSON.parse(
@@ -99,64 +211,198 @@ const read = (file) =>
 
 test("editor import keeps editor identity separate and preserves composed references", () => {
   const editor = {
-    collections: [{ id: "c", name: "Editor", defaultModeId: "m", modes: [{ id: "m", name: "Default" }], source: { file: "figma", id: "figma-c" } }],
+    collections: [
+      {
+        id: "c",
+        name: "Editor",
+        defaultModeId: "m",
+        modes: [{ id: "m", name: "Default" }],
+        source: { file: "figma", id: "figma-c" },
+      },
+    ],
     variables: [
-      { id: "color", name: "base", type: "COLOR", collectionId: "c", values: { m: { kind: "literal", value: { r: 1, g: 0, b: 0, a: 1 } } } },
-      { id: "alpha", name: "alpha", type: "FLOAT", collectionId: "c", values: { m: { kind: "literal", value: 40 } } },
-      { id: "mixed", name: "mixed", type: "COLOR", collectionId: "c", external: true, values: { m: { kind: "composed", color: { kind: "alias", target: "color" }, opacity: { kind: "alias", target: "alpha" } } } },
+      {
+        id: "color",
+        name: "base",
+        type: "COLOR",
+        collectionId: "c",
+        values: { m: { kind: "literal", value: { r: 1, g: 0, b: 0, a: 1 } } },
+      },
+      {
+        id: "alpha",
+        name: "alpha",
+        type: "FLOAT",
+        collectionId: "c",
+        values: { m: { kind: "literal", value: 40 } },
+      },
+      {
+        id: "mixed",
+        name: "mixed",
+        type: "COLOR",
+        collectionId: "c",
+        external: true,
+        values: {
+          m: {
+            kind: "composed",
+            color: { kind: "alias", target: "color" },
+            opacity: { kind: "alias", target: "alpha" },
+          },
+        },
+      },
     ],
   };
   let next = 0;
-  const config = { source: "themebuilder:project", projectId: "p", createId: () => `editor-${++next}`, rules: { c: { axis: "none", layer: "semantic", css: "path" } }, numericUnits: { alpha: "ratio" } };
+  const config = {
+    source: "themebuilder:project",
+    projectId: "p",
+    createId: () => `editor-${++next}`,
+    rules: { c: { axis: "none", layer: "semantic", css: "path" } },
+    numericUnits: { alpha: "ratio" },
+  };
   const first = importThemeBuilderSnapshot(editor, config);
-  assert.equal(first.bindings.find(b => b.kind === "collection").externalId, "c");
-  assert.ok(first.bindings.every(b => b.source === "themebuilder:project"));
-  assert.equal(first.bindings.find(b => b.externalId === "mixed").readOnly, true);
-  const mixed = first.project.tokens.find(t => t.path[0] === "mixed");
+  assert.equal(
+    first.bindings.find((b) => b.kind === "collection").externalId,
+    "c"
+  );
+  assert.ok(first.bindings.every((b) => b.source === "themebuilder:project"));
+  assert.equal(
+    first.bindings.find((b) => b.externalId === "mixed").readOnly,
+    true
+  );
+  const mixed = first.project.tokens.find((t) => t.path[0] === "mixed");
   assert.equal(resolveProject(first.project)[mixed.id].a, 0.4);
   assert.equal(Object.values(mixed.valuesByMode)[0].alpha.kind, "alias");
   editor.variables[0].name = "renamed";
-  const again = importThemeBuilderSnapshot(editor, { ...config, bindings: first.bindings });
+  const again = importThemeBuilderSnapshot(editor, {
+    ...config,
+    bindings: first.bindings,
+  });
   assert.deepEqual(again.bindings, first.bindings);
-  assert.throws(() => importThemeBuilderSnapshot(editor, { ...config, numericUnits: {} }), /Explicit numeric unit/);
+  assert.throws(
+    () => importThemeBuilderSnapshot(editor, { ...config, numericUnits: {} }),
+    /Explicit numeric unit/
+  );
   const missing = structuredClone(editor);
-  missing.variables = missing.variables.filter(v => v.id !== "color");
-  assert.throws(() => importThemeBuilderSnapshot(missing, config), /Missing dependency/);
+  missing.variables = missing.variables.filter((v) => v.id !== "color");
+  assert.throws(
+    () => importThemeBuilderSnapshot(missing, config),
+    /Missing dependency/
+  );
 });
 
 test("explicit units preserve scalars and roundtrip rem aliases without guessing", () => {
-  const source = { collections: [{ id: "c", name: "Numbers", defaultModeId: "m", modes: [{ id: "m", name: "Default" }] }],
+  const source = {
+    collections: [
+      {
+        id: "c",
+        name: "Numbers",
+        defaultModeId: "m",
+        modes: [{ id: "m", name: "Default" }],
+      },
+    ],
     variables: [
-      { i: "size", n: "custom/size", t: "FLOAT", c: "c", v: [["m", ["l", 24]]] },
-      { i: "alias", n: "custom/alias", t: "FLOAT", c: "c", v: [["m", ["a", "size"]]] },
-      { i: "count", n: "custom/count", t: "FLOAT", c: "c", v: [["m", ["l", 3]]] },
-    ] };
+      {
+        i: "size",
+        n: "custom/size",
+        t: "FLOAT",
+        c: "c",
+        v: [["m", ["l", 24]]],
+      },
+      {
+        i: "alias",
+        n: "custom/alias",
+        t: "FLOAT",
+        c: "c",
+        v: [["m", ["a", "size"]]],
+      },
+      {
+        i: "count",
+        n: "custom/count",
+        t: "FLOAT",
+        c: "c",
+        v: [["m", ["l", 3]]],
+      },
+    ],
+  };
   let next = 0;
-  const options = { projectId: "units", source: "file", createId: () => `unit-${++next}`,
+  const options = {
+    projectId: "units",
+    source: "file",
+    createId: () => `unit-${++next}`,
     rules: { c: { axis: "none", layer: "foundation", css: "path" } },
-    requireExplicitNumericUnits: true, numericUnits: { size: "rem", count: "scalar" }, remPixels: 16 };
+    requireExplicitNumericUnits: true,
+    numericUnits: { size: "rem", count: "scalar" },
+    remPixels: 16,
+  };
   const imported = importVariableSnapshot(source, options);
   const css = projectCssVariables(imported.project);
   assert.equal(css["--custom-size"], "1.5rem");
   assert.equal(css["--custom-alias"], "var(--custom-size)");
   assert.equal(css["--custom-count"], "3");
-  const output = exportThemeBuilderSnapshot(imported.project, { source: "file", bindings: imported.bindings, remPixels: 16 });
+  const output = exportThemeBuilderSnapshot(imported.project, {
+    source: "file",
+    bindings: imported.bindings,
+    remPixels: 16,
+  });
   assert.equal(Object.values(output.variables[0].values)[0].value, 24);
-  assert.equal(Object.values(output.variables[1].values)[0].target, imported.project.tokens[0].id);
-  assert.throws(() => importVariableSnapshot(source, { ...options, numericUnits: {} }), /Explicit numeric unit required/);
-  assert.throws(() => importVariableSnapshot(source, { ...options, remPixels: undefined }), /Explicit rem conversion required/);
-  assert.throws(() => importVariableSnapshot(source, { ...options, numericUnits: { ...options.numericUnits, alias: "px" } }), /Inconsistent/);
-  assert.throws(() => importVariableSnapshot(source, { ...options, numericUnits: { missing: "scalar" } }), /source FLOAT/);
+  assert.equal(
+    Object.values(output.variables[1].values)[0].target,
+    imported.project.tokens[0].id
+  );
+  assert.throws(
+    () => importVariableSnapshot(source, { ...options, numericUnits: {} }),
+    /Explicit numeric unit required/
+  );
+  assert.throws(
+    () => importVariableSnapshot(source, { ...options, remPixels: undefined }),
+    /Explicit rem conversion required/
+  );
+  assert.throws(
+    () =>
+      importVariableSnapshot(source, {
+        ...options,
+        numericUnits: { ...options.numericUnits, alias: "px" },
+      }),
+    /Inconsistent/
+  );
+  assert.throws(
+    () =>
+      importVariableSnapshot(source, {
+        ...options,
+        numericUnits: { missing: "scalar" },
+      }),
+    /source FLOAT/
+  );
   const deleted = structuredClone(source);
-  deleted.variables = deleted.variables.filter(variable => variable.i !== "count");
-  const afterDelete = importVariableSnapshot(deleted, { ...options, bindings: imported.bindings });
+  deleted.variables = deleted.variables.filter(
+    (variable) => variable.i !== "count"
+  );
+  const afterDelete = importVariableSnapshot(deleted, {
+    ...options,
+    bindings: imported.bindings,
+  });
   assert.equal(afterDelete.project.tokens.length, 2);
   assert.deepEqual(afterDelete.bindings, imported.bindings);
   const recreated = structuredClone(deleted);
   recreated.variables.push({ ...source.variables[2], i: "new-count" });
-  assert.throws(() => importVariableSnapshot(recreated, { ...options, bindings: afterDelete.bindings }), /Explicit numeric unit required/);
-  const configured = importVariableSnapshot(recreated, { ...options, bindings: afterDelete.bindings, numericUnits: { ...options.numericUnits, "new-count": "scalar" } });
-  assert.notEqual(configured.bindings.find(binding => binding.externalId === "new-count").engineId, imported.bindings.find(binding => binding.externalId === "count").engineId);
+  assert.throws(
+    () =>
+      importVariableSnapshot(recreated, {
+        ...options,
+        bindings: afterDelete.bindings,
+      }),
+    /Explicit numeric unit required/
+  );
+  const configured = importVariableSnapshot(recreated, {
+    ...options,
+    bindings: afterDelete.bindings,
+    numericUnits: { ...options.numericUnits, "new-count": "scalar" },
+  });
+  assert.notEqual(
+    configured.bindings.find((binding) => binding.externalId === "new-count")
+      .engineId,
+    imported.bindings.find((binding) => binding.externalId === "count").engineId
+  );
 });
 const local = read("components.variables.json"),
   deps = read("components.dependencies.json");
@@ -190,16 +436,31 @@ const options = {
 test("remote capability stays in bindings and survives metadata omission", () => {
   const first = importVariableSnapshot(snapshot, options);
   const remote = snapshot.collections.find((c) => c.remote);
-  const binding = first.bindings.find((b) => b.kind === "collection" && b.externalId === remote.id);
+  const binding = first.bindings.find(
+    (b) => b.kind === "collection" && b.externalId === remote.id
+  );
   assert.equal(binding.readOnly, true);
   const token = snapshot.variables.find((v) => v.c === remote.id);
-  assert.equal(first.bindings.find((b) => b.kind === "token" && b.externalId === token.i).readOnly, true);
+  assert.equal(
+    first.bindings.find((b) => b.kind === "token" && b.externalId === token.i)
+      .readOnly,
+    true
+  );
   assert.equal("readOnly" in first.project.tokens[0], false);
   const stripped = structuredClone(snapshot);
-  for (const c of stripped.collections) { delete c.remote; delete c.isExtension; }
+  for (const c of stripped.collections) {
+    delete c.remote;
+    delete c.isExtension;
+  }
   for (const v of stripped.variables) delete v.remote;
-  const again = importVariableSnapshot(stripped, { ...options, bindings: first.bindings });
-  assert.equal(again.bindings.find((b) => b.engineId === binding.engineId).readOnly, true);
+  const again = importVariableSnapshot(stripped, {
+    ...options,
+    bindings: first.bindings,
+  });
+  assert.equal(
+    again.bindings.find((b) => b.engineId === binding.engineId).readOnly,
+    true
+  );
 });
 
 test("all eight mode combinations emit closed CSS graphs with no invalid numbers", () => {
@@ -238,31 +499,62 @@ test("all eight mode combinations emit closed CSS graphs with no invalid numbers
 });
 
 test("persisted strict import units preserve the current eight-mode baseline", () => {
-  const config = JSON.parse(readFileSync(new URL("../source/theme-engine/import-units.json", import.meta.url), "utf8"));
-  const collections = JSON.parse(readFileSync(new URL("../source/theme-engine/import-collections.json", import.meta.url), "utf8"));
+  const config = JSON.parse(
+    readFileSync(
+      new URL("../source/theme-engine/import-units.json", import.meta.url),
+      "utf8"
+    )
+  );
+  const collections = JSON.parse(
+    readFileSync(
+      new URL(
+        "../source/theme-engine/import-collections.json",
+        import.meta.url
+      ),
+      "utf8"
+    )
+  );
   assert.equal(config.source, local.file);
   assert.equal(collections.source, local.file);
   const previous = importVariableSnapshot(snapshot, options);
   const renamed = structuredClone(snapshot);
-  renamed.collections.forEach((collection, index) => { collection.name = `Renamed collection ${index}`; });
+  renamed.collections.forEach((collection, index) => {
+    collection.name = `Renamed collection ${index}`;
+  });
   const strictOptions = {
-    ...options, bindings: previous.bindings,
+    ...options,
+    bindings: previous.bindings,
     rules: collections.rules,
-    numericUnits: config.numericUnits, remPixels: config.remPixels,
+    numericUnits: config.numericUnits,
+    remPixels: config.remPixels,
     requireExplicitNumericUnits: true,
   };
   const strict = importVariableSnapshot(renamed, strictOptions);
   assert.deepEqual(strict.bindings, previous.bindings);
   assert.deepEqual(strict.project.tokens, previous.project.tokens);
-  assert.deepEqual(strict.project.collections.map(c => [c.id, c.axis]), previous.project.collections.map(c => [c.id, c.axis]));
+  assert.deepEqual(
+    strict.project.collections.map((c) => [c.id, c.axis]),
+    previous.project.collections.map((c) => [c.id, c.axis])
+  );
   const unknownCollection = structuredClone(renamed);
-  unknownCollection.collections.push({ id: "unknown", name: "numbers", modes: [{ id: "new-mode", name: "Default" }], defaultModeId: "new-mode" });
-  assert.throws(() => importVariableSnapshot(unknownCollection, strictOptions), /Missing import rule/);
+  unknownCollection.collections.push({
+    id: "unknown",
+    name: "numbers",
+    modes: [{ id: "new-mode", name: "Default" }],
+    defaultModeId: "new-mode",
+  });
+  assert.throws(
+    () => importVariableSnapshot(unknownCollection, strictOptions),
+    /Missing import rule/
+  );
   for (const color of ["Light", "Dark"])
     for (const density of ["Default", "Mobile Friendly"])
       for (const effects of ["ON", "OFF"]) {
         const selection = { color, density, effects };
-        assert.deepEqual(projectCssVariables(strict.project, selection), projectCssVariables(previous.project, selection));
+        assert.deepEqual(
+          projectCssVariables(strict.project, selection),
+          projectCssVariables(previous.project, selection)
+        );
       }
 });
 

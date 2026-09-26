@@ -67,9 +67,15 @@
 
 .aviala-modal__header {
   flex-shrink: 0;
-  background-color: var(--modal-header-bg, var(--modal-content-bg, var(--modal-head-area-color-background-default)));
+  background-color: var(
+    --modal-header-bg,
+    var(--modal-content-bg, var(--modal-head-area-color-background-default))
+  );
   padding-block: var(--modal-header-py, var(--modal-head-area-size-padding-y));
-  padding-inline: var(--modal-header-pl, var(--modal-head-area-size-padding-x-start))
+  padding-inline: var(
+      --modal-header-pl,
+      var(--modal-head-area-size-padding-x-start)
+    )
     var(--modal-header-pr, var(--modal-head-area-size-padding-x-end));
 }
 
@@ -95,7 +101,11 @@
   align-items: stretch;
   min-width: 0;
   gap: var(--modal-head-area-size-headline-gap);
-  padding: var(--modal-header-main-py, var(--modal-head-area-size-headline-padding-y)) var(--modal-head-area-size-headline-padding-x);
+  padding: var(
+      --modal-header-main-py,
+      var(--modal-head-area-size-headline-padding-y)
+    )
+    var(--modal-head-area-size-headline-padding-x);
 }
 
 .aviala-modal__icon {
@@ -107,11 +117,9 @@
   align-self: stretch;
   width: var(--modal-icon-slot-width, auto);
   gap: var(--modal-head-area-size-icon-slot-gap);
-  padding: var(--modal-icon-py, var(--modal-head-area-size-icon-slot-padding-y)) var(--modal-head-area-size-icon-slot-padding-x);
-  color: var(
-    --modal-icon-fg,
-    var(--modal-head-area-color-icon-default)
-  );
+  padding: var(--modal-icon-py, var(--modal-head-area-size-icon-slot-padding-y))
+    var(--modal-head-area-size-icon-slot-padding-x);
+  color: var(--modal-icon-fg, var(--modal-head-area-color-icon-default));
 }
 
 .aviala-modal__icon-frame {
@@ -120,7 +128,10 @@
   align-items: center;
   justify-content: center;
   width: var(--modal-icon-size, var(--modal-head-area-size-icon-width));
-  height: var(--modal-icon-slot-height, var(--modal-head-area-size-icon-height));
+  height: var(
+    --modal-icon-slot-height,
+    var(--modal-head-area-size-icon-height)
+  );
   padding-block: var(--modal-head-area-size-icon-padding-y);
 }
 
@@ -150,7 +161,10 @@
 }
 
 .aviala-modal__title {
-  color: var(--modal-content-fg, var(--modal-head-area-color-heading-text-default));
+  color: var(
+    --modal-content-fg,
+    var(--modal-head-area-color-heading-text-default)
+  );
 }
 
 .aviala-modal__close {
@@ -169,7 +183,8 @@
   justify-content: center;
   flex-shrink: 0;
   gap: var(--modal-head-area-size-button-slot-gap);
-  padding: var(--modal-head-area-size-button-slot-padding-y) var(--modal-head-area-size-button-slot-padding-x);
+  padding: var(--modal-head-area-size-button-slot-padding-y)
+    var(--modal-head-area-size-button-slot-padding-x);
 }
 
 .aviala-modal__close svg {
@@ -183,17 +198,26 @@
   overflow: auto;
   border-top: var(--modal-content-area-size-stroke-width) solid
     var(--modal-section-border, var(--modal-content-area-color-border-default));
-  background-color: var(--modal-body-bg, var(--modal-content-bg, var(--modal-content-area-color-background-default)));
+  background-color: var(
+    --modal-body-bg,
+    var(--modal-content-bg, var(--modal-content-area-color-background-default))
+  );
   padding: var(--modal-section-py, var(--modal-content-area-size-padding-y))
     var(--modal-section-px, var(--modal-content-area-size-padding-x));
 }
 
 .aviala-modal__body-typeface .aviala-typography--title {
-  color: var(--modal-content-fg, var(--modal-content-area-color-heading-text-default));
+  color: var(
+    --modal-content-fg,
+    var(--modal-content-area-color-heading-text-default)
+  );
 }
 
 .aviala-modal__body-typeface .aviala-typography--text {
-  color: var(--modal-content-fg, var(--modal-content-area-color-text-text-default));
+  color: var(
+    --modal-content-fg,
+    var(--modal-content-area-color-text-text-default)
+  );
 }
 
 .aviala-modal__button-group {
@@ -206,7 +230,10 @@
 .aviala-modal__button-slot {
   display: flex;
   align-items: center;
-  gap: var(--modal-footer-actions-gap, var(--button-group-size-button-slot-gap));
+  gap: var(
+    --modal-footer-actions-gap,
+    var(--button-group-size-button-slot-gap)
+  );
 }
 
 .aviala-modal__footer {
@@ -217,7 +244,10 @@
   gap: var(--modal-footer-gap, var(--modal-action-area-size-gap));
   border-top: var(--modal-action-area-size-stroke-width) solid
     var(--modal-section-border, var(--modal-action-area-color-border-default));
-  background-color: var(--modal-footer-bg, var(--modal-content-bg, var(--modal-action-area-color-background-default)));
+  background-color: var(
+    --modal-footer-bg,
+    var(--modal-content-bg, var(--modal-action-area-color-background-default))
+  );
   padding: var(--modal-section-py, var(--modal-action-area-size-padding-y))
     var(--modal-section-px, var(--modal-action-area-size-padding-x));
 }

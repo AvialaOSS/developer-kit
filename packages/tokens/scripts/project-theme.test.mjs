@@ -156,14 +156,26 @@ test("renames follow paths, retain old aliases, respect fixed CSS names and reje
   assert.equal(next.tokens[2].valuesByMode.m.targetId, "b");
   assert.deepEqual(original.tokens[1].path, ["b"]);
   const restored = renameProjectToken(next, "b", ["b"]);
-  assert.deepEqual(restored.cssCompatibility, [{ name: "--spacing-small", targetId: "b" }]);
-  const fixed = fixture(); fixed.tokens[1].cssName = "--fixed";
-  assert.equal(renameProjectToken(fixed, "b", ["new"]).tokens[1].cssName, "--fixed");
+  assert.deepEqual(restored.cssCompatibility, [
+    { name: "--spacing-small", targetId: "b" },
+  ]);
+  const fixed = fixture();
+  fixed.tokens[1].cssName = "--fixed";
+  assert.equal(
+    renameProjectToken(fixed, "b", ["new"]).tokens[1].cssName,
+    "--fixed"
+  );
   const auto = renameProjectToken(fixed, "b", ["new"], { cssName: null });
   assert.equal(auto.tokens[1].cssName, undefined);
   assert.deepEqual(auto.cssCompatibility, [{ name: "--fixed", targetId: "b" }]);
-  assert.throws(() => renameProjectToken(original, "b", ["a"]), /collision|Duplicate|duplicate/i);
-  assert.equal(renameProjectToken(original, "b", ["b"]).draftRevision, original.draftRevision);
+  assert.throws(
+    () => renameProjectToken(original, "b", ["a"]),
+    /collision|Duplicate|duplicate/i
+  );
+  assert.equal(
+    renameProjectToken(original, "b", ["b"]).draftRevision,
+    original.draftRevision
+  );
 });
 
 const overlay = (release) => ({
@@ -361,16 +373,29 @@ test("detaching copies complete dependencies without flattening references", asy
 
 test("detaching retains valid retired identity history and remains publishable", async () => {
   const draft = fixture();
-  draft.tokens.push({ ...structuredClone(draft.tokens[0]), id: "retired", path: ["retired"] });
+  draft.tokens.push({
+    ...structuredClone(draft.tokens[0]),
+    id: "retired",
+    path: ["retired"],
+  });
   const deleted = deleteProjectToken(draft, "retired");
   const release = await createProjectRelease(deleted, "1.0.0", hash);
   const original = JSON.stringify(release);
-  const detached = await detachTheme(overlay(release), release, "independent", hash);
+  const detached = await detachTheme(
+    overlay(release),
+    release,
+    "independent",
+    hash
+  );
   assert.deepEqual(parseProject(JSON.stringify(detached)), detached);
   assert.deepEqual(detached.tombstones, release.project.tombstones);
   assert.equal(detached.draftRevision, release.project.draftRevision);
   assert.deepEqual(detached.tokens[2].valuesByMode.m, alias("a"));
-  const independentRelease = await createProjectRelease(detached, "1.0.0", hash);
+  const independentRelease = await createProjectRelease(
+    detached,
+    "1.0.0",
+    hash
+  );
   assert.equal(independentRelease.projectId, "independent");
   assert.equal(JSON.stringify(release), original);
 });
@@ -378,7 +403,8 @@ test("detaching retains valid retired identity history and remains publishable",
 test("upgrade rejects stale decisions without changing the original theme", async () => {
   const from = await createProjectRelease(fixture(), "1.0.0", hash);
   const to = await createProjectRelease(fixture(), "1.1.0", hash);
-  const theme = overlay(from), original = JSON.stringify(theme);
+  const theme = overlay(from),
+    original = JSON.stringify(theme);
   for (const decisions of [
     { tokenReplacements: { b: "a" } },
     { modeReplacements: { unknown: "m" } },
@@ -393,9 +419,12 @@ test("upgrade rejects stale decisions without changing the original theme", asyn
   const next = fixture();
   next.collections[0].modes[0].id = "replacement-mode";
   next.collections[0].defaultModeId = "replacement-mode";
-  for (const token of next.tokens) token.valuesByMode = { "replacement-mode": token.valuesByMode.m };
+  for (const token of next.tokens)
+    token.valuesByMode = { "replacement-mode": token.valuesByMode.m };
   const changed = await createProjectRelease(next, "2.0.0", hash);
-  const accepted = await upgradeTheme(theme, from, changed, hash, { modeReplacements: { m: "replacement-mode" } });
+  const accepted = await upgradeTheme(theme, from, changed, hash, {
+    modeReplacements: { m: "replacement-mode" },
+  });
   assert.equal(accepted.ok, true);
   assert.equal(accepted.theme.overrides[0].modeId, "replacement-mode");
   assert.equal(JSON.stringify(theme), original);
@@ -426,15 +455,25 @@ test("upgrade cannot silently reinterpret retained overrides after a unit change
   const draft = fixture();
   draft.tokens[0].unit = "rem";
   const to = await createProjectRelease(draft, "2.0.0", hash);
-  const theme = { ...overlay(from), overrides: [{ tokenId: "a", modeId: "m", value: literal(4) }] };
+  const theme = {
+    ...overlay(from),
+    overrides: [{ tokenId: "a", modeId: "m", value: literal(4) }],
+  };
   const before = JSON.stringify({ theme, from, to });
   const conflict = await upgradeTheme(theme, from, to, hash);
   assert.equal(conflict.ok, false);
   assert.match(conflict.conflicts.join("\n"), /Incompatible.*a/);
-  const replaced = await upgradeTheme(theme, from, to, hash, { tokenReplacements: { a: "b" } });
+  const replaced = await upgradeTheme(theme, from, to, hash, {
+    tokenReplacements: { a: "b" },
+  });
   assert.equal(replaced.ok, true);
-  assert.equal(replaced.project.tokens.find(t => t.id === "b").valuesByMode.m.value, 4);
-  const dropped = await upgradeTheme(theme, from, to, hash, { dropOverrides: [{ tokenId: "a", modeId: "m" }] });
+  assert.equal(
+    replaced.project.tokens.find((t) => t.id === "b").valuesByMode.m.value,
+    4
+  );
+  const dropped = await upgradeTheme(theme, from, to, hash, {
+    dropOverrides: [{ tokenId: "a", modeId: "m" }],
+  });
   assert.equal(dropped.ok, true);
   assert.deepEqual(dropped.theme.overrides, []);
   assert.equal(JSON.stringify({ theme, from, to }), before);

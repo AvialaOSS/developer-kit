@@ -60,22 +60,39 @@ export function loadingLevelForButtonSize(
 
 /** Conic fill — inline so theme tokens still apply inside SVG foreignObject. */
 function loadingRingStyle(mode: LoadingMode): CSSProperties {
-  const conic = (legacy: string, start: string, end: string): CSSProperties => ({
-    // An absent legacy variable invalidates only this custom property,
-    // allowing the gradient start to fall back to its independent token.
-    "--_loading-legacy-start": `color-mix(in srgb, var(${legacy}) 0%, transparent)`,
-    background: `conic-gradient(from 90deg, var(--_loading-legacy-start, var(${start})) 0deg, var(${legacy}, var(${end})) 360deg)`,
-  } as CSSProperties);
+  const conic = (legacy: string, start: string, end: string): CSSProperties =>
+    ({
+      // An absent legacy variable invalidates only this custom property,
+      // allowing the gradient start to fall back to its independent token.
+      "--_loading-legacy-start": `color-mix(in srgb, var(${legacy}) 0%, transparent)`,
+      background: `conic-gradient(from 90deg, var(--_loading-legacy-start, var(${start})) 0deg, var(${legacy}, var(${end})) 360deg)`,
+    }) as CSSProperties;
 
   switch (mode) {
     case "theme":
-      return conic("--loading-fg-theme", "--loading-icon-color-theme-gradient-start", "--loading-icon-color-theme-gradient-end");
+      return conic(
+        "--loading-fg-theme",
+        "--loading-icon-color-theme-gradient-start",
+        "--loading-icon-color-theme-gradient-end"
+      );
     case "themeText":
-      return conic("--loading-fg-theme-text", "--loading-icon-color-theme-text-gradient-start", "--loading-icon-color-theme-text-gradient-end");
+      return conic(
+        "--loading-fg-theme-text",
+        "--loading-icon-color-theme-text-gradient-start",
+        "--loading-icon-color-theme-text-gradient-end"
+      );
     case "black":
-      return conic("--loading-fg-black", "--loading-icon-color-black-gradient-start", "--loading-icon-color-black-gradient-end");
+      return conic(
+        "--loading-fg-black",
+        "--loading-icon-color-black-gradient-start",
+        "--loading-icon-color-black-gradient-end"
+      );
     case "white":
-      return conic("--loading-fg-white", "--loading-icon-color-white-gradient-start", "--loading-icon-color-white-gradient-end");
+      return conic(
+        "--loading-fg-white",
+        "--loading-icon-color-white-gradient-start",
+        "--loading-icon-color-white-gradient-end"
+      );
     case "inherit":
       return {
         background:
@@ -115,8 +132,20 @@ export const Loading = forwardRef<HTMLSpanElement, LoadingProps>(
     return (
       <span
         ref={ref}
-        className={cn(loadingVariants({ level, lineHeightFix: !!lineHeightFix && lineHeightFix !== "off" }), className)}
-        data-alignment={lineHeightFix === "both" ? "both" : lineHeightFix && lineHeightFix !== "off" ? "heightOnly" : "off"}
+        className={cn(
+          loadingVariants({
+            level,
+            lineHeightFix: !!lineHeightFix && lineHeightFix !== "off",
+          }),
+          className
+        )}
+        data-alignment={
+          lineHeightFix === "both"
+            ? "both"
+            : lineHeightFix && lineHeightFix !== "off"
+              ? "heightOnly"
+              : "off"
+        }
         role={isDecorative ? undefined : "status"}
         aria-label={isDecorative ? undefined : resolvedLabel}
         aria-live={isDecorative ? undefined : "polite"}

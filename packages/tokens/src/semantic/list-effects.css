@@ -36,11 +36,17 @@
   gap: var(--list-size-content-gap);
   padding: var(--list-size-content-padding-y) var(--list-size-content-padding-x);
   border-radius: var(--list-group-radius, var(--list-size-content-radius));
-  background-color: var(--list-bg, var(--list-item-color-default-background-default));
+  background-color: var(
+    --list-bg,
+    var(--list-item-color-default-background-default)
+  );
 }
 
 .aviala-list-group[data-appearance="deep"] {
-  background-color: var(--list-bg, var(--list-item-color-deep-background-default));
+  background-color: var(
+    --list-bg,
+    var(--list-item-color-deep-background-default)
+  );
 }
 
 .aviala-list-item {
@@ -48,11 +54,18 @@
   align-items: stretch;
   gap: var(--list-item-block-gap, var(--list-item-size-gap));
   padding-block: var(--list-item-size-padding-y);
-  --_list-content-border: var(--list-item-color-content-border-neutral-2-default);
-  --_list-divider-border: var(--list-item-color-divider-border-neutral-2-default);
+  --_list-content-border: var(
+    --list-item-color-content-border-neutral-2-default
+  );
+  --_list-divider-border: var(
+    --list-item-color-divider-border-neutral-2-default
+  );
   border-radius: var(--list-item-size-radius);
   width: 100%;
-  background-color: var(--list-bg, var(--list-item-color-default-background-default));
+  background-color: var(
+    --list-bg,
+    var(--list-item-color-default-background-default)
+  );
   color: var(--list-item-fg, var(--list-item-color-text-default));
   text-decoration: none;
   transition:
@@ -72,7 +85,10 @@ a.aviala-list-item {
 .aviala-list-item[data-leading="shaped"],
 .aviala-list-item[data-leading="default"] {
   gap: var(--list-item-block-gap, var(--list-item-size-gap));
-  padding-inline-start: var(--list-item-pl, var(--list-item-size-with-icon-padding-x-start));
+  padding-inline-start: var(
+    --list-item-pl,
+    var(--list-item-size-with-icon-padding-x-start)
+  );
   padding-inline-end: var(--list-item-size-padding-x-end);
 }
 
@@ -82,9 +98,16 @@ a.aviala-list-item {
 }
 
 .aviala-list-item[data-appearance="deep"] {
-  --_list-content-border: var(--list-item-color-content-border-neutral-3-default);
-  --_list-divider-border: var(--list-item-color-divider-border-neutral-3-default);
-  background-color: var(--list-bg, var(--list-item-color-deep-background-default));
+  --_list-content-border: var(
+    --list-item-color-content-border-neutral-3-default
+  );
+  --_list-divider-border: var(
+    --list-item-color-divider-border-neutral-3-default
+  );
+  background-color: var(
+    --list-bg,
+    var(--list-item-color-deep-background-default)
+  );
 }
 
 .aviala-list-item[data-interactive="true"]:not([data-disabled]):hover {
@@ -129,8 +152,14 @@ a.aviala-list-item {
   padding-inline: var(--icon-place-size-padding-x);
   padding-block: var(--icon-place-size-padding-y);
   border-radius: var(--icon-place-size-rounded-radius);
-  background-color: var(--list-item-icon-shaped-bg, var(--icon-place-color-theme-primary-background-default));
-  color: var(--list-item-icon-shaped-fg, var(--icon-place-color-theme-primary-icon-default));
+  background-color: var(
+    --list-item-icon-shaped-bg,
+    var(--icon-place-color-theme-primary-background-default)
+  );
+  color: var(
+    --list-item-icon-shaped-fg,
+    var(--icon-place-color-theme-primary-icon-default)
+  );
 }
 
 .aviala-list-item__icon--shaped > svg {
@@ -166,10 +195,17 @@ a.aviala-list-item {
   flex: 1 1 auto;
   align-items: center;
   gap: var(--list-item-content-gap, var(--list-item-size-content-gap));
-  border-top: var(--list-item-size-content-stroke-width) solid var(--list-item-border, var(--_list-content-border));
-  padding-block: var(--list-item-content-py, var(--list-item-size-content-padding-y));
+  border-top: var(--list-item-size-content-stroke-width) solid
+    var(--list-item-border, var(--_list-content-border));
+  padding-block: var(
+    --list-item-content-py,
+    var(--list-item-size-content-padding-y)
+  );
   padding-inline-start: var(--list-item-size-content-with-icon-padding-x-start);
-  padding-inline-end: var(--list-item-content-pr, var(--list-item-size-content-padding-x-end));
+  padding-inline-end: var(
+    --list-item-content-pr,
+    var(--list-item-size-content-padding-x-end)
+  );
 }
 
 /* First row in a group has no top hairline; override with data-top-divider. */
@@ -179,11 +215,15 @@ a.aviala-list-item {
 }
 
 .aviala-list-item[data-top-divider="true"] .aviala-list-item__content {
-  border-top: var(--list-item-size-content-stroke-width) solid var(--list-item-border, var(--_list-content-border));
+  border-top: var(--list-item-size-content-stroke-width) solid
+    var(--list-item-border, var(--_list-content-border));
 }
 
 .aviala-list-item[data-leading="none"] .aviala-list-item__content {
-  padding-inline-start: var(--list-item-pl, var(--list-item-size-content-no-icon-padding-x-start));
+  padding-inline-start: var(
+    --list-item-pl,
+    var(--list-item-size-content-no-icon-padding-x-start)
+  );
 }
 
 .aviala-list-item__head {
@@ -202,12 +242,22 @@ a.aviala-list-item {
   border-radius: var(--list-item-size-title-radius);
 }
 
-.aviala-list-item__head .aviala-typeface__line[data-line="0"] .aviala-typography {
-  color: var(--_list-item-text, var(--list-item-fg, var(--list-item-color-text-default)));
+.aviala-list-item__head
+  .aviala-typeface__line[data-line="0"]
+  .aviala-typography {
+  color: var(
+    --_list-item-text,
+    var(--list-item-fg, var(--list-item-color-text-default))
+  );
 }
 
-.aviala-list-item__head .aviala-typeface__line[data-line="1"] .aviala-typography {
-  color: var(--_list-item-description, var(--list-item-color-description-default));
+.aviala-list-item__head
+  .aviala-typeface__line[data-line="1"]
+  .aviala-typography {
+  color: var(
+    --_list-item-description,
+    var(--list-item-color-description-default)
+  );
 }
 
 .aviala-list-item__trailing {

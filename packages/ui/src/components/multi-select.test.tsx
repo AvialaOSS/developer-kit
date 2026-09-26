@@ -2,10 +2,20 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { MultiSelect } from "./multi-select";
 
-const options = [{ value: "a", label: "Alpha" }, { value: "b", label: "Beta", disabled: true }];
+const options = [
+  { value: "a", label: "Alpha" },
+  { value: "b", label: "Beta", disabled: true },
+];
 describe("MultiSelect tags and form ownership", () => {
   it("uses controlled values, removes duplicates and preserves unlisted identities", () => {
-    const html = renderToStaticMarkup(<MultiSelect options={options} value={["a", "a", "missing"]} defaultValue={["b"]} name="choices" />);
+    const html = renderToStaticMarkup(
+      <MultiSelect
+        options={options}
+        value={["a", "a", "missing"]}
+        defaultValue={["b"]}
+        name="choices"
+      />
+    );
     expect(html.match(/type="hidden"/g)).toHaveLength(2);
     expect(html).toContain('name="choices" value="a"');
     expect(html).toContain('name="choices" value="missing"');
@@ -19,10 +29,25 @@ describe("MultiSelect tags and form ownership", () => {
     expect(depth).toBe(0);
   });
   it("disables submission and every removal control", () => {
-    const html = renderToStaticMarkup(<MultiSelect options={options} defaultValue={["a", "b"]} disabled name="choices" />);
-    const buttons = [...html.matchAll(/<button\b[^>]*>/g)].map(match => match[0]);
+    const html = renderToStaticMarkup(
+      <MultiSelect
+        options={options}
+        defaultValue={["a", "b"]}
+        disabled
+        name="choices"
+      />
+    );
+    const buttons = [...html.matchAll(/<button\b[^>]*>/g)].map(
+      (match) => match[0]
+    );
     expect(buttons).toHaveLength(3);
-    expect(buttons.every(button => button.includes('disabled=""'))).toBe(true);
-    expect([...html.matchAll(/<input\b[^>]*>/g)].every(match => match[0].includes('disabled=""'))).toBe(true);
+    expect(buttons.every((button) => button.includes('disabled=""'))).toBe(
+      true
+    );
+    expect(
+      [...html.matchAll(/<input\b[^>]*>/g)].every((match) =>
+        match[0].includes('disabled=""')
+      )
+    ).toBe(true);
   });
 });

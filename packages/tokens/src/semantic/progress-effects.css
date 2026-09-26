@@ -48,21 +48,30 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: var(
-    --progress-label-fg,
-    var(--progress-color-text-default)
-  );
+  color: var(--progress-label-fg, var(--progress-color-text-default));
 }
 
 .aviala-progress--shape-ring {
   gap: var(--progress-gap, var(--progress-size-ring-gap));
-  width: var(--progress-ring-size, var(--progress-size-ring-default-container-width));
-  height: var(--progress-ring-size, var(--progress-size-ring-default-container-height));
+  width: var(
+    --progress-ring-size,
+    var(--progress-size-ring-default-container-width)
+  );
+  height: var(
+    --progress-ring-size,
+    var(--progress-size-ring-default-container-height)
+  );
 }
 
 .aviala-progress--shape-ring.aviala-progress--size-big {
-  width: var(--progress-ring-size, var(--progress-size-ring-big-container-width));
-  height: var(--progress-ring-size, var(--progress-size-ring-big-container-height));
+  width: var(
+    --progress-ring-size,
+    var(--progress-size-ring-big-container-width)
+  );
+  height: var(
+    --progress-ring-size,
+    var(--progress-size-ring-big-container-height)
+  );
 }
 
 .aviala-progress__ring {
@@ -83,30 +92,86 @@
 
 /* Figma tracks use outside strokes; progress vectors describe the centerline. */
 .aviala-progress--shape-ring:not(.aviala-progress--type-success) {
-  --_progress-stroke-width: calc(var(--progress-ring-size, calc(var(--progress-size-ring-stroke-width) * 8)) / 8);
+  --_progress-stroke-width: calc(
+    var(
+        --progress-ring-size,
+        calc(var(--progress-size-ring-stroke-width) * 8)
+      ) /
+      8
+  );
   --_progress-track-width: var(--progress-size-ring-default-track-width);
   --_progress-track-height: var(--progress-size-ring-default-track-height);
   --_progress-path-width: var(--progress-size-ring-default-progress-width);
   --_progress-path-height: var(--progress-size-ring-default-progress-height);
 }
 
-.aviala-progress--shape-ring.aviala-progress--size-big:not(.aviala-progress--type-success) {
-  --_progress-stroke-width: calc(var(--progress-ring-size, calc(var(--progress-size-ring-stroke-width) * 12)) / 12);
+.aviala-progress--shape-ring.aviala-progress--size-big:not(
+    .aviala-progress--type-success
+  ) {
+  --_progress-stroke-width: calc(
+    var(
+        --progress-ring-size,
+        calc(var(--progress-size-ring-stroke-width) * 12)
+      ) /
+      12
+  );
   --_progress-track-width: var(--progress-size-ring-big-track-width);
   --_progress-track-height: var(--progress-size-ring-big-track-height);
   --_progress-path-width: var(--progress-size-ring-big-progress-width);
   --_progress-path-height: var(--progress-size-ring-big-progress-height);
 }
 
-.aviala-progress:not(.aviala-progress--type-success) .aviala-progress__ring-track {
-  rx: calc((var(--progress-ring-size, calc(var(--_progress-track-width) + 2 * var(--_progress-stroke-width))) - var(--_progress-stroke-width)) / 2);
-  ry: calc((var(--progress-ring-size, calc(var(--_progress-track-height) + 2 * var(--_progress-stroke-width))) - var(--_progress-stroke-width)) / 2);
+.aviala-progress:not(.aviala-progress--type-success)
+  .aviala-progress__ring-track {
+  rx: calc(
+    (
+        var(
+            --progress-ring-size,
+            calc(
+              var(--_progress-track-width) + 2 * var(--_progress-stroke-width)
+            )
+          ) -
+          var(--_progress-stroke-width)
+      ) /
+      2
+  );
+  ry: calc(
+    (
+        var(
+            --progress-ring-size,
+            calc(
+              var(--_progress-track-height) + 2 * var(--_progress-stroke-width)
+            )
+          ) -
+          var(--_progress-stroke-width)
+      ) /
+      2
+  );
   stroke-width: var(--_progress-stroke-width);
 }
 
-.aviala-progress:not(.aviala-progress--type-success) .aviala-progress__ring-fill {
-  rx: calc((var(--progress-ring-size, calc(var(--_progress-path-width) + var(--_progress-stroke-width))) - var(--_progress-stroke-width)) / 2);
-  ry: calc((var(--progress-ring-size, calc(var(--_progress-path-height) + var(--_progress-stroke-width))) - var(--_progress-stroke-width)) / 2);
+.aviala-progress:not(.aviala-progress--type-success)
+  .aviala-progress__ring-fill {
+  rx: calc(
+    (
+        var(
+            --progress-ring-size,
+            calc(var(--_progress-path-width) + var(--_progress-stroke-width))
+          ) -
+          var(--_progress-stroke-width)
+      ) /
+      2
+  );
+  ry: calc(
+    (
+        var(
+            --progress-ring-size,
+            calc(var(--_progress-path-height) + var(--_progress-stroke-width))
+          ) -
+          var(--_progress-stroke-width)
+      ) /
+      2
+  );
   stroke-width: var(--_progress-stroke-width);
   transition: stroke-dasharray 0.2s ease;
 }

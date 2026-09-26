@@ -75,8 +75,12 @@ export default function avialaTokensCss(options = {}) {
   const uiSrcDir = normalize(join(tokensRoot, "../ui/src"));
 
   async function generateAll() {
-    const { buildAldThemeCss, buildComponentTokenCss, buildCombinedStylesCss, buildSpiralAggregateCss } =
-      await import("./scripts/css-lib.mjs");
+    const {
+      buildAldThemeCss,
+      buildComponentTokenCss,
+      buildCombinedStylesCss,
+      buildSpiralAggregateCss,
+    } = await import("./scripts/css-lib.mjs");
     mkdirSync(cacheDir, { recursive: true });
     writeFileSync(
       join(cacheDir, "ald-theme.css"),

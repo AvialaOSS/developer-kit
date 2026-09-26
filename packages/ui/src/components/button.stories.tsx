@@ -1,4 +1,8 @@
-import { DirectionArrowRight, GeneralSetting, Icon } from "@aviala-design/icons";
+import {
+  DirectionArrowRight,
+  GeneralSetting,
+  Icon,
+} from "@aviala-design/icons";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState, type CSSProperties } from "react";
 import { parseProject } from "@aviala-design/tokens/project";
@@ -780,17 +784,50 @@ export const IconLineBox: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
-        {(["off", "heightOnly", "both"] as const).map(alignment => (
-          <Icon key={alignment} icon={GeneralSetting} level="text" lineHeightFix={alignment} title={alignment} />
+        {(["off", "heightOnly", "both"] as const).map((alignment) => (
+          <Icon
+            key={alignment}
+            icon={GeneralSetting}
+            level="text"
+            lineHeightFix={alignment}
+            title={alignment}
+          />
         ))}
       </div>
-      {(["primary", "second", "default", "defaultCustom", "outline", "outlineCustom", "noBackground", "noBackgroundCustom", "destructive"] as const).map(mode => (
+      {(
+        [
+          "primary",
+          "second",
+          "default",
+          "defaultCustom",
+          "outline",
+          "outlineCustom",
+          "noBackground",
+          "noBackgroundCustom",
+          "destructive",
+        ] as const
+      ).map((mode) => (
         <div key={mode} className="flex items-center gap-4">
-          {(["tiny", "small", "regular", "big"] as const).map(size => (
+          {(["tiny", "small", "regular", "big"] as const).map((size) => (
             <div key={size} className="flex items-center gap-2">
-              <Button mode={mode} size={size}>Label</Button>
-              <Button mode={mode} size={size} iconOnly leftIcon={<GeneralSetting />} aria-label={`${mode} ${size}`} />
-              <Button mode={mode} size={size} iconOnly loading leftIcon={<GeneralSetting />} aria-label={`${mode} ${size} loading`} />
+              <Button mode={mode} size={size}>
+                Label
+              </Button>
+              <Button
+                mode={mode}
+                size={size}
+                iconOnly
+                leftIcon={<GeneralSetting />}
+                aria-label={`${mode} ${size}`}
+              />
+              <Button
+                mode={mode}
+                size={size}
+                iconOnly
+                loading
+                leftIcon={<GeneralSetting />}
+                aria-label={`${mode} ${size} loading`}
+              />
             </div>
           ))}
         </div>
@@ -802,8 +839,19 @@ export const IconLineBox: Story = {
 export const FigmaModeAliases: Story = {
   render: () => (
     <div className="flex gap-4">
-      {(["secondary", "second", "tertiary", "default", "tertiaryCustom", "defaultCustom"] as const).map(mode => (
-        <Button key={mode} mode={mode} leftIcon={<GeneralSetting />}>{mode}</Button>
+      {(
+        [
+          "secondary",
+          "second",
+          "tertiary",
+          "default",
+          "tertiaryCustom",
+          "defaultCustom",
+        ] as const
+      ).map((mode) => (
+        <Button key={mode} mode={mode} leftIcon={<GeneralSetting />}>
+          {mode}
+        </Button>
       ))}
     </div>
   ),

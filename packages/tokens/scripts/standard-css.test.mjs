@@ -47,7 +47,15 @@ test("production static modes match the canonical runtime declarations", () => {
           standardCssOptions(project)
         );
         assert.deepEqual(actual, { ...expected });
-        assert.deepEqual(Object.keys(actual).sort(), [...new Set([...project.tokens.map(projectApi.tokenCssName), ...project.cssCompatibility.map(alias => alias.name)])].sort());
+        assert.deepEqual(
+          Object.keys(actual).sort(),
+          [
+            ...new Set([
+              ...project.tokens.map(projectApi.tokenCssName),
+              ...project.cssCompatibility.map((alias) => alias.name),
+            ]),
+          ].sort()
+        );
         for (const value of Object.values(actual))
           for (const [, reference] of value.matchAll(/var\((--[\w-]+)/g))
             assert.ok(reference in actual, reference);

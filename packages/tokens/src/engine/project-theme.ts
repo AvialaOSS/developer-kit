@@ -279,12 +279,18 @@ function readUpgradeDecisions(json: string): ThemeUpgradeDecisions {
   // Optional fields still need strict shape checks at the host boundary.
   const value = record(input, Object.keys(input ?? {}), "decisions");
   for (const key of Object.keys(value)) {
-    if (!["tokenReplacements", "modeReplacements", "dropOverrides"].includes(key))
+    if (
+      !["tokenReplacements", "modeReplacements", "dropOverrides"].includes(key)
+    )
       throw new Error(`Unknown field: decisions.${key}`);
   }
   for (const key of ["tokenReplacements", "modeReplacements"] as const) {
     if (!Object.hasOwn(value, key)) continue;
-    const mapping = record(value[key], Object.keys(value[key] ?? {}), `decisions.${key}`);
+    const mapping = record(
+      value[key],
+      Object.keys(value[key] ?? {}),
+      `decisions.${key}`
+    );
     for (const [source, target] of Object.entries(mapping)) {
       text(source, `decisions.${key} source`);
       text(target, `decisions.${key}.${source}`);
@@ -321,7 +327,9 @@ export async function upgradeTheme(
       throw new Error("Cannot upgrade to a different base project");
     const target = await verifyProjectRelease(to, hash);
     if (from.version === to.version && from.contentHash !== to.contentHash)
-      throw new Error("Conflicting immutable release: the same project version has different content; publish a new version before upgrading");
+      throw new Error(
+        "Conflicting immutable release: the same project version has different content; publish a new version before upgrading"
+      );
     const replacements: Record<string, string> = Object.assign(
       Object.create(null),
       decisions.tokenReplacements ?? {}
@@ -336,7 +344,9 @@ export async function upgradeTheme(
     const targetTokens = new Map(
       target.tokens.map((token) => [token.id, token])
     );
-    const existingOverrides = new Set(theme.overrides.map((item) => JSON.stringify([item.tokenId, item.modeId])));
+    const existingOverrides = new Set(
+      theme.overrides.map((item) => JSON.stringify([item.tokenId, item.modeId]))
+    );
     const dropped = new Set<string>();
     for (const item of decisions.dropOverrides ?? []) {
       const key = JSON.stringify([item.tokenId, item.modeId]);
@@ -344,7 +354,9 @@ export async function upgradeTheme(
         throw new Error(`Unknown or duplicate dropped override: ${key}`);
       dropped.add(key);
     }
-    const retained = theme.overrides.filter((item) => !dropped.has(JSON.stringify([item.tokenId, item.modeId])));
+    const retained = theme.overrides.filter(
+      (item) => !dropped.has(JSON.stringify([item.tokenId, item.modeId]))
+    );
     const referencedTokens = new Set(retained.map((item) => item.tokenId));
     const collectReferences = (value: TokenValue): void => {
       if (value.kind === "alias") referencedTokens.add(value.targetId);
@@ -367,16 +379,24 @@ export async function upgradeTheme(
       const old = sourceTokens.get(id);
       const next = targetTokens.get(replacements[id] ?? id);
       if (old && next && (old.type !== next.type || old.unit !== next.unit))
-        throw new Error(`Incompatible upgraded token: ${id}; choose a compatible replacement or drop the affected override`);
+        throw new Error(
+          `Incompatible upgraded token: ${id}; choose a compatible replacement or drop the affected override`
+        );
     }
     for (const [id, replacement] of Object.entries(modeReplacements)) {
       const affected = retained.filter((item) => item.modeId === id);
       if (!affected.length) throw new Error(`Unused mode replacement: ${id}`);
       for (const item of affected) {
-        const token = targetTokens.get(replacements[item.tokenId] ?? item.tokenId);
-        const collection = target.collections.find((entry) => entry.id === token?.collectionId);
+        const token = targetTokens.get(
+          replacements[item.tokenId] ?? item.tokenId
+        );
+        const collection = target.collections.find(
+          (entry) => entry.id === token?.collectionId
+        );
         if (!collection?.modes.some((mode) => mode.id === replacement))
-          throw new Error(`Incompatible mode replacement: ${id} -> ${replacement} for ${item.tokenId}`);
+          throw new Error(
+            `Incompatible mode replacement: ${id} -> ${replacement} for ${item.tokenId}`
+          );
       }
     }
     const remap = (value: TokenValue): TokenValue => {
@@ -400,12 +420,11 @@ export async function upgradeTheme(
         version: to.version,
         contentHash: to.contentHash,
       },
-      overrides: retained
-        .map((item) => ({
-          tokenId: replacements[item.tokenId] ?? item.tokenId,
-          modeId: modeReplacements[item.modeId] ?? item.modeId,
-          value: remap(item.value),
-        })),
+      overrides: retained.map((item) => ({
+        tokenId: replacements[item.tokenId] ?? item.tokenId,
+        modeId: modeReplacements[item.modeId] ?? item.modeId,
+        value: remap(item.value),
+      })),
     };
     return { ok: true, theme: next, project: applyOverrides(target, next) };
   } catch (error) {

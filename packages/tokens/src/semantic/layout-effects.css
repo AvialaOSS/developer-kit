@@ -112,11 +112,15 @@
   color: var(--form-color-description-text-default);
 }
 
-.aviala-form-group__header > .aviala-typeface__line[data-line="0"] > .aviala-typography {
+.aviala-form-group__header
+  > .aviala-typeface__line[data-line="0"]
+  > .aviala-typography {
   color: var(--form-group-color-heading-text-default);
 }
 
-.aviala-form-group__header > .aviala-typeface__line[data-line="1"] > .aviala-typography {
+.aviala-form-group__header
+  > .aviala-typeface__line[data-line="1"]
+  > .aviala-typography {
   color: var(--form-group-color-description-text-default);
 }
 
@@ -185,10 +189,7 @@
 .aviala-scroll {
   overflow: auto;
   scrollbar-width: thin;
-  scrollbar-color: var(
-      --scroll-thumb-bg,
-      var(--scroll-color-thumb-background)
-    )
+  scrollbar-color: var(--scroll-thumb-bg, var(--scroll-color-thumb-background))
     transparent;
 }
 
@@ -223,12 +224,19 @@
     var(--scroll-color-thumb-background)
   );
   border-radius: var(--scroll-size-thumb-radius);
-  border: var(--scroll-thumb-inset, var(--scroll-track-padding-x, var(--scroll-size-padding-x))) solid transparent;
+  border: var(
+      --scroll-thumb-inset,
+      var(--scroll-track-padding-x, var(--scroll-size-padding-x))
+    )
+    solid transparent;
   background-clip: content-box;
 }
 
 .aviala-scroll--size-small::-webkit-scrollbar-thumb {
-  border-width: var(--scroll-thumb-inset-small, var(--scroll-track-padding-x, var(--scroll-size-padding-x)));
+  border-width: var(
+    --scroll-thumb-inset-small,
+    var(--scroll-track-padding-x, var(--scroll-size-padding-x))
+  );
 }
 
 /* Standard non-auto scrollbar properties override WebKit pseudo-element sizing. */

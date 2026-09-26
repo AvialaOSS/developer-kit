@@ -13,7 +13,12 @@ export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
     <div ref={ref} className={cn("aviala-button-group", className)} {...props}>
       <div className="aviala-button-group__buttons">{children}</div>
       {description != null && description !== false && description !== "" && (
-        <Typography level="caption" className="aviala-button-group__description">{description}</Typography>
+        <Typography
+          level="caption"
+          className="aviala-button-group__description"
+        >
+          {description}
+        </Typography>
       )}
     </div>
   )

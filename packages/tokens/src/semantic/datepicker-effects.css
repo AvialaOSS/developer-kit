@@ -13,12 +13,31 @@
   background-color: var(--input-bg-default, var(--_legacy-input-bg-default));
   box-shadow: var(--input-surface-shadow, var(--_legacy-input-surface-shadow));
   color: var(--input-fg, var(--_legacy-input-fg));
-  padding: 0 var(--input-shell-px, var(--input-px-regular, var(--_legacy-input-px-regular, 10px)));
-  gap: var(--input-shell-gap, var(--input-gap-regular, var(--_legacy-input-gap-regular, 6px)));
-  --input-shell-px: var(--input-px-regular, var(--_legacy-input-px-regular, 10px));
-  --input-shell-gap: var(--input-gap-regular, var(--_legacy-input-gap-regular, 6px));
-  --input-shell-field-py: var(--input-field-py-regular, var(--_legacy-input-field-py-regular, 6px));
-  --input-shell-slot-py: var(--input-slot-py-regular, var(--_legacy-input-slot-py-regular, 6px));
+  padding: 0
+    var(
+      --input-shell-px,
+      var(--input-px-regular, var(--_legacy-input-px-regular, 10px))
+    );
+  gap: var(
+    --input-shell-gap,
+    var(--input-gap-regular, var(--_legacy-input-gap-regular, 6px))
+  );
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--_legacy-input-px-regular, 10px)
+  );
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--_legacy-input-gap-regular, 6px)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--_legacy-input-field-py-regular, 6px)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--_legacy-input-slot-py-regular, 6px)
+  );
   transition:
     background-color 0.15s ease,
     border-color 0.15s ease;
@@ -26,10 +45,22 @@
 
 .aviala-datepicker-trigger[data-size="regular"],
 .aviala-timepicker-trigger[data-size="regular"] {
-  --input-shell-px: var(--input-px-regular, var(--_legacy-input-px-regular, 10px));
-  --input-shell-gap: var(--input-gap-regular, var(--_legacy-input-gap-regular, 6px));
-  --input-shell-field-py: var(--input-field-py-regular, var(--_legacy-input-field-py-regular, 6px));
-  --input-shell-slot-py: var(--input-slot-py-regular, var(--_legacy-input-slot-py-regular, 6px));
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--_legacy-input-px-regular, 10px)
+  );
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--_legacy-input-gap-regular, 6px)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--_legacy-input-field-py-regular, 6px)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--_legacy-input-slot-py-regular, 6px)
+  );
   border-radius: var(--input-radius, var(--_legacy-input-radius, 8px));
 }
 
@@ -44,13 +75,22 @@
 
 .aviala-datepicker-trigger[data-all-round="true"],
 .aviala-timepicker-trigger[data-all-round="true"] {
-  border-radius: var(--input-radius-allround, var(--_legacy-input-radius-allround, 99px));
+  border-radius: var(
+    --input-radius-allround,
+    var(--_legacy-input-radius-allround, 99px)
+  );
 }
 
 .aviala-datepicker-trigger[data-state="open"],
 .aviala-timepicker-trigger[data-state="open"] {
-  background-color: var(--input-bg-activated, var(--_legacy-input-bg-activated));
-  border-color: var(--input-border-activated, var(--_legacy-input-border-activated));
+  background-color: var(
+    --input-bg-activated,
+    var(--_legacy-input-bg-activated)
+  );
+  border-color: var(
+    --input-border-activated,
+    var(--_legacy-input-border-activated)
+  );
   outline: none;
 }
 
@@ -58,7 +98,10 @@
 .aviala-datepicker-trigger:focus-within,
 .aviala-timepicker-trigger:focus-visible,
 .aviala-timepicker-trigger:focus-within {
-  background-color: var(--input-bg-activated, var(--_legacy-input-bg-activated));
+  background-color: var(
+    --input-bg-activated,
+    var(--_legacy-input-bg-activated)
+  );
   outline: none;
 }
 
@@ -81,7 +124,10 @@
   .aviala-timepicker-trigger:hover:not(:focus-within):not(
       [data-state="open"]
     ):not(:disabled) {
-    background-color: var(--input-bg-hover, var(--base-input-color-background-hover, var(--_legacy-input-bg-hover)));
+    background-color: var(
+      --input-bg-hover,
+      var(--base-input-color-background-hover, var(--_legacy-input-bg-hover))
+    );
   }
 }
 
@@ -90,7 +136,10 @@
   position: relative;
   z-index: 1;
   display: inline-flex;
-  height: var(--input-icon-slot-height, var(--input-line-height, var(--typography-text-line-height)));
+  height: var(
+    --input-icon-slot-height,
+    var(--input-line-height, var(--typography-text-line-height))
+  );
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
@@ -100,8 +149,14 @@
 
 .aviala-datepicker-trigger__slot svg,
 .aviala-timepicker-trigger__slot svg {
-  width: var(--input-slot-icon-size, var(--_legacy-input-slot-icon-size, var(--size-regular, 0.875rem)));
-  height: var(--input-slot-icon-size, var(--_legacy-input-slot-icon-size, var(--size-regular, 0.875rem)));
+  width: var(
+    --input-slot-icon-size,
+    var(--_legacy-input-slot-icon-size, var(--size-regular, 0.875rem))
+  );
+  height: var(
+    --input-slot-icon-size,
+    var(--_legacy-input-slot-icon-size, var(--size-regular, 0.875rem))
+  );
 }
 
 .aviala-datepicker-trigger__field,
@@ -134,7 +189,10 @@
 
 .aviala-datepicker-trigger__value[data-placeholder],
 .aviala-timepicker-trigger__value[data-placeholder] {
-  opacity: var(--input-placeholder-opacity, var(--_legacy-input-placeholder-opacity, 0.6));
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--_legacy-input-placeholder-opacity, 0.6)
+  );
 }
 
 .aviala-datepicker-trigger__input {
@@ -158,95 +216,187 @@
 
 .aviala-datepicker-trigger__input::placeholder {
   color: inherit;
-  opacity: var(--input-placeholder-opacity, var(--_legacy-input-placeholder-opacity, 0.6));
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--_legacy-input-placeholder-opacity, 0.6)
+  );
 }
-
 
 /* Disabled surfaces stay opaque; field and text mirror the Figma layers. */
 .aviala-datepicker-trigger:is([data-disabled="true"], :disabled) {
-  --_picker-disabled-opacity: var(--input-disabled-opacity, var(--date-picker-input-transparency-content-disabled));
-  --_picker-disabled-text-opacity: var(--input-placeholder-opacity, var(--date-picker-input-transparency-placeholder));
+  --_picker-disabled-opacity: var(
+    --input-disabled-opacity,
+    var(--date-picker-input-transparency-content-disabled)
+  );
+  --_picker-disabled-text-opacity: var(
+    --input-placeholder-opacity,
+    var(--date-picker-input-transparency-placeholder)
+  );
 }
 .aviala-timepicker-trigger:disabled {
-  --_picker-disabled-opacity: var(--input-disabled-opacity, var(--time-picker-input-transparency-content-disabled));
-  --_picker-disabled-text-opacity: var(--input-placeholder-opacity, var(--time-picker-input-transparency-placeholder));
+  --_picker-disabled-opacity: var(
+    --input-disabled-opacity,
+    var(--time-picker-input-transparency-content-disabled)
+  );
+  --_picker-disabled-text-opacity: var(
+    --input-placeholder-opacity,
+    var(--time-picker-input-transparency-placeholder)
+  );
 }
-.aviala-datepicker-trigger:is([data-disabled="true"], :disabled) > .aviala-datepicker-trigger__field,
+.aviala-datepicker-trigger:is([data-disabled="true"], :disabled)
+  > .aviala-datepicker-trigger__field,
 .aviala-timepicker-trigger:disabled > .aviala-timepicker-trigger__field {
   opacity: var(--_picker-disabled-opacity);
 }
-.aviala-datepicker-trigger:is([data-disabled="true"], :disabled) > .aviala-datepicker-trigger__slot,
+.aviala-datepicker-trigger:is([data-disabled="true"], :disabled)
+  > .aviala-datepicker-trigger__slot,
 .aviala-timepicker-trigger:disabled > .aviala-timepicker-trigger__slot {
   opacity: calc(var(--_picker-disabled-opacity) * var(--input-icon-opacity, 1));
 }
-.aviala-datepicker-trigger:is([data-disabled="true"], :disabled) .aviala-datepicker-trigger__input,
-.aviala-datepicker-trigger:is([data-disabled="true"], :disabled) .aviala-datepicker-trigger__value,
+.aviala-datepicker-trigger:is([data-disabled="true"], :disabled)
+  .aviala-datepicker-trigger__input,
+.aviala-datepicker-trigger:is([data-disabled="true"], :disabled)
+  .aviala-datepicker-trigger__value,
 .aviala-timepicker-trigger:disabled .aviala-timepicker-trigger__value {
   opacity: var(--_picker-disabled-text-opacity);
 }
-.aviala-datepicker-trigger:is([data-disabled="true"], :disabled) .aviala-datepicker-trigger__input::placeholder {
+.aviala-datepicker-trigger:is([data-disabled="true"], :disabled)
+  .aviala-datepicker-trigger__input::placeholder {
   opacity: 1;
 }
 .aviala-datepicker-trigger__value[data-placeholder] {
-  opacity: var(--input-placeholder-opacity, var(--date-picker-input-transparency-placeholder));
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--date-picker-input-transparency-placeholder)
+  );
 }
 
 /* DatePicker input tokens. */
 .aviala-datepicker-trigger {
   border: 0;
-  --input-shell-px: var(--input-px-regular, var(--date-picker-input-size-regular-padding-x));
-  --input-shell-gap: var(--input-gap-regular, var(--date-picker-input-size-regular-gap));
-  --input-shell-field-py: var(--input-field-py-regular, var(--date-picker-input-size-regular-slot-padding-y));
-  --input-shell-slot-py: var(--input-slot-py-regular, var(--date-picker-input-size-regular-slot-padding-y));
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--date-picker-input-size-regular-padding-x)
+  );
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--date-picker-input-size-regular-gap)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--date-picker-input-size-regular-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--date-picker-input-size-regular-slot-padding-y)
+  );
   padding-block: var(--date-picker-input-size-regular-padding-y);
-  background-color: var(--input-bg-default, var(--date-picker-input-color-background-default));
+  background-color: var(
+    --input-bg-default,
+    var(--date-picker-input-color-background-default)
+  );
   color: var(--input-fg, var(--date-picker-input-color-text-default));
-  box-shadow: var(--input-surface-shadow, inset 0 -0.5px 0 var(--date-picker-input-color-shadow-default));
+  box-shadow: var(
+    --input-surface-shadow,
+    inset 0 -0.5px 0 var(--date-picker-input-color-shadow-default)
+  );
 }
 
 .aviala-datepicker-trigger[data-size="regular"] {
-  --input-shell-px: var(--input-px-regular, var(--date-picker-input-size-regular-padding-x));
-  --input-shell-gap: var(--input-gap-regular, var(--date-picker-input-size-regular-gap));
-  --input-shell-field-py: var(--input-field-py-regular, var(--date-picker-input-size-regular-slot-padding-y));
-  --input-shell-slot-py: var(--input-slot-py-regular, var(--date-picker-input-size-regular-slot-padding-y));
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--date-picker-input-size-regular-padding-x)
+  );
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--date-picker-input-size-regular-gap)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--date-picker-input-size-regular-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--date-picker-input-size-regular-slot-padding-y)
+  );
   border-radius: var(--input-radius, var(--date-picker-input-size-radius));
 }
 
 .aviala-datepicker-trigger[data-size="big"] {
-  --input-shell-px: var(--input-px-big, var(--date-picker-input-size-big-padding-x));
-  --input-shell-gap: var(--input-gap-big, var(--date-picker-input-size-big-gap));
-  --input-shell-field-py: var(--input-field-py-big, var(--date-picker-input-size-big-slot-padding-y));
-  --input-shell-slot-py: var(--input-slot-py-big, var(--date-picker-input-size-big-slot-padding-y));
+  --input-shell-px: var(
+    --input-px-big,
+    var(--date-picker-input-size-big-padding-x)
+  );
+  --input-shell-gap: var(
+    --input-gap-big,
+    var(--date-picker-input-size-big-gap)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-big,
+    var(--date-picker-input-size-big-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-big,
+    var(--date-picker-input-size-big-slot-padding-y)
+  );
   padding-block: var(--date-picker-input-size-big-padding-y);
   border-radius: var(--input-radius, var(--date-picker-input-size-radius));
 }
 
 .aviala-datepicker-trigger[data-all-round="true"] {
-  border-radius: var(--input-radius-allround, var(--date-picker-input-size-round-radius));
+  border-radius: var(
+    --input-radius-allround,
+    var(--date-picker-input-size-round-radius)
+  );
 }
 
 .aviala-datepicker-trigger[data-state="open"],
 .aviala-datepicker-trigger:focus-visible,
 .aviala-datepicker-trigger:focus-within {
-  background-color: var(--input-bg-activated, var(--date-picker-input-color-background-active));
+  background-color: var(
+    --input-bg-activated,
+    var(--date-picker-input-color-background-active)
+  );
 }
 
 .aviala-datepicker-trigger[data-state="open"]:not([data-error="true"]) {
-  box-shadow: var(--input-shell-focus-shadow, inset 0 0 0 var(--date-picker-input-size-border-width) var(--input-border-activated, var(--date-picker-input-color-border-active)), var(--input-surface-shadow, inset 0 -0.5px 0 var(--date-picker-input-color-shadow-default)));
+  box-shadow: var(
+    --input-shell-focus-shadow,
+    inset 0 0 0 var(--date-picker-input-size-border-width)
+      var(
+        --input-border-activated,
+        var(--date-picker-input-color-border-active)
+      ),
+    var(
+      --input-surface-shadow,
+      inset 0 -0.5px 0 var(--date-picker-input-color-shadow-default)
+    )
+  );
 }
 
 .aviala-datepicker-trigger[data-error="true"] {
-  box-shadow: inset 0 0 0 var(--date-picker-input-size-border-width) var(--destructive), var(--input-surface-shadow, inset 0 -0.5px 0 var(--date-picker-input-color-shadow-default));
+  box-shadow:
+    inset 0 0 0 var(--date-picker-input-size-border-width) var(--destructive),
+    var(
+      --input-surface-shadow,
+      inset 0 -0.5px 0 var(--date-picker-input-color-shadow-default)
+    );
 }
 
 .aviala-datepicker-trigger[data-disabled="true"],
 .aviala-datepicker-trigger:disabled {
-  background-color: var(--input-bg-disabled, var(--date-picker-input-color-background-disabled));
+  background-color: var(
+    --input-bg-disabled,
+    var(--date-picker-input-color-background-disabled)
+  );
 }
 
 .aviala-datepicker-trigger__slot {
   box-sizing: content-box;
-  height: var(--input-icon-slot-height, var(--date-picker-input-size-icon-height));
+  height: var(
+    --input-icon-slot-height,
+    var(--date-picker-input-size-icon-height)
+  );
   color: var(--input-fg, var(--date-picker-input-color-icon-default));
 }
 
@@ -257,64 +407,137 @@
 
 .aviala-datepicker-trigger__value[data-placeholder],
 .aviala-datepicker-trigger__input::placeholder {
-  opacity: var(--input-placeholder-opacity, var(--date-picker-input-transparency-placeholder));
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--date-picker-input-transparency-placeholder)
+  );
 }
 
 /* TimePicker input tokens remain independent from DatePicker input tokens. */
 .aviala-timepicker-trigger {
   border: 0;
-  --input-shell-px: var(--input-px-regular, var(--time-picker-input-size-regular-padding-x));
-  --input-shell-gap: var(--input-gap-regular, var(--time-picker-input-size-regular-gap));
-  --input-shell-field-py: var(--input-field-py-regular, var(--time-picker-input-size-regular-slot-padding-y));
-  --input-shell-slot-py: var(--input-slot-py-regular, var(--time-picker-input-size-regular-slot-padding-y));
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--time-picker-input-size-regular-padding-x)
+  );
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--time-picker-input-size-regular-gap)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--time-picker-input-size-regular-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--time-picker-input-size-regular-slot-padding-y)
+  );
   padding-block: var(--time-picker-input-size-regular-padding-y);
-  background-color: var(--input-bg-default, var(--time-picker-input-color-background-default));
+  background-color: var(
+    --input-bg-default,
+    var(--time-picker-input-color-background-default)
+  );
   color: var(--input-fg, var(--time-picker-input-color-text-default));
-  box-shadow: var(--input-surface-shadow, inset 0 -0.5px 0 var(--time-picker-input-color-shadow-default));
+  box-shadow: var(
+    --input-surface-shadow,
+    inset 0 -0.5px 0 var(--time-picker-input-color-shadow-default)
+  );
 }
 
 .aviala-timepicker-trigger[data-size="regular"] {
-  --input-shell-px: var(--input-px-regular, var(--time-picker-input-size-regular-padding-x));
-  --input-shell-gap: var(--input-gap-regular, var(--time-picker-input-size-regular-gap));
-  --input-shell-field-py: var(--input-field-py-regular, var(--time-picker-input-size-regular-slot-padding-y));
-  --input-shell-slot-py: var(--input-slot-py-regular, var(--time-picker-input-size-regular-slot-padding-y));
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--time-picker-input-size-regular-padding-x)
+  );
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--time-picker-input-size-regular-gap)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--time-picker-input-size-regular-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--time-picker-input-size-regular-slot-padding-y)
+  );
   border-radius: var(--input-radius, var(--time-picker-input-size-radius));
 }
 
 .aviala-timepicker-trigger[data-size="big"] {
-  --input-shell-px: var(--input-px-big, var(--time-picker-input-size-big-padding-x));
-  --input-shell-gap: var(--input-gap-big, var(--time-picker-input-size-big-gap));
-  --input-shell-field-py: var(--input-field-py-big, var(--time-picker-input-size-big-slot-padding-y));
-  --input-shell-slot-py: var(--input-slot-py-big, var(--time-picker-input-size-big-slot-padding-y));
+  --input-shell-px: var(
+    --input-px-big,
+    var(--time-picker-input-size-big-padding-x)
+  );
+  --input-shell-gap: var(
+    --input-gap-big,
+    var(--time-picker-input-size-big-gap)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-big,
+    var(--time-picker-input-size-big-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-big,
+    var(--time-picker-input-size-big-slot-padding-y)
+  );
   padding-block: var(--time-picker-input-size-big-padding-y);
   border-radius: var(--input-radius, var(--time-picker-input-size-radius));
 }
 
 .aviala-timepicker-trigger[data-all-round="true"] {
-  border-radius: var(--input-radius-allround, var(--time-picker-input-size-round-radius));
+  border-radius: var(
+    --input-radius-allround,
+    var(--time-picker-input-size-round-radius)
+  );
 }
 
 .aviala-timepicker-trigger[data-state="open"],
 .aviala-timepicker-trigger:focus-visible,
 .aviala-timepicker-trigger:focus-within {
-  background-color: var(--input-bg-activated, var(--time-picker-input-color-background-active));
+  background-color: var(
+    --input-bg-activated,
+    var(--time-picker-input-color-background-active)
+  );
 }
 
 .aviala-timepicker-trigger[data-state="open"]:not([data-error="true"]) {
-  box-shadow: var(--input-shell-focus-shadow, inset 0 0 0 var(--time-picker-input-size-border-width) var(--input-border-activated, var(--time-picker-input-color-border-active)), var(--input-surface-shadow, inset 0 -0.5px 0 var(--time-picker-input-color-shadow-default)));
+  box-shadow: var(
+    --input-shell-focus-shadow,
+    inset 0 0 0 var(--time-picker-input-size-border-width)
+      var(
+        --input-border-activated,
+        var(--time-picker-input-color-border-active)
+      ),
+    var(
+      --input-surface-shadow,
+      inset 0 -0.5px 0 var(--time-picker-input-color-shadow-default)
+    )
+  );
 }
 
 .aviala-timepicker-trigger[data-error="true"] {
-  box-shadow: inset 0 0 0 var(--time-picker-input-size-border-width) var(--destructive), var(--input-surface-shadow, inset 0 -0.5px 0 var(--time-picker-input-color-shadow-default));
+  box-shadow:
+    inset 0 0 0 var(--time-picker-input-size-border-width) var(--destructive),
+    var(
+      --input-surface-shadow,
+      inset 0 -0.5px 0 var(--time-picker-input-color-shadow-default)
+    );
 }
 
 .aviala-timepicker-trigger:disabled {
-  background-color: var(--input-bg-disabled, var(--time-picker-input-color-background-disabled));
+  background-color: var(
+    --input-bg-disabled,
+    var(--time-picker-input-color-background-disabled)
+  );
 }
 
 .aviala-timepicker-trigger__slot {
   box-sizing: content-box;
-  height: var(--input-icon-slot-height, var(--time-picker-input-size-icon-height));
+  height: var(
+    --input-icon-slot-height,
+    var(--time-picker-input-size-icon-height)
+  );
   color: var(--input-fg, var(--time-picker-input-color-icon-default));
 }
 
@@ -324,7 +547,10 @@
 }
 
 .aviala-timepicker-trigger__value[data-placeholder] {
-  opacity: var(--input-placeholder-opacity, var(--time-picker-input-transparency-placeholder));
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--time-picker-input-transparency-placeholder)
+  );
 }
 
 .aviala-datepicker-content,
@@ -334,39 +560,98 @@
 }
 
 .aviala-datepicker-calendar {
-  --_datepicker-panel-bg: var(--date-picker-select-menu-color-background-default);
-  --_datepicker-day-height: calc(var(--date-button-size-padding-y) * 2 + var(--typography-text-line-height));
-  --_datepicker-header-height: calc(var(--date-picker-month-pointer-size-padding-y) * 2 + var(--padding-tiny, 4px) * 2 + var(--typography-subtitle-line-height));
-  --_datepicker-grid-height: calc(var(--datepicker-grid-rows, 6) * var(--datepicker-day-height, var(--_datepicker-day-height)) + (var(--datepicker-grid-rows, 6) - 1) * var(--datepicker-row-gap, 2px));
-  --_datepicker-view-height: calc(var(--datepicker-weekday-height, 18px) + var(--datepicker-panel-gap, var(--date-button-grid-size-gap)) + var(--datepicker-grid-height, var(--_datepicker-grid-height)));
-  --_datepicker-panel-body-height: calc(var(--datepicker-header-height, var(--_datepicker-header-height)) + var(--datepicker-panel-gap, var(--date-picker-list-size-gap)) + var(--datepicker-view-height, var(--_datepicker-view-height)) + var(--padding-tiny, 4px));
+  --_datepicker-panel-bg: var(
+    --date-picker-select-menu-color-background-default
+  );
+  --_datepicker-day-height: calc(
+    var(--date-button-size-padding-y) * 2 + var(--typography-text-line-height)
+  );
+  --_datepicker-header-height: calc(
+    var(--date-picker-month-pointer-size-padding-y) * 2 +
+      var(--padding-tiny, 4px) * 2 + var(--typography-subtitle-line-height)
+  );
+  --_datepicker-grid-height: calc(
+    var(--datepicker-grid-rows, 6) *
+      var(--datepicker-day-height, var(--_datepicker-day-height)) +
+      (var(--datepicker-grid-rows, 6) - 1) * var(--datepicker-row-gap, 2px)
+  );
+  --_datepicker-view-height: calc(
+    var(--datepicker-weekday-height, 18px) +
+      var(--datepicker-panel-gap, var(--date-button-grid-size-gap)) +
+      var(--datepicker-grid-height, var(--_datepicker-grid-height))
+  );
+  --_datepicker-panel-body-height: calc(
+    var(--datepicker-header-height, var(--_datepicker-header-height)) +
+      var(--datepicker-panel-gap, var(--date-picker-list-size-gap)) +
+      var(--datepicker-view-height, var(--_datepicker-view-height)) +
+      var(--padding-tiny, 4px)
+  );
   display: flex;
   width: var(--datepicker-panel-width, 290px);
   flex-direction: column;
   gap: var(--date-picker-list-size-gap);
-  border: 1px solid var(--datepicker-panel-border, var(--date-picker-select-menu-color-border-default));
-  border-radius: var(--datepicker-panel-radius, var(--date-picker-select-menu-size-radius));
+  border: 1px solid
+    var(
+      --datepicker-panel-border,
+      var(--date-picker-select-menu-color-border-default)
+    );
+  border-radius: var(
+    --datepicker-panel-radius,
+    var(--date-picker-select-menu-size-radius)
+  );
   background-color: var(--datepicker-panel-bg, var(--_datepicker-panel-bg));
   box-shadow: var(
     --datepicker-panel-shadow,
     var(--aviala-shadow-level4-with-line)
   );
   /* One list is flattened into the surface; retain both layers' insets. */
-  padding: calc(var(--date-picker-select-menu-size-padding-y) + var(--date-picker-list-size-padding-y)) calc(var(--date-picker-select-menu-size-padding-x) + var(--date-picker-list-size-padding-x));
+  padding: calc(
+      var(--date-picker-select-menu-size-padding-y) +
+        var(--date-picker-list-size-padding-y)
+    )
+    calc(
+      var(--date-picker-select-menu-size-padding-x) +
+        var(--date-picker-list-size-padding-x)
+    );
 }
 
 .aviala-datepicker-calendar__body {
   display: flex;
-  height: var(--datepicker-panel-body-height, var(--_datepicker-panel-body-height, var(--_legacy-datepicker-panel-body-height)));
-  min-height: var(--datepicker-panel-body-height, var(--_datepicker-panel-body-height, var(--_legacy-datepicker-panel-body-height)));
+  height: var(
+    --datepicker-panel-body-height,
+    var(
+      --_datepicker-panel-body-height,
+      var(--_legacy-datepicker-panel-body-height)
+    )
+  );
+  min-height: var(
+    --datepicker-panel-body-height,
+    var(
+      --_datepicker-panel-body-height,
+      var(--_legacy-datepicker-panel-body-height)
+    )
+  );
   flex-direction: column;
   gap: var(--datepicker-panel-gap, var(--date-picker-list-size-gap));
 }
 
 .aviala-datepicker-calendar__panel-viewport {
   position: relative;
-  height: var(--datepicker-panel-body-height, var(--_datepicker-panel-body-height, var(--_legacy-datepicker-panel-body-height)));
-  flex: 0 0 var(--datepicker-panel-body-height, var(--_datepicker-panel-body-height, var(--_legacy-datepicker-panel-body-height)));
+  height: var(
+    --datepicker-panel-body-height,
+    var(
+      --_datepicker-panel-body-height,
+      var(--_legacy-datepicker-panel-body-height)
+    )
+  );
+  flex: 0 0
+    var(
+      --datepicker-panel-body-height,
+      var(
+        --_datepicker-panel-body-height,
+        var(--_legacy-datepicker-panel-body-height)
+      )
+    );
   overflow: hidden;
   padding: 0;
 }
@@ -413,8 +698,13 @@
 }
 
 .aviala-datepicker-month {
-  --_datepicker-panel-bg: var(--date-picker-menu-item-group-year-and-month-color-background-default);
-  --_datepicker-wheel-item-height: calc(var(--typography-text-line-height) + 2 * var(--scroll-picker-item-size-padding-y));
+  --_datepicker-panel-bg: var(
+    --date-picker-menu-item-group-year-and-month-color-background-default
+  );
+  --_datepicker-wheel-item-height: calc(
+    var(--typography-text-line-height) + 2 *
+      var(--scroll-picker-item-size-padding-y)
+  );
   display: flex;
   width: 100%;
   height: 100%;
@@ -423,7 +713,10 @@
   flex-direction: column;
   justify-content: center;
   /* Keep wheel scroll padding in sync with the stretched height */
-  --datepicker-time-wheel-height: var(--datepicker-view-height, var(--_datepicker-view-height, var(--_legacy-datepicker-view-height)));
+  --datepicker-time-wheel-height: var(
+    --datepicker-view-height,
+    var(--_datepicker-view-height, var(--_legacy-datepicker-view-height))
+  );
 }
 
 .aviala-datepicker-month__columns {
@@ -433,8 +726,11 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0;
   border-radius: var(--date-picker-menu-item-group-year-and-month-size-radius);
-  background: var(--date-picker-menu-item-group-year-and-month-color-background-default);
-  box-shadow: inset 0 0 0 1px var(--date-picker-menu-item-group-year-and-month-color-border-default);
+  background: var(
+    --date-picker-menu-item-group-year-and-month-color-background-default
+  );
+  box-shadow: inset 0 0 0 1px
+    var(--date-picker-menu-item-group-year-and-month-color-border-default);
 }
 
 .aviala-datepicker-month .aviala-datepicker-time__wheel {
@@ -448,63 +744,119 @@
 }
 
 .aviala-datepicker-month__year {
-  --_datepicker-wheel-gap: var(--date-picker-menu-item-group-year-size-content-gap);
-  --_datepicker-wheel-py: calc(var(--date-picker-menu-item-group-year-size-padding-y) + var(--date-picker-menu-item-group-year-size-content-padding-y));
-  --_datepicker-wheel-px: var(--date-picker-menu-item-group-year-size-content-padding-x);
-  --_datepicker-wheel-border: var(--date-picker-menu-item-group-year-color-border-default);
+  --_datepicker-wheel-gap: var(
+    --date-picker-menu-item-group-year-size-content-gap
+  );
+  --_datepicker-wheel-py: calc(
+    var(--date-picker-menu-item-group-year-size-padding-y) +
+      var(--date-picker-menu-item-group-year-size-content-padding-y)
+  );
+  --_datepicker-wheel-px: var(
+    --date-picker-menu-item-group-year-size-content-padding-x
+  );
+  --_datepicker-wheel-border: var(
+    --date-picker-menu-item-group-year-color-border-default
+  );
 }
 
-.aviala-datepicker-month .aviala-datepicker-time__wheel + .aviala-datepicker-time__wheel {
+.aviala-datepicker-month
+  .aviala-datepicker-time__wheel
+  + .aviala-datepicker-time__wheel {
   border-inline-start: 0;
 }
 
 .aviala-datepicker-month__month {
-  --_datepicker-wheel-gap: var(--date-picker-menu-item-group-month-size-content-gap);
-  --_datepicker-wheel-py: calc(var(--date-picker-menu-item-group-month-size-padding-y) + var(--date-picker-menu-item-group-month-size-content-padding-y));
-  --_datepicker-wheel-px: var(--date-picker-menu-item-group-month-size-content-padding-x);
-  --_datepicker-wheel-border: var(--date-picker-menu-item-group-month-color-border-default);
+  --_datepicker-wheel-gap: var(
+    --date-picker-menu-item-group-month-size-content-gap
+  );
+  --_datepicker-wheel-py: calc(
+    var(--date-picker-menu-item-group-month-size-padding-y) +
+      var(--date-picker-menu-item-group-month-size-content-padding-y)
+  );
+  --_datepicker-wheel-px: var(
+    --date-picker-menu-item-group-month-size-content-padding-x
+  );
+  --_datepicker-wheel-border: var(
+    --date-picker-menu-item-group-month-color-border-default
+  );
 }
 
-:is(.aviala-datepicker-month, .aviala-datepicker-time) .aviala-datepicker-time__wheel-highlight,
-:is(.aviala-datepicker-month, .aviala-datepicker-time) .aviala-datepicker-time__wheel-clip {
+:is(.aviala-datepicker-month, .aviala-datepicker-time)
+  .aviala-datepicker-time__wheel-highlight,
+:is(.aviala-datepicker-month, .aviala-datepicker-time)
+  .aviala-datepicker-time__wheel-clip {
   inset-inline: var(--_datepicker-wheel-px);
 }
 
-:is(.aviala-datepicker-month, .aviala-datepicker-time) .aviala-datepicker-time__wheel-highlight,
-:is(.aviala-datepicker-month, .aviala-datepicker-time) .aviala-datepicker-time__wheel-clip,
-:is(.aviala-datepicker-month, .aviala-datepicker-time) .aviala-datepicker-time__wheel-option {
+:is(.aviala-datepicker-month, .aviala-datepicker-time)
+  .aviala-datepicker-time__wheel-highlight,
+:is(.aviala-datepicker-month, .aviala-datepicker-time)
+  .aviala-datepicker-time__wheel-clip,
+:is(.aviala-datepicker-month, .aviala-datepicker-time)
+  .aviala-datepicker-time__wheel-option {
   border-radius: var(--scroll-picker-item-size-radius);
 }
 
-:is(.aviala-datepicker-month, .aviala-datepicker-time) .aviala-datepicker-time__wheel-option,
-:is(.aviala-datepicker-month, .aviala-datepicker-time) .aviala-datepicker-time__wheel-clip-item {
+:is(.aviala-datepicker-month, .aviala-datepicker-time)
+  .aviala-datepicker-time__wheel-option,
+:is(.aviala-datepicker-month, .aviala-datepicker-time)
+  .aviala-datepicker-time__wheel-clip-item {
   padding-inline: var(--scroll-picker-item-size-padding-x);
   line-height: var(--typography-text-line-height);
 }
 
-:is(.aviala-datepicker-month, .aviala-datepicker-time) .aviala-datepicker-time__wheel-option {
-  color: var(--datepicker-day-fg, var(--scroll-picker-item-color-unselected-text-default));
+:is(.aviala-datepicker-month, .aviala-datepicker-time)
+  .aviala-datepicker-time__wheel-option {
+  color: var(
+    --datepicker-day-fg,
+    var(--scroll-picker-item-color-unselected-text-default)
+  );
   opacity: var(--scroll-picker-item-transparency-default);
 }
 
-:is(.aviala-datepicker-month, .aviala-datepicker-time) .aviala-datepicker-time__wheel-highlight {
-  box-shadow: var(--scroll-picker-item-shadow, inset 0 -0.5px 0 var(--line-shadow-bottom));
-  background-color: var(--datepicker-day-bg-selected, var(--scroll-picker-item-color-background-selected));
+:is(.aviala-datepicker-month, .aviala-datepicker-time)
+  .aviala-datepicker-time__wheel-highlight {
+  box-shadow: var(
+    --scroll-picker-item-shadow,
+    inset 0 -0.5px 0 var(--line-shadow-bottom)
+  );
+  background-color: var(
+    --datepicker-day-bg-selected,
+    var(--scroll-picker-item-color-background-selected)
+  );
 }
 
-:is(.aviala-datepicker-month, .aviala-datepicker-time) .aviala-datepicker-time__wheel-clip-item {
-  color: var(--datepicker-day-fg-selected, var(--scroll-picker-item-color-selected-text-default));
+:is(.aviala-datepicker-month, .aviala-datepicker-time)
+  .aviala-datepicker-time__wheel-clip-item {
+  color: var(
+    --datepicker-day-fg-selected,
+    var(--scroll-picker-item-color-selected-text-default)
+  );
 }
 
 .aviala-datepicker-calendar__view-viewport {
   position: relative;
   box-sizing: border-box;
   display: flex;
-  height: calc(var(--datepicker-view-height, var(--_datepicker-view-height, var(--_legacy-datepicker-view-height))) + var(--padding-tiny, 4px));
-  flex: 0 0 calc(var(--datepicker-view-height, var(--_datepicker-view-height, var(--_legacy-datepicker-view-height))) + var(--padding-tiny, 4px));
+  height: calc(
+    var(
+        --datepicker-view-height,
+        var(--_datepicker-view-height, var(--_legacy-datepicker-view-height))
+      ) +
+      var(--padding-tiny, 4px)
+  );
+  flex: 0 0
+    calc(
+      var(
+          --datepicker-view-height,
+          var(--_datepicker-view-height, var(--_legacy-datepicker-view-height))
+        ) +
+        var(--padding-tiny, 4px)
+    );
   flex-direction: column;
   overflow: hidden;
-  padding: 0 var(--date-picker-list-size-grid-padding-x) var(--padding-tiny, 4px);
+  padding: 0 var(--date-picker-list-size-grid-padding-x)
+    var(--padding-tiny, 4px);
 }
 
 .aviala-datepicker-calendar__view {
@@ -538,18 +890,31 @@
 .aviala-datepicker-calendar__view[data-view="date"]
   .aviala-datepicker-calendar__grid-viewport {
   flex: 1 1 auto;
-  min-height: var(--datepicker-grid-height, var(--_datepicker-grid-height, var(--_legacy-datepicker-grid-height)));
+  min-height: var(
+    --datepicker-grid-height,
+    var(--_datepicker-grid-height, var(--_legacy-datepicker-grid-height))
+  );
 }
 
 .aviala-timepicker-panel {
-  --_datepicker-panel-bg: var(--time-picker-select-menu-color-background-default);
+  --_datepicker-panel-bg: var(
+    --time-picker-select-menu-color-background-default
+  );
   display: flex;
   width: var(--datepicker-panel-width, 290px);
   flex-direction: column;
   gap: var(--time-picker-select-menu-size-gap);
-  padding: var(--time-picker-select-menu-size-padding-y) var(--time-picker-select-menu-size-padding-x);
-  border: 1px solid var(--datepicker-panel-border, var(--time-picker-select-menu-color-border-default));
-  border-radius: var(--datepicker-panel-radius, var(--time-picker-select-menu-size-radius));
+  padding: var(--time-picker-select-menu-size-padding-y)
+    var(--time-picker-select-menu-size-padding-x);
+  border: 1px solid
+    var(
+      --datepicker-panel-border,
+      var(--time-picker-select-menu-color-border-default)
+    );
+  border-radius: var(
+    --datepicker-panel-radius,
+    var(--time-picker-select-menu-size-radius)
+  );
   background-color: var(--datepicker-panel-bg, var(--_datepicker-panel-bg));
   box-shadow: var(
     --datepicker-panel-shadow,
@@ -566,7 +931,8 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--datepicker-header-gap, 5px);
-  padding: var(--date-picker-month-pointer-size-padding-y) var(--date-picker-month-pointer-size-padding-x);
+  padding: var(--date-picker-month-pointer-size-padding-y)
+    var(--date-picker-month-pointer-size-padding-x);
   border-radius: var(--date-picker-month-pointer-size-radius);
 }
 
@@ -579,7 +945,10 @@
   background: transparent;
   padding: var(--padding-tiny, 4px) var(--padding-littlesmall, 7px);
   text-align: center;
-  color: var(--datepicker-header-fg, var(--date-picker-month-pointer-color-text-default));
+  color: var(
+    --datepicker-header-fg,
+    var(--date-picker-month-pointer-color-text-default)
+  );
   overflow: hidden;
   transition: background-color 250ms ease;
 }
@@ -677,7 +1046,10 @@
   grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: var(--datepicker-grid-gap, 4px);
   border-radius: var(--date-button-grid-size-header-radius);
-  background-color: var(--datepicker-weekday-bg, var(--date-button-grid-color-header-background-default));
+  background-color: var(
+    --datepicker-weekday-bg,
+    var(--date-button-grid-color-header-background-default)
+  );
   padding: 0;
 }
 
@@ -686,7 +1058,10 @@
   height: var(--datepicker-weekday-height, 18px);
   align-items: center;
   justify-content: center;
-  color: var(--datepicker-weekday-fg, var(--date-button-grid-color-header-text-default));
+  color: var(
+    --datepicker-weekday-fg,
+    var(--date-button-grid-color-header-text-default)
+  );
 }
 
 .aviala-datepicker-calendar__weekday .aviala-typography {
@@ -696,7 +1071,10 @@
 .aviala-datepicker-calendar__grid-viewport {
   position: relative;
   overflow: hidden;
-  min-height: var(--datepicker-grid-height, var(--_datepicker-grid-height, var(--_legacy-datepicker-grid-height)));
+  min-height: var(
+    --datepicker-grid-height,
+    var(--_datepicker-grid-height, var(--_legacy-datepicker-grid-height))
+  );
 }
 
 .aviala-datepicker-calendar__grid {
@@ -754,14 +1132,20 @@
   display: inline-flex;
   width: 100%;
   min-width: 0;
-  min-height: var(--datepicker-day-height, var(--_datepicker-day-height, var(--_legacy-datepicker-day-height)));
+  min-height: var(
+    --datepicker-day-height,
+    var(--_datepicker-day-height, var(--_legacy-datepicker-day-height))
+  );
   cursor: pointer;
   align-items: center;
   justify-content: center;
   border: 0;
   border-radius: var(--datepicker-day-radius, var(--date-button-size-radius));
   background: transparent;
-  color: var(--datepicker-day-fg, var(--date-button-color-unselected-text-default));
+  color: var(
+    --datepicker-day-fg,
+    var(--date-button-color-unselected-text-default)
+  );
   gap: var(--date-button-size-gap);
   padding: var(--date-button-size-padding-y) var(--date-button-size-padding-x);
   /* Match Button noBackground hover fade */
@@ -795,7 +1179,10 @@
   height: 3px;
   transform: translateX(-50%);
   border-radius: 50%;
-  background-color: var(--datepicker-day-today-dot, var(--date-button-color-unselected-today-marker-default));
+  background-color: var(
+    --datepicker-day-today-dot,
+    var(--date-button-color-unselected-today-marker-default)
+  );
   pointer-events: none;
 }
 
@@ -804,12 +1191,21 @@
 .aviala-datepicker-day[data-range-pos="middle"],
 .aviala-datepicker-day[data-range-pos="last"] {
   border-radius: var(--date-button-size-inner-radius);
-  background-color: var(--datepicker-day-bg-in-range, var(--date-button-color-selected-background-default));
-  color: var(--datepicker-day-fg-selected, var(--date-button-color-selected-text-default));
+  background-color: var(
+    --datepicker-day-bg-in-range,
+    var(--date-button-color-selected-background-default)
+  );
+  color: var(
+    --datepicker-day-fg-selected,
+    var(--date-button-color-selected-text-default)
+  );
 }
 
 .aviala-datepicker-day[data-selected="true"] .aviala-datepicker-day__today-dot {
-  background-color: var(--datepicker-day-today-dot, var(--date-button-color-selected-today-marker-default));
+  background-color: var(
+    --datepicker-day-today-dot,
+    var(--date-button-color-selected-today-marker-default)
+  );
 }
 
 /* Figma SelectGap — bridge 4px column gaps for continuous range bar */
@@ -821,7 +1217,10 @@
   inset-inline-end: calc(var(--datepicker-grid-gap, 4px) * -1);
   width: var(--datepicker-grid-gap, 4px);
   height: 100%;
-  background-color: var(--datepicker-day-bg-in-range, var(--_legacy-datepicker-day-bg-in-range));
+  background-color: var(
+    --datepicker-day-bg-in-range,
+    var(--_legacy-datepicker-day-bg-in-range)
+  );
   pointer-events: none;
 }
 
@@ -833,20 +1232,35 @@
   inset-inline-start: calc(var(--datepicker-grid-gap, 4px) * -1);
   width: var(--datepicker-grid-gap, 4px);
   height: 100%;
-  background-color: var(--datepicker-day-bg-in-range, var(--_legacy-datepicker-day-bg-in-range));
+  background-color: var(
+    --datepicker-day-bg-in-range,
+    var(--_legacy-datepicker-day-bg-in-range)
+  );
   pointer-events: none;
 }
 
 .aviala-datepicker-day[data-range-pos="single"],
 .aviala-datepicker-day[data-range-pos="head"] {
-  border-top-left-radius: var(--datepicker-day-radius, var(--date-button-size-radius));
-  border-bottom-left-radius: var(--datepicker-day-radius, var(--date-button-size-radius));
+  border-top-left-radius: var(
+    --datepicker-day-radius,
+    var(--date-button-size-radius)
+  );
+  border-bottom-left-radius: var(
+    --datepicker-day-radius,
+    var(--date-button-size-radius)
+  );
 }
 
 .aviala-datepicker-day[data-range-pos="single"],
 .aviala-datepicker-day[data-range-pos="last"] {
-  border-top-right-radius: var(--datepicker-day-radius, var(--date-button-size-radius));
-  border-bottom-right-radius: var(--datepicker-day-radius, var(--date-button-size-radius));
+  border-top-right-radius: var(
+    --datepicker-day-radius,
+    var(--date-button-size-radius)
+  );
+  border-bottom-right-radius: var(
+    --datepicker-day-radius,
+    var(--date-button-size-radius)
+  );
 }
 
 .aviala-datepicker-day[data-disabled="true"] {
@@ -855,15 +1269,32 @@
 }
 
 .aviala-datepicker-footer-wrap {
-  padding: 0 var(--date-picker-list-size-action-padding-x) var(--date-picker-list-size-action-padding-y-end);
+  padding: 0 var(--date-picker-list-size-action-padding-x)
+    var(--date-picker-list-size-action-padding-y-end);
 }
 
 .aviala-datepicker-footer.aviala-segmentator-group[data-mode="nested"] {
   width: 100%;
   min-width: var(--datepicker-trigger-min-width, 46px);
-  border-radius: var(--segmentator-group-radius, var(--segmentator-group-size-nested-default-radius));
-  background-color: var(--datepicker-footer-bg, var(--segmentator-bg, var(--segmentator-group-color-nested-background-default)));
-  padding: var(--segmentator-group-padding, var(--segmentator-group-size-nested-padding-y)) var(--segmentator-group-padding, var(--segmentator-group-size-nested-padding-x));
+  border-radius: var(
+    --segmentator-group-radius,
+    var(--segmentator-group-size-nested-default-radius)
+  );
+  background-color: var(
+    --datepicker-footer-bg,
+    var(
+      --segmentator-bg,
+      var(--segmentator-group-color-nested-background-default)
+    )
+  );
+  padding: var(
+      --segmentator-group-padding,
+      var(--segmentator-group-size-nested-padding-y)
+    )
+    var(
+      --segmentator-group-padding,
+      var(--segmentator-group-size-nested-padding-x)
+    );
 }
 
 /* Figma DatePickerLIstGroup footer — full-width segmentator layout */
@@ -889,7 +1320,10 @@
 }
 
 .aviala-datepicker-time {
-  --_datepicker-wheel-item-height: calc(var(--typography-text-line-height) + 2 * var(--scroll-picker-item-size-padding-y));
+  --_datepicker-wheel-item-height: calc(
+    var(--typography-text-line-height) + 2 *
+      var(--scroll-picker-item-size-padding-y)
+  );
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -937,10 +1371,19 @@
 }
 
 .aviala-datepicker-time__hour {
-  --_datepicker-wheel-gap: var(--time-picker-menu-item-group-hour-size-content-gap);
-  --_datepicker-wheel-py: calc(var(--time-picker-menu-item-group-hour-size-padding-y) + var(--time-picker-menu-item-group-hour-size-content-padding-y));
-  --_datepicker-wheel-px: var(--time-picker-menu-item-group-hour-size-content-padding-x);
-  --_datepicker-wheel-border: var(--time-picker-menu-item-group-hour-color-border-default);
+  --_datepicker-wheel-gap: var(
+    --time-picker-menu-item-group-hour-size-content-gap
+  );
+  --_datepicker-wheel-py: calc(
+    var(--time-picker-menu-item-group-hour-size-padding-y) +
+      var(--time-picker-menu-item-group-hour-size-content-padding-y)
+  );
+  --_datepicker-wheel-px: var(
+    --time-picker-menu-item-group-hour-size-content-padding-x
+  );
+  --_datepicker-wheel-border: var(
+    --time-picker-menu-item-group-hour-color-border-default
+  );
 }
 
 .aviala-datepicker-time__columns[data-seconds="true"] {
@@ -948,17 +1391,35 @@
 }
 
 .aviala-datepicker-time__second {
-  --_datepicker-wheel-gap: var(--time-picker-menu-item-group-sec-size-content-gap);
-  --_datepicker-wheel-py: calc(var(--time-picker-menu-item-group-sec-size-padding-y) + var(--time-picker-menu-item-group-sec-size-content-padding-y));
-  --_datepicker-wheel-px: var(--time-picker-menu-item-group-sec-size-content-padding-x);
-  --_datepicker-wheel-border: var(--time-picker-menu-item-group-sec-color-border-default);
+  --_datepicker-wheel-gap: var(
+    --time-picker-menu-item-group-sec-size-content-gap
+  );
+  --_datepicker-wheel-py: calc(
+    var(--time-picker-menu-item-group-sec-size-padding-y) +
+      var(--time-picker-menu-item-group-sec-size-content-padding-y)
+  );
+  --_datepicker-wheel-px: var(
+    --time-picker-menu-item-group-sec-size-content-padding-x
+  );
+  --_datepicker-wheel-border: var(
+    --time-picker-menu-item-group-sec-color-border-default
+  );
 }
 
 .aviala-datepicker-time__minute {
-  --_datepicker-wheel-gap: var(--time-picker-menu-item-group-min-size-content-gap);
-  --_datepicker-wheel-py: calc(var(--time-picker-menu-item-group-min-size-padding-y) + var(--time-picker-menu-item-group-min-size-content-padding-y));
-  --_datepicker-wheel-px: var(--time-picker-menu-item-group-min-size-content-padding-x);
-  --_datepicker-wheel-border: var(--time-picker-menu-item-group-min-color-border-default);
+  --_datepicker-wheel-gap: var(
+    --time-picker-menu-item-group-min-size-content-gap
+  );
+  --_datepicker-wheel-py: calc(
+    var(--time-picker-menu-item-group-min-size-padding-y) +
+      var(--time-picker-menu-item-group-min-size-content-padding-y)
+  );
+  --_datepicker-wheel-px: var(
+    --time-picker-menu-item-group-min-size-content-padding-x
+  );
+  --_datepicker-wheel-border: var(
+    --time-picker-menu-item-group-min-color-border-default
+  );
 }
 
 .aviala-datepicker-time .aviala-datepicker-time__wheel {
@@ -967,13 +1428,30 @@
   border-inline-end: 1px solid var(--_datepicker-wheel-border);
 }
 
-.aviala-datepicker-time .aviala-datepicker-time__wheel + .aviala-datepicker-time__wheel {
+.aviala-datepicker-time
+  .aviala-datepicker-time__wheel
+  + .aviala-datepicker-time__wheel {
   border-inline-start: 0;
 }
 
 .aviala-datepicker-time__wheel {
-  --_datepicker-wheel-height: calc(var(--datepicker-time-wheel-item-height, var(--_datepicker-wheel-item-height, 36px)) * var(--datepicker-time-wheel-visible-count, 5) + var(--_datepicker-wheel-gap, 0px) * (var(--datepicker-time-wheel-visible-count, 5) - 1) + 2 * var(--_datepicker-wheel-py, 0px));
-  --_datepicker-wheel-stride: calc(var(--datepicker-time-wheel-item-height, var(--_datepicker-wheel-item-height, 36px)) + var(--_datepicker-wheel-gap, 0px));
+  --_datepicker-wheel-height: calc(
+    var(
+        --datepicker-time-wheel-item-height,
+        var(--_datepicker-wheel-item-height, 36px)
+      ) *
+      var(--datepicker-time-wheel-visible-count, 5) +
+      var(--_datepicker-wheel-gap, 0px) *
+      (var(--datepicker-time-wheel-visible-count, 5) - 1) + 2 *
+      var(--_datepicker-wheel-py, 0px)
+  );
+  --_datepicker-wheel-stride: calc(
+    var(
+        --datepicker-time-wheel-item-height,
+        var(--_datepicker-wheel-item-height, 36px)
+      ) +
+      var(--_datepicker-wheel-gap, 0px)
+  );
   position: relative;
   box-sizing: border-box;
   width: 100%;
@@ -993,10 +1471,16 @@
   z-index: 0;
   top: 50%;
   inset-inline: var(--padding-small, 6px);
-  height: var(--datepicker-time-wheel-item-height, var(--_datepicker-wheel-item-height, 36px));
+  height: var(
+    --datepicker-time-wheel-item-height,
+    var(--_datepicker-wheel-item-height, 36px)
+  );
   transform: translateY(-50%);
   border-radius: var(--border-radius-extra-small-2, 6px);
-  background-color: var(--datepicker-day-bg-selected, var(--_legacy-datepicker-day-bg-selected));
+  background-color: var(
+    --datepicker-day-bg-selected,
+    var(--_legacy-datepicker-day-bg-selected)
+  );
   pointer-events: none;
 }
 
@@ -1006,7 +1490,10 @@
   z-index: 2;
   top: 50%;
   inset-inline: var(--padding-small, 6px);
-  height: var(--datepicker-time-wheel-item-height, var(--_datepicker-wheel-item-height, 36px));
+  height: var(
+    --datepicker-time-wheel-item-height,
+    var(--_datepicker-wheel-item-height, 36px)
+  );
   transform: translateY(-50%);
   overflow: hidden;
   border-radius: var(--border-radius-extra-small-2, 6px);
@@ -1028,7 +1515,10 @@
   padding: 0 var(--padding-small, 6px);
   font: inherit;
   line-height: var(--line-height-line-height-regular, 1.125rem);
-  color: var(--datepicker-day-fg-selected, var(--_legacy-datepicker-day-fg-selected));
+  color: var(
+    --datepicker-day-fg-selected,
+    var(--_legacy-datepicker-day-fg-selected)
+  );
   opacity: 1;
 }
 
@@ -1054,7 +1544,16 @@ html[data-aviala-kbd]
   z-index: 3;
   left: 0;
   right: 0;
-  height: var(--datepicker-time-wheel-fade-height, calc(var(--datepicker-time-wheel-item-height, var(--_datepicker-wheel-item-height, 36px)) * 1.5));
+  height: var(
+    --datepicker-time-wheel-fade-height,
+    calc(
+      var(
+          --datepicker-time-wheel-item-height,
+          var(--_datepicker-wheel-item-height, 36px)
+        ) *
+        1.5
+    )
+  );
   pointer-events: none;
 }
 
@@ -1062,7 +1561,11 @@ html[data-aviala-kbd]
   top: 0;
   background: linear-gradient(
     to bottom,
-    var(--datepicker-panel-bg, var(--_datepicker-panel-bg, var(--_legacy-datepicker-panel-bg))) 0%,
+    var(
+        --datepicker-panel-bg,
+        var(--_datepicker-panel-bg, var(--_legacy-datepicker-panel-bg))
+      )
+      0%,
     transparent 100%
   );
 }
@@ -1071,7 +1574,11 @@ html[data-aviala-kbd]
   bottom: 0;
   background: linear-gradient(
     to top,
-    var(--datepicker-panel-bg, var(--_datepicker-panel-bg, var(--_legacy-datepicker-panel-bg))) 0%,
+    var(
+        --datepicker-panel-bg,
+        var(--_datepicker-panel-bg, var(--_legacy-datepicker-panel-bg))
+      )
+      0%,
     transparent 100%
   );
 }
@@ -1093,15 +1600,15 @@ html[data-aviala-kbd]
   scrollbar-width: none;
   padding-top: calc(
     (
-        var(--datepicker-time-wheel-height, var(--_datepicker-wheel-height)) - 2 * var(--_datepicker-wheel-py, 0px) -
-          var(--_datepicker-wheel-stride)
+        var(--datepicker-time-wheel-height, var(--_datepicker-wheel-height)) -
+          2 * var(--_datepicker-wheel-py, 0px) - var(--_datepicker-wheel-stride)
       ) /
       2
   );
   padding-bottom: calc(
     (
-        var(--datepicker-time-wheel-height, var(--_datepicker-wheel-height)) - 2 * var(--_datepicker-wheel-py, 0px) -
-          var(--_datepicker-wheel-stride)
+        var(--datepicker-time-wheel-height, var(--_datepicker-wheel-height)) -
+          2 * var(--_datepicker-wheel-py, 0px) - var(--_datepicker-wheel-stride)
       ) /
       2
   );
@@ -1109,19 +1616,83 @@ html[data-aviala-kbd]
   -webkit-mask-image: linear-gradient(
     to bottom,
     #000 0,
-    #000 calc(50% - var(--datepicker-time-wheel-item-height, var(--_datepicker-wheel-item-height, 36px)) / 2),
-    transparent calc(50% - var(--datepicker-time-wheel-item-height, var(--_datepicker-wheel-item-height, 36px)) / 2),
-    transparent calc(50% + var(--datepicker-time-wheel-item-height, var(--_datepicker-wheel-item-height, 36px)) / 2),
-    #000 calc(50% + var(--datepicker-time-wheel-item-height, var(--_datepicker-wheel-item-height, 36px)) / 2),
+    #000
+      calc(
+        50% -
+          var(
+            --datepicker-time-wheel-item-height,
+            var(--_datepicker-wheel-item-height, 36px)
+          ) /
+          2
+      ),
+    transparent
+      calc(
+        50% -
+          var(
+            --datepicker-time-wheel-item-height,
+            var(--_datepicker-wheel-item-height, 36px)
+          ) /
+          2
+      ),
+    transparent
+      calc(
+        50% +
+          var(
+            --datepicker-time-wheel-item-height,
+            var(--_datepicker-wheel-item-height, 36px)
+          ) /
+          2
+      ),
+    #000
+      calc(
+        50% +
+          var(
+            --datepicker-time-wheel-item-height,
+            var(--_datepicker-wheel-item-height, 36px)
+          ) /
+          2
+      ),
     #000 100%
   );
   mask-image: linear-gradient(
     to bottom,
     #000 0,
-    #000 calc(50% - var(--datepicker-time-wheel-item-height, var(--_datepicker-wheel-item-height, 36px)) / 2),
-    transparent calc(50% - var(--datepicker-time-wheel-item-height, var(--_datepicker-wheel-item-height, 36px)) / 2),
-    transparent calc(50% + var(--datepicker-time-wheel-item-height, var(--_datepicker-wheel-item-height, 36px)) / 2),
-    #000 calc(50% + var(--datepicker-time-wheel-item-height, var(--_datepicker-wheel-item-height, 36px)) / 2),
+    #000
+      calc(
+        50% -
+          var(
+            --datepicker-time-wheel-item-height,
+            var(--_datepicker-wheel-item-height, 36px)
+          ) /
+          2
+      ),
+    transparent
+      calc(
+        50% -
+          var(
+            --datepicker-time-wheel-item-height,
+            var(--_datepicker-wheel-item-height, 36px)
+          ) /
+          2
+      ),
+    transparent
+      calc(
+        50% +
+          var(
+            --datepicker-time-wheel-item-height,
+            var(--_datepicker-wheel-item-height, 36px)
+          ) /
+          2
+      ),
+    #000
+      calc(
+        50% +
+          var(
+            --datepicker-time-wheel-item-height,
+            var(--_datepicker-wheel-item-height, 36px)
+          ) /
+          2
+      ),
     #000 100%
   );
 }
@@ -1147,7 +1718,10 @@ html[data-aviala-kbd]
 .aviala-datepicker-time__wheel-option {
   display: flex;
   width: 100%;
-  height: var(--datepicker-time-wheel-item-height, var(--_datepicker-wheel-item-height, 36px));
+  height: var(
+    --datepicker-time-wheel-item-height,
+    var(--_datepicker-wheel-item-height, 36px)
+  );
   cursor: pointer;
   align-items: center;
   justify-content: center;

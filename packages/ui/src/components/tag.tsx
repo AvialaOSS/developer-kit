@@ -110,7 +110,13 @@ export const TagClose = forwardRef<HTMLButtonElement, TagCloseProps>(
       className={cn("aviala-tag__close aviala-focus-ring", className)}
       {...props}
     >
-      {children ?? <SymbolWrong aria-hidden width="var(--tag-size-icon-width)" height="var(--tag-size-icon-width)" />}
+      {children ?? (
+        <SymbolWrong
+          aria-hidden
+          width="var(--tag-size-icon-width)"
+          height="var(--tag-size-icon-width)"
+        />
+      )}
     </button>
   )
 );
@@ -191,9 +197,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
           >
             {children}
           </Typography>
-          {resolvedContent === "text"
-            ? renderTagIcon(rightIcon)
-            : null}
+          {resolvedContent === "text" ? renderTagIcon(rightIcon) : null}
           {closable ? (
             <TagClose
               aria-label={resolvedCloseLabel}
@@ -204,7 +208,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
               }}
             />
           ) : null}
-          </span>
+        </span>
       </span>
     );
   }

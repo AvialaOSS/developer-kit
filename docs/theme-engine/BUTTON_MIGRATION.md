@@ -13,12 +13,12 @@ Upload 尚未迁移，其旧 Button padding 回退继续使用原来的基础语
 
 Storybook `basic-input-button--component-spacing`：四档 baseline / token / legacy，共 12 个按钮。
 
-| 尺寸 | 默认 padding（y / x） | gap | radius |
-| --- | --- | --- | --- |
-| tiny | 2px / 4px | 4px | 6px |
-| small | 4px / 6px | 4px | 6px |
-| regular | 6px / 10px | 4px | 8px |
-| big | 8px / 14px | 4px | 8px |
+| 尺寸    | 默认 padding（y / x） | gap | radius |
+| ------- | --------------------- | --- | ------ |
+| tiny    | 2px / 4px             | 4px | 6px    |
+| small   | 4px / 6px             | 4px | 6px    |
+| regular | 6px / 10px            | 4px | 8px    |
+| big     | 8px / 14px            | 4px | 8px    |
 
 四档显式组件覆盖均输出 padding 11px / 23px、gap 13px、radius 17px。新旧 x 覆盖同时存在时旧值 19px 优先，旧 gap 9px 生效。默认 gap 从旧 6px 变为标准 4px；small 的 y 从旧 2px 变为标准 4px，属于已存在标准 Token 的真实差异。
 

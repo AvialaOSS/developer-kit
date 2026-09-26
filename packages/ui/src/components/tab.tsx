@@ -97,7 +97,10 @@ function applyTabIndicatorMetrics(
   }
 }
 
-function measureTabIndicator(list: HTMLElement, indicator: HTMLElement): IndicatorMetrics | null {
+function measureTabIndicator(
+  list: HTMLElement,
+  indicator: HTMLElement
+): IndicatorMetrics | null {
   const active = list.querySelector<HTMLElement>(
     '.aviala-tab-item[data-active="true"]:not([data-disabled="true"])'
   );
@@ -112,17 +115,25 @@ function measureTabIndicator(list: HTMLElement, indicator: HTMLElement): Indicat
   const itemRect = active.getBoundingClientRect();
   const styles = getComputedStyle(list);
   // Read resolved CSS dimensions so rem/calc and zero-valued tokens work.
-  const previousWidth = indicator.style.getPropertyValue("--_tab-indicator-measured-width");
+  const previousWidth = indicator.style.getPropertyValue(
+    "--_tab-indicator-measured-width"
+  );
   const previousTransition = indicator.style.transition;
   indicator.style.transition = "none";
   indicator.style.removeProperty("--_tab-indicator-measured-width");
   const indicatorStyles = getComputedStyle(indicator);
   const height = Number.parseFloat(indicatorStyles.height) || 0;
   const tokenWidth = Number.parseFloat(indicatorStyles.width) || 0;
-  if (previousWidth) indicator.style.setProperty("--_tab-indicator-measured-width", previousWidth);
+  if (previousWidth)
+    indicator.style.setProperty(
+      "--_tab-indicator-measured-width",
+      previousWidth
+    );
   void indicator.offsetWidth;
   indicator.style.transition = previousTransition;
-  const legacyInset = Number.parseFloat(styles.getPropertyValue("--tab-indicator-inset-inline"));
+  const legacyInset = Number.parseFloat(
+    styles.getPropertyValue("--tab-indicator-inset-inline")
+  );
   const width = Number.isFinite(legacyInset)
     ? Math.max(0, controlRect.width - legacyInset * 2)
     : tokenWidth;

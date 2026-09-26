@@ -8,8 +8,22 @@ import { ThemeProvider, useTheme } from "../theme/theme-provider";
 import { Button } from "./button";
 import { Input } from "./input";
 import { NumberInput } from "./number-input";
-import { Select, SelectContent, SelectItem, SelectItemGroup, SelectTrigger } from "./select";
-import { Cascader, CascaderColumn, CascaderContent, CascaderItem, CascaderItemGroup, CascaderMenu, CascaderTrigger } from "./cascader";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectItemGroup,
+  SelectTrigger,
+} from "./select";
+import {
+  Cascader,
+  CascaderColumn,
+  CascaderContent,
+  CascaderItem,
+  CascaderItemGroup,
+  CascaderMenu,
+  CascaderTrigger,
+} from "./cascader";
 import { ColorPickerPanel } from "./color-picker/color-picker-panel";
 import { Table, TableCell, TableHead, TableRow } from "./table";
 
@@ -154,9 +168,28 @@ export const ProjectModes: Story = {
 export const EmbeddedInputs: Story = {
   render: () => (
     <div className="flex w-80 flex-col gap-4">
-      <Input aria-label="带徽标文本框" defaultValue="Theme Engine" leftBadge="项目" rightBadge={<Badge style="success" primary>已发布</Badge>} />
-      <NumberInput aria-label="带徽标数值框" defaultValue={12} leftBadge={<Badge style="normal">宽度</Badge>} rightBadge="px" />
-      <Input aria-label="禁用徽标文本框" defaultValue="只读状态" leftBadge="状态" disabled />
+      <Input
+        aria-label="带徽标文本框"
+        defaultValue="Theme Engine"
+        leftBadge="项目"
+        rightBadge={
+          <Badge style="success" primary>
+            已发布
+          </Badge>
+        }
+      />
+      <NumberInput
+        aria-label="带徽标数值框"
+        defaultValue={12}
+        leftBadge={<Badge style="normal">宽度</Badge>}
+        rightBadge="px"
+      />
+      <Input
+        aria-label="禁用徽标文本框"
+        defaultValue="只读状态"
+        leftBadge="状态"
+        disabled
+      />
     </div>
   ),
 };
@@ -168,28 +201,66 @@ export const EmbeddedConsumers: Story = {
         <SelectTrigger aria-label="徽标选择器" className="w-full" />
         <SelectContent>
           <SelectItemGroup>
-            <SelectItem value="draft" showBadge badge="草稿">设计项目</SelectItem>
-            <SelectItem value="published" showBadge badge={<Badge style="success" primary>已发布</Badge>}>标准项目</SelectItem>
+            <SelectItem value="draft" showBadge badge="草稿">
+              设计项目
+            </SelectItem>
+            <SelectItem
+              value="published"
+              showBadge
+              badge={
+                <Badge style="success" primary>
+                  已发布
+                </Badge>
+              }
+            >
+              标准项目
+            </SelectItem>
           </SelectItemGroup>
         </SelectContent>
       </Select>
       <Cascader>
-        <CascaderTrigger aria-label="徽标级联选择器" placeholder="选择项目" className="w-full" />
+        <CascaderTrigger
+          aria-label="徽标级联选择器"
+          placeholder="选择项目"
+          className="w-full"
+        />
         <CascaderContent>
           <CascaderMenu>
             <CascaderColumn>
               <CascaderItemGroup>
-                <CascaderItem value="theme" pathPrefix={[]} showBadge badge="推荐">主题项目</CascaderItem>
-                <CascaderItem value="archive" pathPrefix={[]} showBadge badge="旧版">归档项目</CascaderItem>
+                <CascaderItem
+                  value="theme"
+                  pathPrefix={[]}
+                  showBadge
+                  badge="推荐"
+                >
+                  主题项目
+                </CascaderItem>
+                <CascaderItem
+                  value="archive"
+                  pathPrefix={[]}
+                  showBadge
+                  badge="旧版"
+                >
+                  归档项目
+                </CascaderItem>
               </CascaderItemGroup>
             </CascaderColumn>
           </CascaderMenu>
         </CascaderContent>
       </Cascader>
-      <ColorPickerPanel defaultValue="#FF5532" showEyedropper={false} showPresets={false} />
+      <ColorPickerPanel
+        defaultValue="#FF5532"
+        showEyedropper={false}
+        showPresets={false}
+      />
       <Table>
-        <TableRow header><TableHead>发布状态</TableHead></TableRow>
-        <TableRow><TableCell content="badge" badgeLabel="已发布" /></TableRow>
+        <TableRow header>
+          <TableHead>发布状态</TableHead>
+        </TableRow>
+        <TableRow>
+          <TableCell content="badge" badgeLabel="已发布" />
+        </TableRow>
       </Table>
     </div>
   ),
@@ -198,8 +269,18 @@ export const EmbeddedConsumers: Story = {
 export const NarrowConsumers: Story = {
   render: () => (
     <div className="flex w-48 flex-col gap-4">
-      <Input aria-label="窄文本框" defaultValue="Very long project name with editable content" leftBadge="项目" rightBadge="已发布" />
-      <NumberInput aria-label="窄数值框" defaultValue={123456} leftBadge="宽度" rightBadge="px" />
+      <Input
+        aria-label="窄文本框"
+        defaultValue="Very long project name with editable content"
+        leftBadge="项目"
+        rightBadge="已发布"
+      />
+      <NumberInput
+        aria-label="窄数值框"
+        defaultValue={123456}
+        leftBadge="宽度"
+        rightBadge="px"
+      />
       <div className="overflow-auto" aria-label="长徽标滚动容器">
         <Badge leftIcon={<GeneralSetting />} rightIcon={<GeneralSetting />}>
           Very long project status / 这是一个很长的状态标签

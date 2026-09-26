@@ -35,7 +35,10 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
 );
 Card.displayName = "Card";
 
-function renderCardIcon(node: ReactNode, section: "head" | "bottom" = "head"): ReactNode {
+function renderCardIcon(
+  node: ReactNode,
+  section: "head" | "bottom" = "head"
+): ReactNode {
   if (!node) return null;
   const content =
     isValidElement(node) && typeof node.type !== "string"
@@ -56,7 +59,17 @@ function renderCardIcon(node: ReactNode, section: "head" | "bottom" = "head"): R
         )
       : node;
 
-  return <span className={section === "head" ? "aviala-card-head__icon" : "aviala-card-bottom__heading-icon"}>{content}</span>;
+  return (
+    <span
+      className={
+        section === "head"
+          ? "aviala-card-head__icon"
+          : "aviala-card-bottom__heading-icon"
+      }
+    >
+      {content}
+    </span>
+  );
 }
 
 export type CardHeadProps = Omit<ComponentPropsWithoutRef<"div">, "title"> & {
@@ -123,19 +136,25 @@ export const CardHead = forwardRef<HTMLDivElement, CardHeadProps>(
           return (
             <div className="aviala-card-head__trailing">
               <ButtonGroup className="aviala-card__button-group">
-                  {primaryAction}
-                  {secondaryAction ?? (
-                    <Button
-                      mode="default"
-                      size="regular"
-                      iconOnly
-                      aria-label={locale.more}
-                      leftIcon={<GeneralSetting aria-hidden />}
-                    />
-                  )}
-                </ButtonGroup>
+                {primaryAction}
+                {secondaryAction ?? (
+                  <Button
+                    mode="default"
+                    size="regular"
+                    iconOnly
+                    aria-label={locale.more}
+                    leftIcon={<GeneralSetting aria-hidden />}
+                  />
+                )}
+              </ButtonGroup>
               <span className="aviala-card__divider" aria-hidden />
-              <span className="aviala-card-head__action-icon"><ChevronIcon width="var(--card-item-head-size-icon-width)" height="var(--card-item-head-size-icon-width)" aria-hidden /></span>
+              <span className="aviala-card-head__action-icon">
+                <ChevronIcon
+                  width="var(--card-item-head-size-icon-width)"
+                  height="var(--card-item-head-size-icon-width)"
+                  aria-hidden
+                />
+              </span>
             </div>
           );
         case "switch":
@@ -151,7 +170,9 @@ export const CardHead = forwardRef<HTMLDivElement, CardHeadProps>(
           return select != null || primaryAction != null ? (
             <div className="aviala-card-head__trailing">
               {primaryAction}
-              {select != null && primaryAction != null && <span className="aviala-card__divider" aria-hidden />}
+              {select != null && primaryAction != null && (
+                <span className="aviala-card__divider" aria-hidden />
+              )}
               {select}
             </div>
           ) : null;
@@ -170,7 +191,9 @@ export const CardHead = forwardRef<HTMLDivElement, CardHeadProps>(
           {renderCardIcon(icon ?? <GeneralSetting aria-hidden />)}
           <div className="aviala-card-head__title">
             {heading != null && heading !== false && (
-              <Typography level="title" className="aviala-card-head__heading">{heading}</Typography>
+              <Typography level="title" className="aviala-card-head__heading">
+                {heading}
+              </Typography>
             )}
             {title != null || description != null ? (
               <Typeface
@@ -279,7 +302,9 @@ export const CardBottom = forwardRef<HTMLDivElement, CardBottomProps>(
           return (
             <>
               {select}
-              {select != null && primaryAction != null && <span className="aviala-card__divider" aria-hidden />}
+              {select != null && primaryAction != null && (
+                <span className="aviala-card__divider" aria-hidden />
+              )}
               {primaryAction}
             </>
           );
@@ -288,19 +313,25 @@ export const CardBottom = forwardRef<HTMLDivElement, CardBottomProps>(
           return (
             <>
               <ButtonGroup className="aviala-card__button-group">
-                  {primaryAction}
-                  {secondaryAction ?? (
-                    <Button
-                      mode="default"
-                      size="regular"
-                      iconOnly
-                      aria-label={locale.more}
-                      leftIcon={<GeneralSetting aria-hidden />}
-                    />
-                  )}
-                </ButtonGroup>
+                {primaryAction}
+                {secondaryAction ?? (
+                  <Button
+                    mode="default"
+                    size="regular"
+                    iconOnly
+                    aria-label={locale.more}
+                    leftIcon={<GeneralSetting aria-hidden />}
+                  />
+                )}
+              </ButtonGroup>
               <span className="aviala-card__divider" aria-hidden />
-              <span className="aviala-card-bottom__icon"><ChevronIcon width="var(--card-item-bottom-size-icon-width)" height="var(--card-item-bottom-size-icon-width)" aria-hidden /></span>
+              <span className="aviala-card-bottom__icon">
+                <ChevronIcon
+                  width="var(--card-item-bottom-size-icon-width)"
+                  height="var(--card-item-bottom-size-icon-width)"
+                  aria-hidden
+                />
+              </span>
             </>
           );
       }
@@ -313,14 +344,28 @@ export const CardBottom = forwardRef<HTMLDivElement, CardBottomProps>(
         data-type={slotType}
         {...props}
       >
-        {((heading != null && heading !== false) || title != null || description != null || icon != null) && (
+        {((heading != null && heading !== false) ||
+          title != null ||
+          description != null ||
+          icon != null) && (
           <div className="aviala-card-bottom__main">
             {renderCardIcon(icon ?? <GeneralSetting aria-hidden />, "bottom")}
             <div className="aviala-card-bottom__title">
               {heading != null && heading !== false && (
-                <Typography level="title" className="aviala-card-bottom__heading">{heading}</Typography>
+                <Typography
+                  level="title"
+                  className="aviala-card-bottom__heading"
+                >
+                  {heading}
+                </Typography>
               )}
-              {(title != null || description != null) && <Typeface content="textCaption" primary={title} secondary={description} />}
+              {(title != null || description != null) && (
+                <Typeface
+                  content="textCaption"
+                  primary={title}
+                  secondary={description}
+                />
+              )}
             </div>
           </div>
         )}

@@ -1,7 +1,8 @@
 /* Cascader — Figma Information Collect → Cascader / Cascader Input / Cascader Menu */
 
 .aviala-cascader-trigger {
-  --_cascader-shadow: inset 0 -0.5px 0 var(--cascader-input-color-shadow-default);
+  --_cascader-shadow: inset 0 -0.5px 0
+    var(--cascader-input-color-shadow-default);
   position: relative;
   display: inline-flex;
   width: 100%;
@@ -10,15 +11,37 @@
   align-items: center;
   overflow: hidden;
   border: 0;
-  background-color: var(--input-bg-default, var(--cascader-input-color-background-default));
+  background-color: var(
+    --input-bg-default,
+    var(--cascader-input-color-background-default)
+  );
   box-shadow: var(--input-surface-shadow, var(--_cascader-shadow));
   color: var(--input-fg, var(--cascader-input-color-text-default));
-  padding: var(--input-shell-py) var(--input-shell-px, var(--input-px-regular, var(--cascader-input-size-regular-padding-x)));
-  gap: var(--input-shell-gap, var(--input-gap-regular, var(--cascader-input-size-regular-gap)));
-  --input-shell-px: var(--input-px-regular, var(--cascader-input-size-regular-padding-x));
-  --input-shell-gap: var(--input-gap-regular, var(--cascader-input-size-regular-gap));
-  --input-shell-field-py: var(--input-field-py-regular, var(--cascader-input-size-regular-slot-padding-y));
-  --input-shell-slot-py: var(--input-slot-py-regular, var(--cascader-input-size-regular-slot-padding-y));
+  padding: var(--input-shell-py)
+    var(
+      --input-shell-px,
+      var(--input-px-regular, var(--cascader-input-size-regular-padding-x))
+    );
+  gap: var(
+    --input-shell-gap,
+    var(--input-gap-regular, var(--cascader-input-size-regular-gap))
+  );
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--cascader-input-size-regular-padding-x)
+  );
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--cascader-input-size-regular-gap)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--cascader-input-size-regular-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--cascader-input-size-regular-slot-padding-y)
+  );
   transition:
     background-color 0.15s ease,
     border-color 0.15s ease;
@@ -26,42 +49,91 @@
 
 .aviala-cascader-trigger[data-size="regular"] {
   --input-shell-py: var(--cascader-input-size-regular-padding-y);
-  --input-shell-px: var(--input-px-regular, var(--cascader-input-size-regular-padding-x));
-  --input-shell-gap: var(--input-gap-regular, var(--cascader-input-size-regular-gap));
-  --input-shell-field-py: var(--input-field-py-regular, var(--cascader-input-size-regular-slot-padding-y));
-  --input-shell-slot-py: var(--input-slot-py-regular, var(--cascader-input-size-regular-slot-padding-y));
-  border-radius: var(--input-radius-regular, var(--input-radius, var(--cascader-input-size-radius)));
+  --input-shell-px: var(
+    --input-px-regular,
+    var(--cascader-input-size-regular-padding-x)
+  );
+  --input-shell-gap: var(
+    --input-gap-regular,
+    var(--cascader-input-size-regular-gap)
+  );
+  --input-shell-field-py: var(
+    --input-field-py-regular,
+    var(--cascader-input-size-regular-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-regular,
+    var(--cascader-input-size-regular-slot-padding-y)
+  );
+  border-radius: var(
+    --input-radius-regular,
+    var(--input-radius, var(--cascader-input-size-radius))
+  );
 }
 
 .aviala-cascader-trigger[data-size="big"] {
   --input-shell-py: var(--cascader-input-size-big-padding-y);
-  --input-shell-px: var(--input-px-big, var(--cascader-input-size-big-padding-x));
+  --input-shell-px: var(
+    --input-px-big,
+    var(--cascader-input-size-big-padding-x)
+  );
   --input-shell-gap: var(--input-gap-big, var(--cascader-input-size-big-gap));
-  --input-shell-field-py: var(--input-field-py-big, var(--cascader-input-size-big-slot-padding-y));
-  --input-shell-slot-py: var(--input-slot-py-big, var(--cascader-input-size-big-slot-padding-y));
-  border-radius: var(--input-radius-big, var(--input-radius, var(--cascader-input-size-radius)));
+  --input-shell-field-py: var(
+    --input-field-py-big,
+    var(--cascader-input-size-big-slot-padding-y)
+  );
+  --input-shell-slot-py: var(
+    --input-slot-py-big,
+    var(--cascader-input-size-big-slot-padding-y)
+  );
+  border-radius: var(
+    --input-radius-big,
+    var(--input-radius, var(--cascader-input-size-radius))
+  );
 }
 
 .aviala-cascader-trigger[data-all-round="true"] {
-  border-radius: var(--input-radius-allround, var(--cascader-input-size-round-radius));
+  border-radius: var(
+    --input-radius-allround,
+    var(--cascader-input-size-round-radius)
+  );
 }
 
 .aviala-cascader-trigger[data-state="open"] {
-  background-color: var(--input-bg-activated, var(--cascader-input-color-background-active));
-  box-shadow: var(--input-shell-focus-shadow, 0 0 0 var(--cascader-input-size-border-width) var(--input-border-activated, var(--cascader-input-color-border-active)), var(--input-surface-shadow, var(--_cascader-shadow)));
+  background-color: var(
+    --input-bg-activated,
+    var(--cascader-input-color-background-active)
+  );
+  box-shadow: var(
+    --input-shell-focus-shadow,
+    0 0 0 var(--cascader-input-size-border-width)
+      var(--input-border-activated, var(--cascader-input-color-border-active)),
+    var(--input-surface-shadow, var(--_cascader-shadow))
+  );
 }
 
 .aviala-cascader-trigger:focus-visible {
-  background-color: var(--input-bg-activated, var(--cascader-input-color-background-active));
+  background-color: var(
+    --input-bg-activated,
+    var(--cascader-input-color-background-active)
+  );
   outline: none;
 }
 
 .aviala-cascader-trigger[data-error="true"] {
-  box-shadow: var(--input-shell-error-shadow, inset 0 0 0 var(--cascader-input-size-border-width) var(--destructive, #ff646f), var(--input-surface-shadow, var(--_cascader-shadow)));
+  box-shadow: var(
+    --input-shell-error-shadow,
+    inset 0 0 0 var(--cascader-input-size-border-width)
+      var(--destructive, #ff646f),
+    var(--input-surface-shadow, var(--_cascader-shadow))
+  );
 }
 
 .aviala-cascader-trigger:disabled {
-  background-color: var(--input-bg-disabled, var(--cascader-input-color-background-disabled));
+  background-color: var(
+    --input-bg-disabled,
+    var(--cascader-input-color-background-disabled)
+  );
   cursor: not-allowed;
 }
 
@@ -74,7 +146,10 @@
   align-items: center;
   justify-content: center;
   box-sizing: content-box;
-  color: var(--input-icon-fg, var(--input-fg, var(--cascader-input-color-icon-default)));
+  color: var(
+    --input-icon-fg,
+    var(--input-fg, var(--cascader-input-color-icon-default))
+  );
   padding: var(--input-shell-slot-py) 0;
   opacity: var(--input-icon-opacity, 0.9);
 }
@@ -113,7 +188,10 @@
 }
 
 .aviala-cascader-trigger__value[data-placeholder="true"] {
-  opacity: var(--input-placeholder-opacity, var(--_legacy-input-placeholder-opacity, 0.6));
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--_legacy-input-placeholder-opacity, 0.6)
+  );
 }
 
 .aviala-cascader-trigger__expand {
@@ -125,7 +203,10 @@
   align-items: center;
   justify-content: center;
   box-sizing: content-box;
-  color: var(--input-icon-fg, var(--input-fg, var(--cascader-input-color-icon-default)));
+  color: var(
+    --input-icon-fg,
+    var(--input-fg, var(--cascader-input-color-icon-default))
+  );
   padding: var(--input-shell-slot-py) 0;
   opacity: var(--input-icon-opacity, 0.9);
   transition: transform 0.15s ease;
@@ -141,7 +222,8 @@
 }
 
 .aviala-cascader-content {
-  padding: var(--cascader-menu-size-padding-y) var(--cascader-menu-size-padding-x);
+  padding: var(--cascader-menu-size-padding-y)
+    var(--cascader-menu-size-padding-x);
   /* Above modal (overlay 50 / content 51); restore hits when Dialog disables body pointer-events */
   z-index: 60;
   pointer-events: auto;
@@ -151,10 +233,23 @@
     min(var(--radix-popover-content-available-width, 100vw), calc(100vw - 16px))
   );
   overflow: hidden;
-  border: 1px solid var(--cascader-menu-border, var(--select-menu-border, var(--cascader-menu-color-border-default)));
-  border-radius: var(--cascader-menu-radius, var(--select-menu-radius, var(--cascader-menu-size-radius)));
-  background-color: var(--cascader-menu-bg, var(--select-menu-bg, var(--cascader-menu-color-background-default)));
-  box-shadow: var(--cascader-menu-shadow, var(--select-menu-shadow, var(--_legacy-select-menu-shadow)));
+  border: 1px solid
+    var(
+      --cascader-menu-border,
+      var(--select-menu-border, var(--cascader-menu-color-border-default))
+    );
+  border-radius: var(
+    --cascader-menu-radius,
+    var(--select-menu-radius, var(--cascader-menu-size-radius))
+  );
+  background-color: var(
+    --cascader-menu-bg,
+    var(--select-menu-bg, var(--cascader-menu-color-background-default))
+  );
+  box-shadow: var(
+    --cascader-menu-shadow,
+    var(--select-menu-shadow, var(--_legacy-select-menu-shadow))
+  );
 }
 
 .aviala-cascader-content[data-state="open"][data-side="bottom"] {
@@ -183,7 +278,10 @@
   align-items: stretch;
   overflow-x: auto;
   overflow-y: hidden;
-  background-color: var(--cascader-menu-bg, var(--select-menu-bg, var(--cascader-menu-color-background-default)));
+  background-color: var(
+    --cascader-menu-bg,
+    var(--select-menu-bg, var(--cascader-menu-color-background-default))
+  );
 }
 
 .aviala-cascader-column {
@@ -195,8 +293,15 @@
   align-self: stretch;
   overflow-x: hidden;
   overflow-y: auto;
-  padding: var(--cascader-column-py, var(--cascader-menu-item-group-group-size-padding-y)) 0;
-  background-color: var(--cascader-menu-bg, var(--select-menu-bg, var(--cascader-menu-color-background-default)));
+  padding: var(
+      --cascader-column-py,
+      var(--cascader-menu-item-group-group-size-padding-y)
+    )
+    0;
+  background-color: var(
+    --cascader-menu-bg,
+    var(--select-menu-bg, var(--cascader-menu-color-background-default))
+  );
 }
 
 .aviala-cascader-column__surface {
@@ -233,15 +338,28 @@
 .aviala-cascader-column:not([data-animate="exit"])
   + .aviala-cascader-column:not([data-animate="exit"]) {
   border-inline-start: 1px solid
-    var(--cascader-menu-border, var(--select-menu-border, var(--cascader-menu-item-group-group-color-divider-default)));
+    var(
+      --cascader-menu-border,
+      var(
+        --select-menu-border,
+        var(--cascader-menu-item-group-group-color-divider-default)
+      )
+    );
 }
 
 .aviala-cascader-group {
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: var(--cascader-group-gap, var(--select-group-gap, var(--cascader-menu-item-group-size-gap)));
-  padding: var(--cascader-menu-item-group-size-padding-y) var(--cascader-group-px, var(--select-group-px, var(--cascader-menu-item-group-size-padding-x)));
+  gap: var(
+    --cascader-group-gap,
+    var(--select-group-gap, var(--cascader-menu-item-group-size-gap))
+  );
+  padding: var(--cascader-menu-item-group-size-padding-y)
+    var(
+      --cascader-group-px,
+      var(--select-group-px, var(--cascader-menu-item-group-size-padding-x))
+    );
 }
 
 /* Figma Cascader Menu (`348:13915`) — last group in a column hides dividing line */
@@ -254,14 +372,29 @@
 .aviala-cascader-group__slot {
   display: flex;
   flex-direction: column;
-  gap: var(--cascader-slot-gap, var(--select-slot-gap, var(--_legacy-select-slot-gap)));
+  gap: var(
+    --cascader-slot-gap,
+    var(--select-slot-gap, var(--_legacy-select-slot-gap))
+  );
 }
 
 .aviala-cascader-label {
-  padding: var(--cascader-label-pt, var(--select-label-pt, var(--cascader-menu-item-size-padding-y)))
-    var(--cascader-label-px, var(--select-label-px, var(--cascader-menu-item-size-padding-x)))
-    var(--cascader-label-pb, var(--select-label-pb, var(--cascader-menu-item-size-title-padding-y-end)));
-  color: var(--cascader-label-fg, var(--select-label-fg, var(--cascader-menu-item-color-group-title-default)));
+  padding: var(
+      --cascader-label-pt,
+      var(--select-label-pt, var(--cascader-menu-item-size-padding-y))
+    )
+    var(
+      --cascader-label-px,
+      var(--select-label-px, var(--cascader-menu-item-size-padding-x))
+    )
+    var(
+      --cascader-label-pb,
+      var(--select-label-pb, var(--cascader-menu-item-size-title-padding-y-end))
+    );
+  color: var(
+    --cascader-label-fg,
+    var(--select-label-fg, var(--cascader-menu-item-color-group-title-default))
+  );
 }
 
 .aviala-cascader-item {
@@ -271,19 +404,37 @@
   cursor: pointer;
   user-select: none;
   align-items: center;
-  gap: var(--cascader-item-gap, var(--select-item-gap, var(--_legacy-select-item-gap)));
+  gap: var(
+    --cascader-item-gap,
+    var(--select-item-gap, var(--_legacy-select-item-gap))
+  );
   border: 0;
   border-radius: var(
     --cascader-item-radius,
     var(--cascader-menu-item-size-radius)
   );
   background: transparent;
-  padding: var(--cascader-item-py, var(--select-item-py, var(--cascader-menu-item-size-padding-y)))
-    var(--cascader-item-px, var(--select-item-px, var(--cascader-menu-item-size-padding-x)));
-  color: var(--cascader-item-fg, var(--select-item-fg, var(--cascader-menu-item-color-text-default)));
+  padding: var(
+      --cascader-item-py,
+      var(--select-item-py, var(--cascader-menu-item-size-padding-y))
+    )
+    var(
+      --cascader-item-px,
+      var(--select-item-px, var(--cascader-menu-item-size-padding-x))
+    );
+  color: var(
+    --cascader-item-fg,
+    var(--select-item-fg, var(--cascader-menu-item-color-text-default))
+  );
   /* Resolve inherited item text metrics in the local theme scope. */
-  font-size: var(--cascader-item-font-size, var(--select-item-font-size, var(--typography-text-size)));
-  line-height: var(--cascader-item-line-height, var(--select-item-line-height, var(--typography-text-line-height)));
+  font-size: var(
+    --cascader-item-font-size,
+    var(--select-item-font-size, var(--typography-text-size))
+  );
+  line-height: var(
+    --cascader-item-line-height,
+    var(--select-item-line-height, var(--typography-text-line-height))
+  );
   text-align: start;
   transition:
     background-color 0.15s ease,
@@ -293,10 +444,22 @@
 
 .aviala-cascader-item[data-layout="title"] {
   cursor: default;
-  padding-top: var(--cascader-item-py, var(--select-item-py, var(--cascader-menu-item-size-padding-y)));
-  padding-bottom: var(--cascader-label-pb, var(--select-label-pb, var(--cascader-menu-item-size-title-padding-y-end)));
-  color: var(--cascader-label-fg, var(--select-label-fg, var(--cascader-menu-item-color-group-title-default)));
-  font-size: var(--cascader-label-font-size, var(--select-label-font-size, var(--typography-caption-size)));
+  padding-top: var(
+    --cascader-item-py,
+    var(--select-item-py, var(--cascader-menu-item-size-padding-y))
+  );
+  padding-bottom: var(
+    --cascader-label-pb,
+    var(--select-label-pb, var(--cascader-menu-item-size-title-padding-y-end))
+  );
+  color: var(
+    --cascader-label-fg,
+    var(--select-label-fg, var(--cascader-menu-item-color-group-title-default))
+  );
+  font-size: var(
+    --cascader-label-font-size,
+    var(--select-label-font-size, var(--typography-caption-size))
+  );
   line-height: var(
     --cascader-label-line-height,
     var(--select-label-line-height, var(--typography-caption-line-height))
@@ -308,13 +471,31 @@
   background: transparent;
 }
 
-.aviala-cascader-item:not([data-layout="title"]):not([data-disabled="true"]):hover,
-.aviala-cascader-item[data-highlighted="true"]:not([data-layout="title"]):not([data-disabled="true"]) {
-  background-color: var(--cascader-item-highlight-bg, var(--select-item-highlight-bg, var(--aviala-interaction-filled-hover, var(--_legacy-select-item-highlight-bg))));
+.aviala-cascader-item:not([data-layout="title"]):not(
+    [data-disabled="true"]
+  ):hover,
+.aviala-cascader-item[data-highlighted="true"]:not([data-layout="title"]):not(
+    [data-disabled="true"]
+  ) {
+  background-color: var(
+    --cascader-item-highlight-bg,
+    var(
+      --select-item-highlight-bg,
+      var(
+        --aviala-interaction-filled-hover,
+        var(--_legacy-select-item-highlight-bg)
+      )
+    )
+  );
 }
 
-.aviala-cascader-item:not([data-layout="title"]):not([data-disabled="true"]):active {
-  background-color: var(--cascader-item-active-bg, var(--aviala-interaction-filled-active));
+.aviala-cascader-item:not([data-layout="title"]):not(
+    [data-disabled="true"]
+  ):active {
+  background-color: var(
+    --cascader-item-active-bg,
+    var(--aviala-interaction-filled-active)
+  );
 }
 
 .aviala-cascader-item[data-disabled="true"] {
@@ -329,24 +510,43 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  color: var(--cascader-item-fg, var(--select-item-fg, var(--cascader-menu-item-color-icon-default)));
+  color: var(
+    --cascader-item-fg,
+    var(--select-item-fg, var(--cascader-menu-item-color-icon-default))
+  );
   opacity: var(--input-icon-opacity, 0.9);
 }
 
 .aviala-cascader-item__icon svg {
-  width: var(--cascader-item-icon-size, var(--cascader-menu-item-size-icon-width));
-  height: var(--cascader-item-icon-size, var(--cascader-menu-item-size-icon-width));
+  width: var(
+    --cascader-item-icon-size,
+    var(--cascader-menu-item-size-icon-width)
+  );
+  height: var(
+    --cascader-item-icon-size,
+    var(--cascader-menu-item-size-icon-width)
+  );
 }
 
 .aviala-cascader-item__icon--sm {
   height: var(--cascader-menu-item-size-title-icon-height);
   width: var(--cascader-menu-item-size-title-icon-width);
-  color: var(--cascader-label-fg, var(--select-label-fg, var(--cascader-menu-item-color-title-icon-default)));
+  color: var(
+    --cascader-label-fg,
+    var(--select-label-fg, var(--cascader-menu-item-color-title-icon-default))
+  );
 }
 
-
-
-.aviala-cascader-item__icon--sm svg { width: var(--cascader-item-icon-size, var(--cascader-menu-item-size-title-icon-width)); height: var(--cascader-item-icon-size, var(--cascader-menu-item-size-title-icon-width)); }
+.aviala-cascader-item__icon--sm svg {
+  width: var(
+    --cascader-item-icon-size,
+    var(--cascader-menu-item-size-title-icon-width)
+  );
+  height: var(
+    --cascader-item-icon-size,
+    var(--cascader-menu-item-size-title-icon-width)
+  );
+}
 
 .aviala-cascader-item__text {
   flex: 0 1 auto;
@@ -370,7 +570,10 @@
   display: inline-flex;
   height: var(
     --cascader-item-function-height,
-    var(--select-item-function-height, var(--cascader-menu-item-size-icon-height))
+    var(
+      --select-item-function-height,
+      var(--cascader-menu-item-size-icon-height)
+    )
   );
   flex-shrink: 0;
   align-items: center;
@@ -380,16 +583,20 @@
   opacity: var(--input-icon-opacity, 0.9);
 }
 
-
-
 .aviala-cascader-item__function svg {
   width: var(
     --cascader-item-function-icon-size,
-    var(--select-item-function-icon-size, var(--cascader-menu-item-size-icon-width))
+    var(
+      --select-item-function-icon-size,
+      var(--cascader-menu-item-size-icon-width)
+    )
   );
   height: var(
     --cascader-item-function-icon-size,
-    var(--select-item-function-icon-size, var(--cascader-menu-item-size-icon-width))
+    var(
+      --select-item-function-icon-size,
+      var(--cascader-menu-item-size-icon-width)
+    )
   );
 }
 
@@ -416,8 +623,12 @@
   position: absolute;
   inset: 0;
   border-radius: var(--border-radius-allround, 99px);
-  border: 2px solid var(--radio-border-unchecked, var(--_legacy-radio-border-unchecked));
-  background-color: var(--radio-bg-unchecked, var(--_legacy-radio-bg-unchecked));
+  border: 2px solid
+    var(--radio-border-unchecked, var(--_legacy-radio-border-unchecked));
+  background-color: var(
+    --radio-bg-unchecked,
+    var(--_legacy-radio-bg-unchecked)
+  );
   opacity: 1;
   transition: opacity 0.15s ease;
 }
@@ -429,7 +640,10 @@
   width: var(--radio-indicator-size, 0.5rem);
   height: var(--radio-indicator-size, 0.5rem);
   border-radius: var(--border-radius-allround, 99px);
-  background-color: var(--radio-indicator-bg, var(--_legacy-radio-indicator-bg));
+  background-color: var(
+    --radio-indicator-bg,
+    var(--_legacy-radio-indicator-bg)
+  );
   transform: scale(0);
   transition: transform 0.15s ease;
 }
@@ -451,8 +665,13 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background-image: var(--radio-checked-surface, var(--_legacy-radio-checked-surface));
-  box-shadow: var(--radio-shadow, var(--_legacy-radio-shadow)), var(--input-surface-shadow, var(--_legacy-input-surface-shadow));
+  background-image: var(
+    --radio-checked-surface,
+    var(--_legacy-radio-checked-surface)
+  );
+  box-shadow:
+    var(--radio-shadow, var(--_legacy-radio-shadow)),
+    var(--input-surface-shadow, var(--_legacy-input-surface-shadow));
 }
 
 .aviala-cascader-item__form-checkbox {
@@ -470,8 +689,12 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--checkbox-radius, var(--_legacy-checkbox-radius, 6px));
-  border: 1px solid var(--checkbox-border-unchecked, var(--_legacy-checkbox-border-unchecked));
-  background-color: var(--checkbox-bg-unchecked, var(--_legacy-checkbox-bg-unchecked));
+  border: 1px solid
+    var(--checkbox-border-unchecked, var(--_legacy-checkbox-border-unchecked));
+  background-color: var(
+    --checkbox-bg-unchecked,
+    var(--_legacy-checkbox-bg-unchecked)
+  );
 }
 
 .aviala-cascader-item__form-checkbox-icon {
@@ -482,7 +705,10 @@
 .aviala-cascader-item[data-selected="true"]
   .aviala-cascader-item__form-checkbox {
   border-color: transparent;
-  background-color: var(--checkbox-checked-bg, var(--_legacy-checkbox-checked-bg));
+  background-color: var(
+    --checkbox-checked-bg,
+    var(--_legacy-checkbox-checked-bg)
+  );
 }
 
 .aviala-cascader-item[data-selected="true"]
@@ -496,12 +722,21 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  color: var(--cascader-item-selected-fg, var(--select-item-selected-fg, var(--cascader-menu-item-color-selected-icon-default)));
+  color: var(
+    --cascader-item-selected-fg,
+    var(
+      --select-item-selected-fg,
+      var(--cascader-menu-item-color-selected-icon-default)
+    )
+  );
 }
 
 .aviala-cascader-separator {
   position: relative;
-  height: calc(var(--cascader-menu-item-group-size-divider-padding-y) + var(--cascader-menu-item-group-size-divider-padding-y-end));
+  height: calc(
+    var(--cascader-menu-item-group-size-divider-padding-y) +
+      var(--cascader-menu-item-group-size-divider-padding-y-end)
+  );
   flex-shrink: 0;
 }
 
@@ -510,7 +745,14 @@
   position: absolute;
   top: var(--cascader-menu-item-group-size-divider-padding-y);
   inset-inline: var(--cascader-menu-item-group-size-divider-padding-x);
-  border-top: 1px solid var(--cascader-menu-border, var(--select-menu-border, var(--cascader-menu-item-group-color-divider-default)));
+  border-top: 1px solid
+    var(
+      --cascader-menu-border,
+      var(
+        --select-menu-border,
+        var(--cascader-menu-item-group-color-divider-default)
+      )
+    );
 }
 
 @keyframes aviala-cascader-in-bottom {
@@ -622,23 +864,40 @@
 }
 
 .aviala-cascader-search {
-  padding: var(--cascader-menu-item-size-search-padding-y) var(--cascader-menu-item-size-search-padding-x);
+  padding: var(--cascader-menu-item-size-search-padding-y)
+    var(--cascader-menu-item-size-search-padding-x);
   border-radius: var(--cascader-menu-item-size-radius);
 }
 
-.aviala-cascader-search > .aviala-input[data-input-kind="text"]:not([data-all-round="true"]) {
-  border-radius: var(--input-radius-regular, var(--input-radius, var(--cascader-menu-item-size-search-radius)));
+.aviala-cascader-search
+  > .aviala-input[data-input-kind="text"]:not([data-all-round="true"]) {
+  border-radius: var(
+    --input-radius-regular,
+    var(--input-radius, var(--cascader-menu-item-size-search-radius))
+  );
 }
 
 /* Figma disabled field and typography are separate opacity layers. */
 .aviala-cascader-trigger:disabled > .aviala-cascader-trigger__field {
-  opacity: var(--input-disabled-opacity, var(--cascader-input-transparency-content-disabled));
+  opacity: var(
+    --input-disabled-opacity,
+    var(--cascader-input-transparency-content-disabled)
+  );
 }
 .aviala-cascader-trigger:disabled > .aviala-cascader-trigger__slot,
 .aviala-cascader-trigger:disabled > .aviala-cascader-trigger__expand {
-  opacity: calc(var(--input-disabled-opacity, var(--cascader-input-transparency-content-disabled)) * var(--input-icon-opacity, 1));
+  opacity: calc(
+    var(
+        --input-disabled-opacity,
+        var(--cascader-input-transparency-content-disabled)
+      ) *
+      var(--input-icon-opacity, 1)
+  );
 }
 .aviala-cascader-trigger__value[data-placeholder],
 .aviala-cascader-trigger:disabled .aviala-cascader-trigger__value {
-  opacity: var(--input-placeholder-opacity, var(--cascader-input-transparency-placeholder));
+  opacity: var(
+    --input-placeholder-opacity,
+    var(--cascader-input-transparency-placeholder)
+  );
 }

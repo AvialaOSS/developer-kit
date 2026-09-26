@@ -61,20 +61,17 @@ ItemGeometryTokens浏览器实测：普通项padding7×17/gap11/radius9；标题
 
 新发现待修：NestedSubMenu点击Sub option B后弹层关闭，但触发器textContent为空，不能宣称子菜单选择通过。需检查关闭时子项卸载与Radix ItemText注册生命周期。菜单项颜色/图标/功能区、完整模式矩阵仍待完成。
 
-
 ## 子菜单标签生命周期修复
 
 关闭的子菜单使用DocumentFragment保留子项注册，避免Popover卸载ItemText后触发器文字丢失；内容不在可见DOM里，不使用强制挂载的隐藏弹层。延迟关闭检查当前焦点是否仍在本子菜单中，避免键盘进入后被指针离开定时器关闭。
 
 浏览器复验：初始关闭子菜单时defaultValue=leaf-a可显示Sub option A；鼠标点击Sub option B后主菜单关闭且触发器显示Sub option B。重新打开，键盘进入子菜单后Down可移动至B，Enter后B具有selected状态，控制台无error/warn。键盘Enter后主菜单本轮仍保持打开，Escape行为还需继续排查（共享useCloseSuppression有窗口blur标志），未宣称完整键盘关闭验收。表单原生选项和深层嵌套尚需回归。
 
-
 ## 键盘关闭修复
 
 共享useCloseSuppression原先在window捕获所有blur，将元素间焦点移动误标为窗口失焦。现在仅event.target===window设置保护，用户后续keydown/pointerdown清除旧标记；键盘操作同时清除指针关闭标志，恢复正确的焦点归还策略。
 
 NestedSubMenu浏览器复验：Down/Up进入子菜单，Down/Enter选择B后主菜单关闭、触发器显示Sub option B且获得焦点；再次展开后一次Escape关闭、标签保留且焦点恢复。控制台无error/warn。新增5项事件流程单元测试，覆盖元素失焦、真正窗口失焦、返回后的键盘/指针关闭及禁用开启，全部通过。测试用轻量hook生命周期替身检验事件监听逻辑；不代替其他使用同一hook的复杂组件浏览器回归。
-
 
 ## 标题、副标题与附加功能区
 
@@ -84,13 +81,11 @@ ItemGeometryTokens浏览器读取标题rgb(70,80,90)、副标题rgb(90,60,80)、
 
 另发现Figma People的Form-CheckBox/Form-Radio使用普通padding-x，而Simple/CheckBox/Radio使用people/padding-x-start；现有网页统一使用people起始留白，后续需按已证实的Function分支修正。heading-default在本轮返回的可见文字绑定未发现，不能按近似语义替代text-default。
 
-
 ## 左右图标与人员项分支
 
 普通/标题左右图标消费4项icon-width/height Token，glyph使用width的正方形尺寸，插槽高度独立消费height；不再以内联共享biggerSize默认值遮住组件宽度。调用方明确传入level/biggerSize时保留旧档位行为。People Form-Radio/Form-CheckBox按本轮已读取绑定改回普通padding-x，其余People保留专属起始留白。
 
 ItemGeometryTokens实际：普通glyph21/槽高29，标题glyph15/槽高23，显式title档位glyph22；普通People起始5，Form-Radio People起始17，旧padding覆盖19仍生效。CSS产物生成通过。尾部功能图标仍未迁移，颜色及选中状态等剩余项保留。
-
 
 ## 尾部默认图标与 Checked 背景
 
@@ -100,7 +95,6 @@ Checked行按623:57570已确认绑定消费selected/background-default；保留�
 
 浏览器ItemGeometryTokens默认尾部glyph21/槽高29；点击Checked token item正常关闭，重新展开仍选中、背景rgb(210,230,220)、shadow none。CSS生成通过。剩余包含图标颜色、自定义尾部图标、Search、badge槽、shared typography局部模式及完整模式矩阵。
 
-
 ## 功能图标颜色与 Badge 外层
 
 按已读取394:24174内部fill绑定icon-default、296:7276/296:7344内部fill绑定selected/icon-default，分别接入普通尾部色与单选/复选选中标记色。旧selected-fg全局默认转内部legacy，普通selected文字及Navigation/Cascader/List/DatePicker派生仍保持旧回退，显式旧覆盖优先。
@@ -109,20 +103,17 @@ Checked行按623:57570已确认绑定消费selected/background-default；保留�
 
 浏览器自定义功能glyph21、颜色rgb(70,100,120)，Badge外层padding1×9；选择Radio function后关闭并重开，标记glyph21、颜色rgb(120,60,80)。CSS构建通过。左右图标颜色、Search、普通selected语义、标题Typography与完整八模式回归仍未完成。
 
-
 ## 局部共享 Typography
 
 将6项菜单字体派生默认移至内部legacy变量；Select消费端直接解析当前作用域的共享Typography字号/行高，仍允许显式select/input覆盖，其他Cascader派生保留原回退。Title行在根节点明确使用caption指标，避免子文字继承正文指标覆盖其caption类。
 
 MenuTypography独立项目浏览器验证：Default正文14/18，分组/Title/副标题12/16；切Mobile Friendly后正文18/24，分组/Title/副标题16/20；显式19/27两模式保持。单位为px。未新增组件级字体Token。CSS生成与类型检查通过。其余颜色/效果及八模式完整交叉矩阵仍待覆盖。
 
-
 ## 菜单八模式首轮交叉回归
 
 MenuTypography增加亮暗/效果控制。浏览器遍历Light/Dark × Default/Mobile Friendly × ON/OFF八组合，每轮实际打开/关闭菜单。标题glyph12/16，正文glyph14/18；正文字号/行高14/18与18/24，标题12/16与16/20；显式字体19/27保持。菜单背景Light255、Dark37，边框249/248/248与18，未选正文38/37/37与213，标题97/96/96与142。
 
 未通过效果要求：八组合菜单阴影都仍是旧rgba0.18细线+rgba0.08投影，OFF不消失，需要继续核对Figma共享效果绑定并接入ON/OFF。普通selected文字仍旧205/57/35，本轮已Ask是否统一Checked Token，等待用户决定。以上只证明当前菜单样例，不等同于全部变体/所有交互验收。
-
 
 ## 菜单效果与隐藏图标绑定审计
 
@@ -132,7 +123,6 @@ MenuTypography增加亮暗/效果控制。浏览器遍历Light/Dark × Default/M
 
 相关Select结构与关闭保护测试共11项通过。这些单元测试不覆盖真实Figma回写或菜单效果。
 
-
 ## Search 行
 
 新增导出的SelectSearch/SelectSearchProps，复用Input，消费search padding-x/y/radius及普通行radius。对应已读取460:42087外框与460:42174 BaseInput绑定。过滤和空结果交由调用方管理，Search示例在关闭时清空查询，让已选项标签继续可见。
@@ -140,7 +130,6 @@ MenuTypography增加亮暗/效果控制。浏览器遍历Light/Dark × Default/M
 键盘文字、编辑与IME事件不进入Radix typeahead；上下键进入首/末结果，Escape正常退出。过滤移除已选项时Radix会自动聚焦panel，新增编辑期焦点保护，只拦截这一panel焦点回落，不阻止用户聚焦结果或退出。
 
 浏览器输入engi筛至Engineering，Down/Enter选择后关闭且标签正确；已有Engineering时输入zzzz完整保留焦点、出现空结果，Escape关闭后Engineering保留。搜索padding7×11、圆角13实测生效；初版圆角被BaseInput高优先级规则覆盖，已修正。无console error/warn。触屏、完整IME实机、异步过滤、表单集成仍需专门验收。
-
 
 ## Search 表单边界
 

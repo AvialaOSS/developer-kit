@@ -101,7 +101,10 @@
 }
 
 .aviala-avatar[data-content="icon"] .aviala-avatar__surface {
-  background-color: var(--avatar-bg, var(--avata-color-icon-background-default));
+  background-color: var(
+    --avatar-bg,
+    var(--avata-color-icon-background-default)
+  );
   color: var(--avatar-fg, var(--avata-color-icon-default));
 }
 /* —— Tag (617:55892) —— */
@@ -121,10 +124,7 @@
   border-radius: var(--tag-radius, var(--tag-size-radius));
   outline: var(--tag-size-stroke-width) solid
     var(--tag-border, var(--tag-color-border-default));
-  background-color: var(
-    --tag-bg,
-    var(--tag-color-background-default)
-  );
+  background-color: var(--tag-bg, var(--tag-color-background-default));
   padding: var(--_tag-padding-y) var(--tag-px, var(--_tag-padding-x));
 }
 
@@ -203,7 +203,8 @@
   --_tag-align-y: var(--tag-size-text-align-to-subtitle-level-padding-y);
 }
 
-.aviala-tag__icon, .aviala-tag__close {
+.aviala-tag__icon,
+.aviala-tag__close {
   color: var(--tag-fg, var(--tag-color-icon-default));
 }
 
@@ -215,11 +216,9 @@
   overflow: auto;
   padding: var(--table-size-padding-y) var(--table-size-padding-x);
   border-radius: var(--table-radius, var(--table-size-radius));
-  background-color: var(
-    --table-bg,
-    var(--table-color-background)
-  );
-  border: var(--table-size-stroke-width) solid var(--table-border, var(--table-color-border));
+  background-color: var(--table-bg, var(--table-color-background));
+  border: var(--table-size-stroke-width) solid
+    var(--table-border, var(--table-color-border));
 }
 
 .aviala-table[data-sticky-header="true"] {
@@ -234,10 +233,7 @@
 }
 
 .aviala-table__row[data-header="true"] {
-  background-color: var(
-    --table-head-bg,
-    var(--table-head-color-background)
-  );
+  background-color: var(--table-head-bg, var(--table-head-color-background));
 }
 
 .aviala-table[data-sticky-header="true"]
@@ -276,20 +272,24 @@
   min-height: var(--table-head-height, 38px);
   justify-content: center;
   padding-block: var(--table-head-size-default-padding-y);
-  padding-inline-start: var(--table-cell-px, var(--table-head-size-default-padding-x-start));
-  padding-inline-end: var(--table-cell-px-end, var(--table-head-size-default-padding-x-end));
+  padding-inline-start: var(
+    --table-cell-px,
+    var(--table-head-size-default-padding-x-start)
+  );
+  padding-inline-end: var(
+    --table-cell-px-end,
+    var(--table-head-size-default-padding-x-end)
+  );
   gap: var(--table-head-size-gap);
   color: var(--table-head-fg, var(--table-head-color-text-default));
-  background-color: var(
-    --table-head-bg,
-    var(--table-head-color-background)
-  );
+  background-color: var(--table-head-bg, var(--table-head-color-background));
 }
 
 .aviala-table-head[data-content="checkbox"] {
   flex: 0 0 var(--table-checkbox-col-width, 40px);
   justify-content: center;
-  padding: var(--table-head-py, var(--table-head-size-checkbox-padding-y)) var(--table-head-size-checkbox-padding-x);
+  padding: var(--table-head-py, var(--table-head-size-checkbox-padding-y))
+    var(--table-head-size-checkbox-padding-x);
 }
 
 .aviala-table-cell {
@@ -303,20 +303,27 @@
   min-height: var(--table-cell-height, 50px);
   justify-content: center;
   padding-block: var(--table-cell-size-default-padding-y);
-  padding-inline-start: var(--table-cell-px, var(--table-cell-size-default-padding-x-start));
-  padding-inline-end: var(--table-cell-px-end, var(--table-cell-size-default-padding-x-end));
-  gap: var(--table-cell-size-gap);
-  color: var(--table-cell-fg, var(--table-cell-content-color-title-text-default));
-  background-color: var(
-    --table-bg,
-    var(--table-cell-color-background)
+  padding-inline-start: var(
+    --table-cell-px,
+    var(--table-cell-size-default-padding-x-start)
   );
+  padding-inline-end: var(
+    --table-cell-px-end,
+    var(--table-cell-size-default-padding-x-end)
+  );
+  gap: var(--table-cell-size-gap);
+  color: var(
+    --table-cell-fg,
+    var(--table-cell-content-color-title-text-default)
+  );
+  background-color: var(--table-bg, var(--table-cell-color-background));
 }
 
 .aviala-table-cell[data-content="checkbox"] {
   flex: 0 0 var(--table-checkbox-col-width, 40px);
   justify-content: center;
-  padding: var(--table-cell-py, var(--table-cell-size-checkbox-padding-y)) var(--table-cell-size-checkbox-padding-x);
+  padding: var(--table-cell-py, var(--table-cell-size-checkbox-padding-y))
+    var(--table-cell-size-checkbox-padding-x);
 }
 
 .aviala-table-cell[data-content="action"] > .aviala-table-cell__content {
@@ -352,13 +359,19 @@
   align-items: center;
   justify-content: center;
   width: var(--table-cell-icon-size, var(--table-cell-content-size-icon-width));
-  height: var(--table-cell-icon-size, var(--table-cell-content-size-icon-container-height));
+  height: var(
+    --table-cell-icon-size,
+    var(--table-cell-content-size-icon-container-height)
+  );
   color: var(--table-cell-fg, var(--table-cell-content-color-icon-default));
 }
 
 .aviala-table-cell__icon > svg {
   width: var(--table-cell-icon-size, var(--table-cell-content-size-icon-width));
-  height: var(--table-cell-icon-size, var(--table-cell-content-size-icon-width));
+  height: var(
+    --table-cell-icon-size,
+    var(--table-cell-content-size-icon-width)
+  );
 }
 
 .aviala-table-cell__icon-place {
@@ -387,7 +400,10 @@
 }
 
 .aviala-table-cell__title.aviala-typography {
-  color: var(--table-cell-fg, var(--table-cell-content-color-title-text-default));
+  color: var(
+    --table-cell-fg,
+    var(--table-cell-content-color-title-text-default)
+  );
 }
 
 .aviala-table-cell__icon-place .aviala-table-cell__icon {
@@ -424,7 +440,11 @@
   align-self: stretch;
   align-items: center;
   gap: var(--table-cell-content-size-internal-gap);
-  padding: var(--table-cell-py, var(--table-cell-content-size-centered-slot-padding-y)) var(--table-cell-content-size-padding-x);
+  padding: var(
+      --table-cell-py,
+      var(--table-cell-content-size-centered-slot-padding-y)
+    )
+    var(--table-cell-content-size-padding-x);
 }
 
 .aviala-table-cell__content,
@@ -445,7 +465,8 @@
   flex-shrink: 0;
   align-items: center;
   gap: var(--table-head-size-icon-slot-gap);
-  padding: var(--table-head-py, var(--table-head-size-slot-padding-y)) var(--table-head-size-padding-x);
+  padding: var(--table-head-py, var(--table-head-size-slot-padding-y))
+    var(--table-head-size-padding-x);
 }
 
 .aviala-table-head__icon {
@@ -464,7 +485,11 @@
 
 .aviala-table-cell__text,
 .aviala-table-cell__headline {
-  padding: var(--table-cell-py, var(--table-cell-content-size-headline-padding-y)) var(--table-cell-content-size-padding-x);
+  padding: var(
+      --table-cell-py,
+      var(--table-cell-content-size-headline-padding-y)
+    )
+    var(--table-cell-content-size-padding-x);
 }
 
 .aviala-table-cell__headline {
@@ -480,17 +505,23 @@
   justify-content: center;
   flex-shrink: 0;
   gap: var(--table-cell-content-size-leading-slot-gap);
-  padding: var(--table-cell-py, var(--table-cell-content-size-centered-slot-padding-y)) var(--table-cell-content-size-padding-x);
+  padding: var(
+      --table-cell-py,
+      var(--table-cell-content-size-centered-slot-padding-y)
+    )
+    var(--table-cell-content-size-padding-x);
 }
 
 .aviala-table-head__content > .aviala-table-cell__main {
   gap: var(--table-head-size-internal-gap);
-  padding: var(--table-head-py, var(--table-head-size-headline-padding-y)) var(--table-head-size-padding-x);
+  padding: var(--table-head-py, var(--table-head-size-headline-padding-y))
+    var(--table-head-size-padding-x);
 }
 
 .aviala-table-head__content > .aviala-table-cell__actions {
   gap: var(--table-head-size-internal-gap);
-  padding: var(--table-head-py, var(--table-head-size-slot-padding-y)) var(--table-head-size-padding-x);
+  padding: var(--table-head-py, var(--table-head-size-slot-padding-y))
+    var(--table-head-size-padding-x);
 }
 
 /* Direct custom children keep the pre-migration content contract. */

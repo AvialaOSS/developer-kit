@@ -301,7 +301,11 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
               onClick={() => applyStep(1)}
               {...spiralDebugId("number-input.step-up")}
             >
-              <DirectionArrowUpLight width="var(--input-slot-icon-size, var(--size-regular))" height="var(--input-slot-icon-size, var(--size-regular))" aria-hidden />
+              <DirectionArrowUpLight
+                width="var(--input-slot-icon-size, var(--size-regular))"
+                height="var(--input-slot-icon-size, var(--size-regular))"
+                aria-hidden
+              />
             </button>
             <button
               type="button"
@@ -316,7 +320,11 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
               onClick={() => applyStep(-1)}
               {...spiralDebugId("number-input.step-down")}
             >
-              <DirectionArrowDownLight width="var(--input-slot-icon-size, var(--size-regular))" height="var(--input-slot-icon-size, var(--size-regular))" aria-hidden />
+              <DirectionArrowDownLight
+                width="var(--input-slot-icon-size, var(--size-regular))"
+                height="var(--input-slot-icon-size, var(--size-regular))"
+                aria-hidden
+              />
             </button>
           </div>
         ) : null}

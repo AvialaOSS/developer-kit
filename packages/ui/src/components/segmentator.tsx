@@ -51,13 +51,7 @@ function renderIcon(node: ReactNode): ReactNode {
     biggerSize: true,
   });
 
-  return (
-    <span
-      className="aviala-segmentator-item__icon"
-    >
-      {content}
-    </span>
-  );
+  return <span className="aviala-segmentator-item__icon">{content}</span>;
 }
 
 function useSegmentatorState(

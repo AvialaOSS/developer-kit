@@ -35,9 +35,7 @@ import { Badge } from "./badge";
 import { Input, type InputProps } from "./input";
 import { typographyVariants } from "./typography";
 import { cloneAvialaIconElement } from "../lib/clone-aviala-icon";
-import {
-  iconSlotCssVarStyle,
-} from "../lib/icon-slot-sizing";
+import { iconSlotCssVarStyle } from "../lib/icon-slot-sizing";
 import { renderSlotIcon } from "../lib/render-slot-icon";
 import {
   collectRovingItems,
@@ -478,11 +476,21 @@ function renderItemIcon(
     level: iconLevel,
     biggerSize: true,
   });
-  const iconProps = isValidElement(node) ? (node as ReactElement<AvialaIconProps>).props : undefined;
-  const useComponentSize = iconProps?.level === undefined && iconProps?.biggerSize === undefined;
-  if (useComponentSize && isValidElement(content) && typeof content.type !== "string") {
+  const iconProps = isValidElement(node)
+    ? (node as ReactElement<AvialaIconProps>).props
+    : undefined;
+  const useComponentSize =
+    iconProps?.level === undefined && iconProps?.biggerSize === undefined;
+  if (
+    useComponentSize &&
+    isValidElement(content) &&
+    typeof content.type !== "string"
+  ) {
     const size = `var(--select-item-icon-size, var(--select-menu-item-size-${iconLevel === "caption" ? "title-" : ""}icon-width))`;
-    content = cloneElement(content as ReactElement<AvialaIconProps>, { width: size, height: size });
+    content = cloneElement(content as ReactElement<AvialaIconProps>, {
+      width: size,
+      height: size,
+    });
   }
 
   return (
@@ -491,12 +499,16 @@ function renderItemIcon(
         "aviala-select-item__icon",
         iconLevel === "caption" && "aviala-select-item__icon--sm"
       )}
-      style={useComponentSize ? undefined : iconSlotCssVarStyle(
-        node,
-        "--select-item-icon-size",
-        iconLevel,
-        true
-      )}
+      style={
+        useComponentSize
+          ? undefined
+          : iconSlotCssVarStyle(
+              node,
+              "--select-item-icon-size",
+              iconLevel,
+              true
+            )
+      }
       {...(debugId ? spiralDebugId(debugId) : undefined)}
     >
       {content}
@@ -540,7 +552,8 @@ function SelectItemFormCheckbox() {
   );
 }
 
-const selectFunctionIconSize = "var(--select-item-function-icon-size, var(--select-menu-item-size-icon-width))";
+const selectFunctionIconSize =
+  "var(--select-item-function-icon-size, var(--select-menu-item-size-icon-width))";
 
 function SelectItemTrailingRadio() {
   return (
@@ -548,7 +561,11 @@ function SelectItemTrailingRadio() {
       className="aviala-select-item__trailing-radio"
       aria-hidden
     >
-      <SymbolRight width={selectFunctionIconSize} height={selectFunctionIconSize} aria-hidden />
+      <SymbolRight
+        width={selectFunctionIconSize}
+        height={selectFunctionIconSize}
+        aria-hidden
+      />
     </SelectPrimitive.ItemIndicator>
   );
 }
@@ -559,7 +576,11 @@ function SelectItemTrailingCheckbox() {
       className="aviala-select-item__trailing-checkbox"
       aria-hidden
     >
-      <SymbolRight width={selectFunctionIconSize} height={selectFunctionIconSize} aria-hidden />
+      <SymbolRight
+        width={selectFunctionIconSize}
+        height={selectFunctionIconSize}
+        aria-hidden
+      />
     </SelectPrimitive.ItemIndicator>
   );
 }
@@ -575,7 +596,13 @@ function SelectItemDefaultAvatar() {
 function SelectExpandChevron() {
   const rtl = useRtl();
   const Icon = rtl ? DirectionArrowLeft : DirectionArrowRight;
-  return <Icon width={selectFunctionIconSize} height={selectFunctionIconSize} aria-hidden />;
+  return (
+    <Icon
+      width={selectFunctionIconSize}
+      height={selectFunctionIconSize}
+      aria-hidden
+    />
+  );
 }
 
 function renderFunctionSlot(
@@ -588,16 +615,38 @@ function renderFunctionSlot(
   if (layout === "checked") return null;
 
   if (icon !== undefined) {
-    const iconProps = isValidElement(icon) ? (icon as ReactElement<AvialaIconProps>).props : undefined;
-    const useComponentSize = iconProps?.level === undefined && iconProps?.biggerSize === undefined;
-    let content = cloneAvialaIconElement(icon, { level: "text", biggerSize: true });
-    if (useComponentSize && isValidElement(content) && typeof content.type !== "string") {
-      content = cloneElement(content as ReactElement<AvialaIconProps>, { width: selectFunctionIconSize, height: selectFunctionIconSize });
+    const iconProps = isValidElement(icon)
+      ? (icon as ReactElement<AvialaIconProps>).props
+      : undefined;
+    const useComponentSize =
+      iconProps?.level === undefined && iconProps?.biggerSize === undefined;
+    let content = cloneAvialaIconElement(icon, {
+      level: "text",
+      biggerSize: true,
+    });
+    if (
+      useComponentSize &&
+      isValidElement(content) &&
+      typeof content.type !== "string"
+    ) {
+      content = cloneElement(content as ReactElement<AvialaIconProps>, {
+        width: selectFunctionIconSize,
+        height: selectFunctionIconSize,
+      });
     }
     return (
       <span
         className="aviala-select-item__function"
-        style={useComponentSize ? undefined : iconSlotCssVarStyle(icon, "--select-item-function-icon-size", "text", true)}
+        style={
+          useComponentSize
+            ? undefined
+            : iconSlotCssVarStyle(
+                icon,
+                "--select-item-function-icon-size",
+                "text",
+                true
+              )
+        }
         {...spiralDebugId("select.content.item.function")}
       >
         {content}
@@ -961,45 +1010,59 @@ export const SelectSearch = forwardRef<HTMLInputElement, SelectSearchProps>(
       const panel = inputRef.current?.closest(SELECT_PANEL_SELECTOR);
       const preserveEditingFocus = (event: Event) => {
         // Radix may focus the panel when filtering unmounts its selected item.
-        if (event.target === panel && editingRef.current) inputRef.current?.focus();
+        if (event.target === panel && editingRef.current)
+          inputRef.current?.focus();
       };
       panel?.addEventListener("focus", preserveEditingFocus);
       return () => panel?.removeEventListener("focus", preserveEditingFocus);
     }, []);
     return (
-    <div className="aviala-select-search">
-      <Input
-        ref={node => {
-          inputRef.current = node;
-          if (typeof ref === "function") ref(node);
-          else if (ref) ref.current = node;
-        }}
-        type="search"
-        {...props}
-        onFocus={event => { editingRef.current = true; onFocus?.(event); }}
-        onBlur={event => {
-          if (event.relatedTarget !== event.currentTarget.closest(SELECT_PANEL_SELECTOR)) editingRef.current = false;
-          onBlur?.(event);
-        }}
-        onKeyDown={(event) => {
-          onKeyDown?.(event);
-          if (event.defaultPrevented || event.key === "Escape") return;
-          // Do not feed input text, selection keys or IME events to Radix typeahead.
-          event.stopPropagation();
-          if (event.nativeEvent.isComposing || event.ctrlKey || event.metaKey || event.altKey) return;
-          // Enter edits the search query; selection belongs to the focused result.
-          if (event.key === "Enter") event.preventDefault();
-          if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-            event.preventDefault();
-            focusSelectMenuItem(
-              event.currentTarget.closest(SELECT_PANEL_SELECTOR),
-              null,
-              event.key === "ArrowDown" ? "first" : "last"
-            );
-          }
-        }}
-      />
-    </div>
+      <div className="aviala-select-search">
+        <Input
+          ref={(node) => {
+            inputRef.current = node;
+            if (typeof ref === "function") ref(node);
+            else if (ref) ref.current = node;
+          }}
+          type="search"
+          {...props}
+          onFocus={(event) => {
+            editingRef.current = true;
+            onFocus?.(event);
+          }}
+          onBlur={(event) => {
+            if (
+              event.relatedTarget !==
+              event.currentTarget.closest(SELECT_PANEL_SELECTOR)
+            )
+              editingRef.current = false;
+            onBlur?.(event);
+          }}
+          onKeyDown={(event) => {
+            onKeyDown?.(event);
+            if (event.defaultPrevented || event.key === "Escape") return;
+            // Do not feed input text, selection keys or IME events to Radix typeahead.
+            event.stopPropagation();
+            if (
+              event.nativeEvent.isComposing ||
+              event.ctrlKey ||
+              event.metaKey ||
+              event.altKey
+            )
+              return;
+            // Enter edits the search query; selection belongs to the focused result.
+            if (event.key === "Enter") event.preventDefault();
+            if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+              event.preventDefault();
+              focusSelectMenuItem(
+                event.currentTarget.closest(SELECT_PANEL_SELECTOR),
+                null,
+                event.key === "ArrowDown" ? "first" : "last"
+              );
+            }
+          }}
+        />
+      </div>
     );
   }
 );

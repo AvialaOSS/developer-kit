@@ -26,7 +26,10 @@ const meta: Meta<typeof TimePickerField> = {
 export default meta;
 
 export const WithSeconds: StoryObj<typeof TimePickerField> = {
-  args: {showSeconds:true,defaultValue:{hours:9,minutes:30,seconds:45}},
+  args: {
+    showSeconds: true,
+    defaultValue: { hours: 9, minutes: 30, seconds: 45 },
+  },
 };
 type Story = StoryObj<typeof TimePickerField>;
 

@@ -12,7 +12,10 @@ export const TIME_PICKER_MINUTE_VALUES = Array.from(
   (_, index) => index * 5
 );
 
-export const TIME_PICKER_SECOND_VALUES = Array.from({ length: 60 }, (_, index) => index);
+export const TIME_PICKER_SECOND_VALUES = Array.from(
+  { length: 60 },
+  (_, index) => index
+);
 
 export type TimePickerWheelsValue = TimePickerValue;
 
@@ -37,7 +40,10 @@ export function TimePickerWheels({
       role="group"
       aria-label={locale.selectTime}
     >
-      <div className="aviala-datepicker-time__columns" data-seconds={showSeconds ? "true" : undefined}>
+      <div
+        className="aviala-datepicker-time__columns"
+        data-seconds={showSeconds ? "true" : undefined}
+      >
         <DatePickerTimeWheelColumn
           className="aviala-datepicker-time__hour"
           aria-label={locale.hour}
@@ -52,13 +58,15 @@ export function TimePickerWheels({
           value={value.minutes}
           onChange={(minutes) => onChange({ ...value, minutes })}
         />
-        {showSeconds && <DatePickerTimeWheelColumn
-          className="aviala-datepicker-time__second"
-          aria-label={locale.second ?? "Second"}
-          values={TIME_PICKER_SECOND_VALUES}
-          value={value.seconds ?? 0}
-          onChange={(seconds) => onChange({ ...value, seconds })}
-        />}
+        {showSeconds && (
+          <DatePickerTimeWheelColumn
+            className="aviala-datepicker-time__second"
+            aria-label={locale.second ?? "Second"}
+            values={TIME_PICKER_SECOND_VALUES}
+            value={value.seconds ?? 0}
+            onChange={(seconds) => onChange({ ...value, seconds })}
+          />
+        )}
       </div>
     </div>
   );

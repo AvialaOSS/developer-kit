@@ -13,14 +13,32 @@
   /* Radix Popper sets --radix-popover-content-transform-origin on Content (accounts
      for side + arrow position) — enter scale grows from the invocation point */
   transform-origin: var(--radix-popover-content-transform-origin, 50% 50%);
-  max-width: min(var(--popover-content-max-width, 320px), var(--radix-popover-content-available-width, 100vw));
+  max-width: min(
+    var(--popover-content-max-width, 320px),
+    var(--radix-popover-content-available-width, 100vw)
+  );
   overflow-wrap: anywhere;
   border: none;
   outline: 1px solid var(--popover-content-border, transparent);
   border-radius: var(--popover-content-radius, var(--popover-size-radius));
-  background-color: var(--popover-content-bg, var(--popover-color-default-background));
+  background-color: var(
+    --popover-content-bg,
+    var(--popover-color-default-background)
+  );
   color: var(--popover-content-fg, var(--popover-color-default-text-default));
-  box-shadow: var(--popover-content-shadow, var(--popover-effect-shadow-offset-x) var(--popover-effect-shadow-large-offset-y) var(--popover-effect-shadow-large-blur) var(--popover-effect-shadow-spread) var(--popover-effect-shadow-large-color), var(--popover-effect-shadow-offset-x) var(--popover-effect-shadow-small-offset-y) var(--popover-effect-shadow-small-blur) var(--popover-effect-shadow-spread) var(--popover-effect-shadow-small-color));
+  box-shadow: var(
+    --popover-content-shadow,
+    var(--popover-effect-shadow-offset-x)
+      var(--popover-effect-shadow-large-offset-y)
+      var(--popover-effect-shadow-large-blur)
+      var(--popover-effect-shadow-spread)
+      var(--popover-effect-shadow-large-color),
+    var(--popover-effect-shadow-offset-x)
+      var(--popover-effect-shadow-small-offset-y)
+      var(--popover-effect-shadow-small-blur)
+      var(--popover-effect-shadow-spread)
+      var(--popover-effect-shadow-small-color)
+  );
   padding: var(--popover-size-padding-y) var(--popover-size-padding-x);
 }
 
@@ -67,14 +85,17 @@
   flex-direction: column;
   min-width: 0;
   gap: var(--popover-slot-size-gap);
-  padding: var(--popover-content-py, var(--popover-slot-size-padding-y)) var(--popover-content-px, var(--popover-slot-size-padding-x));
+  padding: var(--popover-content-py, var(--popover-slot-size-padding-y))
+    var(--popover-content-px, var(--popover-slot-size-padding-x));
 }
 
-.aviala-popover-content__surface[data-flush="true"] > .aviala-popover-content__slot {
+.aviala-popover-content__surface[data-flush="true"]
+  > .aviala-popover-content__slot {
   padding: 0;
 }
 
-.aviala-popover-content[data-appearance] .aviala-popover-content__surface[data-flush="true"] {
+.aviala-popover-content[data-appearance]
+  .aviala-popover-content__surface[data-flush="true"] {
   padding: 0;
 }
 
@@ -216,15 +237,34 @@
    (set on the surface class in TSX), solid 14×5 caret. */
 .aviala-popover-content[data-appearance="tooltip"]
   .aviala-popover-content__surface {
-  max-width: min(var(--tooltip-content-max-width, 240px), var(--radix-popover-content-available-width, 100vw));
+  max-width: min(
+    var(--tooltip-content-max-width, 240px),
+    var(--radix-popover-content-available-width, 100vw)
+  );
   overflow-wrap: anywhere;
   border: none;
   outline: none;
   border-radius: var(--tooltip-content-radius, var(--tooltip-size-radius));
-  background-color: var(--tooltip-content-bg, var(--tooltip-color-background-default));
+  background-color: var(
+    --tooltip-content-bg,
+    var(--tooltip-color-background-default)
+  );
   color: var(--tooltip-content-fg, var(--tooltip-color-text-default));
-  box-shadow: var(--tooltip-content-shadow, var(--tooltip-effect-shadow-offset-x) var(--tooltip-effect-shadow-large-offset-y) var(--tooltip-effect-shadow-large-blur) var(--tooltip-effect-shadow-spread) var(--tooltip-effect-shadow-large-color), var(--tooltip-effect-shadow-offset-x) var(--tooltip-effect-shadow-small-offset-y) var(--tooltip-effect-shadow-small-blur) var(--tooltip-effect-shadow-spread) var(--tooltip-effect-shadow-small-color));
-  padding: var(--tooltip-content-py, var(--tooltip-size-padding-y)) var(--tooltip-content-px, var(--tooltip-size-padding-x));
+  box-shadow: var(
+    --tooltip-content-shadow,
+    var(--tooltip-effect-shadow-offset-x)
+      var(--tooltip-effect-shadow-large-offset-y)
+      var(--tooltip-effect-shadow-large-blur)
+      var(--tooltip-effect-shadow-spread)
+      var(--tooltip-effect-shadow-large-color),
+    var(--tooltip-effect-shadow-offset-x)
+      var(--tooltip-effect-shadow-small-offset-y)
+      var(--tooltip-effect-shadow-small-blur)
+      var(--tooltip-effect-shadow-spread)
+      var(--tooltip-effect-shadow-small-color)
+  );
+  padding: var(--tooltip-content-py, var(--tooltip-size-padding-y))
+    var(--tooltip-content-px, var(--tooltip-size-padding-x));
 }
 
 /* Primary appearance — brand primary surface, white text (same tokens as the primary button).
@@ -232,9 +272,19 @@
 .aviala-popover-content[data-appearance="primary"]
   .aviala-popover-content__surface {
   border: none;
-  background-color: var(--popover-content-bg, var(--popover-color-theme-background));
+  background-color: var(
+    --popover-content-bg,
+    var(--popover-color-theme-background)
+  );
   color: var(--popover-content-fg, var(--popover-color-theme-text-default));
-  box-shadow: var(--popover-content-shadow, var(--popover-effect-shadow-offset-x) var(--popover-effect-shadow-large-offset-y) var(--popover-effect-shadow-large-blur) var(--popover-effect-shadow-spread) var(--popover-effect-shadow-large-color));
+  box-shadow: var(
+    --popover-content-shadow,
+    var(--popover-effect-shadow-offset-x)
+      var(--popover-effect-shadow-large-offset-y)
+      var(--popover-effect-shadow-large-blur)
+      var(--popover-effect-shadow-spread)
+      var(--popover-effect-shadow-large-color)
+  );
 }
 
 /* Tooltip / primary caret — solid 14×5 (TOOLTIP_POINTER, single path, no outline). Host sizing

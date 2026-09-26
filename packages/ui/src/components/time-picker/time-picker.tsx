@@ -62,7 +62,13 @@ export function TimePicker({
   const isOpenControlled = openProp !== undefined;
   const open = isOpenControlled ? openProp : internalOpen;
   const sourceValue = valueProp !== undefined ? valueProp : internalValue;
-  const value = useMemo(() => showSeconds ? { ...sourceValue, seconds: sourceValue.seconds ?? 0 } : sourceValue, [sourceValue, showSeconds]);
+  const value = useMemo(
+    () =>
+      showSeconds
+        ? { ...sourceValue, seconds: sourceValue.seconds ?? 0 }
+        : sourceValue,
+    [sourceValue, showSeconds]
+  );
 
   const setValue = useCallback(
     (next: TimePickerValue) => {
@@ -159,7 +165,11 @@ export const TimePickerTrigger = forwardRef<
     const formatted =
       displayValue !== undefined
         ? displayValue
-        : formatTimeValue(value.hours, value.minutes, showSeconds ? value.seconds ?? 0 : undefined);
+        : formatTimeValue(
+            value.hours,
+            value.minutes,
+            showSeconds ? (value.seconds ?? 0) : undefined
+          );
     const hasValue = formatted != null && formatted !== "";
 
     return (
@@ -266,7 +276,11 @@ export function TimePickerPanel({ className }: TimePickerPanelProps) {
       role="group"
       aria-label={locale.panel}
     >
-      <TimePickerWheels value={value} onChange={setValue} showSeconds={showSeconds} />
+      <TimePickerWheels
+        value={value}
+        onChange={setValue}
+        showSeconds={showSeconds}
+      />
     </div>
   );
 }

@@ -97,7 +97,8 @@ function decode(json: string): ProjectStoreState {
         !binding.engineId ||
         (Object.hasOwn(binding, "retired") &&
           typeof binding.retired !== "boolean") ||
-        (Object.hasOwn(binding, "readOnly") && typeof binding.readOnly !== "boolean")
+        (Object.hasOwn(binding, "readOnly") &&
+          typeof binding.readOnly !== "boolean")
       )
         throw new Error("Invalid source binding");
       if (!binding.retired) {

@@ -17,12 +17,24 @@
   ],
   "exports": {
     ".": {
-      "import": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
-      "require": { "types": "./dist/index.d.cts", "default": "./dist/index.cjs" }
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./project": {
-      "import": { "types": "./dist/project.d.ts", "default": "./dist/project.js" },
-      "require": { "types": "./dist/project.d.cts", "default": "./dist/project.cjs" }
+      "import": {
+        "types": "./dist/project.d.ts",
+        "default": "./dist/project.js"
+      },
+      "require": {
+        "types": "./dist/project.d.cts",
+        "default": "./dist/project.cjs"
+      }
     },
     "./styles.css": "./dist/styles.css",
     "./ald-theme.css": "./dist/ald-theme.css",
@@ -58,12 +70,24 @@
     "./structure-navigation-extras.css": "./dist/structure-navigation-extras.css",
     "./video-effects.css": "./dist/video-effects.css",
     "./node": {
-      "import": { "types": "./dist/node.d.ts", "default": "./dist/node.js" },
-      "require": { "types": "./dist/node.d.cts", "default": "./dist/node.cjs" }
+      "import": {
+        "types": "./dist/node.d.ts",
+        "default": "./dist/node.js"
+      },
+      "require": {
+        "types": "./dist/node.d.cts",
+        "default": "./dist/node.cjs"
+      }
     },
     "./tailwind.preset": {
-      "import": { "types": "./dist/tailwind.preset.d.ts", "default": "./dist/tailwind.preset.js" },
-      "require": { "types": "./dist/tailwind.preset.d.cts", "default": "./dist/tailwind.preset.cjs" }
+      "import": {
+        "types": "./dist/tailwind.preset.d.ts",
+        "default": "./dist/tailwind.preset.js"
+      },
+      "require": {
+        "types": "./dist/tailwind.preset.d.cts",
+        "default": "./dist/tailwind.preset.cjs"
+      }
     }
   },
   "files": [

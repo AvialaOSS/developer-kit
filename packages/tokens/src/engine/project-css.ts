@@ -17,12 +17,16 @@ export interface ProjectCssOptions {
 }
 
 /** Opt-in Aviala typography convention; generic projects keep their source units. */
-export function avialaProjectCssOptions(project: TokenProject): ProjectCssOptions {
+export function avialaProjectCssOptions(
+  project: TokenProject
+): ProjectCssOptions {
   return {
     remTokenIds: project.tokens
-      .filter((token) =>
-        token.type === "number" && token.unit === "px" &&
-        ["size", "line-height"].includes(token.path[0]!)
+      .filter(
+        (token) =>
+          token.type === "number" &&
+          token.unit === "px" &&
+          ["size", "line-height"].includes(token.path[0]!)
       )
       .map((token) => token.id),
   };
@@ -30,6 +34,8 @@ export function avialaProjectCssOptions(project: TokenProject): ProjectCssOption
 
 /** CSSOM string serialization; JSON escapes have different CSS meanings. */
 function cssString(value: string): string {
+  // CSS strings must escape control characters, including NUL.
+  // eslint-disable-next-line no-control-regex
   const escaped = value.replace(/[\u0000-\u001f\u007f"\\]/g, (character) => {
     const code = character.charCodeAt(0);
     if (code === 0) return "\uFFFD";

@@ -14,7 +14,8 @@
   display: flex;
   align-items: flex-start;
   gap: var(--alert-body-gap, var(--alert-size-info-gap));
-  padding: var(--alert-body-py, var(--alert-size-info-padding-y)) var(--alert-body-px, var(--alert-size-info-padding-x));
+  padding: var(--alert-body-py, var(--alert-size-info-padding-y))
+    var(--alert-body-px, var(--alert-size-info-padding-x));
   overflow: hidden;
 }
 
@@ -73,8 +74,15 @@
 }
 
 .aviala-alert__close.aviala-link[data-mode="noBackgroundCustom"],
-.aviala-alert__close.aviala-link[data-mode="noBackgroundCustom"] > .aviala-link__icon {
-  color: var(--alert-close-fg, var(--link-fg-custom, var(--link-color-text-no-background-custom-icon-default)));
+.aviala-alert__close.aviala-link[data-mode="noBackgroundCustom"]
+  > .aviala-link__icon {
+  color: var(
+    --alert-close-fg,
+    var(
+      --link-fg-custom,
+      var(--link-color-text-no-background-custom-icon-default)
+    )
+  );
 }
 
 .aviala-alert__close svg {
@@ -87,15 +95,28 @@
   flex-wrap: wrap;
   align-items: flex-start;
   gap: var(--alert-actions-gap, var(--alert-size-action-gap));
-  padding-block: var(--alert-size-action-padding-y-start) var(--alert-actions-pb, var(--alert-size-action-padding-y-end));
-  padding-inline-start: var(--alert-actions-pl, var(--alert-size-action-padding-x-start));
-  padding-inline-end: var(--alert-actions-pr, var(--alert-size-action-padding-x-end));
+  padding-block: var(--alert-size-action-padding-y-start)
+    var(--alert-actions-pb, var(--alert-size-action-padding-y-end));
+  padding-inline-start: var(
+    --alert-actions-pl,
+    var(--alert-size-action-padding-x-start)
+  );
+  padding-inline-end: var(
+    --alert-actions-pr,
+    var(--alert-size-action-padding-x-end)
+  );
 }
 
 .aviala-alert__actions:dir(rtl) {
   /* Keep explicit legacy left/right overrides physical. */
-  padding-inline-start: var(--alert-actions-pr, var(--alert-size-action-padding-x-start));
-  padding-inline-end: var(--alert-actions-pl, var(--alert-size-action-padding-x-end));
+  padding-inline-start: var(
+    --alert-actions-pr,
+    var(--alert-size-action-padding-x-start)
+  );
+  padding-inline-end: var(
+    --alert-actions-pl,
+    var(--alert-size-action-padding-x-end)
+  );
 }
 
 .aviala-alert--size-small .aviala-alert__actions {
@@ -108,80 +129,165 @@
 }
 
 .aviala-alert__action--secondary.aviala-link[data-mode="noBackgroundCustom"] {
-  color: var(--alert-secondary-action-fg, var(--link-fg-custom, var(--link-color-caption-no-background-custom-text-default)));
+  color: var(
+    --alert-secondary-action-fg,
+    var(
+      --link-fg-custom,
+      var(--link-color-caption-no-background-custom-text-default)
+    )
+  );
 }
 
 /* ---- Type × appearance surfaces ---- */
 
 .aviala-alert--type-info.aviala-alert--appearance-default {
-  background: var(--alert-info-bg-default, var(--alert-color-default-infomation-background-default));
-  border-color: var(--alert-info-border, var(--alert-color-default-infomation-border-default));
-  --alert-icon-fg: var(--alert-info-icon-fg, var(--alert-color-infomation-icon-default));
+  background: var(
+    --alert-info-bg-default,
+    var(--alert-color-default-infomation-background-default)
+  );
+  border-color: var(
+    --alert-info-border,
+    var(--alert-color-default-infomation-border-default)
+  );
+  --alert-icon-fg: var(
+    --alert-info-icon-fg,
+    var(--alert-color-infomation-icon-default)
+  );
 }
 
 .aviala-alert--type-info.aviala-alert--appearance-light {
-  background: var(--alert-info-bg-light, var(--alert-color-light-infomation-background-default));
+  background: var(
+    --alert-info-bg-light,
+    var(--alert-color-light-infomation-background-default)
+  );
   border-color: transparent;
-  --alert-icon-fg: var(--alert-info-icon-fg, var(--alert-color-infomation-icon-default));
+  --alert-icon-fg: var(
+    --alert-info-icon-fg,
+    var(--alert-color-infomation-icon-default)
+  );
 }
 
 .aviala-alert--type-warning.aviala-alert--appearance-default {
-  background: var(--alert-warning-bg-default, var(--alert-color-default-warning-background-default));
-  border-color: var(--alert-warning-border, var(--alert-color-default-warning-border-default));
-  --alert-icon-fg: var(--alert-warning-icon-fg, var(--alert-color-warning-icon-default));
+  background: var(
+    --alert-warning-bg-default,
+    var(--alert-color-default-warning-background-default)
+  );
+  border-color: var(
+    --alert-warning-border,
+    var(--alert-color-default-warning-border-default)
+  );
+  --alert-icon-fg: var(
+    --alert-warning-icon-fg,
+    var(--alert-color-warning-icon-default)
+  );
 }
 
 .aviala-alert--type-warning.aviala-alert--appearance-light {
-  background: var(--alert-warning-bg-light, var(--alert-color-light-warning-background-default));
+  background: var(
+    --alert-warning-bg-light,
+    var(--alert-color-light-warning-background-default)
+  );
   border-color: transparent;
-  --alert-icon-fg: var(--alert-warning-icon-fg, var(--alert-color-warning-icon-default));
+  --alert-icon-fg: var(
+    --alert-warning-icon-fg,
+    var(--alert-color-warning-icon-default)
+  );
 }
 
 .aviala-alert--type-error.aviala-alert--appearance-default {
-  background: var(--alert-error-bg-default, var(--alert-color-default-wrong-background-default));
-  border-color: var(--alert-error-border, var(--alert-color-default-wrong-border-default));
-  --alert-icon-fg: var(--alert-error-icon-fg, var(--alert-color-wrong-icon-default));
+  background: var(
+    --alert-error-bg-default,
+    var(--alert-color-default-wrong-background-default)
+  );
+  border-color: var(
+    --alert-error-border,
+    var(--alert-color-default-wrong-border-default)
+  );
+  --alert-icon-fg: var(
+    --alert-error-icon-fg,
+    var(--alert-color-wrong-icon-default)
+  );
 }
 
 .aviala-alert--type-error.aviala-alert--appearance-light {
-  background: var(--alert-error-bg-light, var(--alert-color-light-wrong-background-default));
+  background: var(
+    --alert-error-bg-light,
+    var(--alert-color-light-wrong-background-default)
+  );
   border-color: transparent;
-  --alert-icon-fg: var(--alert-error-icon-fg, var(--alert-color-wrong-icon-default));
+  --alert-icon-fg: var(
+    --alert-error-icon-fg,
+    var(--alert-color-wrong-icon-default)
+  );
 }
 
 .aviala-alert--type-success.aviala-alert--appearance-default {
-  background: var(--alert-success-bg-default, var(--alert-color-default-success-background-default));
-  border-color: var(--alert-success-border, var(--alert-color-default-success-border-default));
-  --alert-icon-fg: var(--alert-success-icon-fg, var(--alert-color-success-icon-default));
+  background: var(
+    --alert-success-bg-default,
+    var(--alert-color-default-success-background-default)
+  );
+  border-color: var(
+    --alert-success-border,
+    var(--alert-color-default-success-border-default)
+  );
+  --alert-icon-fg: var(
+    --alert-success-icon-fg,
+    var(--alert-color-success-icon-default)
+  );
 }
 
 .aviala-alert--type-success.aviala-alert--appearance-light {
-  background: var(--alert-success-bg-light, var(--alert-color-light-success-background-default));
+  background: var(
+    --alert-success-bg-light,
+    var(--alert-color-light-success-background-default)
+  );
   border-color: transparent;
-  --alert-icon-fg: var(--alert-success-icon-fg, var(--alert-color-success-icon-default));
+  --alert-icon-fg: var(
+    --alert-success-icon-fg,
+    var(--alert-color-success-icon-default)
+  );
 }
 
 .aviala-alert--type-neutral.aviala-alert--appearance-default {
-  background: var(--alert-neutral-bg-default, var(--alert-color-default-normal-background-default));
-  border-color: var(--alert-neutral-border, var(--alert-color-default-normal-border-default));
-  --alert-icon-fg: var(--alert-neutral-icon-fg, var(--alert-color-normal-icon-default));
+  background: var(
+    --alert-neutral-bg-default,
+    var(--alert-color-default-normal-background-default)
+  );
+  border-color: var(
+    --alert-neutral-border,
+    var(--alert-color-default-normal-border-default)
+  );
+  --alert-icon-fg: var(
+    --alert-neutral-icon-fg,
+    var(--alert-color-normal-icon-default)
+  );
 }
 
 .aviala-alert--type-neutral.aviala-alert--appearance-light {
-  background: var(--alert-neutral-bg-light, var(--alert-color-light-normal-background-default));
+  background: var(
+    --alert-neutral-bg-light,
+    var(--alert-color-light-normal-background-default)
+  );
   border-color: transparent;
-  --alert-icon-fg: var(--alert-neutral-icon-fg, var(--alert-color-normal-icon-default));
+  --alert-icon-fg: var(
+    --alert-neutral-icon-fg,
+    var(--alert-color-normal-icon-default)
+  );
 }
 
 .aviala-alert .aviala-typography {
   color: inherit;
 }
 
-.aviala-alert__typeface .aviala-typeface__line[data-line="0"] .aviala-typography,
+.aviala-alert__typeface
+  .aviala-typeface__line[data-line="0"]
+  .aviala-typography,
 .aviala-alert__title.aviala-typography {
   color: var(--alert-title-fg, var(--alert-color-text-default));
 }
 
-.aviala-alert__typeface .aviala-typeface__line[data-line="1"] .aviala-typography {
+.aviala-alert__typeface
+  .aviala-typeface__line[data-line="1"]
+  .aviala-typography {
   color: var(--alert-description-fg, var(--alert-color-description-default));
 }

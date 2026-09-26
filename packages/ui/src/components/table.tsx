@@ -91,13 +91,21 @@ function renderCellIcon(node: ReactNode, sized = true): ReactNode {
 
 function renderHeadIcon(node: ReactNode): ReactNode {
   if (node == null || node === false) return null;
-  const content = isValidElement(node) && typeof node.type !== "string"
-    ? cloneElement(node as ReactElement<{width?: string; height?: string}>, {
-        width: "var(--table-head-size-icon-width)",
-        height: "var(--table-head-size-icon-width)",
-      })
-    : node;
-  return <span className="aviala-table-head__icon-slot"><span className="aviala-table-head__icon">{content}</span></span>;
+  const content =
+    isValidElement(node) && typeof node.type !== "string"
+      ? cloneElement(
+          node as ReactElement<{ width?: string; height?: string }>,
+          {
+            width: "var(--table-head-size-icon-width)",
+            height: "var(--table-head-size-icon-width)",
+          }
+        )
+      : node;
+  return (
+    <span className="aviala-table-head__icon-slot">
+      <span className="aviala-table-head__icon">{content}</span>
+    </span>
+  );
 }
 
 function TableCellDefaultAvatar() {
@@ -135,7 +143,11 @@ function renderActions(actions: ReactNode) {
   return <div className="aviala-table-cell__actions">{actions}</div>;
 }
 
-function renderCellBody(main: ReactNode, actions?: ReactNode, leading?: ReactNode) {
+function renderCellBody(
+  main: ReactNode,
+  actions?: ReactNode,
+  leading?: ReactNode
+) {
   return (
     <>
       {leading != null && (
@@ -162,7 +174,16 @@ export type TableHeadProps = ComponentPropsWithoutRef<"div"> & {
 
 export const TableHead = forwardRef<HTMLDivElement, TableHeadProps>(
   (
-    { className, content = "text", leftIcon, rightIcon, actions, checkboxProps, children, ...props },
+    {
+      className,
+      content = "text",
+      leftIcon,
+      rightIcon,
+      actions,
+      checkboxProps,
+      children,
+      ...props
+    },
     ref
   ) => {
     const renderBody = () => {
@@ -175,7 +196,11 @@ export const TableHead = forwardRef<HTMLDivElement, TableHeadProps>(
           <>
             <span className="aviala-table-cell__main">
               {typeof children === "string" || typeof children === "number" ? (
-                <Typography level="text" as="span" className="aviala-table-head__title">
+                <Typography
+                  level="text"
+                  as="span"
+                  className="aviala-table-head__title"
+                >
                   {children}
                 </Typography>
               ) : (

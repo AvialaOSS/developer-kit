@@ -118,12 +118,12 @@ Goal 保持 active。首批内部单元测试不能证明完整迁移完成；�
 
 Storybook `Information Collect/ScrollPicker Project/Override Ownership` 提供可重复的四种消费场景。2026-09-21 通过浏览器实际计算样式核对：
 
-| 场景 | 应用局部标准主题前 | 应用后 | 移除后 |
-| --- | --- | --- | --- |
-| 仅容器原有背景 Token | rgb(70,80,90) | rgb(255,255,255) | rgb(70,80,90) |
-| 组件新 Token 覆盖 | rgb(10,20,30) | 相同 | 相同 |
-| 组件旧入口覆盖 | rgb(40,50,60) | 相同 | 相同 |
-| 新旧同时覆盖 | 旧入口 rgb(40,50,60) | 相同 | 相同 |
+| 场景                 | 应用局部标准主题前   | 应用后           | 移除后        |
+| -------------------- | -------------------- | ---------------- | ------------- |
+| 仅容器原有背景 Token | rgb(70,80,90)        | rgb(255,255,255) | rgb(70,80,90) |
+| 组件新 Token 覆盖    | rgb(10,20,30)        | 相同             | 相同          |
+| 组件旧入口覆盖       | rgb(40,50,60)        | 相同             | 相同          |
+| 新旧同时覆盖         | 旧入口 rgb(40,50,60) | 相同             | 相同          |
 
 无关 `--consumer-owned` 在三个阶段均保持 `preserved`。新旧同时存在时旧入口优先符合迁移期消费约定，不创建互相引用。验证场景补齐受控 value/onChange 后重载复验，控制台没有新增错误（旧场景缺失回调产生的历史日志仍留在工具记录中）。UI 类型检查通过。
 
@@ -186,6 +186,7 @@ Storybook `Information Collect/ScrollPicker Project/Override Ownership` 提供�
 2026-09-21：36 项单元测试、6 项构建后集成测试通过。tokens 的 tsup、声明文件与静态 CSS 构建完成。最新 tgz 安装至 `.design-qa/package-final/consumer`，独立运行验证 main / project / node 入口、Vite 生成器和 CSS 文件，包含新增预检、合并、发布、身份接替及存储 API 的导出检查。没有进行远端发布。
 
 仓库 `pnpm typecheck` 经 Turbo 调用失败，原因是本机 NVM 下旧 pnpm.exe 的 CommandNotFound；改用已验证的 pnpm.cmd 执行 `-r --if-present run typecheck`，icons、tokens、ui、docs、playground 五个包均通过。未修改本机包管理器配置，也未运行图标生成器。
+
 # 2026-09-23：升级决策输入校验
 
 补充：同一 Token ID 的类型或单位发生变化时，保留覆盖与表达式直接引用也必须兼容，不能只检查显式 replacement。已复现并修复 `4px` 覆盖被静默解释成 `4rem`；兼容替代 Token、显式移除覆盖均可继续，旧主题及两个发布快照不变。相关主题测试现为 17 项通过，tokens 类型检查通过。

@@ -7,68 +7,68 @@
 
 ## 本地 Figma 快照 Collection
 
-| 名称 | 数量 | 模式 |
-| --- | ---: | --- |
-| numbers | 58 | Default / Mobile Friendly |
-| fontWeight | 6 | Mode 1 |
-| colorSystem | 138 | Light / Dark |
-| specialEffort | 5 | ON / OFF |
-| componentToken | 1705 | Default |
-| Aviala Design Colors | 62 | Light / Dark |
-| control | 2 | default |
+| 名称                 | 数量 | 模式                      |
+| -------------------- | ---: | ------------------------- |
+| numbers              |   58 | Default / Mobile Friendly |
+| fontWeight           |    6 | Mode 1                    |
+| colorSystem          |  138 | Light / Dark              |
+| specialEffort        |    5 | ON / OFF                  |
+| componentToken       | 1705 | Default                   |
+| Aviala Design Colors |   62 | Light / Dark              |
+| control              |    2 | default                   |
 
 ## 标准项目与快照的差异
 
 快照变量 1976 项；未映射至标准项目 0 项；标准项目独有 26 项。独有项只表示本地快照未包含，不能据此推断线上 Figma 已有或没有。
 
-| 标准项目独有 Token | Collection | CSS 名 |
-| --- | --- | --- |
-| success/success-11 | Aviala Design Colors | --aviala-success-success-11 |
-| success/success-12 | Aviala Design Colors | --aviala-success-success-12 |
-| warning/warning-1 | Aviala Design Colors | --aviala-warning-warning-1 |
-| warning/warning-11 | Aviala Design Colors | --aviala-warning-warning-11 |
-| warning/warning-12 | Aviala Design Colors | --aviala-warning-warning-12 |
-| error/error-11 | Aviala Design Colors | --aviala-error-error-11 |
-| error/error-12 | Aviala Design Colors | --aviala-error-error-12 |
-| info/info-11 | Aviala Design Colors | --aviala-info-info-11 |
-| info/info-12 | Aviala Design Colors | --aviala-info-info-12 |
-| neutral/neutral-9 | Aviala Design Colors | --aviala-neutral-neutral-9 |
-| neutral/neutral-12 | Aviala Design Colors | --aviala-neutral-neutral-12 |
-| primary/primary-11 | Aviala Design Colors | --aviala-primary-primary-11 |
-| shadow/menu | specialEffort | --shadow-menu |
-| shadow/switch-pointer | specialEffort | --shadow-switch-pointer |
-| shadow/slider-1 | specialEffort | --shadow-slider-1 |
-| shadow/slider-2 | specialEffort | --shadow-slider-2 |
-| selectMenu/color/shadow-default | componentToken | --select-menu-color-shadow-default |
-| selectMenu/size/shadow/offset-x | componentToken | --select-menu-size-shadow-offset-x |
-| selectMenu/size/shadow/offset-y | componentToken | --select-menu-size-shadow-offset-y |
-| selectMenu/size/shadow/radius | componentToken | --select-menu-size-shadow-radius |
-| selectMenu/size/shadow/spread | componentToken | --select-menu-size-shadow-spread |
-| switch/color/pointer-shadow-default | componentToken | --switch-color-pointer-shadow-default |
-| switch/size/pointer-shadow/offset-x | componentToken | --switch-size-pointer-shadow-offset-x |
-| switch/size/pointer-shadow/offset-y | componentToken | --switch-size-pointer-shadow-offset-y |
-| switch/size/pointer-shadow/radius | componentToken | --switch-size-pointer-shadow-radius |
-| switch/size/pointer-shadow/spread | componentToken | --switch-size-pointer-shadow-spread |
+| 标准项目独有 Token                  | Collection           | CSS 名                                |
+| ----------------------------------- | -------------------- | ------------------------------------- |
+| success/success-11                  | Aviala Design Colors | --aviala-success-success-11           |
+| success/success-12                  | Aviala Design Colors | --aviala-success-success-12           |
+| warning/warning-1                   | Aviala Design Colors | --aviala-warning-warning-1            |
+| warning/warning-11                  | Aviala Design Colors | --aviala-warning-warning-11           |
+| warning/warning-12                  | Aviala Design Colors | --aviala-warning-warning-12           |
+| error/error-11                      | Aviala Design Colors | --aviala-error-error-11               |
+| error/error-12                      | Aviala Design Colors | --aviala-error-error-12               |
+| info/info-11                        | Aviala Design Colors | --aviala-info-info-11                 |
+| info/info-12                        | Aviala Design Colors | --aviala-info-info-12                 |
+| neutral/neutral-9                   | Aviala Design Colors | --aviala-neutral-neutral-9            |
+| neutral/neutral-12                  | Aviala Design Colors | --aviala-neutral-neutral-12           |
+| primary/primary-11                  | Aviala Design Colors | --aviala-primary-primary-11           |
+| shadow/menu                         | specialEffort        | --shadow-menu                         |
+| shadow/switch-pointer               | specialEffort        | --shadow-switch-pointer               |
+| shadow/slider-1                     | specialEffort        | --shadow-slider-1                     |
+| shadow/slider-2                     | specialEffort        | --shadow-slider-2                     |
+| selectMenu/color/shadow-default     | componentToken       | --select-menu-color-shadow-default    |
+| selectMenu/size/shadow/offset-x     | componentToken       | --select-menu-size-shadow-offset-x    |
+| selectMenu/size/shadow/offset-y     | componentToken       | --select-menu-size-shadow-offset-y    |
+| selectMenu/size/shadow/radius       | componentToken       | --select-menu-size-shadow-radius      |
+| selectMenu/size/shadow/spread       | componentToken       | --select-menu-size-shadow-spread      |
+| switch/color/pointer-shadow-default | componentToken       | --switch-color-pointer-shadow-default |
+| switch/size/pointer-shadow/offset-x | componentToken       | --switch-size-pointer-shadow-offset-x |
+| switch/size/pointer-shadow/offset-y | componentToken       | --switch-size-pointer-shadow-offset-y |
+| switch/size/pointer-shadow/radius   | componentToken       | --switch-size-pointer-shadow-radius   |
+| switch/size/pointer-shadow/spread   | componentToken       | --switch-size-pointer-shadow-spread   |
 
 ## 被引用但未生成定义的变量
 
 标准输出中未闭合的 CSS 引用：0。此检查不借助手写兼容层补齐引用。
 
 | Collection | Figma 路径 | 缺失 CSS 名 | 引用方示例 |
-| --- | --- | --- | --- |
+| ---------- | ---------- | ----------- | ---------- |
 
 ## 源码仍出现的旧拼写候选
 
 只列同一 Figma 路径的新旧规范化差异，不自动批准不同语义之间的替换。旧覆盖入口需单独保留。
 
-| Figma 路径 | 旧拼写 | 新拼写 | 旧名位置示例 |
-| --- | --- | --- | --- |
-| box/box-normal-Background-blackOnly | --box-box-normal-background-blackonly | --box-box-normal-background-black-only | packages/tokens/src/semantic/colors.css:24、packages/tokens/src/semantic/components.css:994 |
-| box/box-normal-Background-whiteOnly | --box-box-normal-background-whiteonly | --box-box-normal-background-white-only | packages/tokens/src/semantic/colors.css:23、packages/tokens/src/semantic/components.css:365 |
-| special-effort/se-lineShadow-all | --special-effort-se-lineshadow-all | --special-effort-se-line-shadow-all | packages/tokens/src/semantic/button-effects.css:79 |
-| special-effort/se-lineShadow-bottom | --special-effort-se-lineshadow-bottom | --special-effort-se-line-shadow-bottom | packages/tokens/src/semantic/button-effects.css:83、packages/tokens/src/semantic/components.css:120 |
-| special-effort/se-lineShadow-bottomDeep | --special-effort-se-lineshadow-bottomdeep | --special-effort-se-line-shadow-bottom-deep | packages/tokens/src/semantic/button-effects.css:81 |
-| padding/padding-littleSmall | --padding-littlesmall | --padding-little-small | packages/tokens/src/semantic/datepicker-effects.css:551、packages/tokens/src/semantic/datepicker-effects.css:593 |
+| Figma 路径                              | 旧拼写                                    | 新拼写                                      | 旧名位置示例                                                                                                     |
+| --------------------------------------- | ----------------------------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| box/box-normal-Background-blackOnly     | --box-box-normal-background-blackonly     | --box-box-normal-background-black-only      | packages/tokens/src/semantic/colors.css:24、packages/tokens/src/semantic/components.css:994                      |
+| box/box-normal-Background-whiteOnly     | --box-box-normal-background-whiteonly     | --box-box-normal-background-white-only      | packages/tokens/src/semantic/colors.css:23、packages/tokens/src/semantic/components.css:365                      |
+| special-effort/se-lineShadow-all        | --special-effort-se-lineshadow-all        | --special-effort-se-line-shadow-all         | packages/tokens/src/semantic/button-effects.css:79                                                               |
+| special-effort/se-lineShadow-bottom     | --special-effort-se-lineshadow-bottom     | --special-effort-se-line-shadow-bottom      | packages/tokens/src/semantic/button-effects.css:83、packages/tokens/src/semantic/components.css:120              |
+| special-effort/se-lineShadow-bottomDeep | --special-effort-se-lineshadow-bottomdeep | --special-effort-se-line-shadow-bottom-deep | packages/tokens/src/semantic/button-effects.css:81                                                               |
+| padding/padding-littleSmall             | --padding-littlesmall                     | --padding-little-small                      | packages/tokens/src/semantic/datepicker-effects.css:551、packages/tokens/src/semantic/datepicker-effects.css:593 |
 
 ## 独立保留的旧语义层
 

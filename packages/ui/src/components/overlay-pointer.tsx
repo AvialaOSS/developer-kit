@@ -23,40 +23,40 @@ export type OverlayPointerSvgProps = ComponentPropsWithoutRef<"svg"> & {
 };
 
 /** Curved caret SVG — fill via parent `color` / CSS token on the svg class. */
-export const OverlayPointerSvg = forwardRef<SVGSVGElement, OverlayPointerSvgProps>(({
-  width,
-  height,
-  path,
-  variant = "default",
-  className,
-  style,
-  ...props
-}, ref) => {
-  const isPopover = variant === "popover";
+export const OverlayPointerSvg = forwardRef<
+  SVGSVGElement,
+  OverlayPointerSvgProps
+>(
+  (
+    { width, height, path, variant = "default", className, style, ...props },
+    ref
+  ) => {
+    const isPopover = variant === "popover";
 
-  return (
-    <svg
-      {...props}
-      ref={ref}
-      width={width}
-      height={height}
-      viewBox={`0 0 ${width} ${height}`}
-      preserveAspectRatio="none"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-      className={className}
-      style={{ width, height, ...style }}
-    >
-      {isPopover ? (
-        <>
-          <path d={path} className="aviala-popover-content__arrow-outline" />
-          <path d={path} className="aviala-popover-content__arrow-fill" />
-        </>
-      ) : (
-        <path d={path} />
-      )}
-    </svg>
-  );
-});
+    return (
+      <svg
+        {...props}
+        ref={ref}
+        width={width}
+        height={height}
+        viewBox={`0 0 ${width} ${height}`}
+        preserveAspectRatio="none"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden
+        className={className}
+        style={{ width, height, ...style }}
+      >
+        {isPopover ? (
+          <>
+            <path d={path} className="aviala-popover-content__arrow-outline" />
+            <path d={path} className="aviala-popover-content__arrow-fill" />
+          </>
+        ) : (
+          <path d={path} />
+        )}
+      </svg>
+    );
+  }
+);
 OverlayPointerSvg.displayName = "OverlayPointerSvg";

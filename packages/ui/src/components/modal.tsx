@@ -200,21 +200,21 @@ export const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
         <div className="aviala-modal__header-row">
           {showIcon ? renderModalIcon(icon) : null}
           <div className="aviala-modal__header-content">
-          <div className="aviala-modal__header-main">{children}</div>
-          {showClose ? (
-            <div className="aviala-modal__close-slot">
-            <DialogPrimitive.Close asChild>
-              <Button
-                type="button"
-                mode="noBackgroundCustom"
-                iconOnly
-                aria-label={resolvedCloseLabel}
-                className="aviala-modal__close"
-                leftIcon={<SymbolWrong aria-hidden />}
-              />
-            </DialogPrimitive.Close>
-            </div>
-          ) : null}
+            <div className="aviala-modal__header-main">{children}</div>
+            {showClose ? (
+              <div className="aviala-modal__close-slot">
+                <DialogPrimitive.Close asChild>
+                  <Button
+                    type="button"
+                    mode="noBackgroundCustom"
+                    iconOnly
+                    aria-label={resolvedCloseLabel}
+                    className="aviala-modal__close"
+                    leftIcon={<SymbolWrong aria-hidden />}
+                  />
+                </DialogPrimitive.Close>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
@@ -313,11 +313,7 @@ export type ModalFooterProps = HTMLAttributes<HTMLDivElement>;
 
 export const ModalFooter = forwardRef<HTMLDivElement, ModalFooterProps>(
   ({ className, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("aviala-modal__footer", className)}
-      {...props}
-    >
+    <div ref={ref} className={cn("aviala-modal__footer", className)} {...props}>
       <div className="aviala-modal__button-group">
         <div className="aviala-modal__button-slot">{children}</div>
       </div>

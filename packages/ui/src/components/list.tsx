@@ -76,17 +76,19 @@ export const ListGroup = forwardRef<HTMLDivElement, ListGroupProps>(
   ({ className, children, appearance, ...props }, ref) => {
     const inheritedAppearance = useContext(ListAppearanceContext);
     const resolvedAppearance = appearance ?? inheritedAppearance;
-    return <ListAppearanceContext.Provider value={resolvedAppearance}>
-    <div
-      ref={ref}
-      className={cn("aviala-list-group", className)}
-      role="list"
-      data-appearance={resolvedAppearance}
-      {...props}
-    >
-      {children}
-    </div>
-    </ListAppearanceContext.Provider>;
+    return (
+      <ListAppearanceContext.Provider value={resolvedAppearance}>
+        <div
+          ref={ref}
+          className={cn("aviala-list-group", className)}
+          role="list"
+          data-appearance={resolvedAppearance}
+          {...props}
+        >
+          {children}
+        </div>
+      </ListAppearanceContext.Provider>
+    );
   }
 );
 ListGroup.displayName = "ListGroup";
@@ -430,10 +432,18 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 
     const handleClick = (event: MouseEvent<HTMLDivElement>) => {
       if (disabled || event.defaultPrevented) return;
-      const control = event.target instanceof Element
-        ? event.target.closest('button, a, input, select, textarea, label, [contenteditable="true"], [role="button"], [role="switch"], [role="checkbox"], [role="radio"], [role="combobox"], [role="slider"], [role="link"], [role="textbox"]')
-        : null;
-      if (control && control !== event.currentTarget && event.currentTarget.contains(control)) return;
+      const control =
+        event.target instanceof Element
+          ? event.target.closest(
+              'button, a, input, select, textarea, label, [contenteditable="true"], [role="button"], [role="switch"], [role="checkbox"], [role="radio"], [role="combobox"], [role="slider"], [role="link"], [role="textbox"]'
+            )
+          : null;
+      if (
+        control &&
+        control !== event.currentTarget &&
+        event.currentTarget.contains(control)
+      )
+        return;
       onClick?.(event);
     };
 

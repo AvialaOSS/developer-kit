@@ -26,21 +26,50 @@ export const WHEEL_LOOP_SECTIONS = 3;
 export const WHEEL_LOOP_MIDDLE_SECTION = 1;
 
 /** Convert browser wheel units to the column's measured pixel geometry. */
-export function pickerWheelDeltaPixels(deltaY: number, deltaMode: number, rowHeight: number, viewportHeight: number): number {
-  const unit = deltaMode === 0 ? 1 : deltaMode === 1 ? rowHeight : deltaMode === 2 ? viewportHeight : 0;
+export function pickerWheelDeltaPixels(
+  deltaY: number,
+  deltaMode: number,
+  rowHeight: number,
+  viewportHeight: number
+): number {
+  const unit =
+    deltaMode === 0
+      ? 1
+      : deltaMode === 1
+        ? rowHeight
+        : deltaMode === 2
+          ? viewportHeight
+          : 0;
   const pixels = deltaY * unit;
-  return Number.isFinite(pixels) && Number.isFinite(unit) && unit > 0 ? pixels : 0;
+  return Number.isFinite(pixels) && Number.isFinite(unit) && unit > 0
+    ? pixels
+    : 0;
 }
 
 /** Only capture vertical selection gestures that this column can consume. */
 export function shouldCapturePickerWheel(
   event: { deltaY: number; ctrlKey: boolean; defaultPrevented: boolean },
-  geometry: { count: number; loop: boolean; scrollTop: number; scrollHeight: number; clientHeight: number }
+  geometry: {
+    count: number;
+    loop: boolean;
+    scrollTop: number;
+    scrollHeight: number;
+    clientHeight: number;
+  }
 ): boolean {
-  if (event.defaultPrevented || event.ctrlKey || !Number.isFinite(event.deltaY) || event.deltaY === 0 || geometry.count <= 1) return false;
+  if (
+    event.defaultPrevented ||
+    event.ctrlKey ||
+    !Number.isFinite(event.deltaY) ||
+    event.deltaY === 0 ||
+    geometry.count <= 1
+  )
+    return false;
   if (geometry.loop) return true;
   const maxScroll = Math.max(geometry.scrollHeight - geometry.clientHeight, 0);
-  return event.deltaY < 0 ? geometry.scrollTop > 1 : geometry.scrollTop < maxScroll - 1;
+  return event.deltaY < 0
+    ? geometry.scrollTop > 1
+    : geometry.scrollTop < maxScroll - 1;
 }
 
 /**

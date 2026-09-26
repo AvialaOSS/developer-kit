@@ -203,21 +203,21 @@ export const DrawerHeader = forwardRef<HTMLDivElement, DrawerHeaderProps>(
         <div className="aviala-drawer__header-row">
           {showIcon ? renderDrawerIcon(icon) : null}
           <div className="aviala-drawer__header-content">
-          <div className="aviala-drawer__header-main">{children}</div>
-          {showClose ? (
-            <div className="aviala-drawer__close-slot">
-            <DialogPrimitive.Close asChild>
-              <Button
-                type="button"
-                mode="noBackgroundCustom"
-                iconOnly
-                aria-label={resolvedCloseLabel}
-                className="aviala-drawer__close"
-                leftIcon={<SymbolWrong aria-hidden />}
-              />
-            </DialogPrimitive.Close>
-            </div>
-          ) : null}
+            <div className="aviala-drawer__header-main">{children}</div>
+            {showClose ? (
+              <div className="aviala-drawer__close-slot">
+                <DialogPrimitive.Close asChild>
+                  <Button
+                    type="button"
+                    mode="noBackgroundCustom"
+                    iconOnly
+                    aria-label={resolvedCloseLabel}
+                    className="aviala-drawer__close"
+                    leftIcon={<SymbolWrong aria-hidden />}
+                  />
+                </DialogPrimitive.Close>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

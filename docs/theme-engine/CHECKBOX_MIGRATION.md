@@ -21,7 +21,6 @@ ComponentGeometry浏览器：默认20×20/radius6，巨大26×26/radius8；新�
 - CheckboxInput的heading/text/caption与禁用透明度，图标仍有18px固定尺寸，需要结合现有图标API核对。
 - 三轴模式矩阵、禁用与受控交互、嵌入场景验证。
 
-
 ## 三态颜色与禁用表现（2026-09-21）
 
 只读样本：262:4811选中、262:5461选中禁用、262:4815未选中、263:3593半选、262:5463未选中禁用、263:3594半选禁用。根opacity均1；选中/半选禁用内部标记opacity=.55。未选中禁用第二层paint visible=false，因此该overlay Token保留在标准数据但当前不渲染，不能为了引用覆盖率把隐藏层显示出来。
@@ -37,7 +36,6 @@ ComponentGeometry浏览器：默认20×20/radius6，巨大26×26/radius8；新�
 接入12项状态内边距和3项Input正文/说明颜色及禁用文字透明度。PaddingAndTextTokens浏览器检查：两档三态分别解析默认6/0，覆盖均2px 3px，外框保持20/26、勾选图标12/14；半选时勾选SVG隐藏。文字覆盖30/80/130与100/40/80分别生效，禁用文字opacity=.8；旧文字覆盖20/70/120与90/30/70生效。
 
 CheckboxInput的style沿用现有API传入内部Checkbox，整行文字Token应放外层主题容器；已在示例中明确用父容器设置，未暗改style接口。heading Token当前没有可消费的heading结构，不为引用率凭空添加文字。tokens构建、工作区typecheck通过，示例修正后UI typecheck再通过。
-
 
 ## 八模式回归（2026-09-21）
 

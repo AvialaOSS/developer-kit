@@ -10,18 +10,36 @@
   --button-active-brightness: 0.95;
   --_legacy-button-second-bg-hover: var(--aviala-primary-primary-5, #ffc5b9);
   --_legacy-button-second-bg-active: var(--aviala-primary-primary-6, #ffab98);
-  --_legacy-button-default-bg-hover: var(--aviala-interaction-filled-hover, #e5e4e3);
-  --_legacy-button-default-bg-active: var(--aviala-interaction-filled-hover, #e5e4e3);
+  --_legacy-button-default-bg-hover: var(
+    --aviala-interaction-filled-hover,
+    #e5e4e3
+  );
+  --_legacy-button-default-bg-active: var(
+    --aviala-interaction-filled-hover,
+    #e5e4e3
+  );
   --_legacy-button-no-bg-hover: var(--aviala-interaction-ghost-hover, #f9f8f8);
-  --_legacy-button-no-bg-active: var(--aviala-interaction-ghost-active, #f0efef);
-  --_legacy-button-no-bg-custom-hover: var(--aviala-interaction-ghost-hover, #f9f8f8);
-  --_legacy-button-no-bg-custom-active: var(--aviala-interaction-ghost-active, #f0efef);
+  --_legacy-button-no-bg-active: var(
+    --aviala-interaction-ghost-active,
+    #f0efef
+  );
+  --_legacy-button-no-bg-custom-hover: var(
+    --aviala-interaction-ghost-hover,
+    #f9f8f8
+  );
+  --_legacy-button-no-bg-custom-active: var(
+    --aviala-interaction-ghost-active,
+    #f0efef
+  );
   --_legacy-button-outline-border: var(--border-border-normal-3, #d6d5d4);
   --_legacy-button-outline-fg: var(
     --text-text-theme-primary-black,
     var(--aviala-primary-primary-10, #bf2300)
   );
-  --_legacy-button-outline-custom-fg: var(--text-text-normal-text-black, #262525);
+  --_legacy-button-outline-custom-fg: var(
+    --text-text-normal-text-black,
+    #262525
+  );
 
   /* Button size — padding / line-height / radius (height is content-driven) */
   --button-tiny-line-height: var(--line-height-small, 1rem);
@@ -43,7 +61,10 @@
     --icon-size-text-bigger,
     var(--size-middle, 1rem)
   );
-  --_legacy-button-regular-icon-slot-height: var(--line-height-regular, 1.125rem);
+  --_legacy-button-regular-icon-slot-height: var(
+    --line-height-regular,
+    1.125rem
+  );
 
   --button-big-line-height: var(--line-height-regular, 1.125rem);
   --_legacy-button-big-icon-size: var(
@@ -53,16 +74,20 @@
   --_legacy-button-big-icon-slot-height: var(--line-height-regular, 1.125rem);
 
   --_legacy-button-tiny-height: calc(
-    2 * var(--button-tiny-padding-y, var(--button-size-tiny-padding-y)) + var(--button-tiny-line-height)
+    2 * var(--button-tiny-padding-y, var(--button-size-tiny-padding-y)) +
+      var(--button-tiny-line-height)
   );
   --_legacy-button-small-height: calc(
-    2 * var(--button-small-padding-y, var(--button-size-small-padding-y)) + var(--button-small-line-height)
+    2 * var(--button-small-padding-y, var(--button-size-small-padding-y)) +
+      var(--button-small-line-height)
   );
   --_legacy-button-regular-height: calc(
-    2 * var(--button-regular-padding-y, var(--button-size-regular-padding-y)) + var(--button-regular-line-height)
+    2 * var(--button-regular-padding-y, var(--button-size-regular-padding-y)) +
+      var(--button-regular-line-height)
   );
   --_legacy-button-big-height: calc(
-    2 * var(--button-big-padding-y, var(--button-size-big-padding-y)) + var(--button-big-line-height)
+    2 * var(--button-big-padding-y, var(--button-size-big-padding-y)) +
+      var(--button-big-line-height)
   );
 
   /* Gloss = primary-3 at 20% opacity — follows generated / ALD palette step 3.
@@ -98,12 +123,30 @@
 /* ---- Layout (padding + line-height; no fixed height) ---- */
 .aviala-button {
   box-sizing: border-box;
-  --button-padding-x: var(--button-regular-padding-x, var(--button-size-regular-padding-x));
-  --button-padding-y: var(--button-regular-padding-y, var(--button-size-regular-padding-y));
-  --button-radius: var(--button-regular-radius, var(--button-size-regular-default-radius));
-  --_button-icon-width: var(--button-regular-icon-size, var(--button-size-regular-icon-width));
-  --_button-icon-height: var(--button-regular-icon-slot-height, var(--button-size-regular-icon-height));
-  --button-height: var(--button-regular-height, var(--_legacy-button-regular-height));
+  --button-padding-x: var(
+    --button-regular-padding-x,
+    var(--button-size-regular-padding-x)
+  );
+  --button-padding-y: var(
+    --button-regular-padding-y,
+    var(--button-size-regular-padding-y)
+  );
+  --button-radius: var(
+    --button-regular-radius,
+    var(--button-size-regular-default-radius)
+  );
+  --_button-icon-width: var(
+    --button-regular-icon-size,
+    var(--button-size-regular-icon-width)
+  );
+  --_button-icon-height: var(
+    --button-regular-icon-slot-height,
+    var(--button-size-regular-icon-height)
+  );
+  --button-height: var(
+    --button-regular-height,
+    var(--_legacy-button-regular-height)
+  );
   --_button-gap: var(--button-size-regular-gap);
   --_button-rounded-radius: var(--button-size-regular-rounded-radius);
   padding: var(--button-padding-y) var(--button-padding-x);
@@ -112,7 +155,10 @@
 }
 
 .aviala-button--rounded {
-  border-radius: var(--button-rounded-radius, var(--_button-rounded-radius)) !important;
+  border-radius: var(
+    --button-rounded-radius,
+    var(--_button-rounded-radius)
+  ) !important;
 }
 
 /* Icon-only: 1:1 square, height matches text button at the same size. */
@@ -125,44 +171,110 @@
 }
 
 .aviala-button[data-size="tiny"] {
-  --button-padding-x: var(--button-tiny-padding-x, var(--button-size-tiny-padding-x));
-  --button-padding-y: var(--button-tiny-padding-y, var(--button-size-tiny-padding-y));
-  --button-radius: var(--button-tiny-radius, var(--button-size-tiny-default-radius));
-  --_button-icon-width: var(--button-tiny-icon-size, var(--button-size-tiny-icon-width));
-  --_button-icon-height: var(--button-tiny-icon-slot-height, var(--button-size-tiny-icon-height));
+  --button-padding-x: var(
+    --button-tiny-padding-x,
+    var(--button-size-tiny-padding-x)
+  );
+  --button-padding-y: var(
+    --button-tiny-padding-y,
+    var(--button-size-tiny-padding-y)
+  );
+  --button-radius: var(
+    --button-tiny-radius,
+    var(--button-size-tiny-default-radius)
+  );
+  --_button-icon-width: var(
+    --button-tiny-icon-size,
+    var(--button-size-tiny-icon-width)
+  );
+  --_button-icon-height: var(
+    --button-tiny-icon-slot-height,
+    var(--button-size-tiny-icon-height)
+  );
   --button-height: var(--button-tiny-height, var(--_legacy-button-tiny-height));
   --_button-gap: var(--button-size-tiny-gap);
   --_button-rounded-radius: var(--button-size-tiny-rounded-radius);
 }
 
 .aviala-button[data-size="small"] {
-  --button-padding-x: var(--button-small-padding-x, var(--button-size-small-padding-x));
-  --button-padding-y: var(--button-small-padding-y, var(--button-size-small-padding-y));
-  --button-radius: var(--button-small-radius, var(--button-size-small-default-radius));
-  --_button-icon-width: var(--button-small-icon-size, var(--button-size-small-icon-width));
-  --_button-icon-height: var(--button-small-icon-slot-height, var(--button-size-small-icon-height));
-  --button-height: var(--button-small-height, var(--_legacy-button-small-height));
+  --button-padding-x: var(
+    --button-small-padding-x,
+    var(--button-size-small-padding-x)
+  );
+  --button-padding-y: var(
+    --button-small-padding-y,
+    var(--button-size-small-padding-y)
+  );
+  --button-radius: var(
+    --button-small-radius,
+    var(--button-size-small-default-radius)
+  );
+  --_button-icon-width: var(
+    --button-small-icon-size,
+    var(--button-size-small-icon-width)
+  );
+  --_button-icon-height: var(
+    --button-small-icon-slot-height,
+    var(--button-size-small-icon-height)
+  );
+  --button-height: var(
+    --button-small-height,
+    var(--_legacy-button-small-height)
+  );
   --_button-gap: var(--button-size-small-gap);
   --_button-rounded-radius: var(--button-size-small-rounded-radius);
 }
 
 .aviala-button[data-size="regular"] {
-  --button-padding-x: var(--button-regular-padding-x, var(--button-size-regular-padding-x));
-  --button-padding-y: var(--button-regular-padding-y, var(--button-size-regular-padding-y));
-  --button-radius: var(--button-regular-radius, var(--button-size-regular-default-radius));
-  --_button-icon-width: var(--button-regular-icon-size, var(--button-size-regular-icon-width));
-  --_button-icon-height: var(--button-regular-icon-slot-height, var(--button-size-regular-icon-height));
-  --button-height: var(--button-regular-height, var(--_legacy-button-regular-height));
+  --button-padding-x: var(
+    --button-regular-padding-x,
+    var(--button-size-regular-padding-x)
+  );
+  --button-padding-y: var(
+    --button-regular-padding-y,
+    var(--button-size-regular-padding-y)
+  );
+  --button-radius: var(
+    --button-regular-radius,
+    var(--button-size-regular-default-radius)
+  );
+  --_button-icon-width: var(
+    --button-regular-icon-size,
+    var(--button-size-regular-icon-width)
+  );
+  --_button-icon-height: var(
+    --button-regular-icon-slot-height,
+    var(--button-size-regular-icon-height)
+  );
+  --button-height: var(
+    --button-regular-height,
+    var(--_legacy-button-regular-height)
+  );
   --_button-gap: var(--button-size-regular-gap);
   --_button-rounded-radius: var(--button-size-regular-rounded-radius);
 }
 
 .aviala-button[data-size="big"] {
-  --button-padding-x: var(--button-big-padding-x, var(--button-size-big-padding-x));
-  --button-padding-y: var(--button-big-padding-y, var(--button-size-big-padding-y));
-  --button-radius: var(--button-big-radius, var(--button-size-big-default-radius));
-  --_button-icon-width: var(--button-big-icon-size, var(--button-size-big-icon-width));
-  --_button-icon-height: var(--button-big-icon-slot-height, var(--button-size-big-icon-height));
+  --button-padding-x: var(
+    --button-big-padding-x,
+    var(--button-size-big-padding-x)
+  );
+  --button-padding-y: var(
+    --button-big-padding-y,
+    var(--button-size-big-padding-y)
+  );
+  --button-radius: var(
+    --button-big-radius,
+    var(--button-size-big-default-radius)
+  );
+  --_button-icon-width: var(
+    --button-big-icon-size,
+    var(--button-size-big-icon-width)
+  );
+  --_button-icon-height: var(
+    --button-big-icon-slot-height,
+    var(--button-size-big-icon-height)
+  );
   --button-height: var(--button-big-height, var(--_legacy-button-big-height));
   --_button-gap: var(--button-size-big-gap);
   --_button-rounded-radius: var(--button-size-big-rounded-radius);
@@ -200,7 +312,10 @@
 }
 
 .aviala-button--mode-primary {
-  --button-surface-bg: var(--button-primary-bg, var(--button-color-primary-background-default));
+  --button-surface-bg: var(
+    --button-primary-bg,
+    var(--button-color-primary-background-default)
+  );
   color: var(--button-primary-fg, var(--button-color-primary-text-default));
 }
 
@@ -211,23 +326,37 @@
 
 .aviala-button--mode-primary .aviala-button-surface {
   background-color: var(--button-surface-bg);
-  background-image: var(--button-primary-gradient, linear-gradient(
-    180deg,
-    /* Figma Button 129:4: gradient paint opacity 0.2, stops 0 / 0.36. */
-    color-mix(in srgb, var(--button-color-primary-background-gradient-start) 20%, transparent) 0%,
-    color-mix(in srgb, var(--button-color-primary-background-gradient-end) 20%, transparent) 36%
-  ));
-  box-shadow: var(--button-shadow-basic,
+  background-image: var(
+    --button-primary-gradient,
+    linear-gradient(
+      180deg,
+      /* Figma Button 129:4: gradient paint opacity 0.2, stops 0 / 0.36. */
+      color-mix(
+          in srgb,
+          var(--button-color-primary-background-gradient-start) 20%,
+          transparent
+        )
+        0%,
+      color-mix(
+          in srgb,
+          var(--button-color-primary-background-gradient-end) 20%,
+          transparent
+        )
+        36%
+    )
+  );
+  box-shadow: var(
+    --button-shadow-basic,
     var(--button-size-primary-shadow-outer-offset-x)
-    var(--button-size-primary-shadow-outer-offset-y)
-    var(--button-size-primary-shadow-outer-blur)
-    var(--button-size-primary-shadow-outer-spread)
-    var(--button-color-primary-shadow-outer),
+      var(--button-size-primary-shadow-outer-offset-y)
+      var(--button-size-primary-shadow-outer-blur)
+      var(--button-size-primary-shadow-outer-spread)
+      var(--button-color-primary-shadow-outer),
     inset var(--button-size-primary-shadow-inner-offset-x)
-    var(--button-size-primary-shadow-inner-offset-y)
-    var(--button-size-primary-shadow-inner-blur)
-    var(--button-size-primary-shadow-inner-spread)
-    var(--button-color-primary-shadow-inner)
+      var(--button-size-primary-shadow-inner-offset-y)
+      var(--button-size-primary-shadow-inner-blur)
+      var(--button-size-primary-shadow-inner-spread)
+      var(--button-color-primary-shadow-inner)
   );
 }
 
@@ -253,7 +382,12 @@
   --_button-mode-bg-active: var(--button-color-secondary-background-active);
   --_button-mode-text: var(--button-color-secondary-text-default);
   --_button-mode-icon: var(--button-color-secondary-icon-default);
-  --_button-mode-shadow: inset var(--button-size-secondary-shadow-inner-offset-x) var(--button-size-secondary-shadow-inner-offset-y) var(--button-size-secondary-shadow-inner-blur) var(--button-size-secondary-shadow-inner-spread) var(--button-color-secondary-shadow-inner);
+  --_button-mode-shadow: inset
+    var(--button-size-secondary-shadow-inner-offset-x)
+    var(--button-size-secondary-shadow-inner-offset-y)
+    var(--button-size-secondary-shadow-inner-blur)
+    var(--button-size-secondary-shadow-inner-spread)
+    var(--button-color-secondary-shadow-inner);
   --button-surface-bg: var(--button-second-bg, var(--_button-mode-bg-default));
   color: var(--button-second-fg, var(--_button-mode-text));
 }
@@ -269,18 +403,31 @@
   --_button-mode-bg-active: var(--button-color-tertiary-background-active);
   --_button-mode-text: var(--button-color-tertiary-text-default);
   --_button-mode-icon: var(--button-color-tertiary-icon-default);
-  --_button-mode-shadow: inset var(--button-size-tertiary-shadow-inner-offset-x) var(--button-size-tertiary-shadow-inner-offset-y) var(--button-size-tertiary-shadow-inner-blur) var(--button-size-tertiary-shadow-inner-spread) var(--button-color-tertiary-shadow-inner);
+  --_button-mode-shadow: inset var(--button-size-tertiary-shadow-inner-offset-x)
+    var(--button-size-tertiary-shadow-inner-offset-y)
+    var(--button-size-tertiary-shadow-inner-blur)
+    var(--button-size-tertiary-shadow-inner-spread)
+    var(--button-color-tertiary-shadow-inner);
   --button-surface-bg: var(--button-default-bg, var(--_button-mode-bg-default));
   color: var(--button-default-fg, var(--_button-mode-text));
 }
 
 .aviala-button--mode-defaultCustom {
-  --_button-mode-bg-default: var(--button-color-tertiary-custom-background-default);
+  --_button-mode-bg-default: var(
+    --button-color-tertiary-custom-background-default
+  );
   --_button-mode-bg-hover: var(--button-color-tertiary-custom-background-hover);
-  --_button-mode-bg-active: var(--button-color-tertiary-custom-background-active);
+  --_button-mode-bg-active: var(
+    --button-color-tertiary-custom-background-active
+  );
   --_button-mode-text: var(--button-color-tertiary-custom-text-default);
   --_button-mode-icon: var(--button-color-tertiary-custom-icon-default);
-  --_button-mode-shadow: inset var(--button-size-tertiary-custom-shadow-inner-offset-x) var(--button-size-tertiary-custom-shadow-inner-offset-y) var(--button-size-tertiary-custom-shadow-inner-blur) var(--button-size-tertiary-custom-shadow-inner-spread) var(--button-color-tertiary-custom-shadow-inner);
+  --_button-mode-shadow: inset
+    var(--button-size-tertiary-custom-shadow-inner-offset-x)
+    var(--button-size-tertiary-custom-shadow-inner-offset-y)
+    var(--button-size-tertiary-custom-shadow-inner-blur)
+    var(--button-size-tertiary-custom-shadow-inner-spread)
+    var(--button-color-tertiary-custom-shadow-inner);
   --button-surface-bg: var(--button-default-bg, var(--_button-mode-bg-default));
   color: var(--button-default-custom-fg, var(--_button-mode-text));
 }
@@ -293,7 +440,10 @@
 
 /* ---- Hover (exclude disabled + loading) ---- */
 .aviala-button--mode-primary:hover:not(:disabled):not([aria-busy="true"]) {
-  --button-surface-bg: var(--button-primary-bg-hover, var(--button-color-primary-background-hover));
+  --button-surface-bg: var(
+    --button-primary-bg-hover,
+    var(--button-color-primary-background-hover)
+  );
 }
 
 .aviala-button--mode-destructive:hover:not(:disabled):not([aria-busy="true"]) {
@@ -301,14 +451,20 @@
 }
 
 .aviala-button--mode-second:hover:not(:disabled):not([aria-busy="true"]) {
-  --button-surface-bg: var(--button-second-bg-hover, var(--_button-mode-bg-hover));
+  --button-surface-bg: var(
+    --button-second-bg-hover,
+    var(--_button-mode-bg-hover)
+  );
 }
 
 .aviala-button--mode-default:hover:not(:disabled):not([aria-busy="true"]),
 .aviala-button--mode-defaultCustom:hover:not(:disabled):not(
     [aria-busy="true"]
   ) {
-  --button-surface-bg: var(--button-default-bg-hover, var(--_button-mode-bg-hover));
+  --button-surface-bg: var(
+    --button-default-bg-hover,
+    var(--_button-mode-bg-hover)
+  );
 }
 
 /* Pressed: token fill swaps (Figma matrix — no brightness filters) */
@@ -316,7 +472,10 @@
 .aviala-button--mode-primary:hover:active:not(:disabled):not(
     [aria-busy="true"]
   ) {
-  --button-surface-bg: var(--button-primary-bg-active, var(--button-color-primary-background-active));
+  --button-surface-bg: var(
+    --button-primary-bg-active,
+    var(--button-color-primary-background-active)
+  );
 }
 
 .aviala-button--mode-destructive:active:not(:disabled),
@@ -330,7 +489,10 @@
 .aviala-button--mode-second:hover:active:not(:disabled):not(
     [aria-busy="true"]
   ) {
-  --button-surface-bg: var(--button-second-bg-active, var(--_button-mode-bg-active));
+  --button-surface-bg: var(
+    --button-second-bg-active,
+    var(--_button-mode-bg-active)
+  );
 }
 
 .aviala-button--mode-default:active:not(:disabled),
@@ -341,7 +503,10 @@
 .aviala-button--mode-defaultCustom:hover:active:not(:disabled):not(
     [aria-busy="true"]
   ) {
-  --button-surface-bg: var(--button-default-bg-active, var(--_button-mode-bg-active));
+  --button-surface-bg: var(
+    --button-default-bg-active,
+    var(--_button-mode-bg-active)
+  );
 }
 
 /* Icon slot — Figma Basic Input → Button (aligns with input-slot / select-item-function) */
@@ -354,19 +519,31 @@
 }
 
 .aviala-button:is(:disabled, [aria-disabled="true"]) > .aviala-button__label {
-  opacity: var(--button-disabled-opacity, var(--button-transparency-text-disable));
+  opacity: var(
+    --button-disabled-opacity,
+    var(--button-transparency-text-disable)
+  );
 }
 
 .aviala-button:is(:disabled, [aria-disabled="true"]) > .aviala-button__icon {
-  opacity: var(--button-disabled-opacity, var(--button-transparency-icon-disable));
+  opacity: var(
+    --button-disabled-opacity,
+    var(--button-transparency-icon-disable)
+  );
 }
 
 .aviala-button[aria-busy="true"] > .aviala-button__label {
-  opacity: var(--button-loading-opacity, var(--button-transparency-text-loading));
+  opacity: var(
+    --button-loading-opacity,
+    var(--button-transparency-text-loading)
+  );
 }
 
 .aviala-button[aria-busy="true"] > .aviala-button__icon {
-  opacity: var(--button-loading-opacity, var(--button-transparency-icon-loading));
+  opacity: var(
+    --button-loading-opacity,
+    var(--button-transparency-icon-loading)
+  );
 }
 
 .aviala-button > .aviala-button__loading {
@@ -438,37 +615,69 @@
   transition: background-color 250ms ease;
 }
 .aviala-button--mode-noBackground .aviala-typography.aviala-typography--text,
-.aviala-button--mode-noBackground .aviala-typography.aviala-typography--caption {
+.aviala-button--mode-noBackground
+  .aviala-typography.aviala-typography--caption {
   color: var(--button-no-bg-fg, var(--button-color-no-background-text-default));
 }
 .aviala-button--mode-noBackground > .aviala-button__icon,
 .aviala-button--mode-noBackground > .aviala-button__loading {
   color: var(--button-no-bg-fg, var(--button-color-no-background-icon-default));
 }
-.aviala-button--mode-noBackground:hover:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]) {
-  background-color: var(--button-no-bg-hover, var(--button-color-no-background-background-hover));
+.aviala-button--mode-noBackground:hover:not(:disabled):not(
+    [aria-disabled="true"]
+  ):not([aria-busy="true"]) {
+  background-color: var(
+    --button-no-bg-hover,
+    var(--button-color-no-background-background-hover)
+  );
 }
-.aviala-button--mode-noBackground:active:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]) {
-  background-color: var(--button-no-bg-active, var(--button-color-no-background-background-active));
+.aviala-button--mode-noBackground:active:not(:disabled):not(
+    [aria-disabled="true"]
+  ):not([aria-busy="true"]) {
+  background-color: var(
+    --button-no-bg-active,
+    var(--button-color-no-background-background-active)
+  );
 }
 .aviala-button--mode-noBackgroundCustom {
   background-color: var(--button-color-no-background-custom-background-default);
-  color: var(--button-default-custom-fg, var(--button-color-no-background-custom-text-default));
+  color: var(
+    --button-default-custom-fg,
+    var(--button-color-no-background-custom-text-default)
+  );
   transition: background-color 250ms ease;
 }
-.aviala-button--mode-noBackgroundCustom .aviala-typography.aviala-typography--text,
-.aviala-button--mode-noBackgroundCustom .aviala-typography.aviala-typography--caption {
-  color: var(--button-default-custom-fg, var(--button-color-no-background-custom-text-default));
+.aviala-button--mode-noBackgroundCustom
+  .aviala-typography.aviala-typography--text,
+.aviala-button--mode-noBackgroundCustom
+  .aviala-typography.aviala-typography--caption {
+  color: var(
+    --button-default-custom-fg,
+    var(--button-color-no-background-custom-text-default)
+  );
 }
 .aviala-button--mode-noBackgroundCustom > .aviala-button__icon,
 .aviala-button--mode-noBackgroundCustom > .aviala-button__loading {
-  color: var(--button-default-custom-fg, var(--button-color-no-background-custom-icon-default));
+  color: var(
+    --button-default-custom-fg,
+    var(--button-color-no-background-custom-icon-default)
+  );
 }
-.aviala-button--mode-noBackgroundCustom:hover:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]) {
-  background-color: var(--button-no-bg-custom-hover, var(--button-color-no-background-custom-background-hover));
+.aviala-button--mode-noBackgroundCustom:hover:not(:disabled):not(
+    [aria-disabled="true"]
+  ):not([aria-busy="true"]) {
+  background-color: var(
+    --button-no-bg-custom-hover,
+    var(--button-color-no-background-custom-background-hover)
+  );
 }
-.aviala-button--mode-noBackgroundCustom:active:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]) {
-  background-color: var(--button-no-bg-custom-active, var(--button-color-no-background-custom-background-active));
+.aviala-button--mode-noBackgroundCustom:active:not(:disabled):not(
+    [aria-disabled="true"]
+  ):not([aria-busy="true"]) {
+  background-color: var(
+    --button-no-bg-custom-active,
+    var(--button-color-no-background-custom-background-active)
+  );
 }
 .aviala-button--mode-outline {
   background-color: var(--button-color-outline-background-default);
@@ -483,67 +692,129 @@
 .aviala-button--mode-outline > .aviala-button__loading {
   color: var(--button-outline-fg, var(--button-color-outline-icon-default));
 }
-.aviala-button--mode-outline:hover:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]) {
-  background-color: var(--button-no-bg-hover, var(--button-color-outline-background-hover));
+.aviala-button--mode-outline:hover:not(:disabled):not(
+    [aria-disabled="true"]
+  ):not([aria-busy="true"]) {
+  background-color: var(
+    --button-no-bg-hover,
+    var(--button-color-outline-background-hover)
+  );
 }
-.aviala-button--mode-outline:active:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]) {
-  background-color: var(--button-no-bg-active, var(--button-color-outline-background-active));
+.aviala-button--mode-outline:active:not(:disabled):not(
+    [aria-disabled="true"]
+  ):not([aria-busy="true"]) {
+  background-color: var(
+    --button-no-bg-active,
+    var(--button-color-outline-background-active)
+  );
 }
-.aviala-button--mode-outline { overflow: visible; }
+.aviala-button--mode-outline {
+  overflow: visible;
+}
 .aviala-button--mode-outline::after {
   content: "";
   position: absolute;
   inset: calc(-1 * var(--button-size-outline-stroke-width));
   z-index: 0;
   border-radius: inherit;
-  border: var(--button-size-outline-stroke-width) solid var(--button-outline-border, var(--button-color-outline-stroke-default));
+  border: var(--button-size-outline-stroke-width) solid
+    var(--button-outline-border, var(--button-color-outline-stroke-default));
   pointer-events: none;
 }
-.aviala-button--mode-outline:hover:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"])::after {
-  border-color: var(--button-outline-border, var(--button-color-outline-stroke-hover));
+.aviala-button--mode-outline:hover:not(:disabled):not(
+    [aria-disabled="true"]
+  ):not([aria-busy="true"])::after {
+  border-color: var(
+    --button-outline-border,
+    var(--button-color-outline-stroke-hover)
+  );
 }
-.aviala-button--mode-outline:active:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"])::after {
-  border-color: var(--button-outline-border, var(--button-color-outline-stroke-active));
+.aviala-button--mode-outline:active:not(:disabled):not(
+    [aria-disabled="true"]
+  ):not([aria-busy="true"])::after {
+  border-color: var(
+    --button-outline-border,
+    var(--button-color-outline-stroke-active)
+  );
 }
 .aviala-button--mode-outlineCustom {
   background-color: var(--button-color-outline-custom-background-default);
-  color: var(--button-outline-custom-fg, var(--button-color-outline-custom-text-default));
+  color: var(
+    --button-outline-custom-fg,
+    var(--button-color-outline-custom-text-default)
+  );
   transition: background-color 250ms ease;
 }
 .aviala-button--mode-outlineCustom .aviala-typography.aviala-typography--text,
-.aviala-button--mode-outlineCustom .aviala-typography.aviala-typography--caption {
-  color: var(--button-outline-custom-fg, var(--button-color-outline-custom-text-default));
+.aviala-button--mode-outlineCustom
+  .aviala-typography.aviala-typography--caption {
+  color: var(
+    --button-outline-custom-fg,
+    var(--button-color-outline-custom-text-default)
+  );
 }
 .aviala-button--mode-outlineCustom > .aviala-button__icon,
 .aviala-button--mode-outlineCustom > .aviala-button__loading {
-  color: var(--button-outline-custom-fg, var(--button-color-outline-custom-icon-default));
+  color: var(
+    --button-outline-custom-fg,
+    var(--button-color-outline-custom-icon-default)
+  );
 }
-.aviala-button--mode-outlineCustom:hover:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]) {
-  background-color: var(--button-no-bg-custom-hover, var(--button-color-outline-custom-background-hover));
+.aviala-button--mode-outlineCustom:hover:not(:disabled):not(
+    [aria-disabled="true"]
+  ):not([aria-busy="true"]) {
+  background-color: var(
+    --button-no-bg-custom-hover,
+    var(--button-color-outline-custom-background-hover)
+  );
 }
-.aviala-button--mode-outlineCustom:active:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"]) {
-  background-color: var(--button-no-bg-custom-active, var(--button-color-outline-custom-background-active));
+.aviala-button--mode-outlineCustom:active:not(:disabled):not(
+    [aria-disabled="true"]
+  ):not([aria-busy="true"]) {
+  background-color: var(
+    --button-no-bg-custom-active,
+    var(--button-color-outline-custom-background-active)
+  );
 }
-.aviala-button--mode-outlineCustom { overflow: visible; }
+.aviala-button--mode-outlineCustom {
+  overflow: visible;
+}
 .aviala-button--mode-outlineCustom::after {
   content: "";
   position: absolute;
   inset: calc(-1 * var(--button-size-outline-stroke-width));
   z-index: 0;
   border-radius: inherit;
-  border: var(--button-size-outline-stroke-width) solid var(--button-outline-border, var(--button-color-outline-custom-stroke-default));
+  border: var(--button-size-outline-stroke-width) solid
+    var(
+      --button-outline-border,
+      var(--button-color-outline-custom-stroke-default)
+    );
   pointer-events: none;
 }
-.aviala-button--mode-outlineCustom:hover:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"])::after {
-  border-color: var(--button-outline-border, var(--button-color-outline-custom-stroke-hover));
+.aviala-button--mode-outlineCustom:hover:not(:disabled):not(
+    [aria-disabled="true"]
+  ):not([aria-busy="true"])::after {
+  border-color: var(
+    --button-outline-border,
+    var(--button-color-outline-custom-stroke-hover)
+  );
 }
-.aviala-button--mode-outlineCustom:active:not(:disabled):not([aria-disabled="true"]):not([aria-busy="true"])::after {
-  border-color: var(--button-outline-border, var(--button-color-outline-custom-stroke-active));
+.aviala-button--mode-outlineCustom:active:not(:disabled):not(
+    [aria-disabled="true"]
+  ):not([aria-busy="true"])::after {
+  border-color: var(
+    --button-outline-border,
+    var(--button-color-outline-custom-stroke-active)
+  );
 }
 
 .aviala-button__icon:not([data-custom-icon-size="true"]) {
   --icon-size-text-bigger: var(--button-icon-size, var(--_button-icon-width));
-  --icon-size-caption-bigger: var(--button-icon-size, var(--_button-icon-width));
+  --icon-size-caption-bigger: var(
+    --button-icon-size,
+    var(--_button-icon-width)
+  );
 }
 
 /* Square typography line box with equal default padding. Explicit legacy
@@ -551,21 +822,40 @@
 .aviala-button[data-icon-only="true"] {
   width: var(--_button-only-legacy-height, auto);
   height: var(--_button-only-legacy-height, auto);
-  padding: var(--button-icon-only-padding-y, var(--button-padding-y)) var(--button-icon-only-padding-x, var(--button-padding-y));
+  padding: var(--button-icon-only-padding-y, var(--button-padding-y))
+    var(--button-icon-only-padding-x, var(--button-padding-y));
 }
-.aviala-button[data-icon-only="true"][data-size="tiny"] { --_button-only-legacy-height: var(--button-tiny-height, auto); }
-.aviala-button[data-icon-only="true"][data-size="small"] { --_button-only-legacy-height: var(--button-small-height, auto); }
-.aviala-button[data-icon-only="true"][data-size="regular"] { --_button-only-legacy-height: var(--button-regular-height, auto); }
-.aviala-button[data-icon-only="true"][data-size="big"] { --_button-only-legacy-height: var(--button-big-height, auto); }
+.aviala-button[data-icon-only="true"][data-size="tiny"] {
+  --_button-only-legacy-height: var(--button-tiny-height, auto);
+}
+.aviala-button[data-icon-only="true"][data-size="small"] {
+  --_button-only-legacy-height: var(--button-small-height, auto);
+}
+.aviala-button[data-icon-only="true"][data-size="regular"] {
+  --_button-only-legacy-height: var(--button-regular-height, auto);
+}
+.aviala-button[data-icon-only="true"][data-size="big"] {
+  --_button-only-legacy-height: var(--button-big-height, auto);
+}
 .aviala-button[data-icon-only="true"] > .aviala-button__icon {
   min-width: 0;
   padding: 0;
 }
-.aviala-button[data-icon-only="true"][aria-busy="true"] > .aviala-button__icon { visibility: hidden; }
-.aviala-button[data-icon-only="true"] > .aviala-button__loading { position: absolute; }
+.aviala-button[data-icon-only="true"][aria-busy="true"] > .aviala-button__icon {
+  visibility: hidden;
+}
+.aviala-button[data-icon-only="true"] > .aviala-button__loading {
+  position: absolute;
+}
 
-.aviala-button--mode-second > .aviala-button__icon { color: var(--button-second-fg, var(--_button-mode-icon)); }
+.aviala-button--mode-second > .aviala-button__icon {
+  color: var(--button-second-fg, var(--_button-mode-icon));
+}
 
-.aviala-button--mode-default > .aviala-button__icon { color: var(--button-default-fg, var(--_button-mode-icon)); }
+.aviala-button--mode-default > .aviala-button__icon {
+  color: var(--button-default-fg, var(--_button-mode-icon));
+}
 
-.aviala-button--mode-defaultCustom > .aviala-button__icon { color: var(--button-default-custom-fg, var(--_button-mode-icon)); }
+.aviala-button--mode-defaultCustom > .aviala-button__icon {
+  color: var(--button-default-custom-fg, var(--_button-mode-icon));
+}

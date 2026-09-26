@@ -115,30 +115,62 @@ function OverrideDemo() {
   const [value, setValue] = useState("02");
   const variants = [
     { name: "baseline", style: {} },
-    { name: "canonical", style: { "--scroll-picker-color-background": "rgb(10, 20, 30)" } },
+    {
+      name: "canonical",
+      style: { "--scroll-picker-color-background": "rgb(10, 20, 30)" },
+    },
     { name: "legacy", style: { "--scroll-picker-bg": "rgb(40, 50, 60)" } },
-    { name: "both", style: { "--scroll-picker-color-background": "rgb(10, 20, 30)", "--scroll-picker-bg": "rgb(40, 50, 60)" } },
+    {
+      name: "both",
+      style: {
+        "--scroll-picker-color-background": "rgb(10, 20, 30)",
+        "--scroll-picker-bg": "rgb(40, 50, 60)",
+      },
+    },
   ];
   return (
     <>
       <Button onClick={() => setActive(!active)}>
         {active ? "移除局部主题" : "应用局部主题"}
       </Button>
-      <div ref={setTarget} data-testid="ownership-scope" style={{
-        "--scroll-picker-color-background": "rgb(70, 80, 90)",
-        "--consumer-owned": "preserved",
-        display: "flex", gap: "var(--gap-inside)",
-      } as CSSProperties}>
-        {active && target && <ThemeProvider project={project} projectTarget={target}
-          projectCssOptions={cssOptions} storageKey="scroll-picker-ownership-demo">
-          <span>局部主题已应用</span>
-        </ThemeProvider>}
-        {variants.map(({ name, style }) => <div key={name}>
-          <p>{name}</p>
-          <ScrollPicker data-testid={`override-${name}`} style={style as CSSProperties}>
-            <ScrollPickerColumn aria-label={name} values={["01", "02", "03"]} value={value} onChange={setValue} />
-          </ScrollPicker>
-        </div>)}
+      <div
+        ref={setTarget}
+        data-testid="ownership-scope"
+        style={
+          {
+            "--scroll-picker-color-background": "rgb(70, 80, 90)",
+            "--consumer-owned": "preserved",
+            display: "flex",
+            gap: "var(--gap-inside)",
+          } as CSSProperties
+        }
+      >
+        {active && target && (
+          <ThemeProvider
+            project={project}
+            projectTarget={target}
+            projectCssOptions={cssOptions}
+            storageKey="scroll-picker-ownership-demo"
+          >
+            <span>局部主题已应用</span>
+          </ThemeProvider>
+        )}
+        {variants.map(({ name, style }) => (
+          <div key={name}>
+            <p>{name}</p>
+            <ScrollPicker
+              data-testid={`override-${name}`}
+              style={style as CSSProperties}
+            >
+              <ScrollPickerColumn
+                aria-label={name}
+                values={["01", "02", "03"]}
+                value={value}
+                onChange={setValue}
+              />
+            </ScrollPicker>
+          </div>
+        ))}
       </div>
     </>
   );

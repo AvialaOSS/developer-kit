@@ -10,7 +10,10 @@
   display: inline-flex;
   align-items: center;
   gap: var(--badge-gap, var(--_badge-gap));
-  border-radius: var(--badge-radius, var(--_badge-radius, var(--badge-size-radius)));
+  border-radius: var(
+    --badge-radius,
+    var(--_badge-radius, var(--badge-size-radius))
+  );
   padding: var(--_badge-py) var(--badge-px, var(--_badge-px));
   background-color: var(--badge-bg, var(--_badge-bg));
 }
@@ -41,7 +44,10 @@
   --_badge-icon-size: var(--badge-size-caption-icon-width);
   --_badge-icon-slot-height: var(--badge-size-caption-icon-container-height);
 }
-.aviala-badge--level-caption:is(.aviala-badge--lhf-text, .aviala-badge--lhf-subtitle) {
+.aviala-badge--level-caption:is(
+  .aviala-badge--lhf-text,
+  .aviala-badge--lhf-subtitle
+) {
   --_badge-outer-px: var(--badge-size-caption-align-to-text-level-padding-x);
   --_badge-outer-py: var(--badge-size-caption-align-to-text-level-padding-y);
 }
@@ -105,13 +111,17 @@
 
 .aviala-badge--style-info.aviala-badge--primary {
   --_badge-bg: var(--badge-color-infomation-primary-background-default);
-  --_badge-caption-fg: var(--badge-color-caption-infomation-primary-text-default);
+  --_badge-caption-fg: var(
+    --badge-color-caption-infomation-primary-text-default
+  );
   --_badge-text-fg: var(--badge-color-text-infomation-primary-text-default);
 }
 
 .aviala-badge--style-info.aviala-badge--secondary {
   --_badge-bg: var(--badge-color-infomation-secondary-background-default);
-  --_badge-caption-fg: var(--badge-color-caption-infomation-secondary-text-default);
+  --_badge-caption-fg: var(
+    --badge-color-caption-infomation-secondary-text-default
+  );
   --_badge-text-fg: var(--badge-color-text-infomation-secondary-text-default);
 }
 
@@ -135,7 +145,9 @@
 
 .aviala-badge--style-warning.aviala-badge--secondary {
   --_badge-bg: var(--badge-color-warning-secondary-background-default);
-  --_badge-caption-fg: var(--badge-color-caption-warning-secondary-text-default);
+  --_badge-caption-fg: var(
+    --badge-color-caption-warning-secondary-text-default
+  );
   --_badge-text-fg: var(--badge-color-text-warning-secondary-text-default);
 }
 
@@ -147,7 +159,9 @@
 
 .aviala-badge--style-success.aviala-badge--secondary {
   --_badge-bg: var(--badge-color-success-secondary-background-default);
-  --_badge-caption-fg: var(--badge-color-caption-success-secondary-text-default);
+  --_badge-caption-fg: var(
+    --badge-color-caption-success-secondary-text-default
+  );
   --_badge-text-fg: var(--badge-color-text-success-secondary-text-default);
 }
 

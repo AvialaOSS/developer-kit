@@ -102,9 +102,17 @@ export const TooltipContent = forwardRef<
               typographyVariants({ level })
             )}
           >
-            {leadingIcon != null && <span className="aviala-tooltip-content__icon" aria-hidden>{leadingIcon}</span>}
+            {leadingIcon != null && (
+              <span className="aviala-tooltip-content__icon" aria-hidden>
+                {leadingIcon}
+              </span>
+            )}
             <div className="aviala-tooltip-content__copy">{children}</div>
-            {trailingIcon != null && <span className="aviala-tooltip-content__icon" aria-hidden>{trailingIcon}</span>}
+            {trailingIcon != null && (
+              <span className="aviala-tooltip-content__icon" aria-hidden>
+                {trailingIcon}
+              </span>
+            )}
           </div>
           {showArrow ? (
             <TooltipPrimitive.Arrow

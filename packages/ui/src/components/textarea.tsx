@@ -261,7 +261,13 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               onPointerDown={handleResizePointerDown}
               {...spiralDebugId("textarea.resize")}
             >
-              <SymbolResize thickness="Regular" mode="default" width="var(--controller-size-icon-width)" height="var(--controller-size-icon-width)" aria-hidden />
+              <SymbolResize
+                thickness="Regular"
+                mode="default"
+                width="var(--controller-size-icon-width)"
+                height="var(--controller-size-icon-width)"
+                aria-hidden
+              />
             </button>
           </div>
         ) : null}

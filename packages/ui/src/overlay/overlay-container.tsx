@@ -11,7 +11,8 @@ const OverlayContainerContext = createContext<HTMLElement | null>(null);
 const ThemeOverlayContainerContext = createContext<HTMLElement | null>(null);
 
 /** Theme scopes remain local when contained by the active overlay boundary. */
-export const ThemeOverlayContainerProvider = ThemeOverlayContainerContext.Provider;
+export const ThemeOverlayContainerProvider =
+  ThemeOverlayContainerContext.Provider;
 
 export type OverlayContainerProviderProps = {
   container: HTMLElement | null;

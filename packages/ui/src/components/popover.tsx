@@ -65,8 +65,12 @@ export type PopoverIconProps = ComponentPropsWithoutRef<"span">;
 /** Decorative icon placed in the Popover content slot. */
 export const PopoverIcon = forwardRef<HTMLSpanElement, PopoverIconProps>(
   ({ className, ...props }, ref) => (
-    <span ref={ref} aria-hidden="true" {...props}
-      className={cn("aviala-popover-content__icon", className)} />
+    <span
+      ref={ref}
+      aria-hidden="true"
+      {...props}
+      className={cn("aviala-popover-content__icon", className)}
+    />
   )
 );
 PopoverIcon.displayName = "PopoverIcon";
@@ -117,7 +121,8 @@ export const PopoverContent = forwardRef<
     const overlayContainer = useOverlayPortalContainer();
     const isDefaultAppearance = appearance === "default";
     const surfaceLevel = level ?? "text";
-    const pointer = appearance === "tooltip" ? TOOLTIP_POINTER : POPOVER_POINTER;
+    const pointer =
+      appearance === "tooltip" ? TOOLTIP_POINTER : POPOVER_POINTER;
 
     const content = (
       <PopoverPrimitive.Content
@@ -136,7 +141,9 @@ export const PopoverContent = forwardRef<
           )}
           data-flush={flush ? "true" : undefined}
         >
-          {appearance === "tooltip" ? children : (
+          {appearance === "tooltip" ? (
+            children
+          ) : (
             <div className="aviala-popover-content__slot">{children}</div>
           )}
         </div>
@@ -152,13 +159,17 @@ export const PopoverContent = forwardRef<
               width={pointer.width}
               height={pointer.height}
               path={pointer.path}
-              style={appearance === "tooltip" ? {
-                width: "var(--tooltip-size-pointer-width)",
-                height: "var(--tooltip-size-pointer-height)",
-              } : {
-                width: "var(--popover-size-pointer-width)",
-                height: "var(--popover-size-pointer-height)",
-              }}
+              style={
+                appearance === "tooltip"
+                  ? {
+                      width: "var(--tooltip-size-pointer-width)",
+                      height: "var(--tooltip-size-pointer-height)",
+                    }
+                  : {
+                      width: "var(--popover-size-pointer-width)",
+                      height: "var(--popover-size-pointer-height)",
+                    }
+              }
             />
           </PopoverPrimitive.Arrow>
         ) : null}

@@ -54,8 +54,12 @@ export function Icon({
       mode={mode}
     />
   );
-  return lineHeightFix === false || lineHeightFix === "off" ? glyph : (
-    <IconFrame level={level} lineHeightFix={lineHeightFix}>{glyph}</IconFrame>
+  return lineHeightFix === false || lineHeightFix === "off" ? (
+    glyph
+  ) : (
+    <IconFrame level={level} lineHeightFix={lineHeightFix}>
+      {glyph}
+    </IconFrame>
   );
 }
 

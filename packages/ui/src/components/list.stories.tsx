@@ -37,35 +37,146 @@ function ListProjectCases() {
   const [custom, setCustom] = useState(false);
   const [legacy, setLegacy] = useState(false);
   const [deep, setDeep] = useState(false);
-  return <div className="flex flex-col gap-4">
-    <div className="flex gap-4">
-      <Button onClick={() => setMode(mode === "light" ? "dark" : "light")}>外观：{mode}</Button>
-      <Button onClick={() => setDensity(density === "default" ? "mobile-friendly" : "default")}>密度：{density}</Button>
-      <Button onClick={() => setCustom(!custom)}>覆盖：{custom ? "ON" : "OFF"}</Button>
-      <Button onClick={() => setLegacy(!legacy)}>旧覆盖：{legacy ? "ON" : "OFF"}</Button>
-      <Button onClick={() => setDeep(!deep)}>列表外观：{deep ? "Deep" : "Default"}</Button>
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="flex gap-4">
+        <Button onClick={() => setMode(mode === "light" ? "dark" : "light")}>
+          外观：{mode}
+        </Button>
+        <Button
+          onClick={() =>
+            setDensity(density === "default" ? "mobile-friendly" : "default")
+          }
+        >
+          密度：{density}
+        </Button>
+        <Button onClick={() => setCustom(!custom)}>
+          覆盖：{custom ? "ON" : "OFF"}
+        </Button>
+        <Button onClick={() => setLegacy(!legacy)}>
+          旧覆盖：{legacy ? "ON" : "OFF"}
+        </Button>
+        <Button onClick={() => setDeep(!deep)}>
+          列表外观：{deep ? "Deep" : "Default"}
+        </Button>
+      </div>
+      <List
+        appearance={deep ? "deep" : "default"}
+        title={<span>List section</span>}
+        style={
+          {
+            ...(custom
+              ? {
+                  "--list-item-size-title-gap": "11px",
+                  "--list-item-size-title-radius": "13px",
+                  "--list-item-size-last-gap": "17px",
+                  "--list-item-size-more-gap": "13px",
+                  "--button-group-size-button-slot-gap": "5px",
+                  "--size-semilarge": "28px",
+                  "--line-height-middle": "30px",
+                  "--text-text-normal-title-black": "#204060",
+                  "--list-item-size-content-stroke-width": "3px",
+                  "--list-item-size-divider-stroke-width": "4px",
+                  "--list-item-size-divider-height": "20px",
+                  "--list-item-color-text-default": "#123456",
+                  "--list-item-color-description-default": "#705020",
+                  "--list-item-color-deep-background-default": "#e4eff7",
+                  "--list-item-size-gap": "19px",
+                  "--list-item-size-with-icon-padding-x-start": "21px",
+                  "--list-item-size-content-no-icon-padding-x-start": "23px",
+                  "--list-item-size-content-padding-y": "9px",
+                  "--list-item-size-icon-padding-x": "3px",
+                  "--list-item-size-icon-padding-y": "12px",
+                  "--list-item-size-content-padding-x-end": "17px",
+                  "--list-size-gap": "13px",
+                  "--list-size-heading-padding-x": "17px",
+                  "--list-size-heading-padding-y": "3px",
+                  "--icon-place-size-width": "42px",
+                  "--icon-place-size-height": "44px",
+                  "--icon-place-size-icon-width": "18px",
+                  "--icon-place-size-rounded-radius": "7px",
+                  "--icon-place-color-theme-primary-background-default":
+                    "#204060",
+                  "--icon-place-color-theme-primary-icon-default": "#d5e5f5",
+                  "--list-size-title-padding-x": "5px",
+                  "--list-size-title-padding-y": "2px",
+                  "--list-size-title-gap": "9px",
+                  "--list-size-content-gap": "7px",
+                  "--list-size-content-padding-x": "11px",
+                  "--list-size-content-padding-y": "6px",
+                  "--list-size-content-radius": "19px",
+                  "--list-color-text-default": "#123456",
+                }
+              : {}),
+            ...(legacy
+              ? {
+                  "--list-item-icon-default-size": "19px",
+                  "--list-item-icon-shaped-size": "32px",
+                  "--list-item-icon-shaped-bg": "#603080",
+                  "--list-item-icon-shaped-fg": "#f5e5d5",
+                  "--list-item-divider-height": "11px",
+                  "--list-bg": "#d5e5f5",
+                  "--list-item-fg": "#603080",
+                  "--list-item-pl": "6px",
+                  "--list-item-content-py": "5px",
+                  "--list-gap": "4px",
+                  "--list-title-px": "8px",
+                  "--list-group-radius": "12px",
+                  "--list-title-fg": "#603080",
+                }
+              : {}),
+          } as CSSProperties
+        }
+      >
+        <ListItem
+          title="First item"
+          subtitle="Supporting details"
+          showTrailing={false}
+        />
+        <ListItem title="Second item" leading="none" showTrailing={false} />
+        <ListItem
+          title="Explicit default item"
+          leading="default"
+          appearance="default"
+          showTrailing={false}
+        />
+        <ListItem
+          title="Selected item"
+          subtitle="Selected description"
+          selected
+          showTrailing={false}
+        />
+        <ListItem
+          title="Trailing actions"
+          itemType="action"
+          actionLabel="Action"
+        />
+        <ListItem
+          title="Hidden content divider"
+          showTopDivider={false}
+          showTrailing={false}
+        />
+      </List>
     </div>
-    <List appearance={deep ? "deep" : "default"} title={<span>List section</span>} style={{...(custom ? {
-      "--list-item-size-title-gap":"11px", "--list-item-size-title-radius":"13px",
-      "--list-item-size-last-gap":"17px", "--list-item-size-more-gap":"13px", "--button-group-size-button-slot-gap":"5px",
-      "--size-semilarge":"28px", "--line-height-middle":"30px", "--text-text-normal-title-black":"#204060",
-      "--list-item-size-content-stroke-width":"3px", "--list-item-size-divider-stroke-width":"4px", "--list-item-size-divider-height":"20px", "--list-item-color-text-default":"#123456", "--list-item-color-description-default":"#705020", "--list-item-color-deep-background-default":"#e4eff7", "--list-item-size-gap":"19px", "--list-item-size-with-icon-padding-x-start":"21px", "--list-item-size-content-no-icon-padding-x-start":"23px", "--list-item-size-content-padding-y":"9px", "--list-item-size-icon-padding-x":"3px", "--list-item-size-icon-padding-y":"12px", "--list-item-size-content-padding-x-end":"17px", "--list-size-gap":"13px", "--list-size-heading-padding-x":"17px", "--list-size-heading-padding-y":"3px",
-      "--icon-place-size-width":"42px", "--icon-place-size-height":"44px", "--icon-place-size-icon-width":"18px", "--icon-place-size-rounded-radius":"7px", "--icon-place-color-theme-primary-background-default":"#204060", "--icon-place-color-theme-primary-icon-default":"#d5e5f5", "--list-size-title-padding-x":"5px", "--list-size-title-padding-y":"2px", "--list-size-title-gap":"9px",
-      "--list-size-content-gap":"7px", "--list-size-content-padding-x":"11px", "--list-size-content-padding-y":"6px", "--list-size-content-radius":"19px", "--list-color-text-default":"#123456"
-    } : {}), ...(legacy ? {"--list-item-icon-default-size":"19px", "--list-item-icon-shaped-size":"32px", "--list-item-icon-shaped-bg":"#603080", "--list-item-icon-shaped-fg":"#f5e5d5", "--list-item-divider-height":"11px", "--list-bg":"#d5e5f5", "--list-item-fg":"#603080", "--list-item-pl":"6px", "--list-item-content-py":"5px", "--list-gap":"4px", "--list-title-px":"8px", "--list-group-radius":"12px", "--list-title-fg":"#603080"} : {})} as CSSProperties}>
-      <ListItem title="First item" subtitle="Supporting details" showTrailing={false}/>
-      <ListItem title="Second item" leading="none" showTrailing={false}/>
-      <ListItem title="Explicit default item" leading="default" appearance="default" showTrailing={false}/>
-      <ListItem title="Selected item" subtitle="Selected description" selected showTrailing={false}/>
-      <ListItem title="Trailing actions" itemType="action" actionLabel="Action"/>
-      <ListItem title="Hidden content divider" showTopDivider={false} showTrailing={false}/>
-    </List>
-  </div>;
+  );
 }
 export const ProjectModes: Story = {
   render: function ListProjectStory() {
-    const [target,setTarget]=useState<HTMLDivElement|null>(null);
-    return <div ref={setTarget}>{target&&<ThemeProvider project={listProject} projectTarget={target} defaultMode="light" storageKey="list-project"><ListProjectCases/></ThemeProvider>}</div>;
+    const [target, setTarget] = useState<HTMLDivElement | null>(null);
+    return (
+      <div ref={setTarget}>
+        {target && (
+          <ThemeProvider
+            project={listProject}
+            projectTarget={target}
+            defaultMode="light"
+            storageKey="list-project"
+          >
+            <ListProjectCases />
+          </ThemeProvider>
+        )}
+      </div>
+    );
   },
 };
 
@@ -75,17 +186,55 @@ export const InteractionBoundaries: Story = {
     const [rows, setRows] = useState(0);
     const [actions, setActions] = useState(0);
     const [checked, setChecked] = useState(false);
-    return <div ref={setTarget}>{target && <ThemeProvider project={listProject} projectTarget={target} defaultMode="light" storageKey="list-interaction">
-      <p role="status">Rows: {rows}; Actions: {actions}; Switch: {checked ? "ON" : "OFF"}</p>
-      <List appearance="deep" title="Interaction boundaries">
-        <ListItem title="Action row" itemType="action" onClick={() => setRows(n => n + 1)} action={<Button onClick={() => setActions(n => n + 1)}>Nested action</Button>} />
-        <ListItem title="Switch row" itemType="switch" onClick={() => setRows(n => n + 1)} switchProps={{"aria-label":"Nested switch", checked, onCheckedChange:setChecked}} />
-        <div role="listitem">
-          <ListGroup appearance="default"><ListItem title="Nested default" showTrailing={false}/><ListItem title="Explicit deep" appearance="deep" showTrailing={false}/></ListGroup>
-        </div>
-        <ListItem title="Inherited deep" showTrailing={false}/>
-      </List>
-    </ThemeProvider>}</div>;
+    return (
+      <div ref={setTarget}>
+        {target && (
+          <ThemeProvider
+            project={listProject}
+            projectTarget={target}
+            defaultMode="light"
+            storageKey="list-interaction"
+          >
+            <p role="status">
+              Rows: {rows}; Actions: {actions}; Switch: {checked ? "ON" : "OFF"}
+            </p>
+            <List appearance="deep" title="Interaction boundaries">
+              <ListItem
+                title="Action row"
+                itemType="action"
+                onClick={() => setRows((n) => n + 1)}
+                action={
+                  <Button onClick={() => setActions((n) => n + 1)}>
+                    Nested action
+                  </Button>
+                }
+              />
+              <ListItem
+                title="Switch row"
+                itemType="switch"
+                onClick={() => setRows((n) => n + 1)}
+                switchProps={{
+                  "aria-label": "Nested switch",
+                  checked,
+                  onCheckedChange: setChecked,
+                }}
+              />
+              <div role="listitem">
+                <ListGroup appearance="default">
+                  <ListItem title="Nested default" showTrailing={false} />
+                  <ListItem
+                    title="Explicit deep"
+                    appearance="deep"
+                    showTrailing={false}
+                  />
+                </ListGroup>
+              </div>
+              <ListItem title="Inherited deep" showTrailing={false} />
+            </List>
+          </ThemeProvider>
+        )}
+      </div>
+    );
   },
 };
 

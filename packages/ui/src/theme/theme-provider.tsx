@@ -339,7 +339,13 @@ export function ThemeProvider({
 
   return (
     <ThemeContext.Provider value={value}>
-      <ThemeOverlayContainerProvider value={project && projectTarget?.tagName !== "HTML" ? projectTarget ?? null : null}>
+      <ThemeOverlayContainerProvider
+        value={
+          project && projectTarget?.tagName !== "HTML"
+            ? (projectTarget ?? null)
+            : null
+        }
+      >
         {children}
       </ThemeOverlayContainerProvider>
     </ThemeContext.Provider>

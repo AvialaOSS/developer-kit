@@ -86,7 +86,7 @@ export function ColorPickerArea({
             }}
             aria-hidden
           />
-      </div>
+        </div>
       </div>
     </div>
   );
