@@ -1,5 +1,12 @@
 # @aviala-design/spiral
 
+## 3.1.1
+
+### Patch Changes
+
+- Updated dependencies [38f5afb]
+  - @aviala-design/icons@2.6.0
+
 ## 3.1.0
 
 ### Minor Changes
