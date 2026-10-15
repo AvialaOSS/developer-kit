@@ -104,11 +104,15 @@ pnpm icons:export:dry --category=ai
 
 ### Package scripts (`@aviala-design/icons`)
 
-| Script          | Meaning                                        |
-| --------------- | ---------------------------------------------- |
-| `build`         | `build-icons` (no-op if `raw/` empty) + `tsup` |
-| `build:icons`   | SVG → components                               |
-| `build:release` | `tsup` only (CI / publish)                     |
+| Script          | Meaning                                       |
+| --------------- | --------------------------------------------- |
+| `build`         | `tsup` from committed components (no codegen) |
+| `build:icons`   | SVG → components                              |
+| `build:release` | `tsup` only (CI / publish)                    |
+
+Normal builds never regenerate components from `raw/`: historical tracked SVGs
+or a stale local export must not overwrite a newer committed Figma sync. Run
+`icons:sync`, `icons:build`, or `icons:build:merge` explicitly for codegen.
 
 ## How to update icons
 
