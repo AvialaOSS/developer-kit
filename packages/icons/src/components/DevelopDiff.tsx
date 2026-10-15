@@ -5,6 +5,8 @@ import { resolveIconVariant } from "../resolve-variant";
 import type { AvialaIconProps } from "../types";
 import { DEFAULT_ICON_MODE, DEFAULT_ICON_THICKNESS } from "../types";
 
+const BoldDefault = (props: SVGProps<SVGSVGElement>) => <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}><path d="M93 102C95.7614 102 98 104.239 98 107C98 109.761 95.7614 112 93 112H27C24.2386 112 22 109.761 22 107C22 104.239 24.2386 102 27 102H93Z" fill="currentColor" /><path d="M60 7C62.7614 7 65 9.23858 65 12V48H101C103.761 48 106 50.2386 106 53C106 55.7614 103.761 58 101 58H65V94C65 96.7614 62.7614 99 60 99C57.2386 99 55 96.7614 55 94V58H19C16.2386 58 14 55.7614 14 53C14 50.2386 16.2386 48 19 48H55V12C55 9.23858 57.2386 7 60 7Z" fill="currentColor" /></svg>;
+
 const LightDefault = (props: SVGProps<SVGSVGElement>) => <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}><path d="M91 104C92.6569 104 94 105.343 94 107C94 108.657 92.6569 110 91 110H29C27.3431 110 26 108.657 26 107C26 105.343 27.3431 104 29 104H91Z" fill="currentColor" /><path d="M60 8C61.6569 8 63 9.34315 63 11V50H102C103.657 50 105 51.3431 105 53C105 54.6569 103.657 56 102 56H63V95C63 96.6569 61.6569 98 60 98C58.3431 98 57 96.6569 57 95V56H18C16.3431 56 15 54.6569 15 53C15 51.3431 16.3431 50 18 50H57V11C57 9.34315 58.3431 8 60 8Z" fill="currentColor" /></svg>;
 
 const MediumDefault = (props: SVGProps<SVGSVGElement>) => <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}><path d="M93 102.5C95.4853 102.5 97.5 104.515 97.5 107C97.5 109.485 95.4853 111.5 93 111.5H27C24.5147 111.5 22.5 109.485 22.5 107C22.5 104.515 24.5147 102.5 27 102.5H93Z" fill="currentColor" /><path d="M60 7.5C62.4853 7.5 64.5 9.51472 64.5 12V48.5H101C103.485 48.5 105.5 50.5147 105.5 53C105.5 55.4853 103.485 57.5 101 57.5H64.5V94C64.5 96.4853 62.4853 98.5 60 98.5C57.5147 98.5 55.5 96.4853 55.5 94V57.5H19C16.5147 57.5 14.5 55.4853 14.5 53C14.5 50.5147 16.5147 48.5 19 48.5H55.5V12C55.5 9.51472 57.5147 7.5 60 7.5Z" fill="currentColor" /></svg>;
@@ -12,6 +14,9 @@ const MediumDefault = (props: SVGProps<SVGSVGElement>) => <svg viewBox="0 0 120 
 const RegularDefault = (props: SVGProps<SVGSVGElement>) => <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}><path d="M92 103C94.2091 103 96 104.791 96 107C96 109.209 94.2091 111 92 111H28C25.7909 111 24 109.209 24 107C24 104.791 25.7909 103 28 103H92Z" fill="currentColor" /><path d="M60 8C62.2091 8 64 9.79086 64 12V49H101C103.209 49 105 50.7909 105 53C105 55.2091 103.209 57 101 57H64V94C64 96.2091 62.2091 98 60 98C57.7909 98 56 96.2091 56 94V57H19C16.7909 57 15 55.2091 15 53C15 50.7909 16.7909 49 19 49H56V12C56 9.79086 57.7909 8 60 8Z" fill="currentColor" /></svg>;
 
 const variants = {
+  Bold: {
+    default: BoldDefault,
+  },
   Light: {
     default: LightDefault,
   },
