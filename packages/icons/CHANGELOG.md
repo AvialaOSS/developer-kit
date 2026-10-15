@@ -1,5 +1,11 @@
 # @aviala-design/icons
 
+## 2.6.0
+
+### Minor Changes
+
+- 38f5afb: Sync the full published Figma icon library: add 10 icons, expand existing variants, and refresh SVG geometry across the 364-icon catalog. Build committed React components without regenerating them from stale raw SVG exports.
+
 ## 2.5.0
 
 ### Minor Changes
