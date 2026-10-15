@@ -62,7 +62,7 @@ raw/**/*.svg → parse variant file names → group by icon name
 Two modes:
 
 - **Full replace** (`pnpm icons:build`): regenerates all components, removes orphans from `src/components/`.
-- **Merge** (`pnpm icons:build:merge` or `pnpm build` with `--merge`): regenerates only icons present in `raw/`, keeps other committed components untouched. Use after filtered exports.
+- **Merge** (`pnpm icons:build:merge`): regenerates only icons present in `raw/`, keeps other committed components untouched. Use after filtered exports.
 
 If `raw/` is empty, codegen is a no-op and existing committed `src/components/` are preserved.
 
@@ -121,14 +121,14 @@ Fallback chain: exact match → `Medium/default` → any available variant.
 
 ## Package scripts
 
-| Script          | Pipeline step         | What it does                                        |
-| --------------- | --------------------- | --------------------------------------------------- |
-| `build`         | Full codegen + bundle | `build-icons.mjs --merge` then `tsup`               |
-| `build:icons`   | Codegen only          | `build-icons.mjs` (full replace)                    |
-| `build:release` | Bundle only           | `tsup` (CI / publish — no codegen)                  |
-| `dev`           | Watch bundle          | `tsup --watch`                                      |
-| `typecheck`     | Type check            | `tsc --noEmit`                                      |
-| `clean`         | Reset                 | Remove `dist/`, `src/components/`, `src/catalog.ts` |
+| Script          | Pipeline step | What it does                                        |
+| --------------- | ------------- | --------------------------------------------------- |
+| `build`         | Bundle only   | `tsup` from committed components (no codegen)       |
+| `build:icons`   | Codegen only  | `build-icons.mjs` (full replace)                    |
+| `build:release` | Bundle only   | `tsup` (CI / publish — no codegen)                  |
+| `dev`           | Watch bundle  | `tsup --watch`                                      |
+| `typecheck`     | Type check    | `tsc --noEmit`                                      |
+| `clean`         | Reset         | Remove `dist/`, `src/components/`, `src/catalog.ts` |
 
 ## Common operations
 

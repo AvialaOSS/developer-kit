@@ -107,11 +107,11 @@ src/catalog.ts                                        # committed
 
 ## Package scripts
 
-| Script          | Meaning                                        |
-| --------------- | ---------------------------------------------- |
-| `build`         | `build-icons` (no-op if `raw/` empty) + `tsup` |
-| `build:icons`   | SVG → components                               |
-| `build:release` | `tsup` only (CI / publish)                     |
+| Script          | Meaning                                       |
+| --------------- | --------------------------------------------- |
+| `build`         | `tsup` from committed components (no codegen) |
+| `build:icons`   | SVG → components                              |
+| `build:release` | `tsup` only (CI / publish)                    |
 
 ## Rules
 
