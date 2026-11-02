@@ -1,5 +1,10 @@
 import { palette } from "@aviala-design/color";
 import { aldProjectVariables } from "./ald-project";
+import {
+  PRESET_COLOR_FAMILIES,
+  generatePresetColorRamp,
+  type PresetColorInput,
+} from "./preset-colors";
 import type { BaseNumbersDensity } from "./base-numbers";
 import { tokenPathToCssVar } from "./parse-ald";
 import {
@@ -20,6 +25,8 @@ export type ThemeMode = "light" | "dark";
 export type ThemeInput = {
   mode?: ThemeMode;
   primary?: string;
+  /** Independent hue seeds for graphics; brand changes do not recolor these ramps. */
+  presetColors?: PresetColorInput;
   presetId?: string;
   /** Customizable color generation config (curve, hue protection, blending). */
   palette?: PaletteConfig;
@@ -215,6 +222,17 @@ export function generateTheme(input: ThemeInput = {}): ThemeVars {
   }
 
   syncNeutralPalette(vars, mode);
+  for (const family of PRESET_COLOR_FAMILIES) {
+    const ramp = generatePresetColorRamp(
+      family,
+      mode,
+      input.presetColors?.[family]
+    );
+    ramp.forEach((color, index) => {
+      vars[aliasToCssVar(`${family}/${family}-${index + 1}`)] = color;
+      vars[`--aviala-adc-${family}-${family}-${index + 1}`] = color;
+    });
+  }
   const generatedPalette = { ...vars };
   syncPrimarySemanticTokens(vars);
   syncSemanticStatusTextTokens(vars);

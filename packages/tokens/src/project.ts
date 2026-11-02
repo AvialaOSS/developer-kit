@@ -6,3 +6,4 @@ export * from "./engine/project-edit";
 export * from "./engine/project-merge";
 export * from "./engine/figma-plan";
 export * from "./engine/themebuilder-export";
+export * from "./engine/preset-colors";

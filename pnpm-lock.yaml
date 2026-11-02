@@ -192,8 +192,8 @@ importers:
   packages/tokens:
     dependencies:
       '@aviala-design/color':
-        specifier: ^0.5.15
-        version: 0.5.15
+        specifier: ^0.5.16
+        version: 0.5.16
     devDependencies:
       '@types/node':
         specifier: ^22.15.32
@@ -315,6 +315,9 @@ packages:
 
   '@aviala-design/color@0.5.15':
     resolution: {integrity: sha512-OAg8Os52dJaPrkWxSqb8lPid5ux9fJGOoqlZ2tWbD++qeyxyWCvmqhGCDhNrTaWlArIEX45TjLjo+S5pXJhgtg==}
+
+  '@aviala-design/color@0.5.16':
+    resolution: {integrity: sha512-eEOFubdT1TSxxWlDNXFjlsKr2jbQivYksgfWmbbmX9ZhFI4hnFN5Etey5Z4ZFpuEDFwSLJmNg0lDMlSS7Zk5xw==}
 
   '@babel/code-frame@7.29.7':
     resolution: {integrity: sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw==}
@@ -3872,6 +3875,11 @@ snapshots:
   '@adobe/css-tools@4.5.0': {}
 
   '@aviala-design/color@0.5.15':
+    dependencies:
+      '@material/material-color-utilities': 0.4.0
+      color: 3.2.1
+
+  '@aviala-design/color@0.5.16':
     dependencies:
       '@material/material-color-utilities': 0.4.0
       color: 3.2.1

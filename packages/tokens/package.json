@@ -110,11 +110,11 @@
     "lint": "eslint .",
     "test": "node --test scripts/themebuilder-css.test.mjs scripts/project.test.mjs scripts/snapshot-adapter.test.mjs scripts/standard-css.test.mjs scripts/project-theme.test.mjs scripts/figma-plan.test.mjs",
     "typecheck": "tsc --noEmit",
-    "test:integration": "tsup && node scripts/build-css.mjs && node --test scripts/default-theme.test.mjs scripts/project-store.test.mjs scripts/themebuilder-project-cli.test.mjs scripts/package-entrypoints.test.mjs scripts/project-types.test.mjs",
+    "test:integration": "tsup && node scripts/build-css.mjs && node --test scripts/default-theme.test.mjs scripts/project-store.test.mjs scripts/themebuilder-project-cli.test.mjs scripts/package-entrypoints.test.mjs scripts/project-types.test.mjs scripts/preset-colors.test.mjs",
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@aviala-design/color": "^0.5.15"
+    "@aviala-design/color": "^0.5.16"
   },
   "devDependencies": {
     "@types/node": "^22.15.32",

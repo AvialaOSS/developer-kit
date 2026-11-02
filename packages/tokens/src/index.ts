@@ -10,6 +10,15 @@ export {
   type ThemeVars,
 } from "./engine/generate-theme";
 export {
+  PRESET_COLOR_SEEDS,
+  PRESET_COLOR_FAMILIES,
+  PRESET_COLOR_STEPS,
+  PRESET_COLOR_ANCHOR,
+  generatePresetColorRamp,
+  type PresetColorFamily,
+  type PresetColorInput,
+} from "./engine/preset-colors";
+export {
   applyTheme,
   removeTheme,
   type ApplyThemeOptions,
